@@ -18,7 +18,7 @@ Vue.use(VueAxios, axios);
 export const request = ({method = 'post', url, data, options = {}} = {}) => {
   url = `/rest${url}`
   // 分发显示加载样式任务
-  this.$store.dispatch('show_loading');
+  // this.$store.commit('show_loading');
 
   // const accessToken = options.accessToken === null ? createNonceStr() : options.accessToken || getAccessToken()
   // delete options.accessToken

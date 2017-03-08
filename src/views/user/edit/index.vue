@@ -15,7 +15,11 @@
     components: {},
     computed: {...getters},
     methods: {...actions},
-    created: () => this.init(),
-    destroyed: () => this.clear()
+    created () {
+      this.init()
+    },
+    destroyed () {
+      this.clear()
+    }
   }
 </script>
