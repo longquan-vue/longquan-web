@@ -1,0 +1,53 @@
+.my-tree-select {
+
+}
+
+.my-tree-select-option {
+  padding: 0 !important;
+  height: auto !important;
+
+  .my-tree-select-tree {
+    border: 0;
+
+    .el-tree-node__content {
+      position: relative;
+      overflow: hidden;
+
+      .el-tree-node__expand-icon {
+        position: relative;
+        z-index: 2;
+      }
+
+      .my-tree-select-tree-node {
+        display: inline-block;
+        height: 36px;
+        width: 100%;
+        line-height: inherit !important;
+
+        &:hover {
+
+        }
+      }
+
+      .my-tree-select-tree-node-current {
+        > span {
+          position: relative;
+          color: #fff;
+        }
+        &:before {
+          content: '';
+          position: absolute;
+          width: 200%;
+          height: 100%;
+          left: -50%;
+          background-color: #20a0ff;
+        }
+      }
+    }
+
+  }
+}
+
+.my-tree-select-option-value {
+  display: none;
+}

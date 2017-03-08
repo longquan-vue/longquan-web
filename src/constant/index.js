@@ -1,3 +1,2 @@
-// user
-export const USER_FIND_ALL = "USER_FIND_ALL"
-export const USER_EDIT = "USER_EDIT"
+export const CREATE = "create"
+export const NOW = new Date().getTime()

@@ -1,0 +1,60 @@
+.cropper {
+  display: flex;
+  color: #5e6d82;
+  font-size: 14px;
+  font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  .cropper-left {
+    height: 100%;
+    width: 300px;
+    &>div {
+      margin-bottom: 30px;
+    }
+    > img{
+      border: 1px solid gray;
+    }
+    .big-headimg{
+      width: 100px; height: 100px;
+    }
+    .little-headimg{
+      width: 55px; height: 55px;
+    }
+  }
+  .cropper-right {
+    width: 100%;
+    text-align: center;
+    .cropper-image {
+      //margin: 0 auto;
+      //width: 760px;
+      //height: 340px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .raw-img{
+        max-width: 600px;
+        max-height: 340px;
+      }
+    }
+  }
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #304471;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #304471;
+  cursor: pointer;
+  margin: 0 auto;
+}

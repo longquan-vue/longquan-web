@@ -1,7 +1,12 @@
-import ajax from '../common/ajax'
+import {request} from './ajax'
 const BASE_PATH = 'user'
-export const findById = (id) => {
-  return ajax({
-    url: `${BASE_PATH}/get/${id}`
+export const findByIdApi = (id) => {
+  return request({
+    url: `${BASE_PATH}/get/${id}`,
+  })
+}
+export const findAllApi = () => {
+  return request({
+    url: `${BASE_PATH}/all`,
   })
 }
