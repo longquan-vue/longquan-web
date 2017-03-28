@@ -1,6 +1,6 @@
 <style lang="less">
-    @import "../../main.less";
-    @import "../../color-dark.less";
+    @import "../../../main.less";
+    @import "../../../color-dark.less";
 </style>
 <template>
   <div class="wrapper">
@@ -13,9 +13,9 @@
 </template>
 
 <script type="es6">
-    import vHead from '../../components/public/Header.vue';
-    import vSidebar from '../../components/public/SidebarOA.vue';
-    import MyButton from "../../components/common/button/MyButton.js"
+    import vHead from '../../../components/public/Header.vue';
+    import vSidebar from '../../../components/public/SidebarOA.vue';
+    import MyButton from "../../../components/common/button/MyButton"
     export default {
         components:{
             vHead, vSidebar,MyButton

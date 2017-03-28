@@ -1,13 +1,13 @@
-<style lang="less">
-    @import "../../../static/normal";
-    @import "./centermess";
+<style lang="less" scoped>
+    @import "../../../../static/normal.less";
+    @import "./centermess.less";
 </style>
 <template>
     <div class="centerMess">
         <div class="centerMessHead">
             <div flex>
                 <div box="1" flex items="center" style="padding-left:10px;">
-                    <img class="return" src="../../../static/wx/return.png">
+                    <img class="return" src="../../../../static/wx/return.png">
                 </div>
                 <div box="4" flex items="center" justify="center">
                     <h2>系统消息</h2>

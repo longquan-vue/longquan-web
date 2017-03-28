@@ -1,6 +1,6 @@
-<style lang="less">
-    @import "../../../static/normal";
-    @import "./signin";
+<style lang="less" scoped>
+    @import "../../../../static/normal.less";
+    @import "./signin.less";
 </style>
 <template>
     <div class="signin">
@@ -68,23 +68,23 @@
             </div>
             <ul>
                 <li flex>
-                    <span><img  src="../../../static/wx/star.png"></span>
+                    <span><img  src="../../../../static/wx/star.png"></span>
                     <span box="1">每人每天可签到一次</span>
                 </li>
                 <li flex>
-                    <span ><img  src="../../../static/wx/star.png"></span>
+                    <span ><img  src="../../../../static/wx/star.png"></span>
                     <span box="1">如果一周连续签到，获得积分递增10积分，每周重复递增</span>
                 </li>
                 <li flex>
-                    <span ><img  src="../../../static/wx/star.png"></span>
+                    <span ><img  src="../../../../static/wx/star.png"></span>
                     <span box="1">非连续签到，不能享受递增积分</span>
                 </li>
                 <li flex>
-                    <span ><img  src="../../../static/wx/star.png"></span>
+                    <span ><img  src="../../../../static/wx/star.png"></span>
                     <span box="1">积分可用于工会组织的不定期的福利抽奖，健身中心报名以及各类活动的报名</span>
                 </li>
             </ul>
-            <a><img src="../../../static/wx/see.png"></a>
+            <a><img src="../../../../static/wx/see.png"></a>
         </div>
     </div>
 </template>

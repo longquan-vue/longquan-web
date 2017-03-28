@@ -1,15 +1,15 @@
-<style lang="less">
-    @import "../../../static/normal";
-    @import "./center";
+<style lang="less" scoped>
+    @import "../../../../static/normal.less";
+    @import "./center.less";
 </style>
 <template>
     <div class="personCenter">
         <div class="centerHead">
             <a class="javascript:;">编辑</a>
             <div class="circle">
-                <img src="../../../static/wx/aw.jpg">
+                <img src="../../../../static/wx/aw.jpg">
             </div>
-            <p>恶龙の咆哮 <img src="../../../static/wx/renzheng.png"></p>
+            <p>恶龙の咆哮 <img src="../../../../static/wx/renzheng.png"></p>
             <div class="mess">
                 <div flex>
                     <a box="1">年龄：28</a>
@@ -21,25 +21,25 @@
         <div class="centerList">
             <mt-cell title="我的积分" to="//github.com" is-link>
                 <span class="circle">1234</span>
-                <img slot="icon" src="../../../static/wx/center/jifen.png" >
+                <img slot="icon" src="../../../../static/wx/center/jifen.png" >
             </mt-cell>
             <mt-cell title="我的消息" to="//github.com" is-link>
                 <span class="circle">20</span>
-                <img slot="icon" src="../../../static/wx/center/xiaoxi.png" >
+                <img slot="icon" src="../../../../static/wx/center/xiaoxi.png" >
             </mt-cell>
             <mt-cell title="我的福利" to="//github.com" is-link>
                 <span class="circle">14</span>
-                <img slot="icon" src="../../../static/wx/center/fuli.png" >
+                <img slot="icon" src="../../../../static/wx/center/fuli.png" >
             </mt-cell>
             <mt-cell title="我的活动" to="//github.com" is-link>
                 <span class="circle">5</span>
-                <img slot="icon" src="../../../static/wx/center/huodong.png" >
+                <img slot="icon" src="../../../../static/wx/center/huodong.png" >
             </mt-cell>
         </div>
         <div class="centerList">
             <mt-cell title="职工认证" to="//github.com" is-link>
                 <span style="color:#ffb033;">去认证</span>
-                <img slot="icon" src="../../../static/wx/center/renz.png" >
+                <img slot="icon" src="../../../../static/wx/center/renz.png" >
             </mt-cell>
         </div>
     </div>
