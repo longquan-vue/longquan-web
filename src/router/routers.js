@@ -57,4 +57,5 @@ export default [
   {path: '/signin', component: require('../wxView/signin/signin.vue'), name: 'signin'},
   {path: '/center', component: require('../wxView/center/center.vue'), name: 'center'},
   {path: '/centermess', component: require('../wxView/center/centermess.vue'), name: 'centermess'},
+  {path: '/centeredit', component: require('../wxView/center/centeredit.vue'), name: 'centeredit'},
 ]
