@@ -1,6 +1,6 @@
-<style lang="less">
-    @import "../../../static/normal";
-    @import "./welfare";
+<style lang="less" scoped>
+    @import "../../../../static/normal.less";
+    @import "./welfare.less";
 </style>
 <template>
     <div class="welfare">
@@ -8,11 +8,11 @@
             <a class="" href="javascript:;" @click="">签到赚积分</a>
         </div>
         <div class="welfareCont">
-           <img src="../../../static/wx/bg.png">
+           <img src="../../../../static/wx/bg.png">
            <a class="javascript:;" flex>
                <span>我的积分</span>
                <i box="1">3200</i>
-               <em flex items="center" justify="center"><img src="../../../static/wx/go.png"></em>
+               <em flex items="center" justify="center"><img src="../../../../static/wx/go.png"></em>
            </a>
            <ul class="list">
                <li v-for="(item, index) in welfare">
@@ -32,14 +32,14 @@
                    <div class="liFoot" flex justify="between">
                        <div>
                            <h3>福利提供：{{item.support}}</h3>
-                           <p><img src="../../../static/wx/time.png"> {{item.startTime}} 至 {{item.endTime}}</p>
+                           <p><img src="../../../../static/wx/time.png"> {{item.startTime}} 至 {{item.endTime}}</p>
                        </div>
                        <a href="javascript:;" flex items="center" justify="center" @click="detail(index)">详情 > </a>
                    </div>
                </li>
                <li>
                    <div class="liHead" flex>
-                       <img src="../../../static/wx/red.png">
+                       <img src="../../../../static/wx/red.png">
                        <div box="1" class="listDetail">
                            <h3>1元红包</h3>
                            <p>1000积分</p>
@@ -54,14 +54,14 @@
                    <div class="liFoot" flex justify="between">
                        <div>
                            <h3>福利提供：成都爱创业科技有限公司</h3>
-                           <p><img src="../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
+                           <p><img src="../../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
                        </div>
                        <a href="javascript:;" flex items="center" justify="center">详情 > </a>
                    </div>
                </li>
                <li>
                    <div class="liHead" flex>
-                       <img src="../../../static/wx/red.png">
+                       <img src="../../../../static/wx/red.png">
                        <div box="1" class="listDetail">
                            <h3>1元红包</h3>
                            <p>1000积分</p>
@@ -76,7 +76,7 @@
                    <div class="liFoot" flex justify="between">
                        <div>
                            <h3>福利提供：成都爱创业科技有限公司</h3>
-                           <p><img src="../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
+                           <p><img src="../../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
                        </div>
                        <a href="javascript:;" flex items="center" justify="center">详情 > </a>
                    </div>
@@ -89,7 +89,7 @@
             <div class="popupBox">
                 <div class="popupHead">
                     规则详情
-                    <img src="../../../static/wx/del.png" @click="popupVisible=false">
+                    <img src="../../../../static/wx/del.png" @click="popupVisible=false">
                 </div>
                 <div class="popupCont">
                     <ul>
@@ -135,11 +135,11 @@
         </mt-popup>
         <mt-popup v-model="popupOpen" popup-transition="popup-fade" style="background:none;">
             <div class="popupOpenBox">
-                <img class="img" src="../../../static/wx/getSuccess.png">
+                <img class="img" src="../../../../static/wx/getSuccess.png">
                 <div class="mess">
                     兑换成功，获得一个红包
                 </div>
-                <img class="del" src="../../../static/wx/del.png" @click="popupOpen=false">
+                <img class="del" src="../../../../static/wx/del.png" @click="popupOpen=false">
                 <!--<img class="img" src="../../../static/wx/delete.png" @click="popupOpen=false">-->
             </div>
         </mt-popup>

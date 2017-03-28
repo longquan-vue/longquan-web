@@ -113,7 +113,7 @@
   </div>
 </template>
 <script type="es6">
-  import Loading from '../../../components/public/Loading.vue';
+  import Loading from '../../../../components/public/Loading.vue';
   import moment from 'moment';
   import person from './person';
   export default {

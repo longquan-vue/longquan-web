@@ -1,12 +1,12 @@
-<style lang="less">
-    @import "../../../static/normal";
-    @import "./welfare";
+<style lang="less" scoped>
+    @import "../../../../static/normal.less";
+    @import "./welfareDetail.less";
 </style>
 <template>
    <div class="welfareDetail">
        <div class="welfareDetailHead">
-            <img class="return" src="../../../static/wx/return.png">
-            <img class="bg" src="../../../static/wx/centerbg.png">
+            <img class="return" src="../../../../static/wx/return.png">
+            <img class="bg" src="../../../../static/wx/centerbg.png">
             <div class="last">
                 <h3>6500</h3>
                 <p>剩余积分</p>

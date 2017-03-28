@@ -1,61 +1,27 @@
 const ROOT = "/view"
 export default [
-  {
-    path: '/',
-    redirect: `${ROOT}/login`
-  },
-  {
-    path: '/view',
-    redirect: `${ROOT}/login`
-  },
-  {path: `${ROOT}/login`, component: require('../views/login/Login.vue')},
-  {
-    path: '/view/recover',
-    redirect: `${ROOT}/recover/recruitment`
-  },
-  {
-    path: `${ROOT}/home`,
-    component: require('../views/Home/Home.vue'),
-    children:[
-      {path: `${ROOT}/activity`, component: require('../views/activity/activity.vue')},
-      {path: `${ROOT}/health`, component: require('../views/health/health.vue')},
-      {
-        path: `${ROOT}/recover`,
-        component: require('../views/recover/recover.vue'),
-        children:[
-          {path: `${ROOT}/recover/recruitment`, component: require('../views/recover/recover-recruitment.vue')},
-          {path: `${ROOT}/recover/health`, component: require('../views/recover/recover-health.vue')},
-          {path: `${ROOT}/recover/activity`, component: require('../views/recover/recover-activity.vue')},
-          {path: `${ROOT}/recover/redenvelope`, component: require('../views/recover/recover-redenvelope.vue')}
-        ]
-      },
-      {path: `${ROOT}/recruitment`, component: require('../views/recruitment/recruitment.vue')},
-      {path: `${ROOT}/redenvelope`, component: require('../views/redenvelope/redenvelope.vue')},
-    ]
-  },
-  {
-    path: `${ROOT}/glpt`,
-    component: require('../views/Home/HomeOA.vue'),
-    children:[
-      {path: 'count', component: require('../views/oa/count/count.vue')},
-      {path: 'tips', component: require('../views/oa/tips/tips.vue')},
-      {path: 'notice', component: require('../views/oa/notice/notice.vue')},
-      {path: 'innerNews', component: require('../views/oa/innerNews/innerNews.vue')},
-      {path: 'rules', component: require('../views/oa/rules/rules.vue')},
-      {path: 'innerFile', component: require('../views/oa/innerFile/innerFile.vue')},
-      {path: 'approval', component: require('../views/oa/approval/approval.vue')},
-      {path: 'HonorManage', component: require('../views/oa/HonorManage/HonorManage.vue')},
-      {path: 'innerMeeting', component: require('../views/oa/innerMeeting/innerMeeting.vue')},
-      {path: 'innerActivity', component: require('../views/oa/innerActivity/innerActivity.vue')},
-      {path: 'configuration', component: require('../views/oa/configuration/configuration.vue')},
-      {path: 'authority', component: require('../views/oa/authority/authority.vue')},
-      {path: 'recover', component: require('../views/oa/recover/recover.vue')},
-    ]
-  },
-  {path: '/welfare', component: require('../wxView/welfare/welfare.vue'), name: 'welfare'},
-  {path: '/welfareDetail', component: require('../wxView/welfare/welfareDetail.vue'), name: 'welfareDetail'},
-  {path: '/signin', component: require('../wxView/signin/signin.vue'), name: 'signin'},
-  {path: '/center', component: require('../wxView/center/center.vue'), name: 'center'},
-  {path: '/centermess', component: require('../wxView/center/centermess.vue'), name: 'centermess'},
-  {path: '/centeredit', component: require('../wxView/center/centeredit.vue'), name: 'centeredit'},
+  // 管理平台
+  {path: `${ROOT}/glpt/count`, component: require('../view/glpt/oa/count/count.vue')},
+  {path: `${ROOT}/glpt/tips`, component: require('../view/glpt/oa/tips/tips.vue')},
+  {path: `${ROOT}/glpt/notice`, component: require('../view/glpt/oa/notice/notice.vue')},
+  {path: `${ROOT}/glpt/innerNews`, component: require('../view/glpt/oa/innerNews/innerNews.vue')},
+  {path: `${ROOT}/glpt/rules`, component: require('../view/glpt/oa/rules/rules.vue')},
+  {path: `${ROOT}/glpt/innerFile`, component: require('../view/glpt/oa/innerFile/innerFile.vue')},
+  {path: `${ROOT}/glpt/approval`, component: require('../view/glpt/oa/approval/approval.vue')},
+  {path: `${ROOT}/glpt/HonorManage`, component: require('../view/glpt/oa/HonorManage/HonorManage.vue')},
+  {path: `${ROOT}/glpt/innerMeeting`, component: require('../view/glpt/oa/innerMeeting/innerMeeting.vue')},
+  {path: `${ROOT}/glpt/innerActivity`, component: require('../view/glpt/oa/innerActivity/innerActivity.vue')},
+  {path: `${ROOT}/glpt/configuration`, component: require('../view/glpt/oa/configuration/configuration.vue')},
+  {path: `${ROOT}/glpt/authority`, component: require('../view/glpt/oa/authority/authority.vue')},
+  {path: `${ROOT}/glpt/recover`, component: require('../view/glpt/recover/recover.vue')},
+  // 网站主页
+  {path: `${ROOT}/wzzy`},
+  // 企业号
+  {path: `${ROOT}/qyh`},
+  // 服务号
+  {path: `${ROOT}/fwh/welfare`, component: require('../view/fwh/welfare/welfare.vue'), name: 'welfare'},
+  {path: `${ROOT}/fwh/welfareDetail`,component: require('../view/fwh/welfare/welfareDetail.vue'), name: 'welfareDetail'},
+  {path: `${ROOT}/fwh/signin`, component: require('../view/fwh/signin/signin.vue'), name: 'signin'},
+  {path: `${ROOT}/fwh/center`, component: require('../view/fwh/center/center.vue'), name: 'center'},
+  {path: `${ROOT}/fwh/centermess`, component: require('../view/fwh/center/centermess.vue'), name: 'centermess'},
 ]

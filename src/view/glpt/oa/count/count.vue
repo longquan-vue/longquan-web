@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './count.css';
+  @import 'count.css';
 </style>
 <template>
     <div>
