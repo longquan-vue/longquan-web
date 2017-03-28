@@ -6,7 +6,7 @@ Vue.use(VueAxios, axios);
 
 // 动态设置本地和线上接口域名
 Vue.axios.defaults.baseURL = "http://java.ichuangye.cn";
-
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 /**
  * 封装axios的通用请求
  * @param  {string}   method     get、post....(默认post)
@@ -39,6 +39,7 @@ export const request = ({method = 'post', url, data, options = {}} = {}) => {
     param1 = data
     param2 = options
   }
+  console.log(url, param1, param2)
   return Vue.axios[method](url, param1, param2).catch(response => Promise.reject({
     code: 500,
     msg: '服务器繁忙'
@@ -53,5 +54,4 @@ export const request = ({method = 'post', url, data, options = {}} = {}) => {
     }
     return Promise.reject(data)
   })
-
 };
