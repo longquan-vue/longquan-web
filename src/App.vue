@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './global.less';
+  @import './main.less';
 </style>
 <template>
   <div id="app">
@@ -13,7 +13,7 @@
   export default {
     name: 'vue_app',
     replace: false,
-    components:{
+    components: {
       Alert
     }
   }
