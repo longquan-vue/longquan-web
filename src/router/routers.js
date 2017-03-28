@@ -24,4 +24,5 @@ export default [
   {path: `${ROOT}/fwh/signin`, component: require('../view/fwh/signin/signin.vue'), name: 'signin'},
   {path: `${ROOT}/fwh/center`, component: require('../view/fwh/center/center.vue'), name: 'center'},
   {path: `${ROOT}/fwh/centermess`, component: require('../view/fwh/center/centermess.vue'), name: 'centermess'},
+  {path: `${ROOT}/fwh/centeredit`, component: require('../view/fwh/center/centeredit.vue'), name: 'centeredit'},
 ]
