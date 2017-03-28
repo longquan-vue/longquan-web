@@ -5,7 +5,7 @@ import assertType from '../utils/assertType'
 Vue.use(VueAxios, axios);
 
 // 动态设置本地和线上接口域名
-// Vue.axios.defaults.baseURL = "";
+Vue.axios.defaults.baseURL = "http://java.ichuangye.cn";
 
 /**
  * 封装axios的通用请求
@@ -16,7 +16,9 @@ Vue.use(VueAxios, axios);
  * @returns {Promise.<TResult>|*}
  */
 export const request = ({method = 'post', url, data, options = {}} = {}) => {
-  url = `http://java.ichuangye.cn/rest${url}?debug=weizidong&appType=FWH`
+  url = `/rest${url}?debug=weizidong&appType=FWH`
+  console.log(this.$router)
+  console.log(process.env.NODE_ENV)
   // 分发显示加载样式任务
   // this.$store.commit('show_loading');
 

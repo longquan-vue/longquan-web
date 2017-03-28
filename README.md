@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # vue-demo
 
 > vue+vuex+vue-router+webpack
@@ -18,7 +17,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-=======
-# longquan-web
-longquan-web
->>>>>>> 5fc4f152a66ac55e0dbad2922d0d6f5346c4aa9b

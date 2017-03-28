@@ -123,7 +123,6 @@
   </div>
 </template>
 <script type="es6">
-  import VueCoreImageUpload  from 'vue-core-image-upload';
   export default {
     name: 'recruitment',
     data() {
@@ -174,7 +173,6 @@
       }
     },
     components: {
-      VueCoreImageUpload
     },
       mounted(){
           this.getData();

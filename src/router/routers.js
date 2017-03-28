@@ -34,7 +34,7 @@ export default [
     ]
   },
   {
-    path: `${ROOT}/oa`,
+    path: `${ROOT}/glpt`,
     component: require('../views/Home/HomeOA.vue'),
     children:[
       {path: 'count', component: require('../views/oa/count/count.vue')},
