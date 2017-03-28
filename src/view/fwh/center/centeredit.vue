@@ -31,6 +31,12 @@
                    <el-form-item label="生日" prop="birth" >
                        <el-input v-model="ruleForm.birth" placeholder="请选择生日" readonly @focus="openPicker"></el-input>
                    </el-form-item>
+                   <el-form-item label="婚姻" prop="marriage">
+                       <el-radio-group v-model="ruleForm.marriage">
+                           <el-radio label="已婚"></el-radio>
+                           <el-radio label="未婚"></el-radio>
+                       </el-radio-group>
+                   </el-form-item>
                    <el-form-item label="联系电话" prop="phone">
                        <el-input v-model="ruleForm.phone" placeholder="请输入联系电话" ></el-input>
                    </el-form-item>
@@ -40,8 +46,28 @@
                    <el-form-item label="邮箱" prop="email">
                        <el-input v-model="ruleForm.email" placeholder="请输入邮箱" ></el-input>
                    </el-form-item>
+
+
+                   <el-form-item label="职工认证" prop="marriage">
+                       <el-radio-group v-model="ruleForm.marriage">
+                           <el-radio label="是工会职工"></el-radio>
+                           <el-radio label="不是工会职工"></el-radio>
+                       </el-radio-group>
+                   </el-form-item>
+
+                   <el-form-item label="姓名" prop="truename">
+                       <el-input v-model="ruleForm.truename" placeholder="请输入姓名" ></el-input>
+                   </el-form-item>
+                   <el-form-item label="身份证号" prop="idcard">
+                       <el-input v-model="ruleForm.idcard" placeholder="请输入身份证号" ></el-input>
+                   </el-form-item>
+                   <el-form-item label="身份证号" prop="jobname">
+                       <el-input v-model="ruleForm.jobname" placeholder="请输入身份证号" ></el-input>
+                   </el-form-item>
+
+
                    <el-form-item style="margin-top:20px;">
-                       <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                       <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
                        <el-button @click="resetForm('ruleForm')">取消</el-button>
                    </el-form-item>
                </el-form>
@@ -63,6 +89,7 @@
                 ruleForm: {
                     name: '',
                     sex: '',
+                    marriage:'',
                     birth: '',
                     phone: '',
                     address: '',
@@ -74,6 +101,9 @@
                         { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
                     ],
                     sex: [
+                        { required: true, message: '请选择性别', trigger: 'change' }
+                    ],
+                    marriage: [
                         { required: true, message: '请选择性别', trigger: 'change' }
                     ],
                     birth: [
@@ -128,6 +158,7 @@
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+                window.history.go(-1);
             },
             openPicker() {  //打开日期选择弹窗
                 this.$refs.picker.open();

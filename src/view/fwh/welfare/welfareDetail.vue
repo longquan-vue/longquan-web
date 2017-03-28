@@ -1,11 +1,11 @@
 <style lang="less" scoped>
     @import "../../../../static/normal.less";
-    @import "./welfareDetail.less";
+    @import "./welfare";
 </style>
 <template>
    <div class="welfareDetail">
        <div class="welfareDetailHead">
-            <img class="return" src="../../../../static/wx/return.png">
+            <a href="javascript:history.go(-1);"><img class="return" src="../../../../static/wx/return.png"></a>
             <img class="bg" src="../../../../static/wx/centerbg.png">
             <div class="last">
                 <h3>6500</h3>
