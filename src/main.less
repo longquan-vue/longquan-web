@@ -1,0 +1,41 @@
+*{margin:0;padding:0;}
+a{text-decoration: none}
+html,body,#app,.wrapper{  width:100%;  height:100%;  overflow: hidden; }
+.mgb20{ margin-bottom: 20px;}
+#app {
+  font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.content{  background: none repeat scroll 0 0 #fff;  position: absolute;
+  left: 200px;  right: 0;  top: 70px;  bottom:0;  width: auto;
+  padding:20px;  box-sizing: border-box;  overflow-y: scroll;
+}
+.contentBody{ width: 100%;height: 100%;}
+//设置表格提示信息的最大宽度
+.el-tooltip__popper{ max-width: 200px;}
+
+/*// 这是 路由切换 动画*/
+.move-enter-active,.move-leave-active{
+ transition: all .5s;
+}
+.move-enter,.move-leave{
+  opacity: 0;
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  -o-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.slideDown-enter-active,.slideDown-leave-active{
+  transition: all .5s;
+}
+.slideDown-enter,.slideDown-leave{
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+  -moz-transform: translateY(20px);
+  -ms-transform: translateY(20px);
+  -o-transform: translateY(20px);
+  transform: translateY(20px);
+}

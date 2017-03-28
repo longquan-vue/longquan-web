@@ -1,12 +1,22 @@
 import {request} from './ajax'
-const BASE_PATH = 'user'
-export const findByIdApi = (id) => {
+const BASE_PATH = '/user'
+
+export const mineApi = () => {
   return request({
-    url: `${BASE_PATH}/get/${id}`,
+      method:"get",
+      url: `${BASE_PATH}/mine`,
   })
 }
-export const findAllApi = () => {
+export const signApi = () => {
   return request({
-    url: `${BASE_PATH}/all`,
+      method:"put",
+      url: `${BASE_PATH}/sign`,
   })
 }
+export const updateApi = () => {
+    return request({
+        method:"put",
+        url: `${BASE_PATH}/mine`,
+    })
+}
+

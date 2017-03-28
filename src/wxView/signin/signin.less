@@ -1,0 +1,62 @@
+.signin{
+  .signinHead{
+      height: 8.93333333rem;position: relative;padding: 1.2rem 15px 0 15px;
+      background: url("../../../static/wx/signin.png") no-repeat center;background-size: cover;
+      >i { position: absolute;top: 20px;left: 10px;color: #ffffff;font-size: 0.3733333333rem;}
+      .signinBtn{text-align: center;background-color: #ffffff;margin: auto;border-radius: 50%;
+        width: 3.06666666rem;height: 3.06666666rem;position: relative;margin-bottom: 15px;
+        &:before{ content: '';position: absolute;width: 90%;height: 90%;border-radius: 50%;
+          left: 5%;top: 5%;background: url("../../../static/wx/circle.png") no-repeat center;background-size: cover;
+        }
+
+        &:after{ content: '';position: absolute;width: 110%;height: 110%;border-radius: 50%;
+          background-color: rgba(255,255,255,.3);left: -5%;top: -5%;
+        }
+        .signinBtnCont{ position: absolute;width: 100%;top: 48%;z-index: 1;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+          div{ height: 1px; background-color: #FFEAD5;width: 75%;margin: 5px auto;}
+        }
+        h2{ color: #ff9900;font-size: 0.6133333rem;}
+        p{ color: rgba(255,153,0,0.7);font-size: 0.4rem;}
+      }
+      .tips{ color: #ffffff;font-size: 0.3733333333rem;text-align: center;}
+      .line{ height: 1px;background-color: #F58B58;margin: 0.5333333rem auto;}
+       ul{
+         li{
+           div{ width: 0.93333333rem;height: 0.93333333rem;line-height: 0.93333333rem;text-align: center;background-color: rgba(255,255,255,.5);
+             border:1px solid #FFB036;border-radius: 50%;color: #ffffff;;
+             margin:0 auto 5px auto;
+           }
+           div.active{ background-color: #FFB036;}
+           p{ color: #ffffff;font-size: 0.24rem;text-align: center;}
+         }
+       }
+
+  }
+  .signinFoot{
+      padding: 0.8rem 15px;
+      .signinFootHead{ position: relative; text-align: center;font-size: 0.46666666rem;line-height: 0.4rem;;
+        margin-bottom: 15px;
+        &:before{ content: '';position: absolute;width: 30%;left: 0;height: 1px;background-color: #E8E8E8;
+          top: 0.2rem;
+        }
+        &:after{ content: '';position: absolute;width: 30%;right: 0;height: 1px;background-color: #E8E8E8;
+          top: 0.2rem;
+        }
+      }
+      ul{
+        margin-bottom: 20px;
+        li{ font-size: 0.32rem;vertical-align: middle;margin-left: 5px;color: #999999;
+          margin-bottom: 5px;
+          span:nth-child(1){ margin-right: 5px;}
+        }
+      }
+      a{ width: 70%;display: block;margin: auto;
+        img{ width: 100%;}
+      }
+  }
+}

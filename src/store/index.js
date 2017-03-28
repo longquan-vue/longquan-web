@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import plugins from './plugins'
-import modules from './modules'
+import getters from './getters'
+import actions from './actions'
+import mutations from './mutations'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  // getters,
-  // actions,
-  modules,
+   getters,
+   actions,
+  ...mutations,
   plugins,
   /**
    * 要开启严格模式，只需要在创建 Vuex store 实例时传入 strict: true
@@ -22,17 +24,18 @@ const store = new Vuex.Store({
 if (module.hot) {
   // 使 modules 成为可热重载模块
   module.hot.accept([
-    // './getters',
-    // './actions',
-    './modules',
+     './getters',
+     './actions',
+    './mutations',
   ], () => {
     // 获取更新后的模块
     // 因为 babel 6 的模块编译格式问题，这里需要加上 .default
     // 加载新模块
     store.hotUpdate({
-      // getters: require('./getters').default,
-      // actions: require('./actions').default,
-      modules: require('./modules').default
+       getters: require('./getters').default,
+       actions: require('./actions').default,
+        state: require('./mutations').state,
+        mutations:require('./mutations').mutations
     })
   })
 }

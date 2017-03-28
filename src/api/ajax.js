@@ -16,12 +16,13 @@ Vue.use(VueAxios, axios);
  * @returns {Promise.<TResult>|*}
  */
 export const request = ({method = 'post', url, data, options = {}} = {}) => {
-  url = `/rest${url}`
+  url = `http://java.ichuangye.cn/rest${url}?debug=weizidong&appType=FWH`
   // 分发显示加载样式任务
   // this.$store.commit('show_loading');
 
   // const accessToken = options.accessToken === null ? createNonceStr() : options.accessToken || getAccessToken()
   // delete options.accessToken
+  //   console.log(url);
 
   let param1
   let param2
