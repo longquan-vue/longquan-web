@@ -55,12 +55,6 @@ export default [
   {path: '/welfare', component: require('../wxView/welfare/welfare.vue'), name: 'welfare'},
   {path: '/welfareDetail', component: require('../wxView/welfare/welfareDetail.vue'), name: 'welfareDetail'},
   {path: '/signin', component: require('../wxView/signin/signin.vue'), name: 'signin'},
-  {
-      path: '/center',
-      component: require('../wxView/center/center.vue'),
-      name: 'center',
-      children:[
-
-      ]
-  },
+  {path: '/center', component: require('../wxView/center/center.vue'), name: 'center'},
+  {path: '/centermess', component: require('../wxView/center/centermess.vue'), name: 'centermess'},
 ]

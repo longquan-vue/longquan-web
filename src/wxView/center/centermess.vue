@@ -6,19 +6,24 @@
     <div class="centerMess">
         <div class="centerMessHead">
             <div flex>
-                <div box="1" flex items="center" justify="center">
+                <div box="1" flex items="center" style="padding-left:10px;">
                     <img class="return" src="../../../static/wx/return.png">
                 </div>
-                <div box="6" flex items="center" justify="center">
+                <div box="4" flex items="center" justify="center">
                     <h2>系统消息</h2>
                 </div>
-                <div box="1" flex items="center" justify="center">
+                <div box="1" flex items="center">
                     <a>清空</a>
                 </div>
             </div>
         </div>
         <ul class="centerMessList">
-            <li></li>
+            <li>
+                <p>认证成功</p>
+                <div class="mess">
+                    啦啦啦，我是卖报的小行家，大风大雨满街跑
+                </div>
+            </li>
         </ul>
     </div>
 </template>
