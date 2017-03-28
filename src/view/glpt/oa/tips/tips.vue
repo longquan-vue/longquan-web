@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './tips.css';
+  @import 'tips.css';
 </style>
 <template>
   <div class="contentBody">

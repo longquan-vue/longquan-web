@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './redenvelope.css';
+  @import 'redenvelope.css';
 </style>
 <template>
   <div class="activity">

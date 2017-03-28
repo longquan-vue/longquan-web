@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './recruitment.less';
+  @import 'recruitment.less';
 </style>
 <template>
   <div class="recruitment">

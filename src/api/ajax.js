@@ -16,16 +16,16 @@ Vue.axios.defaults.baseURL = "http://java.ichuangye.cn";
  * @returns {Promise.<TResult>|*}
  */
 export const request = ({method = 'post', url, data, options = {}} = {}) => {
-  url = `/rest${url}?debug=weizidong&appType=FWH`
-  console.log(this.$router)
-  console.log(process.env.NODE_ENV)
   // 分发显示加载样式任务
   // this.$store.commit('show_loading');
-
   // const accessToken = options.accessToken === null ? createNonceStr() : options.accessToken || getAccessToken()
   // delete options.accessToken
-  //   console.log(url);
-
+  url = `/rest${url}`
+  if (process.env.NODE_ENV == 'development') {
+    url += url.indexOf('?') > 0 ? `&debug=weizidong` : `?debug=weizidong`;
+  }
+  const appType = 'appType=' + window.location.pathname.split('/')[2];
+  url += url.indexOf('?') > 0 ? `&${appType}` : `?${appType}`;
   let param1
   let param2
   if (['get', 'head', 'delete', 'jsonp'].indexOf(method.toLocaleLowerCase()) !== -1) {
@@ -39,7 +39,10 @@ export const request = ({method = 'post', url, data, options = {}} = {}) => {
     param1 = data
     param2 = options
   }
-  return Vue.axios[method](url, param1, param2).catch(response => Promise.reject({code: 500, msg: '服务器繁忙'})).then((response) => {
+  return Vue.axios[method](url, param1, param2).catch(response => Promise.reject({
+    code: 500,
+    msg: '服务器繁忙'
+  })).then((response) => {
     // 如果code 不等于200，当作异常处理
     let {data} = response
     if (assertType(data, String)) {
