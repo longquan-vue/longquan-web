@@ -6,3 +6,9 @@ export const marriageFilter = (marriage) => ['未知', '已婚', '未婚'][marri
 // 日期格式化过滤器
 export const dateFilter = (date, pattern = 'YYYY-MM-DD') => moment(date).format(pattern)
 export const diffFilter = (date,type) => moment().diff(date,type)
+//筛选过滤器
+export const searchFilter=(value,data)=>{
+    if(value.indexOf(data)>-1){
+        return value
+    }
+};

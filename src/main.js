@@ -8,11 +8,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 import {localStorage} from './store/localstorage'
+import animate from 'animate.css'
 
 sync(store, router)
 
 Vue.use(ElementUI)
 Vue.use(Mint)
+Vue.use(animate)
 
 new Vue({
   el: '#app',

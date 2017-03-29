@@ -34,11 +34,31 @@
 
   .el-form-item:not(:last-child){ border-bottom: 1px solid #E8E8E8;}
   .demo-ruleForm{}
-  .el-form-item{ margin-bottom: 0;height: 1.6rem;line-height:1.6rem;}
+  .el-form-item{ margin-bottom: 0;height: 1.6rem;line-height:1.6rem;background-color: #ffffff}
   .el-form-item__error{ top: 0;}
   .el-form-item__label{ height: 100%;line-height: 1.6rem;
   padding-top: 0;padding-bottom: 0;}
   .el-form-item__content{ line-height: 1.6rem;}
   .el-input__inner{ }
   input{ border: none;}
+}
+
+//pop 弹窗
+.popup{
+  width: 8.4rem;background-color: #ffffff;
+  .popTitle{ height: 1.633333rem;position: relative;line-height: 1.633333rem;
+  background: url("../../../../static/wx/pophead.png") no-repeat center;background-size: cover;
+  text-align: center;color: #ffffff;font-size: 0.48rem;
+    img{ position: absolute;right: 15px;top: 30%;width: 0.6rem;}
+  }
+  .popContent{ height: 8.2666667rem;overflow: scroll;padding: 0 0.3rem;
+    .search{ padding: .2rem 0;}
+    .el-radio-group{ width: 100%;}
+    .el-radio{ display: block;margin-left: 0;line-height: 1rem;border-bottom: 1px solid #E5E5E5;
+      width: 100%;
+    }
+  }
+  .popBtn{ padding: 0.666666667rem 0;text-align: center;
+    img{ width: 50%;}
+  }
 }
