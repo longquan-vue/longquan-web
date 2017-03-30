@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script type="es6">
     import vHead from '../../../components/public/Header.vue';
     import vSidebar from '../../../components/public/Sidebar.vue';
     import MyButton from "../../../components/common/button/MyButton.js"

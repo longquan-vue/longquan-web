@@ -144,8 +144,8 @@
   </div>
 </template>
 <script type="es6">
-  import VueCoreImageUpload  from '../../components/public/vue.core.image.upload.vue';
-  import Loading from '../../components/public/Loading.vue';
+  import VueCoreImageUpload  from '../../../components/public/vue.core.image.upload.vue';
+  import Loading from '../../../components/public/Loading.vue';
   import moment from 'moment';
   export default {
     name: 'recruitment',
