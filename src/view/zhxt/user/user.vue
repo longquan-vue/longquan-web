@@ -1,5 +1,5 @@
 <style lang="less">
-    @import 'user';
+    @import './user.less';
 </style>
 <template>
     <div class="contentBox">
@@ -14,34 +14,15 @@
                 </span>
                 <mySelect title="婚姻" field="marriage" :options="{0:'全部',1:'已婚',2:'未婚'}" value="0" :change="change"></mySelect>
 
-                <span>
-                        职工认证：<el-select v-model="certificationSelect.value" placeholder="请选择" style="width:100px;">
-                                <el-option v-for="item in certificationSelect.options" :key="item.label" :label="item.label" :value="item.value">
-                                </el-option>
-                              </el-select>
-                    </span>
-                <span>
-                        是否冻结：<el-select v-model="freezeSelect.value" placeholder="请选择" style="width:100px;">
-                                <el-option v-for="item in freezeSelect.options" :key="item.label" :label="item.label" :value="item.value">
-                                </el-option>
-                              </el-select>
-                    </span>
-                <span>
-                        积分：<el-input v-model="pointValue" placeholder="" style="width:100px;"></el-input> <em>以上</em>
-                    </span>
+                <mySelect title="职工认证" field="audit" :options="{0:'全部',1:'未认证',2:'认证中',3:'已认证',4:'认证失败'}" value="0" :change="change"></mySelect>
+                <mySelect title="是否冻结" field="marriage" :options="{0:'全部',1:'是',2:'否'}" value="0" :change="change"></mySelect>
 
                 <span>
-                        搜索条件：<el-select v-model="typeSelect.value" placeholder="请选择" style="width:120px;">
-                                <el-option v-for="item in typeSelect.options"  :key="item.label" :label="item.label" :value="item.value">
-                                </el-option>
-                              </el-select>
-                                <el-input style="width:150px;"
-                                          placeholder="请输入搜索内容"
-                                          icon="search"
-                                          v-model="searchVal"
-                                          :on-icon-click="handleIconClick">
-                                </el-input>
-                    </span>
+                    积分：<el-input v-model="score" placeholder="" style="width:100px;"  @blur="inputSearch('score',score)"></el-input> <em>以上</em>
+                </span>
+
+                <mySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}"
+                               valueLabel="name" :change="change" :searchVal="searchVal" :handleIconClick="handleIconClicked"></mySelectInput>
             </div>
             <div class="btn mgb20">
                 <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
@@ -70,7 +51,7 @@
                         <template scope="scope">
                             <el-button type="text"
                                        size="small"
-                                       @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                                       @click="go(['useredit',scope.row.id])">编辑</el-button>
                             <el-button
                                     size="small"
                                     type="text"
@@ -83,112 +64,36 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <div class="pageSlide">
-                <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="1000">
-                </el-pagination>
-            </div>
+            <div class="pageSlide"><myPage :method="findUserList"/></div>
         </div>
+
+
+        <myDialog title="提示" :uid="uid" :delNum="1" content="您确定要删除此条信息吗" :result="result" @on-result-change="onResultChange" :method="delUser"></myDialog>
+
     </div>
 </template>
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import mySelect from '../../../components/public/select/mySelect.vue'
+    import mySelectInput from '../../../components/public/selectInput/mySelectInput.vue'
+    import myPage from '../../../components/public/page/page.vue'
+    import myDialog from '../../../components/public/dialog/dialog.vue'
     import {date2Filter,sex2Filter,date3Filter,marriage2Filter,auditFilter} from '../../../filters'
     export default {
         data() {
             return {
-                currentPage: 1,
                 tbindex:-1,
                 formLabelWidth: '80px',
-                sexSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '男'
-                    }, {
-                        value: '选项3',
-                        label: '女'
-                    }],
-                    value: ''
-                },
-                merrySelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '已婚'
-                    }, {
-                        value: '选项3',
-                        label: '未婚'
-                    }],
-                    value: ''
-                },
                 ageValue:'',
-                certificationSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '已认证'
-                    }, {
-                        value: '选项3',
-                        label: '未认证'
-                    }, {
-                        value: '选项3',
-                        label: '审核中'
-                    }],
-                    value: ''
-                },
-                freezeSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '是'
-                    }, {
-                        value: '选项3',
-                        label: '否'
-                    }],
-                    value: ''
-                },
-                pointValue:'',
-                typeSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '姓名'
-                    }, {
-                        value: '选项2',
-                        label: '身份照号'
-                    }, {
-                        value: '选项3',
-                        label: '所属单位'
-                    }, {
-                        value: '选项4',
-                        label: '电话号码'
-                    }, {
-                        value: '选项5',
-                        label: '昵称'
-                    }],
-                    value: ''
-                },
-                searchVal:''
+                score:'',
+                searchVal:'',
+                uid:'',
+                result:false  //删除弹框控制
             }
         },
         components: {
-            mySelect
+            mySelect,mySelectInput,myPage,myDialog
         },
         methods: {
             handleEdit(index, row) {
@@ -196,16 +101,12 @@
             },
             handleDelete(index, row) {
                 console.log(index, row);
+                this.uid=row.id;
                 this.tbindex=index;
-                this.dialogVisible=true;
+                this.result=true;
             },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                console.log(`当前页: ${val}`);
-
+            onResultChange(val){
+                this.result=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
             deleteClick(index){
                 this.tableData.splice(index,1);
@@ -238,18 +139,30 @@
             handlePoint(){   //积分管理
                 this.$router.push('userpoint');
             },
-            ...mapActions(['findUserList']),
+            ...mapActions(['findUserList','changePage','clearPage','changeSelect','delUser','go']),
             date2Filter,sex2Filter,date3Filter,marriage2Filter,auditFilter,
-            change(...v){
-                console.log(v)
+            change(key,value){   //这是每个 change
+                this.changeSelect({key,value});
+                this.findUserList();
+            },
+            inputSearch(key,value){
+                // console.log(this.score);
+                this.changeSelect({key,value});
+                this.findUserList();
+            },
+            handleIconClicked(data){  //搜索的函数
+                console.log(data);
+                // let {key,value}=data;
+                // console.log({key,value});
+                this.changeSelect(data);
+                this.findUserList();
             }
         },
-        computed: {...mapGetters(['userList'])},
+        computed: {...mapGetters(['userList','page'])},
         created () {
             this.findUserList();
         },
         destroyed () {
-
         }
     }
 </script>

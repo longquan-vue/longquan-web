@@ -29,7 +29,7 @@ export default [
           {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue')},
           {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')},
           {path: `${ROOT}/zhxt/userpoint`, component: require('../view/zhxt/user/userpoint.vue')},
-          {path: `${ROOT}/zhxt/useredit`, component: require('../view/zhxt/user/useredit.vue')},
+          {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/useredit.vue'),name:"useredit"},
           {path: `${ROOT}/zhxt/usermanage`, component: require('../view/zhxt/user/manage.vue')},
           {path: `${ROOT}/zhxt/signinlist`, component: require('../view/zhxt/signin/signinlist.vue')},
           {path: `${ROOT}/zhxt/signinsetting`, component: require('../view/zhxt/signin/signinsetting.vue')},
