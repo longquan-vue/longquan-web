@@ -19,3 +19,9 @@ export const GET_WELFARE = "GET_WELFARE"
 export const PAGE = "PAGE"
 export const CHANE_SELECT = "CHANE_SELECT"
 
+
+//activity 活动
+export const GET_ACTIVITY_LIST = 'GET_ACTIVITY_LIST'
+export const GET_ENTER_LIST = 'GET_ENTER_LIST'
+export const GET_ACTIVITY_DETAIL = 'GET_ACTIVITY_DETAIL'
+

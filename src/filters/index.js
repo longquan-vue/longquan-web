@@ -9,7 +9,9 @@ export const marriage2Filter = ({marriage}) => marriageFilter(marriage)
 // 日期格式化过滤器
 export const dateFilter = (date, pattern = 'YYYY-MM-DD') => moment(date).format(pattern)
 export const date2Filter = ({birthday}) => dateFilter(birthday)
-export const date3Filter = ({birthday}) => dateFilter(birthday,'YYYY-MM-DD HH:mm')
+export const date3Filter = (birthday) => dateFilter(birthday,'YYYY-MM-DD HH:mm')
+export const date4Filter = ({start,end}) => dateFilter(start,'YYYY-MM-DD HH:mm')+'——'+dateFilter(end,'YYYY-MM-DD HH:mm')
+export const date5Filter = ({entryStart,entryEnd}) => dateFilter(entryStart,'YYYY-MM-DD HH:mm')+'——'+dateFilter(entryEnd,'YYYY-MM-DD HH:mm')
 export const diffFilter = (date,type) => moment().diff(date,type)
 //筛选过滤器
 export const searchFilter=(value,data)=>value.indexOf(data)>-1?value:null

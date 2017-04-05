@@ -26,6 +26,8 @@ export default [
           {path: `${ROOT}/zhxt/authority`, component: require('../view/zhxt/authority/authority.vue')},
           {path: `${ROOT}/zhxt/recover`, component: require('../view/zhxt/recover/recover.vue')},
           {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue')},
+          {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'),name:"activityEnter"},
+          {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'),name:"activityEdit"},
           {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue')},
           {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')},
           {path: `${ROOT}/zhxt/userpoint`, component: require('../view/zhxt/user/userpoint.vue')},
