@@ -8,14 +8,16 @@ export const GET_USER_LIST = 'GET_USER_LIST'
 export const DEL_USER = 'DEL_USER'
 
 export const GET_MINE = "GET_MINE"
-
+export const GET_MINE_WELFARE = "GET_MINE_WELFARE"
 
 // alert
 export const ALERT = "ALERT"
 export const ALERT_CLOSE = "ALERT_CLOSE"
 
-//point
+//福利
 export const GET_WELFARE = "GET_WELFARE"
+export const GET_WELFARE_DETAIL = "GET_WELFARE_DETAIL"
+
 
 //
 export const PAGE = "PAGE"

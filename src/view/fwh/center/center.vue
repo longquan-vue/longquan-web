@@ -27,11 +27,11 @@
                 <span class="circle">{{mine.msgNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/xiaoxi.png" >
             </mt-cell>
-            <mt-cell title="我的福利" to="" is-link>
+            <mt-cell title="我的福利" to="/view/fwh/centerwelfare" is-link>
                 <span class="circle">{{mine.welfNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/fuli.png" >
             </mt-cell>
-            <mt-cell title="我的活动" to="" is-link>
+            <mt-cell title="我的活动" to="/view/fwh/centeractivity" is-link>
                 <span class="circle">{{mine.actNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/huodong.png" >
             </mt-cell>
@@ -61,8 +61,8 @@
         },
         computed: {...mapGetters(['mine','welfare'])},
         methods:{
-            ...mapActions(['getMine','getWelfare','clear']),
-            diffFilter,sexFilter,marriageFilter
+            ...mapActions(['getMine','getWelfare','clear','goto']),
+            diffFilter,sexFilter,marriageFilter,
         },
         created () {
             this.getMine();

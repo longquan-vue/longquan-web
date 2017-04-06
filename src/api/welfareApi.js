@@ -12,9 +12,9 @@ export const createApi = (data) => request({
   data
 })
 //查询福利详情
-export const findByIdApi = (id, del) => request({
+export const findWelfareByIdApi = (id) => request({
   method: "get",
-  url: `${BASE_PATH}/findById/${id}/${del}`,
+  url: `${BASE_PATH}/find/${id}`,
 })
 //兑换福利
 export const convertApi = (id) => request({

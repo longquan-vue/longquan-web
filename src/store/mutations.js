@@ -1,13 +1,16 @@
 //操纵数据，修改
 
 import {GET_USER, GET_WELFARE, PAGE, GET_USER_LIST, CHANE_SELECT,DEL_USER,GET_ACTIVITY_LIST,
-    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE} from './mutation-types'
+    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE,GET_MINE_WELFARE,
+    GET_WELFARE_DETAIL} from './mutation-types'
 import {defpage, defUser ,defActivity} from '../constant'
 export default {
     state: {
         mine:{},
+        mineWelfare:[],  //我的福利
         user: {},
         welfare: {},
+        welfareDetail:{},
         page: {...defpage},
         userList: [],
         activityList: [],  //活动列表
@@ -19,11 +22,22 @@ export default {
         [GET_MINE] (state, mine) {
             state.mine = mine ? {...state.mine, ...mine} : defUser;
         },
+        [GET_MINE_WELFARE] (state, mineWelfare) {   //我的福利
+            if (!!mineWelfare) {
+                console.log(mineWelfare);
+                state.mineWelfare = mineWelfare.list;
+                delete mineWelfare.list;
+                state.page = {...state.page, ...mineWelfare}
+            }
+        },
         [GET_USER] (state, user) {
             state.user = user ? {...state.user, ...user} : defUser;
         },
-        [GET_WELFARE] (state, welfare) {
+        [GET_WELFARE] (state, welfare) {   //获取福利列表
             state.welfare = welfare;
+        },
+        [GET_WELFARE_DETAIL] (state, welfareDetail) {   //获取福利详情
+            state.welfareDetail = welfareDetail;
         },
         [PAGE] (state, page) {
             state.page = page ? {...state.page, ...page} : defpage;

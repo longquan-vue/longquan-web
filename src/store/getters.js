@@ -1,7 +1,10 @@
 
 const mine = (state) => state.mine;
+const mineWelfare = (state) => state.mineWelfare;
 const user = (state) => state.user;
 const welfare = (state) => state.welfare;
+const welfareDetail = (state) => state.welfareDetail;
+
 const page = (state) => state.page;
 const userList = (state) => state.userList;
 const activityList = (state) => state.activityList;
@@ -21,8 +24,10 @@ const healthList = (state) => state.healthList;
 
 export default {
     mine,
+    mineWelfare,
     user,
     welfare,
+    welfareDetail,
     page,
     userList,
     activityList,

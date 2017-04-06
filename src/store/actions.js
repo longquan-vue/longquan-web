@@ -1,7 +1,7 @@
 //业务逻辑处理
 import router from '../router'
-import {mineApi, findApi, delUserApi, getByIdApi} from '../api/userApi'
-import {welfareApi} from '../api/welfareApi'
+import {mineApi, findApi, delUserApi, getByIdApi, mineWelfareApi} from '../api/userApi'
+import {welfareApi,findWelfareByIdApi} from '../api/welfareApi'
 import {findActivityApi,findEntryListByIdApi,findActivityDetailApi,createActivityApi,deleteActivityApi} from '../api/activityApi'
 import {fileApi} from '../api/fileApi'
 
@@ -9,7 +9,8 @@ import {findHealthApi} from '../api/healthApi'
 
 
 import {GET_USER, GET_WELFARE, PAGE, GET_USER_LIST, CHANE_SELECT, DEL_USER,GET_ACTIVITY_LIST,
-    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE} from './mutation-types'
+    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE,GET_MINE_WELFARE,
+    GET_WELFARE_DETAIL} from './mutation-types'
 
 //上传文件
 const upload=({commit,state},data) => fileApi(data);
@@ -20,6 +21,11 @@ const successActivity= ({commit,state},{data}) => {
 
 // go
 const go = ({commit}, [name, id]) => router.push({name, params: {id}});
+// goto
+const goto = ({commit}, [name, query]) =>{
+    console.log(1111);
+    router.push({name, query})
+} ;
 //清除page
 const clearPage = ({commit}) => commit(PAGE);
 //更改page
@@ -53,16 +59,33 @@ const getMine = async({commit, state}) => {
     const mine = await mineApi();
     commit(GET_MINE, mine);
 };
+//获取我的福利
+const getMineWelfare = async({commit, state}) => {
+    if(!state.mine.id){
+        await getMine({commit, state});
+    }
+    const mineWelfare = await mineWelfareApi(state.mine.id,0,state.page);
+    commit(GET_MINE_WELFARE, mineWelfare);
+};
 
 
 
 
-//获取福利兑换列表
+
+//获取福利  兑换列表
 const getWelfare = async({commit}) => {
     const welfare = await welfareApi();
 
     commit(GET_WELFARE, welfare);
 };
+//获取福利   福利详情
+const getWelfareDetail = async({commit,state}) => {
+    const {query:{id,ticket}}=state.route;
+    const welfareDetail = await findWelfareByIdApi(id);
+    commit(GET_WELFARE_DETAIL, {...welfareDetail,ticket});
+};
+
+
 
 //获取活动相关数据   活动列表
 const getActivity = async({commit,state}) => {
@@ -123,6 +146,6 @@ const changeWC = ({commit},data) => {
 
 
 export default {
-    getMine,getUser, getWelfare, findUserList, changePage, clearPage, changeSelect, delUser, go, getActivity,getEnter,getActivityDetail,changeWC,
-    upload,successActivity,createActivity,deleteActivity,getHealth
+    getMine,getMineWelfare,getUser, getWelfare, getWelfareDetail, findUserList, changePage, clearPage, changeSelect, delUser, go, goto, getActivity,getEnter,getActivityDetail,changeWC,
+    upload,successActivity,createActivity,deleteActivity,getHealth,
 }

@@ -31,3 +31,9 @@ export const delUserApi = (id, del) => request({
     method: "delete",
     url: `${BASE_PATH}/delete/${id}/${del}`,
 });
+
+//我的福利
+export const mineWelfareApi = (id, del,data) => request({
+    url: `/history/welfare/${id}/${del}`,
+    data
+});
