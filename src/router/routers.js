@@ -1,13 +1,18 @@
 const ROOT = "/view"
 export default [
   // 管理平台
-  // {
-  //     path: `${ROOT}/zhxt/home`,
-  //     component: require('../view/zhxt/Home/home.vue'),
-  //     children:[
-  //
-  //     ]
-  // },
+  {
+      path: `${ROOT}/zhxt/login`,
+      component: require('../view/zhxt/login/Login.vue')
+  },
+    {
+        path: `${ROOT}/zhxt/loginSuccess`,
+        component: require('../view/zhxt/login/loginSuccess.vue')
+    },
+    {
+        path: `${ROOT}/zhxt/loginError`,
+        component: require('../view/zhxt/login/loginError.vue')
+    },
   {
       path: `${ROOT}/zhxt/home`,
       component: require('../view/zhxt/Home/home.vue'),
@@ -28,6 +33,9 @@ export default [
           {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue')},
           {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'),name:"activityEnter"},
           {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'),name:"activityEdit"},
+          {path: `${ROOT}/zhxt/activitySigned`, component: require('../view/zhxt/activity/activitySigned.vue'),name:"activitySigned"},
+          {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'),name:"activityCount"},
+          {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'),name:"health"},
           {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue')},
           {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')},
           {path: `${ROOT}/zhxt/userpoint`, component: require('../view/zhxt/user/userpoint.vue')},

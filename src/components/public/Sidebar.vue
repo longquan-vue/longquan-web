@@ -47,14 +47,14 @@
             <el-submenu index="8">
                 <template slot="title"><i class="el-icon-star-on"></i>活动管理</template>
                 <el-menu-item index="activity">活动列表</el-menu-item>
-                <el-menu-item index="basecharts">活动配置</el-menu-item>
-                <el-menu-item index="markdown">统计报表</el-menu-item>
+                <el-menu-item index="activityCount">活动配置</el-menu-item>
+                <el-menu-item index="activityCount">统计报表</el-menu-item>
             </el-submenu>
             <el-submenu index="9">
                 <template slot="title"><i class="el-icon-star-on"></i>健身中心管理</template>
-                <el-menu-item index="baseform">报名列表</el-menu-item>
-                <el-menu-item index="basecharts">管理配置</el-menu-item>
-                <el-menu-item index="markdown">统计报表</el-menu-item>
+                <el-menu-item index="health">健身项目列表</el-menu-item>
+                <el-menu-item index="healthCount">统计报表</el-menu-item>
+                <el-menu-item index="healthCode">到场签到二维码</el-menu-item>
             </el-submenu>
 
             <el-submenu index="10">

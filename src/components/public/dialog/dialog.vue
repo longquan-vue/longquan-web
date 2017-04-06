@@ -31,7 +31,6 @@
                 this.myResult = val;//新增result的watch，监听变更并同步到myResult上
             },
             myResult(val){
-                //xxcanghai 小小沧海 博客园
                 this.$emit("on-result-change",val);//③组件内对myResult变更后向外部发送事件通知
             }
         },

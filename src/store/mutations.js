@@ -1,19 +1,24 @@
 //操纵数据，修改
 
 import {GET_USER, GET_WELFARE, PAGE, GET_USER_LIST, CHANE_SELECT,DEL_USER,GET_ACTIVITY_LIST,
-    GET_ENTER_LIST,GET_ACTIVITY_DETAIL} from './mutation-types'
+    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE} from './mutation-types'
 import {defpage, defUser ,defActivity} from '../constant'
 export default {
     state: {
+        mine:{},
         user: {},
         welfare: {},
         page: {...defpage},
         userList: [],
         activityList: [],  //活动列表
         enterList:[],     //活动报名列表
-        activityDetail: {},
+        activityDetail: {},  //活动详情
+        healthList:[]    //活动列表
     },
     mutations: {
+        [GET_MINE] (state, mine) {
+            state.mine = mine ? {...state.mine, ...mine} : defUser;
+        },
         [GET_USER] (state, user) {
             state.user = user ? {...state.user, ...user} : defUser;
         },
@@ -62,8 +67,19 @@ export default {
                 state.page = {...state.page, ...enterList}
             }
         },
-        [GET_ACTIVITY_DETAIL] (state, activityDetail) {
+        [GET_ACTIVITY_DETAIL] (state, activityDetail) {    //获取活动详情
             state.activityDetail = activityDetail ? {...state.activityDetail, ...activityDetail} : defActivity;
         },
+        [DELETE_ACTIVITY](state,index){   //删除活动
+            console.log('这是删除操作');
+        },
+        [GET_HEALTH_LIST](state, healthList){  //健身项目列表
+            if (!!healthList) {
+                state.healthList = healthList.list;
+                delete healthList.list;
+                state.page = {...state.page, ...healthList}
+            }
+        },
+
     }
 }

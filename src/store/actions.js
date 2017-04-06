@@ -2,33 +2,37 @@
 import router from '../router'
 import {mineApi, findApi, delUserApi, getByIdApi} from '../api/userApi'
 import {welfareApi} from '../api/welfareApi'
-import {findActivityApi,findEntryListByIdApi,findActivityDetailApi,createActivityApi} from '../api/activityApi'
+import {findActivityApi,findEntryListByIdApi,findActivityDetailApi,createActivityApi,deleteActivityApi} from '../api/activityApi'
 import {fileApi} from '../api/fileApi'
 
-import {GET_USER, GET_WELFARE, PAGE, GET_USER_LIST, CHANE_SELECT, DEL_USER,GET_ACTIVITY_LIST,GET_ENTER_LIST,GET_ACTIVITY_DETAIL} from './mutation-types'
+import {findHealthApi} from '../api/healthApi'
+
+
+import {GET_USER, GET_WELFARE, PAGE, GET_USER_LIST, CHANE_SELECT, DEL_USER,GET_ACTIVITY_LIST,
+    GET_ENTER_LIST,GET_ACTIVITY_DETAIL,DELETE_ACTIVITY,GET_HEALTH_LIST,GET_MINE} from './mutation-types'
 
 //上传文件
-const upload=({commit,state},data) => fileApi(data)
+const upload=({commit,state},data) => fileApi(data);
 const successActivity= ({commit,state},{data}) => {
-    console.log(data)
+    console.log(data);
     commit(GET_ACTIVITY_DETAIL, {files:[...state.activityDetail.files,data]});
 };
 
 // go
-const go = ({commit}, [name, id]) => router.push({name, params: {id}})
+const go = ({commit}, [name, id]) => router.push({name, params: {id}});
 //清除page
 const clearPage = ({commit}) => commit(PAGE);
 //更改page
 const changePage = ({commit}, data) => commit(PAGE, data);
 //更改查询字段
 const changeSelect = ({commit, state}, data) => {
-    console.log(data)
+    console.log(data);
     commit(CHANE_SELECT, data);
 };
 
-//获取我的信息
+//获取用户信息
 const getUser = async({commit, state}) => {
-    const {params:{id}}=state.route
+    const {params:{id}}=state.route;
     const user = await getByIdApi(id);
     commit(GET_USER, user);
 };
@@ -44,6 +48,13 @@ const delUser = async({commit, state}, data) => {
     // const delUserOne = await delUserApi();
     commit(DEL_USER);
 };
+//获取我的信息
+const getMine = async({commit, state}) => {
+    const mine = await mineApi();
+    commit(GET_MINE, mine);
+};
+
+
 
 
 //获取福利兑换列表
@@ -87,6 +98,23 @@ const createActivity = async({commit,state}) => {
     });
 };
 
+//获取活动相关数据   删除活动
+const deleteActivity = async({commit,state},data) => {
+    console.log(data[0], data[1]);
+    deleteActivityApi(data[0], data[1]);
+    // const delUserOne = await delUserApi();
+    commit(DELETE_ACTIVITY);
+};
+
+//获取健身项目相关数据   列表
+const getHealth = async({commit,state}) => {
+    const health = await findHealthApi(state.page);
+
+    commit(GET_HEALTH_LIST, health);
+};
+
+
+
 
 const changeWC = ({commit},data) => {
     console.log(data);
@@ -95,6 +123,6 @@ const changeWC = ({commit},data) => {
 
 
 export default {
-    getUser, getWelfare, findUserList, changePage, clearPage, changeSelect, delUser, go, getActivity,getEnter,getActivityDetail,changeWC,
-    upload,successActivity,createActivity
+    getMine,getUser, getWelfare, findUserList, changePage, clearPage, changeSelect, delUser, go, getActivity,getEnter,getActivityDetail,changeWC,
+    upload,successActivity,createActivity,deleteActivity,getHealth
 }

@@ -1,4 +1,5 @@
 
+const mine = (state) => state.mine;
 const user = (state) => state.user;
 const welfare = (state) => state.welfare;
 const page = (state) => state.page;
@@ -14,8 +15,12 @@ const action = (state) => {
 
     }
     return url
-}
+};
+const healthList = (state) => state.healthList;
+
+
 export default {
+    mine,
     user,
     welfare,
     page,
@@ -23,5 +28,6 @@ export default {
     activityList,
     enterList,
     activityDetail,
-    action
+    action,
+    healthList
 }

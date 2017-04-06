@@ -44,7 +44,7 @@
                                 <el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单
                                 </el-button>
                                 <el-button size="small" type="text" @click="">二维码</el-button>
-                                <el-button size="small" type="text" @click="">签到管理</el-button>
+                                <el-button size="small" type="text" @click="go(['activitySigned',scope.row.id])">签到管理</el-button>
                                 <el-button size="small" type="text" @click="handleDelete(scope.$index, scope.row)">删除
                                 </el-button>
                             </template>
@@ -55,65 +55,9 @@
                     <myPage :method="getActivity"/>
                 </div>
 
-                <el-dialog :title="formTitle" v-model="dialogFormVisible" size="small" ref="startAct" id='startAct'
-                           @open="openDialog">
-                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                        <el-form-item label="活动图片" class="userUpload">
-                            <img class="userSrc" :src="userSrc">
-                            <vue-core-image-upload
-                                    :maxWidth=150
-                                    :maxHeight=100
-                                    crop-ratio="2:1.5"
-                                    v-bind:class="['el-button','el-button--primary','js-btn-crop']"
-                                    v-bind:crop="true"
-                                    url=""
-                                    extensions="png,gif,jpeg,jpg"
-                                    @:imageuploaded="imageuploaded"
-                                    @:errorhandle="handleError"
-                                    @:imagechanged="imagechanged"
-                                    text='上传图片'>
-                            </vue-core-image-upload>
-                        </el-form-item>
-                        <el-form-item label="活动名称" prop="name">
-                            <el-input v-model="ruleForm.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="活动地点" prop="region">
-                            <el-input v-model="ruleForm.region"></el-input>
-                        </el-form-item>
-                        <el-form-item label="活动时间" required>
-                            <el-col :span="11">
-                                <el-form-item prop="date1">
-                                    <el-date-picker @change="dateChange" type="date" placeholder="选择时间"
-                                                    v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-                                </el-form-item>
-                            </el-col>
-                            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
-                            <el-col :span="11">
-                                <el-form-item prop="date2">
-                                    <el-date-picker @change="dateChange" type="date" placeholder="选择时间"
-                                                    v-model="ruleForm.date2" style="width: 100%;"></el-date-picker>
-                                </el-form-item>
-                            </el-col>
-                        </el-form-item>
-                        <el-form-item label="活动人数" prop="num">
-                            <el-input v-model.number="ruleForm.num" auto-complete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="活动内容" prop="desc">
-                            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" @click="submitForm('ruleForm',tbindex)">{{formBtn}}</el-button>
-                            <el-button @click="resetForm('ruleForm')">取消</el-button>
-                        </el-form-item>
-                    </el-form>
-                    <!--        <div slot="footer" class="dialog-footer">
-                              <el-button @click="resetForm('ruleForm')">取 消</el-button>
-                              <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
-                            </div>-->
-                </el-dialog>
             </div>
         </div>
-
+        <myDialog title="提示" :uid="uid" :delNum="1" content="您确定要删除此条信息吗" :result="result" @on-result-change="onResultChange" :method="delUser"></myDialog>
     </div>
 </template>
 <script type="es6">
@@ -202,7 +146,9 @@
                 restaurants: [],   //搜索框的下拉数据
                 state2: '',   // 搜索框的value
                 searchVal: '',
-                dialogFormVisible: false
+                dialogFormVisible: false,
+                uid:'',
+                result:false  //删除弹框控制
             }
         },
         components: {
@@ -217,120 +163,23 @@
         methods: {
             ...mapActions(['getActivity', 'getEnter', 'changePage', 'clearPage', 'changeSelect', 'delUser', 'go']),
             date2Filter, sex2Filter, date3Filter, marriage2Filter, date4Filter, date5Filter,
+            handleDelete(index, row) {
+                console.log(index, row);
+                this.uid=row.id;
+                this.result=true;
+            },
+            onResultChange(val){
+                this.result=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+            },
             getData(){
                 let _this = this;
                 setTimeout(() => {
                     _this.loadingData = false;
 
                 }, 1000)
-
-            },
-            openDialog(){  //打开弹窗后的回调
-                setTimeout(() => {
-                    let dom = document.querySelector('#startAct .el-dialog');
-                    let w = document.querySelector('#startAct .el-dialog').clientWidth;
-                    dom.style.marginLeft = -(w / 2) + 'px';
-                }, 10)
-
-            },
-            bulidAct(formName){   //发起
-                this.dialogFormVisible = true;
-                this.formTitle = '发起活动';
-                this.formBtn = '立即创建';
-                /*        this.ruleForm.name='';
-                 this.ruleForm.region='';
-                 this.ruleForm.date1='';
-                 this.ruleForm.date2='';
-                 this.ruleForm.num='';
-                 this.ruleForm.desc='';*/
-                console.log(this.ruleForm);
-            },
-            handleEdit(index, row) {   //编辑
-                console.log(index);
-                // console.log(this.tableData[index])
-                this.tbindex = index;
-                /*console.log(index, row);*/
-                this.dialogFormVisible = true;  //打开编辑弹框
-                let datea = row.date.split("——");
-                this.formTitle = '编辑活动';
-                this.formBtn = '保存';
-                this.ruleForm.name = row.name;
-                this.ruleForm.region = row.address;
-                this.ruleForm.date1 = new Date(datea[0]);
-                this.ruleForm.date2 = new Date(datea[1]);
-                this.ruleForm.num = row.num;
-                this.ruleForm.desc = row.desc;
-//         this.ruleForm={    这样做的话会有问题
-//           name: row.name,
-//           region: row.address,
-// /*          date1: date[0],
-//           date2: date[1],*/
-//           num: row.num,
-//           desc: row.desc
-//         };
-            },
-            closeDialog(){
-                this.$refs['ruleForm'].resetFields();  //this.$refs['ruleForm'] 获取元素   resetFields() 重置
-            },
-            handleDelete(index, row) {  //删除单条活动
-                console.log(index, row);
-                this.tbindex = index;
-                this.dialogVisible = true;
             },
             dateChange(val){
                 return val;
-            },
-            submitForm(formName, index) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        if (this.formBtn == '保存') {   //如果是编辑状态
-                            // alert('这是编辑状态');
-                            // console.log(index);
-                            // console.log(this.tableData[index])
-                            this.tableData[index].name = this.ruleForm.name;
-                            this.tableData[index].address = this.ruleForm.region;
-                            this.tableData[index].date = moment(this.ruleForm.date1, 'YYYY-MM-DD').format('YYYY-MM-DD') + '——' + moment(this.ruleForm.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');
-                            this.tableData[index].num = this.ruleForm.num;
-                            this.tableData[index].desc = this.ruleForm.desc;
-                        } else {
-                            /*alert('这是创建状态');*/
-                            this.tableData.push({
-                                name: this.ruleForm.name,
-                                date: moment(this.ruleForm.date1, 'YYYY-MM-DD').format('YYYY-MM-DD') + '——' + moment(this.ruleForm.date2, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-                                address: this.ruleForm.region,
-                                num: this.ruleForm.num,
-                                checkedNum: '8000',
-                                depatrment: '活动部',
-                                desc: this.ruleForm.desc,
-                                depatrmentPerson: '邹可涛',
-                                publishDate: '2017-03-05',
-                            })
-                        }
-                        this.dialogFormVisible = false;
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.dialogFormVisible = false;
-                this.$refs[formName].resetFields();
-            },
-            imageuploaded(res) {
-                console.log(res);
-                if (res.errcode == 0) {
-                    this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png';
-                }
-            },
-            imagechanged(res) {
-                console.log(res.name)
-            },
-            handleError(){
-                this.$notify.error({
-                    title: '上传失败',
-                    message: '图片上传接口上传失败，可更改为自己的服务器接口'
-                });
             },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;

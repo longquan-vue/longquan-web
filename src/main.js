@@ -11,6 +11,7 @@ import {localStorage} from './store/localstorage'
 import animate from 'animate.css'
 import VueQuillEditor from 'vue-quill-editor'
 
+
 sync(store, router)
 
 Vue.use(ElementUI)

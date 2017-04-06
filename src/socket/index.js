@@ -1,3 +1,4 @@
 import VueWebsocket from "vue-websocket";
 import Vue from 'vue'
-// Vue.use(VueWebsocket, "ws://java.ichuangye.cn/socekt/{userid}");
+
+export const connect = (sessionId) =>Vue.use(VueWebsocket, `ws://java.ichuangye.cn/websocekt/${sessionId}`);
