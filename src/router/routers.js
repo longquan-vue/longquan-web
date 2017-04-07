@@ -6,7 +6,7 @@ export default [
       component: require('../view/zhxt/login/Login.vue')
   },
     {
-        path: `${ROOT}/zhxt/loginSuccess/:sessionId`,
+        path: `${ROOT}/zhxt/loginSuccess`,
         component: require('../view/zhxt/login/loginSuccess.vue')
     },
     {
