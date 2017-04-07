@@ -5,80 +5,42 @@
 <template>
     <div class="welfare">
         <div class="welfareHead">
-            <a class="" href="javascript:;" @click="">签到赚积分</a>
+            <p>不定期推出各种积分兑换福利，你备好积分了么？</p>
+            <a class="" href="javascript:;" @click="goto(['signin'])">
+                <img src="../../../../static/wx/button.png">
+            </a>
         </div>
         <div class="welfareCont">
-           <img src="../../../../static/wx/bg.png">
            <a class="javascript:;" flex>
-               <span>我的积分</span>
-               <i box="1">3200</i>
-               <em flex items="center" justify="center"><img src="../../../../static/wx/go.png"></em>
+               <span>我的积分 : </span>
+               <i box="1">{{login.score}}</i>
+               <em flex items="center" justify="center" @click="goto(['welfareDetail',{id:login.id}])">积分明细<img src="../../../../static/wx/go.png"></em>
            </a>
            <ul class="list">
-               <li v-for="(item, index) in welfare">
+               <li v-for="(item, index) in list">
                    <div class="liHead" flex>
-                        <img :src="item.pic_url">
+                        <img :src="item.picUrl">
                         <div box="1" class="listDetail">
-                            <h3>{{item.title}}</h3>
-                            <p>{{item.point}}积分</p>
+                            <h3>
+                                {{item.name}}
+                                <a @click="openRule(item)">规则详情</a>
+                            </h3>
                             <div>
-                               剩余 ： <span>{{item.last}}</span>  / <span>{{item.all}}</span>
+                               剩余 ： <span>20</span>  / <span>{{item.total}}</span>
+                            </div>
+                            <div>
+                                福利提供 ： <span>{{item.provider}}</span>
                             </div>
                         </div>
                         <div class="listStatus" @click="popupOpen=true">
-                            兑换
+                            <p>{{item.score}}积分</p>
+                            <a>兑换</a>
                         </div>
                    </div>
                    <div class="liFoot" flex justify="between">
                        <div>
-                           <h3>福利提供：{{item.support}}</h3>
-                           <p><img src="../../../../static/wx/time.png"> {{item.startTime}} 至 {{item.endTime}}</p>
+                           <p>兑换时间 : {{date3Filter(item.startTime)}} 至 {{date3Filter(item.endTime)}}</p>
                        </div>
-                       <a href="javascript:;" flex items="center" justify="center" @click="detail(index)">详情 > </a>
-                   </div>
-               </li>
-               <li>
-                   <div class="liHead" flex>
-                       <img src="../../../../static/wx/red.png">
-                       <div box="1" class="listDetail">
-                           <h3>1元红包</h3>
-                           <p>1000积分</p>
-                           <div>
-                               剩余 ： <span>20</span>  / <span>120</span>
-                           </div>
-                       </div>
-                       <div class="listStatus">
-                           兑换
-                       </div>
-                   </div>
-                   <div class="liFoot" flex justify="between">
-                       <div>
-                           <h3>福利提供：成都爱创业科技有限公司</h3>
-                           <p><img src="../../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
-                       </div>
-                       <a href="javascript:;" flex items="center" justify="center">详情 > </a>
-                   </div>
-               </li>
-               <li>
-                   <div class="liHead" flex>
-                       <img src="../../../../static/wx/red.png">
-                       <div box="1" class="listDetail">
-                           <h3>1元红包</h3>
-                           <p>1000积分</p>
-                           <div>
-                               剩余 ： <span>20</span>  / <span>120</span>
-                           </div>
-                       </div>
-                       <div class="listStatus over">
-                           兑换
-                       </div>
-                   </div>
-                   <div class="liFoot" flex justify="between">
-                       <div>
-                           <h3>福利提供：成都爱创业科技有限公司</h3>
-                           <p><img src="../../../../static/wx/time.png"> 2017-06-25 15:00 至 2017-06-30 15:00</p>
-                       </div>
-                       <a href="javascript:;" flex items="center" justify="center">详情 > </a>
                    </div>
                </li>
            </ul>
@@ -95,31 +57,31 @@
                     <ul>
                         <li flex>
                             <span box="1">名称: </span>
-                            <div  box="5">红包详情</div>
+                            <div  box="5">{{data.name}}</div>
                         </li>
                         <li flex>
                             <span box="1">积分: </span>
-                            <div box="5">500积分</div>
+                            <div box="5">{{data.score}}
+                                <span>所需积分</span>
+                            </div>
                         </li>
                         <li flex>
                             <span box="1">次数: </span>
-                            <div box="5">每人1次</div>
+                            <div box="5">{{data.time}}
+                                <span>次/人</span>
+                            </div>
                         </li>
                         <li flex>
                             <span box="1">提供: </span>
-                            <div box="5">成都爱创业科技有限公司</div>
+                            <div box="5"><a :href="data.website">{{data.provider}}</a></div>
                         </li>
                         <li flex>
                             <span box="1">时间: </span>
-                            <div box="5">2017-06-25 15:00 至 2017-07-12  15:00</div>
+                            <div box="5">{{date3Filter(data.startTime)}} 至 {{date3Filter(data.endTime)}}</div>
                         </li>
                         <li flex>
                             <span box="1">规则:</span>
-                            <div box="5">
-                                <p>1、规则11111111</p>
-                                <p>2、规则11111111</p>
-                                <p>3、规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111</p>
-                            </div>
+                            <div box="5" v-html="data.rule"></div>
                         </li>
                     </ul>
                     <!--<div class="rules" flex>-->
@@ -149,6 +111,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
+    import {date3Filter} from '../../../filters'
     export default{
         data(){
             return{
@@ -159,11 +122,16 @@
         components:{
 
         },
-        computed: {...mapGetters(['user','welfare'])},
+        computed: {...mapGetters(['login','list','data'])},
         methods:{
-            ...mapActions(['getMine','getWelfare','clear']),
+            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto']),
+            date3Filter,
             detail(index){
                 this.popupVisible=true;
+            },
+            openRule(data){
+                this.popupVisible=true;
+                this.getWelfareDetail(data);
             }
         },
         created () {

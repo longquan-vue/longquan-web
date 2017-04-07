@@ -4,21 +4,9 @@
 </style>
 <template>
     <div class="centerMess">
-        <div class="centerMessHead">
-            <div flex>
-                <div box="1" flex items="center" style="padding-left:10px;">
-                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
-                </div>
-                <div box="4" flex items="center" justify="center">
-                    <h2>我的福利</h2>
-                </div>
-                <div box="1" flex items="center">
-
-                </div>
-            </div>
-        </div>
+        <appHead title="我的福利"></appHead>
         <ul class="centerMessList">
-            <li v-for="(item,index) in mineWelfare" flex @click="goto(['centerwelfardetail',{id:item.id,ticket:item.ticket}])">
+            <li v-for="(item,index) in list" flex @click="goto(['centerwelfardetail',{id:item.id,ticket:item.ticket,used:item.used,welfareId:item.welfareId}])">
                 <div box="2">
                     <img :src="item.picUrl">
                 </div>
@@ -40,6 +28,7 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
+    import appHead from '../../../components/public/apphead/Apphead.vue'
     export default{
         data(){
             return{
@@ -47,12 +36,12 @@
             }
         },
         components:{
-
+            appHead
         },
-        computed: {...mapGetters(['mineWelfare', 'page']),
+        computed: {...mapGetters(['list', 'page']),
         },
         methods:{
-            ...mapActions(['goto','getMineWelfare']),
+            ...mapActions(['goto','clear','getMineWelfare']),
             date3Filter,
             isEnd(endTime){
                 return new Date().getTime()>endTime
@@ -60,6 +49,9 @@
         },
         created () {
             this.getMineWelfare()
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

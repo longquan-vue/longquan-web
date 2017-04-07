@@ -72,183 +72,6 @@
                    </li>
                </ul>
            </div>
-           <div class="welfareList">
-               <p>2017年2月</p>
-               <ul class="welfareListBox">
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>红包兑换</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div>-200</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-               </ul>
-           </div>
-           <div class="welfareList">
-               <p>2017年2月</p>
-               <ul class="welfareListBox">
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>红包兑换</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div>-200</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-               </ul>
-           </div>
-           <div class="welfareList">
-               <p>2017年2月</p>
-               <ul class="welfareListBox">
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>红包兑换</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div>-200</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-               </ul>
-           </div>
        </div>
        <a href="javascript:;">查看更多</a>
    </div>
@@ -257,6 +80,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
+    import filter from '../../../filters'
     export default{
         data(){
             return{
@@ -266,14 +90,16 @@
         components:{
 
         },
-        computed: {
-
-        },
+        computed: {...mapGetters(['login','data','list'])},
         methods:{
-
+            ...mapActions(['clear','getMineScore']),
+            ...filter
         },
         created () {
-
+            this.getMineScore();
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

@@ -47,17 +47,17 @@
                     <el-form-item label="福利名称" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="福利总量" prop="name">
+                    <el-form-item label="福利数量" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="福利时间" prop="name">
+                    <el-form-item label="兑换时间" prop="name">
                         <el-date-picker v-model="ruleForm.time" type="datetimerange" placeholder="选择时间范围">
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item label="所需积分" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="兑换次数" prop="name">
+                    <el-form-item label="人均兑换次数" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
                     <el-form-item label="福利提供方" prop="name">

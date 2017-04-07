@@ -37,3 +37,19 @@ export const mineWelfareApi = (id, del,data) => request({
     url: `/history/welfare/${id}/${del}`,
     data
 });
+
+//我的积分
+export const mineScoreApi = (id, del,data) => request({
+    url: `/history/score/${id}/${del}`,
+    data
+});
+//我的消息
+export const mineMsgApi = (id, del,data) => request({
+    url: `/history/msg`,
+    data
+});
+//我的活动
+// export const mineMsgApi = (id, del,data) => request({
+//     url: `/history/msg`,
+//     data
+// });

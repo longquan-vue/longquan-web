@@ -18,70 +18,11 @@
             </div>
         </div>
         <ul class="centerMessList">
-            <li>
-                <p>认证成功</p>
+            <li v-for="(item,index) in list">
+                <p>{{item.title}}</p>
                 <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
-                </div>
-            </li>
-            <li>
-                <p>认证成功</p>
-                <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
-                </div>
-            </li>
-            <li>
-                <p>认证成功</p>
-                <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
-                </div>
-            </li>
-            <li>
-                <p>认证成功</p>
-                <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
-                </div>
-            </li>
-            <li>
-                <p>认证成功</p>
-                <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
-                </div>
-            </li>
-            <li>
-                <p>认证成功</p>
-                <div class="mess">
-                    <div>
-                        啦啦啦，我是卖报的小行家，大风大雨满街跑
-                    </div>
-                    <p>
-                        02-05 10:31
-                    </p>
+                    <div>{{item.content}}</div>
+                    <p>{{date3Filter(item.recording)}}</p>
                 </div>
             </li>
         </ul>
@@ -91,6 +32,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
+    import filter from '../../../filters'
     export default{
         data(){
             return{
@@ -100,14 +42,16 @@
         components:{
 
         },
-        computed: {
-
-        },
+        computed: {...mapGetters(['login','list'])},
         methods:{
-
+            ...mapActions(['getMineMsg','clear']),
+            ...filter
         },
         created () {
-
+            this.getMineMsg();
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

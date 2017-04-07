@@ -4,23 +4,11 @@
 </style>
 <template>
     <div class="centerwelfaardetail">
-        <div class="centerMessHead">
-            <div flex>
-                <div box="1" flex items="center" style="padding-left:10px;">
-                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
-                </div>
-                <div box="4" flex items="center" justify="center">
-                    <h2>福利详情</h2>
-                </div>
-                <div box="1" flex items="center">
-
-                </div>
-            </div>
-        </div>
+        <appHead title="福利详情"></appHead>
         <div class="detailHead">
-            <img src="../../../../static/wx/center/reapack.png" v-if="welfareDetail.type==2">
-            <div v-if="welfareDetail.type==3">
-                <h2>{{welfareDetail.ticket}}</h2>
+            <img src="../../../../static/wx/center/reapack.png" v-if="data.type==2">
+            <div v-if="data.type==3">
+                <h2>{{data.ticket}}</h2>
                 <p>兑换码</p>
             </div>
         </div>
@@ -28,27 +16,27 @@
             <ul>
                 <li flex>
                     <div box="1">名称 : </div>
-                    <div box="8">{{welfareDetail.name}}</div>
+                    <div box="8">{{data.name}}</div>
                 </li>
                 <li flex>
                     <div box="1">积分 : </div>
-                    <div box="8">{{welfareDetail.score}}  积分</div>
+                    <div box="8">{{data.score}}  积分</div>
                 </li>
                 <li flex>
                     <div box="1">次数 : </div>
-                    <div box="8">每人  {{welfareDetail.time}} 次</div>
+                    <div box="8">每人  {{data.time}} 次</div>
                 </li>
                 <li flex>
                     <div box="1">提供 : </div>
-                    <div box="8"><a :href="welfareDetail.website">{{welfareDetail.provider}}</a></div>
+                    <div box="8"><a :href="data.website">{{data.provider}}</a></div>
                 </li>
                 <li flex>
                     <div box="1">时间 : </div>
-                    <div box="8">{{date3Filter(welfareDetail.startTime)}} 至 {{date3Filter(welfareDetail.endTime)}} </div>
+                    <div box="8">{{date3Filter(data.startTime)}} 至 {{date3Filter(data.endTime)}} </div>
                 </li>
                 <li flex>
                     <div box="1">规则 : </div>
-                    <div box="8" v-html="welfareDetail.rule"></div>
+                    <div box="8" v-html="data.rule"></div>
                 </li>
             </ul>
         </div>
@@ -59,6 +47,7 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
+    import appHead from '../../../components/public/apphead/Apphead.vue'
     export default{
         data(){
             return{
@@ -66,9 +55,9 @@
             }
         },
         components:{
-
+            appHead
         },
-        computed: {...mapGetters(['welfareDetail'])},
+        computed: {...mapGetters(['data'])},
         methods:{
             ...mapActions(['goto','getWelfareDetail']),
             date3Filter

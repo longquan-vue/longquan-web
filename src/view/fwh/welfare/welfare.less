@@ -10,53 +10,57 @@
 //0.48rem =36px
 
 .welfare {
-  background:#FFE966;min-height: 100%;
+  background:#f0f0f0;min-height: 100%;
   .welfareHead{
-    height: 6.6666666667rem;width: 100%;position: relative;
-    background: url("../../../../static/wx/banner.png") no-repeat center;background-size: cover;
-    a{ width: 4rem;height: 1.6rem;background: url("../../../../static/wx/btn.png") no-repeat center;
-      background-size: cover;position: absolute;left: 50%;margin-left: -2rem;
-      bottom: .5rem;text-align: center;line-height: 1.6rem;color: #BE2500;font-size: 0.5333333rem;
+    height: 8rem;width: 100%;position: relative;
+    background: url("../../../../static/wx/welbanner.jpg") no-repeat center;background-size: cover;
+    p{ font-size: 0.3466666rem;color: #ffffff;position: absolute;width: 100%;text-align: center;
+      top: 55%;
+    }
+    a{ width: 60%;display: block;position: absolute;left: 50%;margin-left: -30%;
+      bottom: 1.2rem;
+      img{ width: 100%;}
     }
   }
   .welfareCont{
     position: relative;
-    min-height: 5rem;padding: .4rem;
+    min-height: 5rem;padding-bottom: .4rem;
     > img{ width: 100%;position: absolute;left: 0;top: -.9rem;}
-    > a{ width: 100%;height: 1.2rem;line-height: 1.2rem;
-      background-color: #FFF9D3;position: relative;border-radius: 4px;
-      -webkit-box-shadow: 0 0 6px rgba(0,0,0,.2);
-      -moz-box-shadow: 0 0 6px rgba(0,0,0,.2);
-      box-shadow:  0 0 6px rgba(0,0,0,.2);
-      img{ width: 0.533333rem;}
+    > a{ width: 100%;height: 0.8rem;line-height: 0.8rem;
+      position: relative;border-radius: 4px;
+      img{ width: 0.35rem;margin-left: 5px;}
       span{ text-align: center;width: 2.4rem}
       i{ font-size: 0.533333rem;color: #FF790C;}
-      em{ text-align: center;border-left: 1px dashed #FFE966;width: 1.46666666rem;}
+      em{ text-align: center;width: 3rem;}
     }
     .list{
       li{ margin-top: 10px;position: relative;min-height: 3rem;background-color: #ffffff;
-        border-radius: 6px;padding: 0.5333333rem 0.2666666rem 0 0.6666666rem;
-        &:before{ content: '';position: absolute;left: 0;top: 0;width: 0.26666666rem;height: 100%;
-        background: url("../../../../static/wx/liImg.png") no-repeat center;background-size: cover;}
         .liHead{
-          padding-bottom: 0.53333333rem;border-bottom: 1px dashed #FFE966;
+          padding: 0.45rem;
           img{ width: 1.97333333rem;height: 1.97333333rem;}
-          .listDetail{ padding-left: 0.46666666rem;
-            h3{ font-size: 0.5333333rem;color: #333333;margin-bottom: .05rem;}
+          .listDetail{ padding-left: 0.4rem;
+            h3{ font-size: 0.5333333rem;color: #333333;margin-bottom: .05rem;
+              position: relative;
+              a{ color: #FFB135;font-size: 0.2933333rem;text-decoration: underline}
+            }
             p { font-size: 0.42666666rem;color: #ff6600;margin-bottom: .05rem;}
             div{
-              color: #999999;
+              color: #999999; overflow: hidden;  text-overflow:ellipsis;  white-space: nowrap;
               span:nth-of-type(1){ font-size: 12px;}
               span:nth-of-type(2){ font-size: 14px;}
             }
           }
-          .listStatus{ width: 1.46666666rem;height: 1.46666666rem;border-radius: 50%;background-color: #FF780B;
-          border: 2px solid #FFD0AB;text-align: center;line-height: 1.46666666rem;color: #ffffff;
-          font-size: 0.466666667rem;}
-          .listStatus.over{ background-color: #CCCCCC;border-color: #e7e7e7;color: #666666;}
+          .listStatus{ text-align: center;width: 2.2rem;margin-left: 0.2rem;padding-top: .2rem;
+            p{ font-size: 0.4rem;color: #666666;margin-bottom: 10px;}
+          }
+          .listStatus a{ border-radius: 15px;background-color: #FF780B;
+          text-align: center;color: #ffffff;padding: 3px 0;
+          font-size: 0.4rem;display: block}
+          .listStatus a.over{ background-color: #CCCCCC;color: #666666;}
         }
         .liFoot{
-          padding: 10px 0;
+          padding:0.4rem 0.45rem;
+          background: url("../../../../static/wx/huawen.png") no-repeat center;background-size: cover;
           h3{ font-size: 0.37333333rem;margin-bottom: 5px;color: #333333;}
           p{ font-size: 0.32rem;color: #999999;
             img{ width: 0.37333333rem;vertical-align: middle;position: relative;top: -2px;}
@@ -82,6 +86,9 @@
           padding: 10px 0;
         &:last-child{ border: none;}
         i{ margin-left: 5px;}
+        div{ position: relative;
+          span{ position: absolute;right: 0;}
+        };
       }
     }
   }
