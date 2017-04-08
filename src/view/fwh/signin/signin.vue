@@ -5,45 +5,46 @@
 <template>
     <div class="signin">
         <div class="signinHead">
-            <i>您的积分:2000</i>
-            <div class="signinBtn">
+            <i>您的积分:{{login.score}}</i>
+            <div class="signinBtn" @click="sign()">
                 <div class="signinBtnCont">
-                    <h2>签到</h2>
+                    <h2 v-if="!login.isSign">签到</h2>
+                    <h2 v-if="login.isSign">已签到</h2>
                     <div></div>
-                    <p>已连续2天</p>
+                    <p>已连续{{login.signNum}}天</p>
                 </div>
             </div>
             <div class="tips">
-                明日签到可领取50积分啦~
+                明日签到可领取{{(login.signNum+1)*10}}积分啦~
             </div>
             <div class="line"></div>
             <ul flex>
                 <li box="1">
-                    <div class="active">
+                    <div>
                         +10
                     </div>
                     <p>星期一</p>
                 </li>
                 <li box="1">
-                    <div class="active">
+                    <div>
                         +20
                     </div>
                     <p>星期二</p>
                 </li>
                 <li box="1">
-                    <div class="active">
+                    <div>
                         +30
                     </div>
                     <p>星期三</p>
                 </li>
                 <li box="1">
-                    <div class="active">
+                    <div>
                         +40
                     </div>
                     <p>星期四</p>
                 </li>
                 <li box="1">
-                    <div class="active">
+                    <div>
                         +50
                     </div>
                     <p>星期五</p>
@@ -84,12 +85,15 @@
                     <span box="1">积分可用于工会组织的不定期的福利抽奖，健身中心报名以及各类活动的报名</span>
                 </li>
             </ul>
-            <a><img src="../../../../static/wx/see.png"></a>
+            <a @click="goto(['welfare'])"><img src="../../../../static/wx/see.png"></a>
         </div>
     </div>
 </template>
 
 <script type="es6">
+    import { mapGetters } from 'vuex'
+    import { mapActions } from 'vuex'
+    import filter from '../../../filters'
     export default{
         data(){
             return{
@@ -99,8 +103,20 @@
         components:{
 
         },
+        computed: {...mapGetters(['login','data','list'])},
         methods:{
-
+            ...mapActions(['clear','getMine','singin','goto']),
+            ...filter,
+            sign(){
+               this.singin();
+            }
+        },
+        created () {
+            this.getMine();
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>
+

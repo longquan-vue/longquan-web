@@ -20,11 +20,11 @@
                 </li>
                 <li flex>
                     <div box="1">积分 : </div>
-                    <div box="8">{{data.score}}  积分</div>
+                    <div box="8">{{data.score}}  <span style="float:right">积分</span></div>
                 </li>
                 <li flex>
                     <div box="1">次数 : </div>
-                    <div box="8">每人  {{data.time}} 次</div>
+                    <div box="8">  {{data.time}} <span style="float:right">人/次</span></div>
                 </li>
                 <li flex>
                     <div box="1">提供 : </div>
@@ -40,6 +40,10 @@
                 </li>
             </ul>
         </div>
+        <div class="sao">
+            <p>提示: 请到现场点击“扫码兑换”按钮进行扫码兑换</p>
+            <a @click="code()"><img src="../../../../static/wx/center/saocode.png"></a>
+        </div>
     </div>
 </template>
 
@@ -48,6 +52,7 @@
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import { Toast ,MessageBox } from 'mint-ui';
     export default{
         data(){
             return{
@@ -60,7 +65,10 @@
         computed: {...mapGetters(['data'])},
         methods:{
             ...mapActions(['goto','getWelfareDetail']),
-            date3Filter
+            date3Filter,
+            code(){
+                Toast('调用微信接口 打开二维码扫描');
+            }
         },
         created () {
             this.getWelfareDetail();

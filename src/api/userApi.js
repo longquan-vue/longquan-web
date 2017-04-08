@@ -7,12 +7,12 @@ export const mineApi = () => request({
 });
 // 签到
 export const signApi = () => request({
-    method: "put",
+    method: "post",
     url: `${BASE_PATH}/sign`,
 });
 // 修改我的资料
 export const updateApi = (data) => request({
-    method: "put",
+    method: "post",
     url: `${BASE_PATH}/mine`,
     data
 });

@@ -4,6 +4,16 @@
 </style>
 <template>
     <div class="welfare">
+        <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+            <div class="scrollBox" flex v-show="show">
+                <span box="1">福利预告:</span>
+
+                 <roll-notice :notices="['第一条福利预告', '第二条福利预告', '第三条福利预告']"></roll-notice>
+
+                <i box="1" @click="show=false">X</i>
+            </div>
+        </transition>
+
         <div class="welfareHead">
             <p>不定期推出各种积分兑换福利，你备好积分了么？</p>
             <a class="" href="javascript:;" @click="goto(['signin'])">
@@ -32,7 +42,7 @@
                                 福利提供 ： <span>{{item.provider}}</span>
                             </div>
                         </div>
-                        <div class="listStatus" @click="popupOpen=true">
+                        <div class="listStatus" @click="convert(index)">
                             <p>{{item.score}}积分</p>
                             <a>兑换</a>
                         </div>
@@ -112,19 +122,21 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
+    import RollNotice from '../../../components/public/showNotice/RollNotice.vue'
     export default{
         data(){
             return{
+                show:false,
                 popupVisible:false,  //控制规则详情
                 popupOpen:false    //控制兑换详情
             }
         },
         components:{
-
+            RollNotice
         },
         computed: {...mapGetters(['login','list','data'])},
         methods:{
-            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto']),
+            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto','convertWelfare']),
             date3Filter,
             detail(index){
                 this.popupVisible=true;
@@ -132,13 +144,27 @@
             openRule(data){
                 this.popupVisible=true;
                 this.getWelfareDetail(data);
+            },
+            convert(index){
+                this.convertWelfare(index);
+                this.popupOpen=true;
+            },
+            scrollMess(){
+                setTimeout(()=>{
+
+                },2000)
             }
         },
+        mounted(){
+
+        },
         created () {
+            this.show=true;
             this.getMine();
             this.getWelfare();
         },
         destroyed(){
+            this.show=false;
             this.clear();
         }
     }

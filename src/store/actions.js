@@ -1,7 +1,8 @@
 //业务逻辑处理
 import router from '../router'
-import {mineApi, findApi, getByIdApi, mineWelfareApi ,mineScoreApi ,mineMsgApi } from '../api/userApi'
-import {welfareApi, findWelfareByIdApi} from '../api/welfareApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi ,mineScoreApi ,mineMsgApi ,
+    signApi} from '../api/userApi'
+import {welfareApi, findWelfareByIdApi ,convertApi} from '../api/welfareApi'
 // import {
 //     findActivityApi,
 //     findEntryListByIdApi,
@@ -15,9 +16,9 @@ import {fileApi} from '../api/fileApi'
 
 import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE} from './mutation-types'
 const clear = ({commit}) => {
-    commit(SET_DATA)
+    commit(SET_DATA);
     commit(GET_DATA_LIST)
-}
+};
 //上传文件
 const upload = ({commit, state}, data) => fileApi(data);
 // const successActivity = ({commit, state}, {data}) => {
@@ -71,6 +72,17 @@ const getMine = async({commit,state}) => {
     }
     commit(GET_MINE, mine);
 };
+//签到
+const singin = async({commit,state}) =>{
+    if(state.login.isSign){
+        alert('您已签到');
+        return false;
+    }else {
+        await signApi()
+    }
+};
+
+
 //获取我的福利
 const getMineWelfare = async({commit, state}) => {
     await getMine({commit,state});
@@ -90,7 +102,7 @@ const getMineMsg = async({commit,state}) => {
 
 
 //
-// //获取福利  兑换列表
+//获取福利  兑换列表
 const getWelfare = async({commit}) => {
     commit(GET_DATA_LIST, await welfareApi());
 };
@@ -105,6 +117,12 @@ const getWelfareDetail = async({commit, state}, data) => {
         commit(SET_DATA, data);
     }
 };
+// //获取福利  兑换福利
+const convertWelfare = async({commit,state},index) => {
+    const id=state.list[index].id;
+    await convertApi(id)
+};
+
 //
 //
 // //获取活动相关数据   活动列表
@@ -176,4 +194,6 @@ export default {
     getMineScore,  //获取我的积分记录
     getMineMsg,    //获取我的消息记录
     getWelfare,    //获取福利列表
+    singin,      //签到
+    convertWelfare,  //兑换福利
 }

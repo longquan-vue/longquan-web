@@ -31,9 +31,13 @@
                 <span class="circle">{{login.welfNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/fuli.png" >
             </mt-cell>
-            <mt-cell title="我的活动" to="/view/fwh/centeractivity" is-link>
+            <mt-cell title="我参加的工会活动" to="/view/fwh/centeractivity" is-link>
                 <span class="circle">{{login.actNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/huodong.png" >
+            </mt-cell>
+            <mt-cell title="我报名的健身项目" to="/view/fwh/centerhealth" is-link>
+                <span class="circle">{{login.actNum}}</span>
+                <img slot="icon" src="../../../../static/wx/center/health.png" >
             </mt-cell>
         </div>
         <div class="centerList">
