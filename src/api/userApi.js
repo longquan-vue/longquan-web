@@ -49,7 +49,12 @@ export const mineMsgApi = (id, del,data) => request({
     data
 });
 //我的活动
-// export const mineMsgApi = (id, del,data) => request({
-//     url: `/history/msg`,
-//     data
-// });
+export const mineActivityApi = (del,data) => request({
+    url: `/history/activity/${del}`,
+    data
+});
+//我的健身
+export const mineHealthApi = (del,data) => request({
+    url: `/history/health/${del}`,
+    data
+});

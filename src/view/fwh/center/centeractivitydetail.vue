@@ -7,9 +7,9 @@
         <appHead title="活动详情"></appHead>
         <div class="detailHead">
             <div class="swiper">
-                <swipe swipeid="swipe" ref="swiper" :autoplay="5000" effect="slide" :loop="true">
-                    <div @click="" v-for="top in tops" class="swiper-slide" slot="swiper-con">
-                        <img :src="top.img">
+                <swipe swipeid="swipe" ref="swiper" :autoplay="5000" effect="slide" :loop="false">
+                    <div @click="" v-for="(item,index) in data.files" class="swiper-slide" slot="swiper-con">
+                        <img :src="item.url">
                     </div>
                 </swipe>
             </div>
@@ -19,52 +19,54 @@
                 <li flex>
                     <div box="2">活动名称 : </div>
                     <div box="8">
-                        龙泉驿区职工年中盛典  <a>报名中</a>
+                        {{data.name}}
+                        <a v-if="!isEnd(data.end)">报名中</a>
+                        <a v-if="isEnd(data.end)">已结束</a>
                     </div>
                 </li>
                 <li flex>
                     <div box="2">报名权限 : </div>
-                    <div box="8">所有用户可报名</div>
+                    <div box="8">{{data.entry?'认证用户可报名':'所有用户可报名'}}</div>
                 </li>
                 <li flex>
                     <div box="2">报名人数 : </div>
-                    <div box="8">605/1000  <span>（人）</span></div>
+                    <div box="8">{{data.current}}/{{data.total}}  <span>人</span></div>
                 </li>
                 <li flex>
                     <div box="2">报名所需 : </div>
-                    <div box="8">50 <span>（积分）</span></div>
+                    <div box="8">{{data.score?data.score:'0'}} <span>积分</span></div>
                 </li>
                 <li flex>
                     <div box="2">主办方 : </div>
-                    <div box="8">龙泉驿区总工会</div>
+                    <div box="8">{{data.sponsor}}</div>
                 </li>
                 <li flex>
                     <div box="2">协办方 : </div>
-                    <div box="8">成都爱创业科技有限公司</div>
+                    <div box="8">{{data.coSponsor}}</div>
                 </li>
                 <li flex>
                     <div box="2">承办方 : </div>
-                    <div box="8">成都爱创业科技有限公司</div>
+                    <div box="8">{{data.organizer}}</div>
                 </li>
                 <li flex>
                     <div box="2">报名时间 : </div>
-                    <div box="8">2017-06-25 15:00  至  2017-06-30 15:00</div>
+                    <div box="8">{{date3Filter(data.entryStart)}}  至  {{date3Filter(data.entryEnd)}}</div>
                 </li>
                 <li flex>
                     <div box="2">活动时间 : </div>
-                    <div box="8">2017-06-25 15:00  至  2017-06-30 15:00</div>
+                    <div box="8">{{date3Filter(data.start)}}  至  {{date3Filter(data.end)}}</div>
                 </li>
                 <li flex>
                     <div box="2">活动地点 : </div>
-                    <div box="8">成都市龙泉驿区红光路128号兴隆广场127</div>
+                    <div box="8">{{data.place}}</div>
                 </li>
                 <li flex>
                     <div box="2">活动内容 : </div>
-                    <div box="8">活动内容活动内容活动内容活动内容活动内容活动内容活动内容</div>
+                    <div box="8" v-html="data.detail"></div>
                 </li>
                 <li flex>
                     <div box="2">规则介绍 : </div>
-                    <div box="8">规则介绍规则介绍规则介绍规则介绍规则介绍规则介绍规则介绍规则介绍</div>
+                    <div box="8" v-html="data.rule"></div>
                 </li>
             </ul>
         </div>
@@ -93,12 +95,19 @@
         components:{
             appHead,swipe
         },
-        computed: {...mapGetters(['welfareDetail'])},
+        computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['goto','getWelfareDetail']),
-            date3Filter
+            ...mapActions(['goto','clear','getActivityDetail']),
+            date3Filter,
+            isEnd(endTime){
+                return new Date().getTime()>endTime
+            }
         },
-        created () {this.getWelfareDetail();
+        created () {
+            this.getActivityDetail();
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

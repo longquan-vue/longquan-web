@@ -5,100 +5,25 @@
 <template>
     <div class="centeractivity" style="background-color: #F0F0F0;height: 100%;overflow: scroll">
         <ul class="centerMessList">
-            <li @click="goto(['centeractivitydetail'])">
+            <li @click="goto(['centeractivitydetail',{id:item.id}])" v-for="(item,index) in list">
                 <div class="liHead" flex>
                     <div box="2">
-                        <img src="../../../../static/wx/center/reapack.png">
-                        <p>认证用户可报名</p>
+                        <img :src="item.picUrl">
+                        <p v-if="item.entry">认证用户可报名</p>
                     </div>
                     <div box="4">
                         <div>
-                            <h2>龙泉驿职工年终盛典</h2>
-                            <p>报名人数 : 605/1000</p>
-                            <p>报名所需 : <span>50 积分</span></p>
+                            <h2>{{item.name}}</h2>
+                            <p>报名人数 : {{item.current}}/{{item.total}}</p>
+                            <p>报名所需 : <span>{{item.score?item.score:'0'}} 积分</span></p>
                         </div>
                     </div>
-                    <div box="1">
-                        <a class="ising">进行中</a>
+                    <div>
+                        <a class="over" v-if="isEnd(item.end)">已结束</a>
+                        <a class="ising" v-if="!isEnd(item.end)">进行中</a>
                     </div>
                 </div>
-                <div class="liCont">报名时间： 2017-06-25 15:00  至  2017-06-30 15:00</div>
-            </li>
-            <li @click="goto(['centeractivitydetail'])">
-                <div class="liHead" flex>
-                    <div box="2">
-                        <img src="../../../../static/wx/center/reapack.png">
-                        <p>认证用户可报名</p>
-                    </div>
-                    <div box="4">
-                        <div>
-                            <h2>龙泉驿职工年终盛典</h2>
-                            <p>报名人数 : 605/1000</p>
-                            <p>报名所需 : <span>50 积分</span></p>
-                        </div>
-                    </div>
-                    <div box="1">
-                        <a class="over">已结束</a>
-                    </div>
-                </div>
-                <div class="liCont">报名时间： 2017-06-25 15:00  至  2017-06-30 15:00</div>
-            </li>
-            <li @click="goto(['centeractivitydetail'])">
-                <div class="liHead" flex>
-                    <div box="2">
-                        <img src="../../../../static/wx/center/reapack.png">
-                        <p>认证用户可报名</p>
-                    </div>
-                    <div box="4">
-                        <div>
-                            <h2>龙泉驿职工年终盛典</h2>
-                            <p>报名人数 : 605/1000</p>
-                            <p>报名所需 : <span>50 积分</span></p>
-                        </div>
-                    </div>
-                    <div box="1">
-                        <a class="over">已结束</a>
-                    </div>
-                </div>
-                <div class="liCont">报名时间： 2017-06-25 15:00  至  2017-06-30 15:00</div>
-            </li>
-            <li @click="goto(['centeractivitydetail'])">
-                <div class="liHead" flex>
-                    <div box="2">
-                        <img src="../../../../static/wx/center/reapack.png">
-                        <p>认证用户可报名</p>
-                    </div>
-                    <div box="4">
-                        <div>
-                            <h2>龙泉驿职工年终盛典</h2>
-                            <p>报名人数 : 605/1000</p>
-                            <p>报名所需 : <span>50 积分</span></p>
-                        </div>
-                    </div>
-                    <div box="1">
-                        <a class="over">已结束</a>
-                    </div>
-                </div>
-                <div class="liCont">报名时间： 2017-06-25 15:00  至  2017-06-30 15:00</div>
-            </li>
-            <li @click="goto(['centeractivitydetail'])">
-                <div class="liHead" flex>
-                    <div box="2">
-                        <img src="../../../../static/wx/center/reapack.png">
-                        <p>认证用户可报名</p>
-                    </div>
-                    <div box="4">
-                        <div>
-                            <h2>龙泉驿职工年终盛典</h2>
-                            <p>报名人数 : 605/1000</p>
-                            <p>报名所需 : <span>50 积分</span></p>
-                        </div>
-                    </div>
-                    <div box="1">
-                        <a class="over">已结束</a>
-                    </div>
-                </div>
-                <div class="liCont">报名时间： 2017-06-25 15:00  至  2017-06-30 15:00</div>
+                <div class="liCont">报名时间： {{date3Filter(item.entryStart)}}  至  {{date3Filter(item.entryEnd)}}</div>
             </li>
         </ul>
     </div>
@@ -118,14 +43,20 @@
         components:{
             appHead
         },
-        computed: {...mapGetters([ 'page']),
+        computed: {...mapGetters([ 'page','list']),
         },
         methods:{
-            ...mapActions(['goto']),
+            ...mapActions(['goto','getActivity','clear']),
             date3Filter,
+            isEnd(endTime){
+                return new Date().getTime()>endTime
+            }
         },
         created () {
-
+            this.getActivity();
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

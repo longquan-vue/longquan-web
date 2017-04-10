@@ -39,6 +39,10 @@
                 <span class="circle">{{login.actNum}}</span>
                 <img slot="icon" src="../../../../static/wx/center/health.png" >
             </mt-cell>
+            <mt-cell title="我收藏的招聘信息" to="/view/fwh/centerrecruit" is-link>
+                <span class="circle">{{login.actNum}}</span>
+                <img slot="icon" src="../../../../static/wx/center/collect.png" >
+            </mt-cell>
         </div>
         <div class="centerList">
             <mt-cell title="职工认证" to="//github.com" is-link>

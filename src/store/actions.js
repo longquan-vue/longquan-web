@@ -1,15 +1,15 @@
 //业务逻辑处理
 import router from '../router'
 import {mineApi, findApi, getByIdApi, mineWelfareApi ,mineScoreApi ,mineMsgApi ,
-    signApi} from '../api/userApi'
+    signApi,mineActivityApi,mineHealthApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi ,convertApi} from '../api/welfareApi'
-// import {
-//     findActivityApi,
-//     findEntryListByIdApi,
-//     findActivityDetailApi,
-//     createActivityApi,
-//     deleteActivityApi
-// } from '../api/activityApi'
+import {
+    findActivityApi,
+    findEntryListByIdApi,
+    findActivityDetailApi,
+    createActivityApi,
+    deleteActivityApi
+} from '../api/activityApi'
 import {fileApi} from '../api/fileApi'
 // import {findHealthApi} from '../api/healthApi'
 
@@ -33,6 +33,12 @@ const goto = ({commit}, [name, query]) => {
     console.log(1111);
     router.push({name, query})
 };
+//判断是否结束
+const isEnd=(endTime)=>{
+    return new Date().getTime()>endTime
+};
+
+
 //清除page
 // const clearPage = ({commit}) => commit(PAGE);
 //更改page
@@ -99,6 +105,17 @@ const getMineMsg = async({commit,state}) => {
     await getMine({commit,state});
     commit(GET_DATA_LIST, await mineMsgApi(state.page));
 };
+//获取我的工会活动
+const getMineActivity = async({commit,state}) => {
+    await getMine({commit,state});
+    commit(GET_DATA_LIST, await mineActivityApi(1,state.page));
+};
+//获取我的健身项目
+const getMineHealth = async({commit,state}) => {
+    await getMine({commit,state});
+    commit(GET_DATA_LIST, await mineHealthApi(1,state.page));
+};
+
 
 
 //
@@ -125,30 +142,31 @@ const convertWelfare = async({commit,state},index) => {
 
 //
 //
-// //获取活动相关数据   活动列表
-// const getActivity = async({commit, state}) => {
-//     const activity = await findActivityApi(state.page);
-//
-//     commit(GET_ACTIVITY_LIST, activity);
-// };
+//获取活动相关数据   活动列表
+const getActivity = async({commit, state}) => {
+    const activity = await findActivityApi(state.page);
+    commit(GET_DATA_LIST, activity);
+};
 // //获取活动相关数据   活动报名列表
 // const getEnter = async({commit, state}) => {
 //     const {params:{id}}=state.route;
 //     const activityEnter = await findEntryListByIdApi(id, state.page);
 //     commit(GET_ENTER_LIST, activityEnter);
 // };
-// //获取活动相关数据   活动详情
-// const getActivityDetail = async({commit, state}) => {
-//     const {params:{id}}=state.route;
-//     console.log(state.route);
-//     console.log(id);
-//     if (id == 'creat') {
-//         commit(GET_ACTIVITY_DETAIL);
-//     } else {
-//         const activityDetail = await findActivityDetailApi(id);
-//         commit(GET_ACTIVITY_DETAIL, activityDetail);
-//     }
-// };
+//获取活动相关数据   活动详情
+const getActivityDetail = async({commit, state}) => {
+    if (state.route.path.indexOf('fwh')>-1){
+        var {query:{id}}=state.route;
+    }else {
+        var {params:{id}}=state.route;
+    }
+    if (id == 'creat') {
+        commit(SET_DATA);
+    } else {
+        const activityDetail = await findActivityDetailApi(id);
+        commit(SET_DATA, activityDetail);
+    }
+};
 // //获取活动相关数据   创建活动
 // const createActivity = async({commit, state}) => {
 //     createActivityApi(state.activityDetail).then(function () {
@@ -188,12 +206,17 @@ export default {
     findUserList,
     go,
     goto,
+    isEnd,//判断是否结束
     upload,
     clear,
     getWelfareDetail,  //获取福利详情
     getMineScore,  //获取我的积分记录
     getMineMsg,    //获取我的消息记录
+    getMineActivity,  //获取我的工会活动
+    getMineHealth,  //获取我的健身项目
     getWelfare,    //获取福利列表
     singin,      //签到
     convertWelfare,  //兑换福利
+    getActivity,     //获取工会活动
+    getActivityDetail,  //获取工会活动详情
 }

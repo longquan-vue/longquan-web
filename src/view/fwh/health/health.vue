@@ -66,11 +66,14 @@
         computed: {...mapGetters([ 'page']),
         },
         methods:{
-            ...mapActions(['goto']),
+            ...mapActions(['goto','clear']),
             date3Filter,
         },
         created () {
 
+        },
+        destroyed(){
+            this.clear()
         }
     }
 </script>

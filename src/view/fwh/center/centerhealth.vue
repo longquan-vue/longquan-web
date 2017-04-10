@@ -47,7 +47,7 @@
         computed: {...mapGetters(['list', 'page']),
         },
         methods:{
-            ...mapActions(['goto','clear','getMineWelfare']),
+            ...mapActions(['goto','clear','getMineHealth']),
             date3Filter,
             isEnd(endTime){
                 return new Date().getTime()>endTime
@@ -64,7 +64,7 @@
             }
         },
         created () {
-            this.getMineWelfare()
+            this.getMineHealth();
         },
         destroyed(){
             this.clear()
