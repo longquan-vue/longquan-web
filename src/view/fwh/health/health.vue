@@ -14,7 +14,7 @@
         </div>
         <div class="healthList">
             <ul>
-                <li flex>
+                <li flex @click="goto(['healthDetail'])">
                     <div flex items="center"><img src="../../../../static/wx/center/item1.png"></div>
                     <div box="1">
                         跑步机

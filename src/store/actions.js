@@ -84,6 +84,7 @@ const singin = async({commit,state}) =>{
         alert('您已签到');
         return false;
     }else {
+        // commit(GET_MINE, {...state.login, isSign});
         await signApi()
     }
 };

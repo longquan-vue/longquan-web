@@ -6,7 +6,7 @@
     <div class="centerCruit" style="background-color: #F0F0F0;height: 100%;overflow: scroll;padding-top:1.6533333rem;">
         <appHead title="我收藏的招聘信息"></appHead>
         <ul class="centerCruitList">
-            <li>
+            <li  @click="goto(['centerrecruitdetail'])">
                 <div class="listTitle" flex justify="between" items="center">
                     <span>招聘车间电焊工</span>
                     <a class="ising">进行中</a>
@@ -65,7 +65,7 @@
         },
         computed: {...mapGetters(['login','list'])},
         methods:{
-            ...mapActions(['getMineMsg','clear','isEnd']),
+            ...mapActions(['getMineMsg','clear','isEnd','goto']),
             ...filter
         },
         created () {

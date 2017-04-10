@@ -1,0 +1,27 @@
+.healthDetail{
+
+  .healthCont{
+      padding: 0 0.3rem;
+    >p{  color: #666666; font-size: 0.3733333rem;line-height: 1rem;text-align: center}
+    ul{
+      li{
+        .timeLine{ color: #CCCCCC;font-size: 0.32rem;position: relative;
+          line-height: 0.533333rem;text-align: center;
+          &:before{ width: 38%;left: 0;height: 1px;background-color: #E7E7E7;
+            top: 49%;position: absolute;content: '';
+          }
+          &:after{
+            width: 38%;right: 0;height: 1px;background-color: #E7E7E7;
+            top: 49%;position: absolute;content: '';
+          }
+        }
+        .siginList{
+          padding: 0.3rem 0;
+          .weui-grid{ padding: 0 0 0.3rem 0;text-align: center}
+          img{ width: 1.02rem;height: 1.02rem;border-radius: 1.02rem;}
+          .weui-grids:before,.weui-grid:before,.weui-grids:after,.weui-grid:after{ border: none;}
+        }
+      }
+    }
+  }
+}

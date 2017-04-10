@@ -3,7 +3,7 @@
     @import "activity.less";
 </style>
 <template>
-    <div class="centeractivity" style="background-color: #F0F0F0;height: 100%;overflow: scroll">
+    <div class="centeractivity" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
         <ul class="centerMessList">
             <li @click="goto(['centeractivitydetail',{id:item.id}])" v-for="(item,index) in list">
                 <div class="liHead" flex>
