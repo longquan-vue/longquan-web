@@ -31,8 +31,7 @@
 
             <!--pullup slot-->
             <div slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up"
-                 style="position: absolute; width: 100%; height: 40px; bottom: -40px; text-align: center;">
-                <span v-show="demo4Value.pullupStatus === 'default'"></span>
+                 style="position: absolute; width: 100%; text-align: center;">
                 <span class="pullup-arrow"
                       v-show="demo4Value.pullupStatus === 'default' || demo4Value.pullupStatus === 'up' || demo4Value.pullupStatus === 'down'"
                       :class="{'rotate': demo4Value.pullupStatus === 'down'}">↑</span>
@@ -87,8 +86,11 @@
             click (key) {
                 console.log(key)
             },
-            onDelete () {
-                this.delMethod(this.idx)
+            async onDelete () {
+                await this.delMethod(this.idx);
+                this.$nextTick(() => {
+                  this.$refs.scroller.reset()
+                });
             },
             load4 () {
                 setTimeout(async() => {
@@ -99,10 +101,12 @@
                     });
                     setTimeout(() => {
                         this.demo4Value.pullupStatus = 'default';
-                        this.$nextTick(() => {
-                            this.$refs.scroller.reset()
-                        })
                     }, 10)
+                    if (this.$store.state.page.page==this.$store.state.page.pages){
+                      setTimeout(() => {
+                        this.$refs.scroller.disablePullup();
+                      }, 100)
+                    }
                 }, 2000)
             }
         },
