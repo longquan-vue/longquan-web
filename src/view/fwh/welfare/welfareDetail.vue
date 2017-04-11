@@ -8,67 +8,22 @@
             <a href="javascript:history.go(-1);"><img class="return" src="../../../../static/wx/return.png"></a>
             <img class="bg" src="../../../../static/wx/centerbg.png">
             <div class="last">
-                <h3>6500</h3>
+                <h3>{{login.score}}</h3>
                 <p>剩余积分</p>
             </div>
        </div>
        <div class="welfareDetailCont">
-           <div class="welfareList">
-               <p>2017年2月</p>
+           <div class="welfareList" v-for="(value,key) in group(list,'recording',date7Filter)">
+               <p>{{key}}</p>
                <ul class="welfareListBox">
-                   <li flex justify="between">
+                   <li flex justify="between" v-for="(item,index) in value">
                        <div box="1" flex items="center">
                            <div>
-                               <h3>红包兑换</h3>
-                               <p>02-25 10:30</p>
+                               <h3>{{item.title}}</h3>
+                               <p>{{date6Filter(item.recording)}}</p>
                            </div>
                        </div>
-                       <div>-200</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
-                   </li>
-                   <li flex justify="between">
-                       <div box="1" flex items="center">
-                           <div>
-                               <h3>积分签到</h3>
-                               <p>02-25 10:30</p>
-                           </div>
-                       </div>
-                       <div class="active">+20</div>
+                       <div>{{item.score}}</div>
                    </li>
                </ul>
            </div>

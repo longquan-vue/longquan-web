@@ -1,5 +1,5 @@
 // page
-
+export const PAGE = 'PAGE'
 // login
 export const GET_MINE = 'GET_MINE'
 // data

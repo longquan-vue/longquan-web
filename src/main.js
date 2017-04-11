@@ -10,6 +10,8 @@ import store from './store'
 import {localStorage} from './store/localstorage'
 import animate from 'animate.css'
 import VueQuillEditor from 'vue-quill-editor'
+import Vuelidate from 'vuelidate'
+
 
 
 sync(store, router)
@@ -18,6 +20,9 @@ Vue.use(ElementUI)
 Vue.use(Mint)
 Vue.use(animate)
 Vue.use(VueQuillEditor)
+Vue.use(Vuelidate)
+
+
 
 new Vue({
   el: '#app',

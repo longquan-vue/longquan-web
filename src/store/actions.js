@@ -1,7 +1,8 @@
 //业务逻辑处理
 import router from '../router'
+import { Message } from 'element-ui';
 import {mineApi, findApi, getByIdApi, mineWelfareApi ,mineScoreApi ,mineMsgApi ,
-    signApi,mineActivityApi,mineHealthApi} from '../api/userApi'
+    signApi,mineActivityApi,mineHealthApi ,deleteApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi ,convertApi} from '../api/welfareApi'
 import {
     findActivityApi,
@@ -14,10 +15,10 @@ import {fileApi} from '../api/fileApi'
 // import {findHealthApi} from '../api/healthApi'
 
 
-import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE} from './mutation-types'
+import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE ,PAGE} from './mutation-types'
 const clear = ({commit}) => {
     commit(SET_DATA);
-    commit(GET_DATA_LIST)
+    commit(GET_DATA_LIST);
 };
 //上传文件
 const upload = ({commit, state}, data) => fileApi(data);
@@ -40,9 +41,11 @@ const isEnd=(endTime)=>{
 
 
 //清除page
-// const clearPage = ({commit}) => commit(PAGE);
-//更改page
-// const changePage = ({commit}, data) => commit(PAGE, data);
+const clearPage = ({commit}) => commit(PAGE);
+// 更改page
+const changePage = ({commit,state}) => {
+    commit(PAGE, state.page);
+};
 //更改查询字段
 // const changeSelect = ({commit, state}, data) => {
 //     console.log(data);
@@ -98,13 +101,19 @@ const getMineWelfare = async({commit, state}) => {
 //获取我的积分记录
 const getMineScore = async({commit,state}) => {
     await getMine({commit,state});
-    commit(GET_DATA_LIST, await mineScoreApi(state.login.id, 0, state.page));
+    let list = await mineScoreApi(state.login.id, 0, state.page);
+    commit(GET_DATA_LIST, list);
 };
 
 //获取我的消息记录
 const getMineMsg = async({commit,state}) => {
-    await getMine({commit,state});
-    commit(GET_DATA_LIST, await mineMsgApi(state.page));
+    console.log(state.page.page+'and'+state.page.pages);
+    if (state.page.page>state.page.pages){
+        return false;
+    }else {
+        await getMine({commit,state});
+        commit(GET_DATA_LIST, await mineMsgApi(state.page));
+    }
 };
 //获取我的工会活动
 const getMineActivity = async({commit,state}) => {
@@ -115,6 +124,26 @@ const getMineActivity = async({commit,state}) => {
 const getMineHealth = async({commit,state}) => {
     await getMine({commit,state});
     commit(GET_DATA_LIST, await mineHealthApi(1,state.page));
+};
+
+//公共删除方法
+const delMethod = async({commit,state},idx) => {
+    console.log(state.list[idx].id);
+    const id = state.list[idx].id;
+    deleteApi(id,1).then(function () {
+        Message({
+            message: '删除成功',
+            type: 'success',
+            duration:1000
+        });
+        commit(DEL_DATA,idx);
+    }).catch(function () {
+        Message({
+            message: '删除失败',
+            type: 'error',
+            duration:1000
+        });
+    });
 };
 
 
@@ -205,6 +234,9 @@ export default {
     getMineWelfare,
     getUser,
     findUserList,
+    delMethod,  //公共删除方法
+    changePage,  // 改变page
+    clearPage,  // 清除page
     go,
     goto,
     isEnd,//判断是否结束

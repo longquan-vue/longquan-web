@@ -6,7 +6,7 @@ export const defData = {
         headimgurl: require('../../static/wx/aw.jpg'), nickname: '蕾姆', birthday: NOW, sex: 1,
         marriage: 0, score: 0, msgNum: 0, welfNum: 0, actNum: 0, audit: 0
     },
-    page: {page: 1, pageSize: 5, sort: [], order: [], filed: [], keyWord: [], start: null, end: null},
+    page: {page: 1, pageSize: 10, sort: [], order: [], filed: [], keyWord: [], start: null, end: null},
     activity: {
         name: '',
         picUrl: '',
@@ -33,4 +33,4 @@ export const defData = {
         status: '',
         files: []
     }
-}
+};

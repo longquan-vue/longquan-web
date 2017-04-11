@@ -1,6 +1,6 @@
 //操纵数据，修改
 
-import {SET_DATA, GET_DATA_LIST, DEL_DATA, GET_MINE} from './mutation-types'
+import {SET_DATA, GET_DATA_LIST, DEL_DATA, GET_MINE ,PAGE} from './mutation-types'
 import {defData} from '../constant'
 export default {
     state: {
@@ -34,16 +34,22 @@ export default {
             }
         },
         [DEL_DATA] (state, idx) {   //删除数据
-            if (!!idx) {
-                state.list = state.list.splice(idx, 1)
+            if (state.list[idx]) {
+                console.log(idx);
+                state.list.splice(idx, 1)
             }
         },
         // [GET_WELFARE_DETAIL] (state, welfareDetail) {   //获取福利详情
         //     state.welfareDetail = welfareDetail;
         // },
-        // [PAGE] (state, page) {
-        //     state.page = page ? {...state.page, ...page} : defpage;
-        // },
+        [PAGE] (state, page) {
+            if (page.page>page.pages){
+                return false;
+            }else {
+                page.page++;
+            }
+            state.page = page ? {...state.page, ...page} : defData.page;
+        },
         // [GET_USER_LIST] (state, userList) {
         //     if (!!userList) {
         //         state.userList = userList.list;

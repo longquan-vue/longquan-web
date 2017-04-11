@@ -44,7 +44,7 @@ export const mineScoreApi = (id, del,data) => request({
     data
 });
 //我的消息
-export const mineMsgApi = (id, del,data) => request({
+export const mineMsgApi = (data) => request({
     url: `/history/msg`,
     data
 });
@@ -57,4 +57,9 @@ export const mineActivityApi = (del,data) => request({
 export const mineHealthApi = (del,data) => request({
     url: `/history/health/${del}`,
     data
+});
+//删除API
+export const deleteApi = (id, del) => request({
+    method: "delete",
+    url: `/history/delete/${id}/${del}`,
 });

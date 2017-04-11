@@ -53,10 +53,11 @@
     import { mapActions } from 'vuex'
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+
     export default{
         data(){
             return{
-
+                name: '',
             }
         },
         components:{

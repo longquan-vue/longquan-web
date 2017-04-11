@@ -13,11 +13,19 @@ export const date3Filter = (birthday) => dateFilter(birthday,'YYYY-MM-DD HH:mm')
 export const date4Filter = ({start,end}) => dateFilter(start,'YYYY-MM-DD HH:mm')+'——'+dateFilter(end,'YYYY-MM-DD HH:mm')
 export const date5Filter = ({entryStart,entryEnd}) => dateFilter(entryStart,'YYYY-MM-DD HH:mm')+'——'+dateFilter(entryEnd,'YYYY-MM-DD HH:mm')
 export const diffFilter = (date,type) => moment().diff(date,type)
+export const date6Filter = (time) => dateFilter(time,'MM-DD HH:mm');
+export const date7Filter = (time) => dateFilter(time,'YYYY年MM月');
 //筛选过滤器
 export const searchFilter=(value,data)=>value.indexOf(data)>-1?value:null
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证','认证中', '已认证','认证失败' ][audit] || '未知'
+export const group = (list,field='recording',filter=date7Filter) => {
+    const g = {};
+    list.map((item)=> g[filter(item[field])]?g[filter(item[field])].push(item):g[filter(item[field])] = [item]);
+    console.log(g);
+    return g;
+};
 
 export default {
     sexFilter,
@@ -29,7 +37,10 @@ export default {
     date3Filter,
     date4Filter,
     date5Filter,
+    date6Filter,
+    date7Filter,
     diffFilter,
     searchFilter,
-    auditFilter
+    auditFilter,
+    group
 }

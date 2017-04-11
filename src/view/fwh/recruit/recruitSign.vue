@@ -3,31 +3,42 @@
     @import "./recruitSign.less";
 </style>
 <template>
-    <div class="recruitSign" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
+    <div class="recruitSign" style="background-color: #F0F0F0;height: 100%;overflow: scroll;padding-top:1.6533333rem;">
+        <appHead title="意向报名" style="background-color:#FFB036"></appHead>
         <div class="formBox">
-            <div class="form-group" flex>
+            <div class="form-group" flex :class="{ 'form-group--error': $v.name.$error }">
                 <label class="form__label"><span>*</span>姓名</label>
-                <input class="form__input" name="name" placeholder="请输入您的名字">
+                <input class="form__input" name="name" placeholder="请输入您的名字" v-model.trim="name" @input="$v.name.$touch()">
             </div>
+            <span class="form-group__message" v-if="!$v.name.required">姓名必填</span>
+            <span class="form-group__message" v-if="!$v.name.minLength">名字至少 {{$v.name.$params.minLength.min}} 个字符.</span>
+
             <div class="form-group" flex>
                 <label class="form__label"><span>*</span>性别</label>
-                
+                <input checked type="radio" name="sex" class="mgr mgr-primary form__radio" /> <i class="form__i">男</i>
+                <input type="radio" name="sex" class="mgr mgr-primary form__radio" /> <i class="form__i">女</i>
             </div>
             <div class="form-group" flex>
-                <label class="form__label"><span>*</span>姓名</label>
-                <input class="form__input" name="name" placeholder="请输入您的名字">
+                <label class="form__label"><span>*</span>年龄</label>
+                <input class="form__input" name="age" placeholder="请输入您的年龄">
             </div>
             <div class="form-group" flex>
-                <label class="form__label"><span>*</span>姓名</label>
-                <input class="form__input" name="name" placeholder="请输入您的名字">
+                <label class="form__label"><span>*</span>婚姻</label>
+                <input checked type="radio" name="merrige" class="mgr mgr-primary form__radio" /> <i class="form__i">未婚</i>
+                <input type="radio" name="merrige" class="mgr mgr-primary form__radio" /> <i class="form__i">已婚</i>
             </div>
             <div class="form-group" flex>
-                <label class="form__label"><span>*</span>姓名</label>
-                <input class="form__input" name="name" placeholder="请输入您的名字">
+                <label class="form__label"><span>*</span>籍贯</label>
+                <input class="form__input" name="name" placeholder="请输入您的籍贯">
+            </div>
+            <div class="form-group" flex>
+                <label class="form__label"><span>*</span>有无工作经验</label>
+                <input checked type="radio" name="job" class="mgr mgr-primary form__radio" /> <i class="form__i">有</i>
+                <input type="radio" name="job" class="mgr mgr-primary form__radio" /> <i class="form__i">无</i>
             </div>
         </div>
         <div class="submitBtn">
-            <a @click="submitForm('ruleForm')" class="baoming">提交</a>
+            <a @click="" class="baoming">提交</a>
             <p style="font-size:0.32rem;color:#999999;text-align: center;">提示：请认真填写每项信息，方便招聘人员了解你！</p>
         </div>
     </div>
@@ -39,42 +50,21 @@
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
     import { XInput, Group, XButton, Cell ,XSwitch} from 'vux'
+    import { required, minLength, between } from 'vuelidate/lib/validators'
     export default{
         data(){
             return{
-                ruleForm: {
-                    name: '',
-                    sex: '',
-                    phone: '',
-                    address: '',
-                    age:'',
-                    marriage:'',
-                    hasjob:''
-                },
-                rules: {
-                    name: [
-                        { required: true, message: '请输入昵称', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    ],
-                    sex: [
-                        { required: true, message: '请选择性别', trigger: 'change' }
-                    ],
-                    marriage: [
-                        { required: true, message: '请选择性别', trigger: 'change' }
-                    ],
-                    address: [
-                        { required: true, message: '请填写籍贯', trigger: 'change' }
-                    ],
-                    age: [
-                        { required: true, message: '请填写年龄', trigger: 'change' }
-                    ],
-                    hasjob: [
-                        { required: true, message: '请选择是否有工作经验', trigger: 'change' }
-                    ],
-                    phone: [
-                        { required: true, message: '请填写手机号码', trigger: 'change' }
-                    ]
-                },
+                value:'',
+                name: '',
+            }
+        },
+        validations: {
+            name: {
+                required,
+                minLength: minLength(4)
+            },
+            age: {
+                between: between(20, 30)
             }
         },
         components:{
@@ -84,16 +74,6 @@
         methods:{
             ...mapActions(['getMineMsg','clear','isEnd','goto']),
             ...filter,
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
         },
         created () {
             // this.getMineMsg();
