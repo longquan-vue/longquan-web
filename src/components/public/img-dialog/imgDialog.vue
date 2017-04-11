@@ -19,6 +19,12 @@
                 height: 1.2rem;line-height: 1.2rem;color: #ffffff;margin: auto;
                 display: block;border-radius: 1.2rem}
         }
+        .dialog-btn2{
+            padding-bottom: 1.2rem;
+            a{ background-color: #FDB915;font-size: 0.48rem;width: 2.5rem;
+                height: 1rem;line-height: 1rem;color: #ffffff;margin:0 0.1rem;
+                display: inline-block;border-radius: 1rem}
+        }
     }
 </style>
 <template>
@@ -33,8 +39,12 @@
                     <div class="dialog-box">
                         {{content}}
                     </div>
-                    <div class="dialog-btn">
-                        <a @click="close(item.action)" v-for="(item,index) in btns">{{item.btn}}</a>
+                    <div class="dialog-btn" v-if="btns.btn">
+                        <a @click="close(btns.action)" >{{btns.btn}}</a>
+                    </div>
+                    <div class="dialog-btn2" v-if="!btns.btn">
+                        <a @click="show=false">取消</a>
+                        <a @click="cancle(btns.cancelAction)">确定</a>
                     </div>
                 </div>
             </div>
@@ -55,10 +65,10 @@
             title: String,
             content: String,
             btns: {
-                type: Array,
-                default: () => [{btn: '确定'}]
+                type: Object,
+                default: () => {btn: '确定'}
             },
-            isShow: Boolean
+            isShow: Boolean,
         },
         directives: {
             TransferDom
@@ -77,6 +87,10 @@
         },
         methods: {
             close(act){
+                act && act();
+                this.show = false;
+            },
+            cancle(act){
                 act && act();
                 this.show = false;
             }

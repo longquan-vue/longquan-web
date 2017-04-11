@@ -70,13 +70,13 @@
                             <a></a>
                             <a @click="goto(['healthPerson'])">...</a>
                         </div>
-                        <a class="over">已满员</a>
+                        <a class="over" @click="isShow(3)">已满员</a>
                     </div>
                 </li>
             </ul>
         </div>
 
-        <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :content="content" :isShow="isshow"></myImgDialog>
+        <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
 
     </div>
@@ -114,6 +114,7 @@
                 img:'../../../../static/wx/succ.png',//控制弹窗图片
                 title:'这是标题',   //控制弹窗标题
                 content:'恭喜您！报名成功',  //控制弹窗内容
+                btns: {btn:'确定'},
             }
         },
         components:{
@@ -134,10 +135,21 @@
                 if (val==1){
                     this.img='../../../../static/wx/succ.png';
                     this.content='恭喜您！报名成功';
-                }else {
+                    this.btns={btn:'确定'};
+                }else if (val==2){
                     this.img='../../../../static/wx/default.png';
                     this.content='对不起，已经满员拉';
+                    this.btns={btn:'确定'};
+                }else if (val==3){
+                    this.img='';
+                    this.content="是否确定取消预约报名";
+                    this.btns= {
+                        cancelAction:function () {
+                            alert(1);
+                        }
+                    };
                 }
+
                 this.isshow=true;
             },
             onResultChange(val){

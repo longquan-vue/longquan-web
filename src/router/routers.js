@@ -81,6 +81,8 @@ export default [
           {path: `${ROOT}/fwh/health`, component: require('../view/fwh/health/health.vue'), name: 'health'}, //健身中心
           {path: `${ROOT}/fwh/healthDetail`, component: require('../view/fwh/health/healthDetail.vue'), name: 'healthDetail'}, //健身中心项目详情
           {path: `${ROOT}/fwh/healthPerson`, component: require('../view/fwh/health/healthPerson.vue'), name: 'healthPerson'}, //健身中心报名人员列表
+          {path: `${ROOT}/fwh/recruit`, component: require('../view/fwh/recruit/recruit.vue'), name: 'recruit'}, //招聘信息
+          {path: `${ROOT}/fwh/recruitSign`, component: require('../view/fwh/recruit/recruitSign.vue'), name: 'recruitSign'}, //招聘信息报名
       ]
   },
 ]

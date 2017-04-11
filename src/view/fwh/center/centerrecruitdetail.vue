@@ -92,7 +92,7 @@
             </ul>
 
         </div>
-        <a href="javascript:;" class="baoming">意向报名</a>
+        <a @click="goto(['recruitSign'])" class="baoming">意向报名</a>
     </div>
 </template>
 
