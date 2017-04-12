@@ -41,7 +41,7 @@ const isEnd = (endTime) => {
   return new Date().getTime() > endTime
 };
 // 更改page
-const changePage = ({commit}, page) => commit(PAGE, page);
+const changePage = ({commit, state}, page) => commit(PAGE, page ? page : {page: state.page.page + 1, series: true});
 //更改查询字段
 // const changeSelect = ({commit, state}, data) => {
 //     console.log(data);

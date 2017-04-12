@@ -15,21 +15,17 @@
   export default{
     name: 'myPage',
     props: {
-      method: Function,
-      series: {
-        type: Boolean,
-        default: false
-      }
+      method: Function
     },
     computed: {...mapGetters(['page'])},
     methods: {
       ...mapActions(['changePage', 'clear']),
       handleSizeChange(pageSize){
-        this.changePage({pageSize, series: this.series});
+        this.changePage({pageSize});
         this.method && this.method();
       },
       handleCurrentChange(page){
-        this.changePage({page, series: this.series});
+        this.changePage({page});
         this.method && this.method();
       }
     },
