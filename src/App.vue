@@ -19,13 +19,12 @@
 <script type="es6">
     import vHead from './components/public/Header.vue';
     import vSidebar from './components/public/Sidebar.vue'
-    import Alert from './actions/alert/Alert.vue'
 
     export default {
         name: 'vue_app',
         replace: false,
         components: {
-            Alert, vHead, vSidebar
+            vHead, vSidebar
         },
     }
 

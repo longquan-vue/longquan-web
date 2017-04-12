@@ -2,6 +2,7 @@
     <span>
         {{title}}：
         <el-select v-model="val" :placeholder="placeholder" style="width:100px;" @change="changed">
+            <el-option key="x" label="全部" value="x"></el-option>
             <el-option v-for="(value, key) in options" :key="key" :label="value" :value="key"></el-option>
         </el-select>
     </span>
@@ -30,6 +31,7 @@
         },
         methods: {
             changed(v){
+                console.log(this.options)
                 this.change(this.field, v)
             }
         }
