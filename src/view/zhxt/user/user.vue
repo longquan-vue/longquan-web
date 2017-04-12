@@ -75,14 +75,14 @@
         this.data = [id, idx];
         this.$refs.dialog.show()
       },
-      ...mapActions(['findUserList', 'changePage', 'clear', 'changeSelect', 'delUser', 'go']),
+      ...mapActions(['findUserList', 'clear', 'changeSelect', 'delUser', 'go']),
       ...filter,
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
         this.findUserList();
       },
     },
-    computed: {...mapGetters(['list', 'page'])},
+    computed: {...mapGetters(['list'])},
     created () {
       this.findUserList();
     },

@@ -48,8 +48,7 @@ const changeSelect = ({commit, state}, data) => commit(CHANE_SELECT, data);
 //获取用户信息
 const getUser = async({commit, state}) => {
   const {params:{id}}=state.route;
-  const user = await getByIdApi(id);
-  commit(SET_DATA, user);
+  commit(SET_DATA, await getByIdApi(id));
 };
 //findUserList 获取用户列表
 const findUserList = async({commit, state}) => {
@@ -101,8 +100,9 @@ const getMineWelfare = async({commit, state}) => {
 };
 //获取我的积分记录
 const getMineScore = async({commit, state}) => {
-  let list = await mineScoreApi(state.login.id, 0, state.page);
-  commit(GET_DATA_LIST, list);
+  const {params:{id}}=state.route;
+  !id ? await getMine({commit, state}) : '';
+  commit(GET_DATA_LIST, await mineScoreApi(id ? id : state.login.id, 0, state.page));
 };
 
 //获取我的消息记录

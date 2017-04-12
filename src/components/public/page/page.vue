@@ -19,7 +19,7 @@
     },
     computed: {...mapGetters(['page'])},
     methods: {
-      ...mapActions(['changePage', 'clear']),
+      ...mapActions(['changePage']),
       handleSizeChange(pageSize){
         this.changePage({pageSize});
         this.method && this.method();
@@ -29,8 +29,5 @@
         this.method && this.method();
       }
     },
-    destroyed(){
-      this.clear()
-    }
   }
 </script>
