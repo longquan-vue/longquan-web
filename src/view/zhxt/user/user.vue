@@ -28,7 +28,7 @@
                 <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
             </div>
             <div class="tableList mgb20">
-                <el-table :data="userList" border style="width: 100%">
+                <el-table :data="list" border style="width: 100%">
                     <el-table-column type="index" label="编号" fixed="left"></el-table-column>
                     <el-table-column prop="nickname" label="昵称" show-overflow-tooltip></el-table-column>
                     <el-table-column prop="name" label="姓名"></el-table-column>
@@ -157,7 +157,7 @@
                 this.findUserList();
             }
         },
-        computed: {...mapGetters(['userList','page'])},
+        computed: {...mapGetters(['list','page'])},
         created () {
             this.findUserList();
         },
