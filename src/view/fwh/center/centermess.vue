@@ -5,15 +5,6 @@
 <template>
     <div class="centerMess" style="background-color: #F0F0F0;padding-top:50px;;">
         <appHead title="我的消息" style="background:#FFB033"></appHead>
-        <!--<ul class="centerMessList">-->
-        <!--<li v-for="(item,index) in list">-->
-        <!--<p>{{item.title}} <a @click="del(index)" :plain="true">删除</a></p>-->
-        <!--<div class="mess">-->
-        <!--<div>{{item.content}}</div>-->
-        <!--<p>{{date3Filter(item.recording)}}</p>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--</ul>-->
 
         <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="demo4Value" @on-pullup-loading="load4" height="-50">
             <!--content slot-->
