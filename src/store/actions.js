@@ -3,7 +3,7 @@ import router from '../router'
 import {Message} from 'element-ui';
 import {
   mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi,
-  signApi, mineActivityApi, mineHealthApi, deleteApi
+  signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
 import {
@@ -57,12 +57,20 @@ const findUserList = async({commit, state}) => {
   commit(GET_DATA_LIST, userList);
 };
 //删除用户
-// const delUser = async({commit, state}, data) => {
-//     console.log(data[0], data[1]);
-//     delUserApi(data[0], data[1]);
-//     // const delUserOne = await delUserApi();
-//     commit(DEL_USER);
-// };
+const delUser = ({commit}, [id, idx]) => {
+  delUserApi(id, 1).then(() => {
+    Message({
+      message: '删除成功',
+      type: 'success',
+      duration: 1000
+    });
+    commit(DEL_DATA, idx);
+  }).catch(() => Message({
+    message: '删除失败',
+    type: 'error',
+    duration: 1000
+  }));
+};
 //获取我的信息
 const getMine = async({commit, state}) => {
   if (!!state.login.id) {
@@ -227,6 +235,7 @@ export default {
   findUserList,
   delMethod,  //公共删除方法
   changePage,  // 改变page
+  delUser,// 删除用户
   go,
   goto,
   isEnd,//判断是否结束

@@ -3,11 +3,9 @@
 </style>
 <template>
   <div class="contentBox">
-    <!--<transition name="move" mode="out-in"><router-view></router-view></transition>-->
     <div class="contentBoxtitle"><span>用户列表</span></div>
     <div class="contentBoxCont">
       <div class="btnGroup mgb20">
-
         <mySelect title="性别" field="sex" :options="{1:'男',2:'女'}" value="x" :change="change"></mySelect>
         <myInput title="年龄" field="birthday" :format="ageFilter" end="岁以上" :change="change"></myInput>
         <mySelect title="婚姻" field="marriage" :options="{1:'已婚',2:'未婚'}" value="x" :change="change"></mySelect>
@@ -16,7 +14,7 @@
         <myInput title="积分" field="score" end="以上" :change="change"></myInput>
         <mySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" def-val="value" :change="change"></mySelectInput>
       </div>
-      <div class="btn mgb20">
+      <div class="btn mgb20" v-if="false">
         <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
       </div>
       <div class="tableList mgb20">
@@ -36,25 +34,12 @@
           <el-table-column prop="audit" :formatter="auditFilter" label="职工认证"></el-table-column>
           <el-table-column prop="score" label="剩余积分"></el-table-column>
           <el-table-column prop="created" label="注册日期" :formatter="date3Filter" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="freeze" label="是否冻结用户">
-
-          </el-table-column>
+          <el-table-column prop="deleted" label="是否冻结用户" :formatter="freezeFilter"></el-table-column>
           <el-table-column label="操作" fixed="right" width="150px">
             <template scope="scope">
-              <el-button type="text"
-                         size="small"
-                         @click="go(['useredit',scope.row.id])">编辑
-              </el-button>
-              <el-button
-                size="small"
-                type="text"
-                @click="handlePoint">积分
-              </el-button>
-              <el-button
-                size="small"
-                type="text"
-                @click="handleDelete(scope.$index, scope.row)">删除
-              </el-button>
+              <el-button type="text" size="small" @click="go(['useredit',scope.row.id])">编辑</el-button>
+              <el-button size="small" type="text" @click="go(['userpoint',scope.row.id])">积分</el-button>
+              <el-button size="small" type="text" @click="handleDelete(scope.row.id,scope.$index)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -63,9 +48,7 @@
         <myPage :method="findUserList"/>
       </div>
     </div>
-
-    <myDialog title="提示" :uid="uid" :delNum="1" content="您确定要删除此条信息吗" :result="result" @on-result-change="onResultChange" :method="delUser"></myDialog>
-
+    <myDialog title="提示" :data="data" content="您确定要删除此条信息吗" ref="dialog" :show="show" :method="delUser"></myDialog>
   </div>
 </template>
 <script type="es6">
@@ -80,85 +63,31 @@
   export default {
     data() {
       return {
-        tbindex: -1,
-        formLabelWidth: '80px',
-        ageValue: '',
-        score: '',
-        uid: '',
-        result: false  //删除弹框控制
+        data: [],
+        show: false  //删除弹框控制
       }
     },
     components: {
       mySelect, mySelectInput, myPage, myDialog, myInput
     },
     methods: {
-      handleEdit(index, row) {
-        this.$router.push('useredit');
+      handleDelete(id, idx) {
+        this.data = [id, idx];
+        this.$refs.dialog.show()
       },
-      handleDelete(index, row) {
-        console.log(index, row);
-        this.uid = row.id;
-        this.tbindex = index;
-        this.result = true;
-      },
-      onResultChange(val){
-        this.result = val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
-      },
-      deleteClick(index){
-        this.tableData.splice(index, 1);
-        this.dialogVisible = false;
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-            this.dialogFormVisible = false;
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.dialogFormVisible = false;
-        this.$refs[formName].resetFields();
-      },
-      handleError(){
-        this.$notify.error({
-          title: '上传失败',
-          message: '图片上传接口上传失败，可更改为自己的服务器接口'
-        });
-      },
-      handleIconClick(){  //搜索
-
-      },
-      handlePoint(){   //积分管理
-        this.$router.push('userpoint');
-      },
-      ...mapActions(['findUserList', 'changePage', 'clearPage', 'changeSelect', 'delUser', 'go']),
+      ...mapActions(['findUserList', 'changePage', 'clear', 'changeSelect', 'delUser', 'go']),
       ...filter,
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
         this.findUserList();
       },
-      inputSearch(key, value){
-        // console.log(this.score);
-        this.changeSelect({key, value});
-        this.findUserList();
-      },
-      handleIconClicked(data){  //搜索的函数
-        console.log(data);
-        // let {key,value}=data;
-        // console.log({key,value});
-        this.changeSelect(data);
-        this.findUserList();
-      }
     },
     computed: {...mapGetters(['list', 'page'])},
     created () {
       this.findUserList();
     },
     destroyed () {
+      this.clear()
     }
   }
 </script>

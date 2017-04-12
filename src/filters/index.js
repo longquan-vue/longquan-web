@@ -1,6 +1,7 @@
 import moment from 'moment'
 // 性别过滤器   0->未知,1->男,2->女
 export const sexFilter = (sex) => ['未知', '男', '女'][sex] || '未知'
+export const freezeFilter = ({deleted}) => ['否', '是'][deleted] || '否'
 // 性别过滤器   0->未知,1->男,2->女
 export const sex2Filter = ({sex}) => sexFilter(sex)
 // 性别过滤器   0->未知,1->男,2->女
@@ -44,5 +45,6 @@ export default {
   searchFilter,
   auditFilter,
   group,
-  ageFilter
+  ageFilter,
+  freezeFilter
 }

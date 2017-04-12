@@ -30,7 +30,6 @@ export default {
     },
     [DEL_DATA] (state, idx) {   //删除数据
       if (state.list[idx]) {
-        console.log(idx);
         state.list.splice(idx, 1)
       }
     },
@@ -38,9 +37,7 @@ export default {
       state.page = page ? {...state.page, ...page} : defData.page;
     },
     [CHANE_SELECT](state, {key, value}){
-      console.log(key, value);
       const i = state.page.filed.indexOf(key);
-      // console.log(i);
       if (value == 'x' && i > -1) {          // 如果选择的全部,就删除当前的字段  也可以加上(说明当前已经有了当前字段) && i > -1
         state.page.filed.splice(i, 1);
         state.page.keyWord.splice(i, 1);
@@ -50,7 +47,6 @@ export default {
         state.page.filed.push(key);
         state.page.keyWord.push(value);
       }
-      console.log(state.page)
     },
   }
 }
