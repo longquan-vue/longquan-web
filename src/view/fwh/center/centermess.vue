@@ -108,7 +108,8 @@
             })
         },
         destroyed(){
-            this.clear()
+            this.clear();
+            this.clearPage();
         }
     }
 </script>

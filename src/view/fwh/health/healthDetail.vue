@@ -3,8 +3,8 @@
     @import "healthDetail.less";
 </style>
 <template>
-    <div class="healthDetail" style="background-color: #ffffff;height: 100%;overflow: scroll;padding-top:1.6533333rem;">
-        <appHead title="健身项目详情"></appHead>
+    <div class="healthDetail" style="background-color: #ffffff;height: 100%;overflow: scroll;padding-top:50px;">
+        <appHead :title="data.name"></appHead>
         <inline-calendar @click="calenderClick()"
                 class="inline-calendar-demo"
                 :show.sync="show"
@@ -26,11 +26,11 @@
         </inline-calendar>
 
         <div class="healthCont">
-            <p>报名详情(多人项目),可以14人同时报名</p>
+            <p>报名详情({{itemFilter(data.total)}}),可以{{data.total}}人同时报名</p>
             <ul>
-                <li>
+                <li v-for="(item,index) in data.starts">
                     <div class="timeLine">
-                        <span>10:31-10:50</span>
+                        <span>{{date8Filter(data.starts[index])}}--{{date8Filter(data.ends[index])}}</span>
                     </div>
                     <div class="siginList" flex items="center">
                         <div box="1" flex justify="between">
@@ -38,43 +38,64 @@
                             <a><img src="../../../../static/wx/img/2.jpg"></a>
                             <a><img src="../../../../static/wx/img/3.jpg"></a>
                             <a><img src="../../../../static/wx/img/4.png"></a>
-                            <a><img src="../../../../static/wx/img/5.jpg"></a>
+                            <a @click="goto(['healthPerson'])">...</a>
                         </div>
                         <a class="ising" @click="isShow(1)">报名</a>
                     </div>
                 </li>
-                <li>
-                    <div class="timeLine">
-                        <span>10:31-10:50</span>
-                    </div>
-                    <div class="siginList" flex items="center">
-                        <div box="1" flex justify="between">
-                            <a><img src="../../../../static/wx/img/1.jpg"></a>
-                            <a><img src="../../../../static/wx/img/2.jpg"></a>
-                            <a><img src="../../../../static/wx/img/3.jpg"></a>
-                            <a><img src="../../../../static/wx/img/4.png"></a>
-                            <a><img src="../../../../static/wx/img/5.jpg"></a>
-                        </div>
-                        <a class="over" @click="isShow(2)">已截止</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="timeLine">
-                        <span>10:31-10:50</span>
-                    </div>
-                    <div class="siginList" flex items="center">
-                        <div box="1" flex justify="between">
-                            <a><img src="../../../../static/wx/img/1.jpg"></a>
-                            <a><img src="../../../../static/wx/img/2.jpg"></a>
-                            <a><img src="../../../../static/wx/img/3.jpg"></a>
-                            <a></a>
-                            <a @click="goto(['healthPerson'])">...</a>
-                        </div>
-                        <a class="over" @click="isShow(3)">已满员</a>
-                    </div>
-                </li>
             </ul>
         </div>
+
+        <!--<div class="healthCont">-->
+            <!--<p>报名详情({{itemFilter(data.total)}}),可以{{data.total}}人同时报名</p>-->
+            <!--<ul>-->
+                <!--<li>-->
+                    <!--<div class="timeLine">-->
+                        <!--<span>10:31-10:50</span>-->
+                    <!--</div>-->
+                    <!--<div class="siginList" flex items="center">-->
+                        <!--<div box="1" flex justify="between">-->
+                            <!--<a><img src="../../../../static/wx/img/1.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/2.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/3.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/4.png"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/5.jpg"></a>-->
+                        <!--</div>-->
+                        <!--<a class="ising" @click="isShow(1)">报名</a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<div class="timeLine">-->
+                        <!--<span>10:31-10:50</span>-->
+                    <!--</div>-->
+                    <!--<div class="siginList" flex items="center">-->
+                        <!--<div box="1" flex justify="between">-->
+                            <!--<a><img src="../../../../static/wx/img/1.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/2.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/3.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/4.png"></a>-->
+                            <!--<a @click="goto(['healthPerson'])">...</a>-->
+                        <!--</div>-->
+                        <!--<a class="over" @click="isShow(2)">已截止</a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<div class="timeLine">-->
+                        <!--<span>10:31-10:50</span>-->
+                    <!--</div>-->
+                    <!--<div class="siginList" flex items="center">-->
+                        <!--<div box="1" flex justify="between">-->
+                            <!--<a><img src="../../../../static/wx/img/1.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/2.jpg"></a>-->
+                            <!--<a><img src="../../../../static/wx/img/3.jpg"></a>-->
+                            <!--<a></a>-->
+                            <!--<a @click="goto(['healthPerson'])">...</a>-->
+                        <!--</div>-->
+                        <!--<a class="over" @click="isShow(3)">已满员</a>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
 
         <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
@@ -86,7 +107,7 @@
     import { InlineCalendar,Group} from 'vux'
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
     export default{
@@ -117,17 +138,20 @@
                 btns: {btn:'确定'},
             }
         },
+        watch:{
+            value(newval,oldval){
+                console.log(oldval+'老');
+                console.log(newval+'新');
+            }
+        },
         components:{
             appHead,Group,InlineCalendar,myImgDialog
         },
-        computed: {...mapGetters([ 'page','list']),
+        computed: {...mapGetters(['data']),
         },
         methods:{
-            ...mapActions(['goto','getActivity','clear']),
-            date3Filter,
-            isEnd(endTime){
-                return new Date().getTime()>endTime
-            },
+            ...mapActions(['goto','gethealthDetail','clear']),
+            ...filters,
             calenderClick(){
                 console.log(this.value);
             },
@@ -155,9 +179,23 @@
             onResultChange(val){
                 this.isshow=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
-        },
-        created () {
+            setting(val){
+                let dateaa = this.$store.state.data.date.split('|');
+                // console.log(dateaa);
+                this.buildSlotFn = val ? (line, index, data) => {
+                    // console.log(data);
+                    let mons = data.month_str>9?data.month_str:'0'+data.month_str;
+                    let days = data.day>9?data.day:'0'+data.day;
+                    let dates =  data.year+'-'+mons+'-'+days ;
+                    // console.log(dates);
+                    return  dateaa.indexOf(dates)>-1? '<div style="font-size:12px;text-align:center;"><span style="display:inline-block;width:5px;height:5px;background-color:red;border-radius:50%;"></span></div>' : ''
 
+                } : () => ''
+            }
+        },
+        async created () {
+            await this.gethealthDetail();
+            this.setting(true);
         },
         destroyed(){
             this.clear()

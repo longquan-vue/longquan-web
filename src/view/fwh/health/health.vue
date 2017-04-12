@@ -14,33 +14,11 @@
         </div>
         <div class="healthList">
             <ul>
-                <li flex @click="goto(['healthDetail'])">
-                    <div flex items="center"><img src="../../../../static/wx/center/item1.png"></div>
-                    <div box="1">
-                        跑步机
-                    </div>
+                <li flex @click="goto(['healthDetail',{id:item.id}])" v-for="(item,index) in list">
+                    <div flex items="center"><img :src="item.picUrl"></div>
+                    <div box="1">{{item.name}}</div>
                     <div class="">
-                        <span>所需20积分</span>
-                        <img src="../../../../static/wx/center/jiantou.png">
-                    </div>
-                </li>
-                <li flex>
-                    <div flex items="center"><img src="../../../../static/wx/center/item1.png"></div>
-                    <div box="1">
-                        跑步机
-                    </div>
-                    <div class="">
-                        <span>所需40积分</span>
-                        <img src="../../../../static/wx/center/jiantou.png">
-                    </div>
-                </li>
-                <li flex>
-                    <div flex items="center"><img src="../../../../static/wx/center/item1.png"></div>
-                    <div box="1">
-                        跑步机
-                    </div>
-                    <div class="">
-                        <span>所需60积分</span>
+                        <span>所需 {{item.score}} 积分</span>
                         <img src="../../../../static/wx/center/jiantou.png">
                     </div>
                 </li>
@@ -63,14 +41,14 @@
         components:{
             appHead
         },
-        computed: {...mapGetters([ 'page']),
+        computed: {...mapGetters([ 'page','list']),
         },
         methods:{
-            ...mapActions(['goto','clear']),
+            ...mapActions(['goto','clear','getHealth','clearPage']),
             date3Filter,
         },
         created () {
-
+            this.getHealth()
         },
         destroyed(){
             this.clear()

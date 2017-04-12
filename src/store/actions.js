@@ -21,7 +21,7 @@ import {
 
 
 import {fileApi} from '../api/fileApi'
-// import {findHealthApi} from '../api/healthApi'
+import {findHealthApi,findHealthDetailApi} from '../api/healthApi'
 
 
 import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT} from './mutation-types'
@@ -235,12 +235,27 @@ const entryActivity = async({commit, state}) => {
 //     commit(DELETE_ACTIVITY);
 // };
 //
-// //获取健身项目相关数据   列表
-// const getHealth = async({commit, state}) => {
-//     const health = await findHealthApi(state.page);
-//
-//     commit(GET_HEALTH_LIST, health);
-// };
+//获取健身项目相关数据   列表
+const getHealth = async({commit, state}) => {
+    const health = await findHealthApi(state.page);
+    commit(GET_DATA_LIST, health);
+};
+//获取健身项目相关数据   详情
+const gethealthDetail = async({commit, state}) => {
+    if (state.route.path.indexOf('fwh') > -1) {
+        var {query:{id}}=state.route;
+    } else {
+        var {params:{id}}=state.route;
+    }
+    if (id == 'creat') {
+        commit(SET_DATA);
+    } else {
+        const healthDetail = await findHealthDetailApi(id);
+        commit(SET_DATA, healthDetail);
+    }
+};
+
+
 //
 //
 // const changeWC = ({commit}, data) => {
@@ -318,5 +333,7 @@ export default {
     getRecruit,  //获取招聘信息列表
     getRecruitDetail,  // 获取招聘信息详情
     entryRecruit,  //报名招聘
+    getHealth,   //获取健身中心列表
+    gethealthDetail, //获取健身项目详情
 }
 

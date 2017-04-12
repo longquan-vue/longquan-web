@@ -4,7 +4,19 @@
 </style>
 <template>
     <div class="centerwelfaardetail" style="background-color: #F0F0F0;padding-top:50px;height: 100%;overflow: scroll">
-        <appHead title="招聘详情" style="background-color:#FFB036"></appHead>
+        <div class="centerMessHead">
+            <div flex>
+                <div box="1" flex items="center" style="padding-left:10px;">
+                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
+                </div>
+                <div box="4" flex items="center" justify="center">
+                    <h2>招聘详情</h2>
+                </div>
+                <div box="1" flex items="center">
+                    <a class="a" @click="collect()">收藏</a>
+                </div>
+            </div>
+        </div>
         <div class="detailCont">
             <ul>
                 <li flex>
@@ -80,6 +92,7 @@
     import { mapActions } from 'vuex'
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import {Message} from 'element-ui';
     export default{
         data(){
             return{
@@ -92,6 +105,13 @@
         methods:{
             ...mapActions(['goto','clear','getRecruitDetail']),
             ...filter,
+            collect(){
+                Message({
+                    message: '收藏成功',
+                    type: 'success',
+                    duration: 1000
+                });
+            }
         },
         created () {
             this.getRecruitDetail();
