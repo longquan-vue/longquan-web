@@ -9,8 +9,15 @@ import {
     findEntryListByIdApi,
     findActivityDetailApi,
     createActivityApi,
-    deleteActivityApi
+    deleteActivityApi,
+    entryActivityApi
 } from '../api/activityApi'
+import {
+    findRecruitApi,findRecruitDetailApi,
+    entryRecruitApi
+} from '../api/recruitApi'
+
+
 import {fileApi} from '../api/fileApi'
 // import {findHealthApi} from '../api/healthApi'
 
@@ -34,11 +41,6 @@ const goto = ({commit}, [name, query]) => {
     console.log(1111);
     router.push({name, query})
 };
-//判断是否结束
-const isEnd=(endTime)=>{
-    return new Date().getTime()>endTime
-};
-
 
 //清除page
 const clearPage = ({commit}) => commit(PAGE);
@@ -165,10 +167,22 @@ const getWelfareDetail = async({commit, state}, data) => {
     }
 };
 // //获取福利  兑换福利
-const convertWelfare = async({commit,state},index) => {
-    const id=state.list[index].id;
-    await convertApi(id)
-};
+// const convertWelfare = async({commit,state},index) => {
+//     const id=state.list[index].id;
+//     await convertApi(id).then(()=>{
+//         Message({
+//             message: '兑换成功',
+//             type: 'success',
+//             duration:1000
+//         });
+//     }).catch((data)=>{
+//         Message({
+//             message: data.msg,
+//             type: 'error',
+//             duration:1000
+//         });
+//     });
+// };
 
 //
 //
@@ -197,6 +211,27 @@ const getActivityDetail = async({commit, state}) => {
         commit(SET_DATA, activityDetail);
     }
 };
+//获取活动相关数据  报名
+const entryActivity = async({commit, state}) => {
+    const {query:{id}}=state.route;
+    entryActivityApi(id).then((data)=>{
+        Message({
+            message: '报名成功',
+            type: 'success',
+            duration:1000
+        });
+    }).catch((data)=>{
+        console.log(data);
+        Message({
+            message: data.msg,
+            type: 'error',
+            duration:1000
+        });
+    });
+};
+
+
+
 // //获取活动相关数据   创建活动
 // const createActivity = async({commit, state}) => {
 //     createActivityApi(state.activityDetail).then(function () {
@@ -229,6 +264,48 @@ const getActivityDetail = async({commit, state}) => {
 // };
 
 
+//获取招聘信息相关数据  列表
+const getRecruit = async({commit, state}) => {
+    const recruit = await findRecruitApi(state.page);
+    commit(GET_DATA_LIST, recruit);
+};
+//获取招聘信息相关数据   招聘详情
+const getRecruitDetail = async({commit, state}) => {
+    if (state.route.path.indexOf('fwh')>-1){
+        var {query:{id}}=state.route;
+    }else {
+        var {params:{id}}=state.route;
+    }
+    if (id == 'creat') {
+        commit(SET_DATA);
+    } else {
+        commit(SET_DATA, await findRecruitDetailApi(id));
+    }
+};
+
+//获取招聘信息相关数据  报名
+const entryRecruit = async({commit, state},data) => {
+    const {query:{id}}=state.route;
+    entryRecruitApi(id,data).then((data)=>{
+        Message({
+            message: '报名成功',
+            type: 'success',
+            duration:1000
+        });
+    }).catch((data)=>{
+        console.log(data);
+        Message({
+            message: data.msg,
+            type: 'error',
+            duration:1000
+        });
+    });
+};
+
+
+
+
+
 export default {
     getMine,
     getMineWelfare,
@@ -239,7 +316,6 @@ export default {
     clearPage,  // 清除page
     go,
     goto,
-    isEnd,//判断是否结束
     upload,
     clear,
     getWelfareDetail,  //获取福利详情
@@ -249,7 +325,11 @@ export default {
     getMineHealth,  //获取我的健身项目
     getWelfare,    //获取福利列表
     singin,      //签到
-    convertWelfare,  //兑换福利
+    // convertWelfare,  //兑换福利
     getActivity,     //获取工会活动
     getActivityDetail,  //获取工会活动详情
+    entryActivity,  //报名工会活动
+    getRecruit,  //获取招聘信息列表
+    getRecruitDetail,  // 获取招聘信息详情
+    entryRecruit,  //报名招聘
 }

@@ -49,20 +49,22 @@
         .liHead{
           padding: 0.45rem;
           img{ width: 1.97333333rem;height: 1.97333333rem;}
-          .listDetail{ padding-left: 0.4rem;
+          .listDetail{ padding-left: 0.2rem;
             h3{ font-size: 0.5333333rem;color: #333333;margin-bottom: .05rem;
               position: relative;
               a{ color: #FFB135;font-size: 0.2933333rem;text-decoration: underline}
             }
             p { font-size: 0.42666666rem;color: #ff6600;margin-bottom: .05rem;}
-            div{
-              color: #999999; overflow: hidden;  text-overflow:ellipsis;  white-space: nowrap;
+            div{ color: #999999;display: -webkit-box;margin-bottom: 0.1rem;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              overflow: hidden;
               span:nth-of-type(1){ font-size: 12px;}
               span:nth-of-type(2){ font-size: 14px;}
             }
           }
-          .listStatus{ text-align: center;width: 2.2rem;margin-left: 0.2rem;padding-top: .2rem;
-            p{ font-size: 0.4rem;color: #666666;margin-bottom: 10px;}
+          .listStatus{ text-align: center;padding-left: 0.2rem;padding-top: .2rem;
+            p{ font-size: 0.4rem;color: #666666;margin-bottom: 10px;width: 2rem}
           }
           .listStatus a{ border-radius: 15px;background-color: #FF780B;
           text-align: center;color: #ffffff;padding: 3px 0;
@@ -81,49 +83,9 @@
       }
     }
   }
-  //规则详情弹框样式
-  .popupBox{
-    border-radius: 6px;width: 8rem;
-    .popupHead{
-      height: 1.333333rem;width: 100%;position: relative;color: #ffffff;font-size: 0.48rem;;
-      text-align: center;line-height: 1.333333rem;background-color: #FF780B;
-      img{ position: absolute;width: 0.6666667rem;height: 0.6666667rem;
-        right: 15px;top: 20%;
-      }
-    }
-    .popupCont{
-      padding: 15px; height: 10rem; overflow: scroll;font-size: 0.4rem;
-      li{ border-bottom: 1px solid #E7E7E7;
-          padding: 10px 0;
-        &:last-child{ border: none;}
-        i{ margin-left: 5px;}
-        div{ position: relative;
-          span{ position: absolute;right: 0;}
-        };
-      }
-    }
-  }
-
-//  兑换弹窗样式
-
-  .popupOpenBox{ width: 7.333333333rem;
-    position: relative;
-
-    .img{ width: 100%;margin-left: 0.38rem}
-    .del{ position: absolute;left: 50%;width: 0.96rem;bottom: -1.5rem;margin-left: -0.48rem;}
-    .mess{ position:absolute;text-align: center;top: 60%;font-size: 0.48rem;color: #ffffff;
-      -webkit-transform: translateY(-50%);width: 100%;;
-      -moz-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      -o-transform: translateY(-50%);
-      transform: translateY(-50%); }
-    a{ width: 90%;display: block;height: 1.066666667rem;position: absolute;left: 5%;
-    bottom: 0.5333333rem;background-color: #ff6600;font-size: 0.48rem;text-align: center;
-    line-height: 1.066666667rem;color: #ffffff;border-radius: 6px;}
-
-  }
 
 }
+
 
 //积分详情历史
 .welfareDetail{
@@ -168,3 +130,49 @@
     }
   }
 }
+
+
+
+// 查看规则详情 弹窗
+.popupBox{
+  border-radius: 6px;width: 8rem;background-color: #ffffff;
+  .popupHead{
+    height: 1.333333rem;width: 100%;position: relative;color: #ffffff;font-size: 0.48rem;;
+    text-align: center;line-height: 1.333333rem;background-color: #FF780B;
+    img{ position: absolute;width: 0.6666667rem;height: 0.6666667rem;
+      right: 15px;top: 20%;
+    }
+  }
+  .popupCont{
+    padding: 15px; height: 10rem; overflow: scroll;font-size: 0.4rem;
+    li{ border-bottom: 1px solid #E7E7E7;
+      padding: 10px 0;
+      &:last-child{ border: none;}
+      i{ margin-left: 5px;}
+      div{ position: relative; text-align: left;
+        span{ position: absolute;right: 0;}
+      };
+    }
+  }
+}
+//  兑换弹窗样式
+
+.popupOpenBox{
+  position: relative;
+
+  .img{ width: 100%;margin-left: 0.38rem}
+  .del{ width: 0.96rem;bottom: -1.5rem;}
+  .mess{ position:absolute;text-align: center;top: 60%;font-size: 0.48rem;color: #ffffff;
+    -webkit-transform: translateY(-50%);width: 100%;;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  a{ width: 90%;display: block;height: 1.066666667rem;position: absolute;left: 5%;
+    bottom: 0.5333333rem;background-color: #ff6600;font-size: 0.48rem;text-align: center;
+    line-height: 1.066666667rem;color: #ffffff;border-radius: 6px;}
+
+}
+
+
+

@@ -70,7 +70,7 @@
                 </li>
             </ul>
         </div>
-        <a href="javascript:;" class="baoming">
+        <a href="javascript:;" class="baoming" @click="sign()">
             <img src="../../../../static/wx/center/baoming.png">
         </a>
     </div>
@@ -97,10 +97,11 @@
         },
         computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['goto','clear','getActivityDetail']),
+            ...mapActions(['goto','clear','getActivityDetail','entryActivity','isEnd']),
             date3Filter,
-            isEnd(endTime){
-                return new Date().getTime()>endTime
+            sign(){
+                this.entryActivity();
+                // alert(1);
             }
         },
         created () {

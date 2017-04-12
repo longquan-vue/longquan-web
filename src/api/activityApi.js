@@ -33,3 +33,8 @@ export const deleteActivityApi = (id, del) => request({
     method: "delete",
     url: `${BASE_PATH}/${id}/${del}`,
 });
+
+//报名活动
+export const entryActivityApi = (id) => request({
+    url: `${BASE_PATH}/entry/${id}`,
+});

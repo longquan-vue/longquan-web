@@ -30,7 +30,7 @@
                <li v-for="(item, index) in list">
                    <div class="liHead" flex>
                         <img :src="item.picUrl">
-                        <div box="1" class="listDetail">
+                        <div class="listDetail" box="auto">
                             <h3>
                                 {{item.name}}
                                 <a @click="openRule(item)">规则详情</a>
@@ -42,9 +42,11 @@
                                 福利提供 ： <span>{{item.provider}}</span>
                             </div>
                         </div>
-                        <div class="listStatus" @click="convert(index)">
+                        <div class="listStatus">
                             <p>{{item.score}}积分</p>
-                            <a>兑换</a>
+                            <a @click="convert(index)" v-if="isEnd(item.endTime)">兑换</a>
+                            <a v-if="!isEnd(item.endTime)">已结束</a>
+                            <a v-if="!isStart(item.startTime)">未开始</a>
                         </div>
                    </div>
                    <div class="liFoot" flex justify="between">
@@ -56,65 +58,68 @@
            </ul>
         </div>
 
-
-        <mt-popup v-model="popupVisible" popup-transition="popup-fade">
-            <div class="popupBox">
-                <div class="popupHead">
-                    规则详情
-                    <img src="../../../../static/wx/del.png" @click="popupVisible=false">
-                </div>
-                <div class="popupCont">
-                    <ul>
-                        <li flex>
-                            <span box="1">名称: </span>
-                            <div  box="5">{{data.name}}</div>
-                        </li>
-                        <li flex>
-                            <span box="1">积分: </span>
-                            <div box="5">{{data.score}}
-                                <span>所需积分</span>
-                            </div>
-                        </li>
-                        <li flex>
-                            <span box="1">次数: </span>
-                            <div box="5">{{data.time}}
-                                <span>次/人</span>
-                            </div>
-                        </li>
-                        <li flex>
-                            <span box="1">提供: </span>
-                            <div box="5"><a :href="data.website">{{data.provider}}</a></div>
-                        </li>
-                        <li flex>
-                            <span box="1">时间: </span>
-                            <div box="5">{{date3Filter(data.startTime)}} 至 {{date3Filter(data.endTime)}}</div>
-                        </li>
-                        <li flex>
-                            <span box="1">规则:</span>
-                            <div box="5" v-html="data.rule"></div>
-                        </li>
-                    </ul>
-                    <!--<div class="rules" flex>-->
+        <div v-transfer-dom>
+            <x-dialog v-model="popupVisible" class="dialog-demo" :hideOnBlur="true">
+                <div class="popupBox">
+                    <div class="popupHead">
+                        规则详情
+                        <img src="../../../../static/wx/del.png" @click="popupVisible=false">
+                    </div>
+                    <div class="popupCont">
+                        <ul>
+                            <li flex>
+                                <span box="1">名称: </span>
+                                <div  box="5">{{data.name}}</div>
+                            </li>
+                            <li flex>
+                                <span box="1">积分: </span>
+                                <div box="5">{{data.score}}
+                                    <span>所需积分</span>
+                                </div>
+                            </li>
+                            <li flex>
+                                <span box="1">次数: </span>
+                                <div box="5">{{data.time}}
+                                    <span>次/人</span>
+                                </div>
+                            </li>
+                            <li flex>
+                                <span box="1">提供: </span>
+                                <div box="5"><a :href="data.website">{{data.provider}}</a></div>
+                            </li>
+                            <li flex>
+                                <span box="1">时间: </span>
+                                <div box="5">{{date3Filter(data.startTime)}} 至 {{date3Filter(data.endTime)}}</div>
+                            </li>
+                            <li flex>
+                                <span box="1">规则:</span>
+                                <div box="5" v-html="data.rule"></div>
+                            </li>
+                        </ul>
+                        <!--<div class="rules" flex>-->
                         <!--<span>规则:</span>-->
                         <!--<div class="">-->
-                            <!--<p>1、规则11111111</p>-->
-                            <!--<p>2、规则11111111</p>-->
-                            <!--<p>3、规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111</p>-->
+                        <!--<p>1、规则11111111</p>-->
+                        <!--<p>2、规则11111111</p>-->
+                        <!--<p>3、规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111</p>-->
                         <!--</div>-->
-                    <!--</div>-->
+                        <!--</div>-->
+                    </div>
                 </div>
-            </div>
-        </mt-popup>
-        <mt-popup v-model="popupOpen" popup-transition="popup-fade" style="background:none;">
-            <div class="popupOpenBox">
-                <img class="img" src="../../../../static/wx/getSuccess.png">
-                <div class="mess">
-                    兑换成功，获得一个红包
+            </x-dialog>
+        </div>
+
+        <div v-transfer-dom>
+            <x-dialog v-model="popupOpen" class="dialog-demo" :hideOnBlur="true">
+                <div class="popupOpenBox">
+                    <img class="img" src="../../../../static/wx/getSuccess.png">
+                    <div class="mess">兑换成功</div>
+                    <img class="del" src="../../../../static/wx/del.png" @click="popupOpen=false">
+                    <!--<img class="img" src="../../../static/wx/delete.png" @click="popupOpen=false">-->
                 </div>
-                <img class="del" src="../../../../static/wx/del.png" @click="popupOpen=false">
-                <!--<img class="img" src="../../../static/wx/delete.png" @click="popupOpen=false">-->
-            </div>
-        </mt-popup>
+            </x-dialog>
+        </div>
+
     </div>
 </template>
 
@@ -123,6 +128,9 @@
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
     import RollNotice from '../../../components/public/showNotice/RollNotice.vue'
+    import { XDialog ,TransferDomDirective as TransferDom} from 'vux'
+    import {convertApi} from '../../../api/welfareApi'
+    import { Message } from 'element-ui';
     export default{
         data(){
             return{
@@ -131,12 +139,15 @@
                 popupOpen:false    //控制兑换详情
             }
         },
+        directives: {
+            TransferDom
+        },
         components:{
-            RollNotice
+            RollNotice,XDialog
         },
         computed: {...mapGetters(['login','list','data'])},
         methods:{
-            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto','convertWelfare']),
+            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto','isEnd','isStart']),
             date3Filter,
             detail(index){
                 this.popupVisible=true;
@@ -147,12 +158,23 @@
             },
             convert(index){
                 this.convertWelfare(index);
-                this.popupOpen=true;
             },
             scrollMess(){
                 setTimeout(()=>{
 
                 },2000)
+            },
+            async convertWelfare(index){     //兑换福利
+                const id=this.$store.state.list[index].id;
+                await convertApi(id).then(()=>{
+                    this.popupOpen=true;
+                }).catch((data)=>{
+                    Message({
+                        message: data.msg,
+                        type: 'error',
+                        duration:1000
+                    });
+                });
             }
         },
         mounted(){

@@ -33,7 +33,7 @@ export default {
   },
   mounted () {
     let destination = 30;
-    console.log(this.notices.length);
+    // console.log(this.notices.length);
     setInterval(() => {
       if (destination / 30 < this.notices.length) {
         this.move(destination, 500);
@@ -53,7 +53,7 @@ export default {
       let step = () => {
         this.noticePosition += speed;
         count++;
-        console.log(this.noticePosition);
+        // console.log(this.noticePosition);
         rAF(() => {
           if (this.noticePosition < destination) {
             step()

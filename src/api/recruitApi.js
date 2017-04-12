@@ -1,19 +1,19 @@
 import {request} from './ajax'
-const BASE_PATH = '/activity';
+const BASE_PATH = '/recruit';
 
 
-//获取活动列表
-export const findActivityApi = (data) => request({
+//获取招聘列表
+export const findRecruitApi = (data) => request({
     url: `${BASE_PATH}/find`,
     data
 });
-//获取活动详情
-export const findActivityDetailApi = (id) => request({
+//获取招聘详情
+export const findRecruitDetailApi = (id) => request({
     method: "get",
-    url: `${BASE_PATH}/get/${id}`,
+    url: `${BASE_PATH}/find/${id}`,
 });
-//创建活动
-export const createActivityApi = (data) => request({
+//创建招聘
+export const createRecruitApi = (data) => request({
     url: `${BASE_PATH}/create`,
     data
 });
@@ -22,14 +22,20 @@ export const findEntryListByIdApi = (id,data) => request({
     url: `${BASE_PATH}/entryList/${id}`,
     data
 });
-//修改活动
+//修改招聘
 export const updateApi = (data) => request({
     method: "put",
     url: `${BASE_PATH}/update`,
     data
 });
-//删除活动
-export const deleteActivityApi = (id, del) => request({
+//删除招聘
+export const deleteRecruitApi = (id, del) => request({
     method: "delete",
     url: `${BASE_PATH}/${id}/${del}`,
+});
+
+//报名招聘
+export const entryRecruitApi = (id,data) => request({
+    url: `${BASE_PATH}/entry/${id}`,
+    data
 });

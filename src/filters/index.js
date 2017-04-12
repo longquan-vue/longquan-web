@@ -15,8 +15,14 @@ export const date5Filter = ({entryStart,entryEnd}) => dateFilter(entryStart,'YYY
 export const diffFilter = (date,type) => moment().diff(date,type)
 export const date6Filter = (time) => dateFilter(time,'MM-DD HH:mm');
 export const date7Filter = (time) => dateFilter(time,'YYYY年MM月');
+//是否结束、开始过滤器
+export const isEnd = (endTime) => {
+    return new Date().getTime()>endTime;
+};
+
 //筛选过滤器
 export const searchFilter=(value,data)=>value.indexOf(data)>-1?value:null
+
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证','认证中', '已认证','认证失败' ][audit] || '未知'
@@ -42,5 +48,6 @@ export default {
     diffFilter,
     searchFilter,
     auditFilter,
-    group
+    group,
+    isEnd
 }

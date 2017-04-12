@@ -5,43 +5,18 @@
 <template>
     <div class="centerCruit" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
         <ul class="centerCruitList">
-            <li  @click="goto(['centerrecruitdetail'])">
+            <li  @click="goto(['centerrecruitdetail',{id:item.id}])" v-for="(item,index) in list">
                 <div class="listTitle" flex justify="between" items="center">
-                    <span>招聘车间电焊工</span>
-                    <a class="ising">进行中</a>
+                    <span>{{item.name}}</span>
+                    <a class="over" v-if="isEnd(item.end)">已结束</a>
+                    <a class="ising" v-if="!isEnd(item.end)">进行中</a>
                 </div>
                 <div class="listCont" flex justify="between">
-                    <span>招聘人数:1000</span>
-                    <span>5000-6000 元/月</span>
+                    <span>招聘人数:{{item.num}}</span>
+                    <span>{{item.pay}} 元/月</span>
                 </div>
                 <div class="listFoot">
-                    招聘单位:成都爱创业科技有限公司
-                </div>
-            </li>
-            <li>
-                <div class="listTitle" flex justify="between" items="center">
-                    <span>招聘车间电焊工</span>
-                    <a class="over">进行中</a>
-                </div>
-                <div class="listCont" flex justify="between">
-                    <span>招聘人数:1000</span>
-                    <span>5000-6000 元/月</span>
-                </div>
-                <div class="listFoot">
-                    招聘单位:成都爱创业科技有限公司
-                </div>
-            </li>
-            <li>
-                <div class="listTitle" flex justify="between" items="center">
-                    <span>招聘车间电焊工</span>
-                    <a class="over">进行中</a>
-                </div>
-                <div class="listCont" flex justify="between">
-                    <span>招聘人数:1000</span>
-                    <span>5000-6000 元/月</span>
-                </div>
-                <div class="listFoot">
-                    招聘单位:成都爱创业科技有限公司
+                    招聘单位:{{item.company}}
                 </div>
             </li>
         </ul>
@@ -63,13 +38,13 @@
         components:{
             appHead
         },
-        computed: {...mapGetters(['login','list'])},
+        computed: {...mapGetters(['list'])},
         methods:{
-            ...mapActions(['getMineMsg','clear','isEnd','goto']),
+            ...mapActions(['getRecruit','clear','goto']),
             ...filter
         },
         created () {
-            // this.getMineMsg();
+            this.getRecruit();
         },
         destroyed(){
             this.clear()
