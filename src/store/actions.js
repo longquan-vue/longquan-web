@@ -17,7 +17,7 @@ import {fileApi} from '../api/fileApi'
 // import {findHealthApi} from '../api/healthApi'
 
 
-import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE} from './mutation-types'
+import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT} from './mutation-types'
 const clear = ({commit}) => {
   commit(SET_DATA);
   commit(GET_DATA_LIST);
@@ -43,10 +43,7 @@ const isEnd = (endTime) => {
 // 更改page
 const changePage = ({commit, state}, page) => commit(PAGE, page ? page : {page: state.page.page + 1, series: true});
 //更改查询字段
-// const changeSelect = ({commit, state}, data) => {
-//     console.log(data);
-//     commit(CHANE_SELECT, data);
-// };
+const changeSelect = ({commit, state}, data) => commit(CHANE_SELECT, data);
 
 //获取用户信息
 const getUser = async({commit, state}) => {
@@ -96,7 +93,6 @@ const getMineWelfare = async({commit, state}) => {
 };
 //获取我的积分记录
 const getMineScore = async({commit, state}) => {
-  await getMine({commit, state});
   let list = await mineScoreApi(state.login.id, 0, state.page);
   commit(GET_DATA_LIST, list);
 };
@@ -236,6 +232,7 @@ export default {
   isEnd,//判断是否结束
   upload,
   clear, // 清理工作
+  changeSelect, // 修改查询
   getWelfareDetail,  //获取福利详情
   getMineScore,  //获取我的积分记录
   getMineMsg,    //获取我的消息记录

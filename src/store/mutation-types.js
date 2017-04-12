@@ -1,5 +1,6 @@
 // page
 export const PAGE = 'PAGE'
+export const CHANE_SELECT = 'CHANE_SELECT'
 // login
 export const GET_MINE = 'GET_MINE'
 // data

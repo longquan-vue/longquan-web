@@ -1,47 +1,49 @@
 <template>
     <span>
         {{title}}：
-        <el-select v-model="key" :placeholder="placeholder" style="width:120px;" @change="changed">
-            <el-option v-for="(val, index) in options" :key="index" :label="val" :value="index"></el-option>
+        <el-select v-model="key" style="width:120px;" @change="changeKey">
+            <el-option v-for="(val, idx) in options" :key="idx" :label="val" :value="idx"></el-option>
         </el-select>
-         <el-input style="width:150px;" placeholder="请输入搜索内容" icon="search" v-model="value" @click="handleIconClicked({key,value})">
+         <el-input style="width:150px;" :placeholder="placeholder" icon="search" @click="changed" @blur="changed">
         </el-input>
     </span>
 </template>
 <script type="es6">
-    export default{
-        name: 'mySelectInput',
-        data(){
-            return {
-                key: this.valueLabel,
-                value:this.searchVal
-            }
-        },
-        props: {
-            title: String,
-            valueLabel: String,
-            searchVal:String,
-            field: String,
-            options: {
-                type: Object,
-                required: true
-            },
-            placeholder: {
-                type: String,
-                default: '请选择...'
-            },
-            change: Function,
-            handleIconClick:Function
-        },
-        methods: {
-            changed(v){
-                this.key=v;
-            },
-            handleIconClicked(data){
-                this.handleIconClick(data);
-                // console.log(this.val+'~~~'+this.sVal)
-            }
+  export default{
+    name: 'mySelectInput',
+    data(){
+      return {
+        key: this.defKey,
+        val: this.defVal
+      }
+    },
+    props: {
+      title: String,
+      defKey: String,
+      defVal: String,
+      options: {
+        type: Object,
+        required: true
+      },
+      placeholder: {
+        type: String,
+        default: '请输入...'
+      },
+      change: Function
+    },
+    methods: {
+      changeKey(v){
+        this.key = v;
+        this.changed(this.val);
+      },
+      changed(v){
+        const val = v.target ? v.target.value : v
+        if (!this.key || (!this.val && !val) || (!!v.target && this.val == val)) {
+          return;
         }
+        this.change && this.change(this.key, val);
+        this.val = val;
+      }
     }
-
+  }
 </script>
