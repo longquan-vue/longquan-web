@@ -3,7 +3,7 @@
     @import "./centermess.less";
 </style>
 <template>
-    <div class="centerMess" style="background-color: #F0F0F0;padding-top:1.8rem;">
+    <div class="centerMess" style="background-color: #F0F0F0;padding-top:50px;;">
         <appHead title="我的消息" style="background:#FFB033"></appHead>
         <!--<ul class="centerMessList">-->
         <!--<li v-for="(item,index) in list">-->
@@ -15,7 +15,7 @@
         <!--</li>-->
         <!--</ul>-->
 
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="demo4Value" @on-pullup-loading="load4" height="">
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="demo4Value" @on-pullup-loading="load4" height="-50">
             <!--content slot-->
             <div class="centerMessList">
                 <ul>
