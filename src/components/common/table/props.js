@@ -12,7 +12,7 @@ export default {
   },
   border: { // 是否带有纵向边框
     type: Boolean,
-    default: false
+    default: true
   },
   fit: { // 列的宽度是否自撑开
     type: Boolean,

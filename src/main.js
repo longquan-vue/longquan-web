@@ -11,17 +11,19 @@ import {localStorage} from './store/localstorage'
 import animate from 'animate.css'
 import VueQuillEditor from 'vue-quill-editor'
 import Vuelidate from 'vuelidate'
-
-
+import Socket from './socket/index'
+import VueCookie from 'vue-cookie'
 
 sync(store, router)
 
 Vue.use(ElementUI)
+
 Vue.use(Mint)
 Vue.use(animate)
 Vue.use(VueQuillEditor)
 Vue.use(Vuelidate)
-
+Vue.use(Socket)
+Vue.use(VueCookie);
 
 
 new Vue({

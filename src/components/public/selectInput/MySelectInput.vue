@@ -20,7 +20,10 @@
     props: {
       title: String,
       defKey: String,
-      defVal: String,
+      defVal: {
+        type: String,
+        default: ''
+      },
       options: {
         type: Object,
         required: true

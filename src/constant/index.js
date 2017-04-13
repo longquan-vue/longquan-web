@@ -1,6 +1,10 @@
 export const CREATE = "create";
 export const NOW = new Date().getTime();
-
+export const debug = (...msg) => {
+  if (process.env.NODE_ENV == 'development') {
+    console.debug(...msg)
+  }
+}
 export const defData = {
   user: {
     headimgurl: require('../../static/wx/aw.jpg'), nickname: '蕾姆', birthday: NOW, sex: 1,
@@ -31,6 +35,9 @@ export const defData = {
     type: '',
     deleted: '',
     status: '',
-    files: []
-  }
+    files: [],
+    admin: {}
+  },
+  health: {},
+  recruit: {}
 };

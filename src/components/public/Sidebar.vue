@@ -47,7 +47,7 @@
             <el-submenu index="8">
                 <template slot="title"><i class="el-icon-star-on"></i>活动管理</template>
                 <el-menu-item index="activity">活动列表</el-menu-item>
-                <el-menu-item index="activityCount">活动配置</el-menu-item>
+                <!--<el-menu-item index="activityCount">活动配置</el-menu-item>-->
                 <el-menu-item index="activityCount">统计报表</el-menu-item>
             </el-submenu>
             <el-submenu index="9">
