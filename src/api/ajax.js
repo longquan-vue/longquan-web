@@ -5,7 +5,9 @@ import assertType from '../utils/assertType'
 Vue.use(VueAxios, axios);
 
 // 动态设置本地和线上接口域名
-Vue.axios.defaults.baseURL = "http://java.ichuangye.cn";
+if (process.env.NODE_ENV == 'development') {
+  Vue.axios.defaults.baseURL = "http://java.ichuangye.cn";
+}
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 /**
  * 封装axios的通用请求

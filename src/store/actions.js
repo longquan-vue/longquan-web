@@ -6,19 +6,19 @@ import {
   signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
+import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
 import {
-    findActivityApi,
-    findEntryListByIdApi,
-    findActivityDetailApi,
-    createActivityApi,
-    deleteActivityApi,
-    entryActivityApi
+  findActivityApi,
+  findEntryListByIdApi,
+  findActivityDetailApi,
+  createActivityApi,
+  deleteActivityApi,
+  entryActivityApi
 } from '../api/activityApi'
 import {
-    findRecruitApi,findRecruitDetailApi,
-    entryRecruitApi
+  findRecruitApi, findRecruitDetailApi,
+  entryRecruitApi
 } from '../api/recruitApi'
-
 
 import {fileApi} from '../api/fileApi'
 // import {findHealthApi} from '../api/healthApi'
@@ -37,7 +37,7 @@ const upload = ({commit, state}, data) => fileApi(data);
 // };
 
 // go
-const go = ({commit}, [name, id]) => router.push({name, params: {id}});
+const go = ({commit}, [name, id]) => router.push({name, params: id ? {id} : {}});
 // goto
 const goto = ({commit}, [name, query]) => {
   console.log(1111);
@@ -88,6 +88,41 @@ const getMine = async({commit, state}) => {
   }
   commit(GET_MINE, mine);
 };
+//获取登录信息
+const getLogin = async({commit, state}) => {
+  if (!!state.login.id) {
+    return false;
+  }
+  adminApi().then((mine) => {
+    commit(GET_MINE, mine);
+  }).catch(() => {
+    go({commit, state}, ['login']);
+  });
+};
+// 登录
+const login = async({commit, state}, admin) => {
+  if (admin.id) {
+    commit(GET_MINE, admin);
+    go({commit, state}, ['userList']);
+  } else {
+    loginApi(admin).then(({user}) => {
+      commit(GET_MINE, user);
+      go({commit, state}, ['userList']);
+    }).catch(() => {
+      Message({
+        message: '账号或密码错误！',
+        type: 'error',
+        duration: 1000
+      });
+    });
+  }
+}
+// 退出
+const loginOut = ({commit, state}) => {
+  loginOutApi();
+  go({commit, state}, ['login']);
+  commit(GET_MINE, {});
+}
 //签到
 const singin = async({commit, state}) => {
   if (state.login.isSign) {
@@ -198,23 +233,22 @@ const getActivityDetail = async({commit, state}) => {
 };
 //获取活动相关数据  报名
 const entryActivity = async({commit, state}) => {
-    const {query:{id}}=state.route;
-    entryActivityApi(id).then((data)=>{
-        Message({
-            message: '报名成功',
-            type: 'success',
-            duration:1000
-        });
-    }).catch((data)=>{
-        console.log(data);
-        Message({
-            message: data.msg,
-            type: 'error',
-            duration:1000
-        });
+  const {query:{id}}=state.route;
+  entryActivityApi(id).then((data) => {
+    Message({
+      message: '报名成功',
+      type: 'success',
+      duration: 1000
     });
+  }).catch((data) => {
+    console.log(data);
+    Message({
+      message: data.msg,
+      type: 'error',
+      duration: 1000
+    });
+  });
 };
-
 
 
 // //获取活动相关数据   创建活动
@@ -251,72 +285,72 @@ const entryActivity = async({commit, state}) => {
 
 //获取招聘信息相关数据  列表
 const getRecruit = async({commit, state}) => {
-    const recruit = await findRecruitApi(state.page);
-    commit(GET_DATA_LIST, recruit);
+  const recruit = await findRecruitApi(state.page);
+  commit(GET_DATA_LIST, recruit);
 };
 //获取招聘信息相关数据   招聘详情
 const getRecruitDetail = async({commit, state}) => {
-    if (state.route.path.indexOf('fwh')>-1){
-        var {query:{id}}=state.route;
-    }else {
-        var {params:{id}}=state.route;
-    }
-    if (id == 'creat') {
-        commit(SET_DATA);
-    } else {
-        commit(SET_DATA, await findRecruitDetailApi(id));
-    }
+  if (state.route.path.indexOf('fwh') > -1) {
+    var {query:{id}}=state.route;
+  } else {
+    var {params:{id}}=state.route;
+  }
+  if (id == 'creat') {
+    commit(SET_DATA);
+  } else {
+    commit(SET_DATA, await findRecruitDetailApi(id));
+  }
 };
 
 //获取招聘信息相关数据  报名
-const entryRecruit = async({commit, state},data) => {
-    const {query:{id}}=state.route;
-    entryRecruitApi(id,data).then((data)=>{
-        Message({
-            message: '报名成功',
-            type: 'success',
-            duration:1000
-        });
-    }).catch((data)=>{
-        console.log(data);
-        Message({
-            message: data.msg,
-            type: 'error',
-            duration:1000
-        });
+const entryRecruit = async({commit, state}, data) => {
+  const {query:{id}}=state.route;
+  entryRecruitApi(id, data).then((data) => {
+    Message({
+      message: '报名成功',
+      type: 'success',
+      duration: 1000
     });
+  }).catch((data) => {
+    console.log(data);
+    Message({
+      message: data.msg,
+      type: 'error',
+      duration: 1000
+    });
+  });
 };
 
 
-
-
-
 export default {
-    getMine,
-    getMineWelfare,
-    getUser,
-    findUserList,
-    delMethod,  //公共删除方法
-    changePage,  // 改变page
-    clearPage,  // 清除page
-    go,
-    goto,
-    upload,
-    clear, // 清理工作
-    changeSelect, // 修改查询
-    getWelfareDetail,  //获取福利详情
-    getMineScore,  //获取我的积分记录
-    getMineMsg,    //获取我的消息记录
-    getMineActivity,  //获取我的工会活动
-    getMineHealth,  //获取我的健身项目
-    getWelfare,    //获取福利列表
-    singin,      //签到
-    // convertWelfare,  //兑换福利
-    getActivity,     //获取工会活动
-    getActivityDetail,  //获取工会活动详情
-    entryActivity,  //报名工会活动
-    getRecruit,  //获取招聘信息列表
-    getRecruitDetail,  // 获取招聘信息详情
-    entryRecruit,  //报名招聘
+  getMine,
+  getMineWelfare,
+  getUser,
+  findUserList,
+  delMethod,  //公共删除方法
+  changePage,  // 改变page
+  clearPage,  // 清除page
+  getLogin,//获取登录信息
+  go,
+  goto,
+  upload,
+  clear, // 清理工作
+  changeSelect, // 修改查询
+  getWelfareDetail,  //获取福利详情
+  getMineScore,  //获取我的积分记录
+  getMineMsg,    //获取我的消息记录
+  getMineActivity,  //获取我的工会活动
+  getMineHealth,  //获取我的健身项目
+  getWelfare,    //获取福利列表
+  singin,      //签到
+  // convertWelfare,  //兑换福利
+  getActivity,     //获取工会活动
+  getActivityDetail,  //获取工会活动详情
+  entryActivity,  //报名工会活动
+  getRecruit,  //获取招聘信息列表
+  getRecruitDetail,  // 获取招聘信息详情
+  entryRecruit,  //报名招聘
+  loginOut,
+  login
 }
 

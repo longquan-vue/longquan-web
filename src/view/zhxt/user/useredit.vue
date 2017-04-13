@@ -2,7 +2,7 @@
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>用户列表</span>
-      <a @click="goBack" style="float:right;">
+      <a @click="go(['userList'])" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
     </div>
@@ -94,12 +94,7 @@
         return this.data.audit == 2;
       }
     },
-    methods: {
-      ...mapActions(['getUser', 'clear']),
-      goBack(){
-        this.$router.go(-1);
-      }
-    },
+    methods: {...mapActions(['getUser', 'clear', 'go'])},
     created () {
       this.getUser();
     },

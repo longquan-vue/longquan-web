@@ -3,7 +3,8 @@ export default [
   // 管理平台
   {
     path: `${ROOT}/zhxt/login`,
-    component: require('../view/zhxt/login/Login.vue')
+    component: require('../view/zhxt/login/Login.vue'),
+    name: 'login'
   },
   {
     path: `${ROOT}/zhxt/loginSuccess`,
@@ -36,11 +37,13 @@ export default [
       {path: `${ROOT}/zhxt/activitySigned`, component: require('../view/zhxt/activity/activitySigned.vue'), name: "activitySigned"},
       {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'), name: "activityCount"},
       {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health"},
-      {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue')},
-      {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')},
-      {path: `${ROOT}/zhxt/userpoint/:id`, component: require('../view/zhxt/user/userpoint.vue'), name: 'userpoint'},
-      {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/useredit.vue'), name: "useredit"},
-      {path: `${ROOT}/zhxt/usermanage`, component: require('../view/zhxt/user/manage.vue')},
+      /*用户*/
+      {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue'), name: 'userList'}, // 用户列表
+      {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')}, // 用户统计
+      {path: `${ROOT}/zhxt/userpoint/:id`, component: require('../view/zhxt/user/userpoint.vue'), name: 'userpoint'}, // 用户积分
+      {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/useredit.vue'), name: "useredit"}, // 修改用户
+      {path: `${ROOT}/zhxt/usermanage`, component: require('../view/zhxt/user/manage.vue')}, // 用户积分操作
+
       {path: `${ROOT}/zhxt/signinlist`, component: require('../view/zhxt/signin/signinlist.vue')},
       {path: `${ROOT}/zhxt/signinsetting`, component: require('../view/zhxt/signin/signinsetting.vue')},
       {path: `${ROOT}/zhxt/signincount`, component: require('../view/zhxt/signin/signincount.vue')},

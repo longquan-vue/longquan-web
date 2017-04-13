@@ -26,10 +26,10 @@ export default {
             treeTableVueComponent.$emit('expand', scope.row)
           }
           return (
-            <span style={{ paddingLeft: (scope.row._level * 15) + 'px' }}>
+            <span style={{paddingLeft: (scope.row._level * 15) + 'px'}}>
               <span
                 onClick={toggleExpand}
-                class={['el-tree-node__expand-icon', { expanded: scope.row._expand }]}
+                class={['el-tree-node__expand-icon', {expanded: scope.row._expand}]}
                 style={[
                   {
                     marginRight: '10px',
@@ -38,7 +38,7 @@ export default {
                     visibility: 'hidden'
                   }
                 ]}
-                />
+              />
               {context.data.scopedSlots.default(scope)}
             </span>
           )
@@ -84,7 +84,7 @@ export default {
     formatter: Function, // 用来格式化内容
     showTooltipWhenOverflow: { // 当过长被隐藏时显示 tooltip
       type: Boolean,
-      default: false
+      default: true
     },
     align: { // 对齐方式 left, center, right
       type: String,

@@ -10,7 +10,7 @@ export default {
   },
   mutations: {
     [GET_MINE] (state, login) {
-      state.login = login;
+      state.login = login || {};
     },
     [SET_DATA] (state, data) { // 修改值
       state.data = data ? {...state.data, ...data} : {};

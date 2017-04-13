@@ -10,17 +10,18 @@ export const marriage2Filter = ({marriage}) => marriageFilter(marriage)
 // 日期格式化过滤器
 export const dateFilter = (date, pattern = 'YYYY-MM-DD') => date ? moment(date).format(pattern) : '无'
 export const date2Filter = ({birthday}) => dateFilter(birthday)
-
 export const date3Filter = (birthday) => dateFilter(birthday, 'YYYY-MM-DD HH:mm')
+
 export const date4Filter = ({start, end}) => dateFilter(start, 'YYYY-MM-DD HH:mm') + '——' + dateFilter(end, 'YYYY-MM-DD HH:mm')
 export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'YYYY-MM-DD HH:mm') + '——' + dateFilter(entryEnd, 'YYYY-MM-DD HH:mm')
 export const diffFilter = (date, type) => moment().diff(date, type)
 export const date6Filter = (time) => dateFilter(time, 'MM-DD HH:mm');
 export const date7Filter = (time) => dateFilter(time, 'YYYY年MM月');
+export const date8Filter = ({recording}) => dateFilter(recording, 'YYYY-MM-DD HH:mm')
 export const ageFilter = (age) => age ? moment().subtract(age - 0, 'years').format('x') - 0 : null;
 //是否结束、开始过滤器
 export const isEnd = (endTime) => {
-    return new Date().getTime()>endTime;
+  return new Date().getTime() > endTime;
 };
 
 
@@ -54,6 +55,7 @@ export default {
   group,
   isEnd,
   ageFilter,
-  freezeFilter
+  freezeFilter,
+  date8Filter
 }
 
