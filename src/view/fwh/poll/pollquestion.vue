@@ -138,7 +138,7 @@
                 swip:'',
                 commonList: [ 'A、男', 'B、女', 'C、秀吉' ],
                 errors:'',
-                saveQuestion:[['a'],['b'],['a','b']]
+                saveQuestion:[]
             }
         },
         directives: {
@@ -197,10 +197,12 @@
             },
             switchSwiper(index){
                 if (index==2){
-                    if (this.saveQuestion.length==0){
-                        alert('请至少选择一个答案');
+                    console.log(this.saveQuestion[this.swip.activeIndex+1]);
+                    if (this.saveQuestion[this.swip.activeIndex+1].length==0){
+                      alert('请至少选择一个答案');
                     }else {
-                        this.swip.slideNext();
+                      this.swip.slideNext();
+                      console.log(this.saveQuestion);
                     }
                 }else {
                     this.swip.slidePrev();
@@ -208,8 +210,7 @@
                 }
             },
             change (idx,val) {
-                // this.saveQuestion[idx]=val;
-                console.log(val)
+                this.saveQuestion[idx]=val;
             }
         },
         mounted () {
