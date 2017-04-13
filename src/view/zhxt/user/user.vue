@@ -6,13 +6,13 @@
     <div class="contentBoxtitle"><span>用户列表</span></div>
     <div class="contentBoxCont">
       <div class="btnGroup mgb20">
-        <mySelect title="性别" field="sex" :options="{1:'男',2:'女'}" value="x" :change="change"></mySelect>
-        <myInput title="年龄" field="birthday" :format="ageFilter" end="岁以上" :change="change"></myInput>
-        <mySelect title="婚姻" field="marriage" :options="{1:'已婚',2:'未婚'}" value="x" :change="change"></mySelect>
-        <mySelect title="职工认证" field="audit" :options="{0:'未认证',1:'认证中',2:'已认证',3:'认证失败'}" value="x" :change="change"></mySelect>
-        <mySelect title="是否冻结" field="marriage" :options="{0:'是',1:'否'}" value="x" :change="change"></mySelect>
-        <myInput title="积分" field="score" end="以上" :change="change"></myInput>
-        <mySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" def-val="value" :change="change"></mySelectInput>
+        <mySelect title="性别" field="sex" :options="{1:'男',2:'女'}" :change="change"/>
+        <myInput title="年龄" field="birthday" :format="ageFilter" end="岁以上" :change="change"/>
+        <mySelect title="婚姻" field="marriage" :options="{1:'已婚',2:'未婚'}" :change="change"/>
+        <mySelect title="职工认证" field="audit" :options="{0:'未认证',1:'认证中',2:'已认证',3:'认证失败'}" :change="change"/>
+        <mySelect title="是否冻结" field="marriage" :options="{0:'是',1:'否'}" :change="change"/>
+        <myInput title="积分" field="score" end="以上" :change="change"/>
+        <mySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" :change="change"/>
       </div>
       <div class="btn mgb20" v-if="false">
         <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
@@ -52,11 +52,10 @@
   </div>
 </template>
 <script type="es6">
-  import {mapGetters} from 'vuex'
-  import {mapActions} from 'vuex'
-  import mySelect from '../../../components/public/select/mySelect.vue'
-  import myInput from '../../../components/public/select/myInput.vue'
-  import mySelectInput from '../../../components/public/selectInput/mySelectInput.vue'
+  import {mapGetters, mapActions} from 'vuex'
+  import mySelect from '../../../components/public/select/MySelect.vue'
+  import myInput from '../../../components/public/select/MyInput.vue'
+  import mySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import myPage from '../../../components/public/page/page.vue'
   import myDialog from '../../../components/public/dialog/dialog.vue'
   import MyColumn from '../../../components/common/table/MyTableColumn'

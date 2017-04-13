@@ -5,10 +5,16 @@ import {request} from './ajax'
 const BASE_PATH = '/file';
 
 export const fileApi = (file) => {
-    const f = new FormData();
-    f.setData('file',file);
-    return request({
-        url: `${BASE_PATH}/upload`,
-        data:f
-    });
+  const data = new FormData();
+  data.append('file', file);
+  return request({
+    url: `${BASE_PATH}/upload`,
+    data
+  });
+}
+export const delFileApi = (id, del) => {
+  return request({
+    method: 'delete',
+    url: `${BASE_PATH}/delete/${id}/${del}`,
+  });
 }

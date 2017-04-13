@@ -13,8 +13,8 @@ export const dateFilter2 = (date, pattern = 'YYYY-M-DD') => date ? moment(date).
 export const date2Filter = ({birthday}) => dateFilter(birthday)
 export const date3Filter = (birthday) => dateFilter(birthday, 'YYYY-MM-DD HH:mm')
 
-export const date4Filter = ({start, end}) => dateFilter(start, 'YYYY-MM-DD HH:mm') + '——' + dateFilter(end, 'YYYY-MM-DD HH:mm')
-export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'YYYY-MM-DD HH:mm') + '——' + dateFilter(entryEnd, 'YYYY-MM-DD HH:mm')
+export const date4Filter = ({start, end}) => dateFilter(start, 'YYYY-MM-DD HH:mm') + '--' + dateFilter(end, 'YYYY-MM-DD HH:mm')
+export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'YYYY-MM-DD HH:mm') + '--' + dateFilter(entryEnd, 'YYYY-MM-DD HH:mm')
 export const diffFilter = (date, type) => moment().diff(date, type)
 export const date6Filter = (time) => dateFilter(time, 'MM-DD HH:mm');
 export const date7Filter = (time) => dateFilter(time, 'YYYY年MM月');
@@ -25,8 +25,10 @@ export const isEnd = (endTime) => {
   return new Date().getTime() > endTime;
 };
 //单人，双人，多人项目
-export const itemFilter = (item) => ['多人项目', '单人项目' ,'双人项目'][item] || '多人项目';
-
+export const itemFilter = (item) => ['多人项目', '单人项目', '双人项目', '多人项目'][item] || '多人项目';
+export const spotType = ({type}) => ['多人项目', '单人项目', '双人项目', '多人项目'][type] || '多人项目';
+export const entryType = ({entry}) => ['所有用户可报名', '认证用户可报名'][entry]|| '所有用户可报名';
+export const stateType = ({status}) => ['未开始', '进行中','暂停','已结束'][status]|| '未开始';
 
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
@@ -61,7 +63,9 @@ export default {
   isEnd,
   ageFilter,
   freezeFilter,
-  date8Filter,
-  itemFilter
+  itemFilter,
+  spotType,
+  entryType,
+  stateType
 }
 

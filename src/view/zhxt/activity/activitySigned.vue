@@ -45,8 +45,8 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import mySelect from '../../../components/public/select/mySelect.vue'
-    import mySelectInput from '../../../components/public/selectInput/mySelectInput.vue'
+    import mySelect from '../../../components/public/select/MySelect.vue'
+    import mySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
     import myPage from '../../../components/public/page/page.vue'
     import myDialog from '../../../components/public/dialog/dialog.vue'
     import {date2Filter,sex2Filter,date3Filter,marriage2Filter,auditFilter} from '../../../filters'

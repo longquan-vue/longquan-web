@@ -1,6 +1,7 @@
 //业务逻辑处理
 import router from '../router'
 import {Message} from 'element-ui';
+import {CREATE} from '../constant'
 import {
   mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi,
   signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi
@@ -20,22 +21,24 @@ import {
   entryRecruitApi
 } from '../api/recruitApi'
 
-import {fileApi} from '../api/fileApi'
-import {findHealthApi,findHealthDetailApi} from '../api/healthApi'
+import {fileApi, delFileApi} from '../api/fileApi'
+import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
 
 
-import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT} from './mutation-types'
-const clear = ({commit}) => {
-  commit(SET_DATA);
-  commit(GET_DATA_LIST);
+import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST} from './mutation-types'
+import {defData} from '../constant'
+const clear = ({commit}, key = 'user') => {
+  commit(SET_DATA, defData[key]);
+  commit(GET_DATA_LIST, []);
 };
 //上传文件
-const upload = ({commit, state}, data) => fileApi(data);
-// const successActivity = ({commit, state}, {data}) => {
-//     console.log(data);
-//     commit(GET_ACTIVITY_DETAIL, {files: [...state.activityDetail.files, data]});
-// };
-
+const upload = ({commit, state}, {file}) => fileApi(file);
+// 删除文件
+const delFile = async({commit, state}, [key, idx]) => {
+  const {id} = state.data[key][idx]
+  await delFileApi(id, 2)
+  commit(DEL_LIST, [key, idx])
+}
 // go
 const go = ({commit}, [name, id]) => router.push({name, params: id ? {id} : {}});
 // goto
@@ -219,16 +222,11 @@ const getActivity = async({commit, state}) => {
 // };
 //获取活动相关数据   活动详情
 const getActivityDetail = async({commit, state}) => {
-  if (state.route.path.indexOf('fwh') > -1) {
-    var {query:{id}}=state.route;
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {edit: true, ...defData.activity});
   } else {
-    var {params:{id}}=state.route;
-  }
-  if (id == 'creat') {
-    commit(SET_DATA);
-  } else {
-    const activityDetail = await findActivityDetailApi(id);
-    commit(SET_DATA, activityDetail);
+    commit(SET_DATA, await findActivityDetailApi(id));
   }
 };
 //获取活动相关数据  报名
@@ -271,22 +269,22 @@ const entryActivity = async({commit, state}) => {
 //
 //获取健身项目相关数据   列表
 const getHealth = async({commit, state}) => {
-    const health = await findHealthApi(state.page);
-    commit(GET_DATA_LIST, health);
+  const health = await findHealthApi(state.page);
+  commit(GET_DATA_LIST, health);
 };
 //获取健身项目相关数据   详情
 const gethealthDetail = async({commit, state}) => {
-    if (state.route.path.indexOf('fwh') > -1) {
-        var {query:{id}}=state.route;
-    } else {
-        var {params:{id}}=state.route;
-    }
-    if (id == 'creat') {
-        commit(SET_DATA);
-    } else {
-        const healthDetail = await findHealthDetailApi(id);
-        commit(SET_DATA, healthDetail);
-    }
+  if (state.route.path.indexOf('fwh') > -1) {
+    var {query:{id}}=state.route;
+  } else {
+    var {params:{id}}=state.route;
+  }
+  if (id == 'creat') {
+    commit(SET_DATA);
+  } else {
+    const healthDetail = await findHealthDetailApi(id);
+    commit(SET_DATA, healthDetail);
+  }
 };
 
 
@@ -335,42 +333,44 @@ const entryRecruit = async({commit, state}, data) => {
     });
   });
 };
-
-
-
-
-
+// 设置值
+const setData = ({commit}, data) => commit(SET_DATA, data)
+// 设置数组
+const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
 export default {
-    getMine,
-    getMineWelfare,
-    getUser,
-    findUserList,
-    delMethod,  //公共删除方法
-    changePage,  // 改变page
-    clearPage,  // 清除page
+  getMine,
+  getMineWelfare,
+  getUser,
+  findUserList,
+  delMethod,  //公共删除方法
+  changePage,  // 改变page
+  clearPage,  // 清除page
   getLogin,//获取登录信息
-    go,
-    goto,
-    upload,
-    clear, // 清理工作
-    changeSelect, // 修改查询
-    getWelfareDetail,  //获取福利详情
-    getMineScore,  //获取我的积分记录
-    getMineMsg,    //获取我的消息记录
-    getMineActivity,  //获取我的工会活动
-    getMineHealth,  //获取我的健身项目
-    getWelfare,    //获取福利列表
-    singin,      //签到
-    // convertWelfare,  //兑换福利
-    getActivity,     //获取工会活动
-    getActivityDetail,  //获取工会活动详情
-    entryActivity,  //报名工会活动
-    getRecruit,  //获取招聘信息列表
-    getRecruitDetail,  // 获取招聘信息详情
-    entryRecruit,  //报名招聘
+  setData,// 设置对象
+  setList, // 设置数组
+  go,
+  goto,
+  upload,
+  clear, // 清理工作
+  changeSelect, // 修改查询
+  getWelfareDetail,  //获取福利详情
+  getMineScore,  //获取我的积分记录
+  getMineMsg,    //获取我的消息记录
+  getMineActivity,  //获取我的工会活动
+  getMineHealth,  //获取我的健身项目
+  getWelfare,    //获取福利列表
+  singin,      //签到
+  // convertWelfare,  //兑换福利
+  getActivity,     //获取工会活动
+  getActivityDetail,  //获取工会活动详情
+  entryActivity,  //报名工会活动
+  getRecruit,  //获取招聘信息列表
+  getRecruitDetail,  // 获取招聘信息详情
+  entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表
   gethealthDetail, //获取健身项目详情
-  loginOut,
-  login
+  loginOut,// 登出
+  login,// 登录
+  delFile,//删除文件
 }
 

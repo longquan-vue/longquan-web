@@ -75,7 +75,7 @@ export default {
     sortMethod: Function, // 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效
     resizable: { // 对应列是否可以通过拖动改变宽度（如果需要在 el-table 上设置 border 属性为真）
       type: Boolean,
-      default: false
+      default: true
     },
     type: { // 对应列的类型。如果设置了 selection 则显示多选框，如果设置了 index 则显示该行的索引（从 1 开始计算）
       type: String,

@@ -31,22 +31,26 @@ export default [
       {path: `${ROOT}/zhxt/configuration`, component: require('../view/zhxt/configuration/configuration.vue')},
       {path: `${ROOT}/zhxt/authority`, component: require('../view/zhxt/authority/authority.vue')},
       {path: `${ROOT}/zhxt/recover`, component: require('../view/zhxt/recover/recover.vue')},
-      {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue')},
+      /*活动*/
+      {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'),name:'activityList'},
       {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'), name: "activityEnter"},
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit"},
       {path: `${ROOT}/zhxt/activitySigned`, component: require('../view/zhxt/activity/activitySigned.vue'), name: "activitySigned"},
       {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'), name: "activityCount"},
-      {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health"},
+      /*运动*/
+      {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health"}, // 运动列表
+      {path: `${ROOT}/zhxt/health/:id`, component: require('../view/zhxt/health/healthEdit.vue'), name: "sportEdit"}, // 编辑运动
       /*用户*/
       {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue'), name: 'userList'}, // 用户列表
       {path: `${ROOT}/zhxt/usercount`, component: require('../view/zhxt/user/usercount.vue')}, // 用户统计
       {path: `${ROOT}/zhxt/userpoint/:id`, component: require('../view/zhxt/user/userpoint.vue'), name: 'userpoint'}, // 用户积分
       {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/useredit.vue'), name: "useredit"}, // 修改用户
       {path: `${ROOT}/zhxt/usermanage`, component: require('../view/zhxt/user/manage.vue')}, // 用户积分操作
-
+      /*签到*/
       {path: `${ROOT}/zhxt/signinlist`, component: require('../view/zhxt/signin/signinlist.vue')},
       {path: `${ROOT}/zhxt/signinsetting`, component: require('../view/zhxt/signin/signinsetting.vue')},
       {path: `${ROOT}/zhxt/signincount`, component: require('../view/zhxt/signin/signincount.vue')},
+      /*福利*/
       {path: `${ROOT}/zhxt/welfareTickt`, component: require('../view/zhxt/welfare/welfareTickt.vue')},
       {path: `${ROOT}/zhxt/welfareTicktEdit`, component: require('../view/zhxt/welfare/welfareTicktEdit.vue')},
       {path: `${ROOT}/zhxt/welfareTicktCount`, component: require('../view/zhxt/welfare/welfareTicktCount.vue')},
