@@ -23,7 +23,8 @@
       return {
         list: [],
         picUrl: '',
-        showPic: false
+        showPic: false,
+        first: true
       }
     },
     props: {
@@ -45,7 +46,10 @@
     },
     watch: {
       files(val){
-        val.forEach((v) => this.list.push({...v}))
+        if (this.first) {
+          val.forEach((v) => this.list.push({...v}))
+        }
+        this.first = false
       }
     },
     methods: {
