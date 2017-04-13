@@ -9,6 +9,7 @@ export const marriageFilter = (marriage) => ['未知', '已婚', '未婚'][marri
 export const marriage2Filter = ({marriage}) => marriageFilter(marriage)
 // 日期格式化过滤器
 export const dateFilter = (date, pattern = 'YYYY-MM-DD') => date ? moment(date).format(pattern) : '无'
+export const dateFilter2 = (date, pattern = 'YYYY-M-DD') => date ? moment(date).format(pattern) : '无'
 export const date2Filter = ({birthday}) => dateFilter(birthday)
 export const date3Filter = (birthday) => dateFilter(birthday, 'YYYY-MM-DD HH:mm')
 
@@ -23,6 +24,8 @@ export const ageFilter = (age) => age ? moment().subtract(age - 0, 'years').form
 export const isEnd = (endTime) => {
   return new Date().getTime() > endTime;
 };
+//单人，双人，多人项目
+export const itemFilter = (item) => ['多人项目', '单人项目' ,'双人项目'][item] || '多人项目';
 
 
 //筛选过滤器
@@ -43,12 +46,14 @@ export default {
   marriageFilter,
   marriage2Filter,
   dateFilter,
+  dateFilter2,
   date2Filter,
   date3Filter,
   date4Filter,
   date5Filter,
   date6Filter,
   date7Filter,
+  date8Filter,
   diffFilter,
   searchFilter,
   auditFilter,
@@ -56,6 +61,7 @@ export default {
   isEnd,
   ageFilter,
   freezeFilter,
-  date8Filter
+  date8Filter,
+  itemFilter
 }
 

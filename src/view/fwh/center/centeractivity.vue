@@ -23,7 +23,7 @@
                         <a>删除</a>
                     </div>
                 </div>
-                <div class="liCont">报名时间： {{date3Filter(item.entryStart)}}  至  {{date3Filter(item.entryEnd)}}</div>
+                <div class="liCont">报名时间： {{date3Filter(item.start)}}  至  {{date3Filter(item.end)}}</div>
             </li>
         </ul>
     </div>
@@ -32,7 +32,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
     export default{
         data(){
@@ -47,7 +47,7 @@
         },
         methods:{
             ...mapActions(['goto','getMineActivity','clear']),
-            date3Filter,
+            ...filters,
 
         },
         created () {
