@@ -35,7 +35,7 @@ export default [
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'),name:'activityList'},
       {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'), name: "activityEnter"},
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit"},
-      {path: `${ROOT}/zhxt/activitySigned`, component: require('../view/zhxt/activity/activitySigned.vue'), name: "activitySigned"},
+      {path: `${ROOT}/zhxt/activitySigned/:id`, component: require('../view/zhxt/activity/activitySigned.vue'), name: "activitySigned"},
       {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'), name: "activityCount"},
       /*运动*/
       {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health"}, // 运动列表

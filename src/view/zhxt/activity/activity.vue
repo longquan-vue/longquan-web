@@ -33,7 +33,7 @@
               </el-button>
               <el-button size="small" type="text" @click="">二维码</el-button>
               <el-button size="small" type="text" @click="go(['activitySigned',scope.row.id])">签到管理</el-button>
-              <el-button size="small" type="text" @click="handleDelete(scope.$index, scope.row)">删除
+              <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除
               </el-button>
             </template>
           </MyColumn>
@@ -43,7 +43,6 @@
         <MyPagination :method="getActivity"/>
       </div>
     </div>
-    <myDialog title="提示" :data="data" content="您确定要删除此条信息吗" ref="dialog" :method="delActivity"></myDialog>
   </div>
 </template>
 <script type="es6">
@@ -53,7 +52,6 @@
   import {mapGetters, mapActions} from 'vuex'
   import MySelect from '../../../components/public/select/MySelect.vue'
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
-  import myDialog from '../../../components/public/dialog/dialog.vue'
   import filter from '../../../filters'
   export default {
     data() {
@@ -63,15 +61,18 @@
       }
     },
     components: {
-      MySelect, MySelectInput, MyPagination, myDialog, MyColumn, MyTable
+      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
     },
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['clear', 'getActivity', 'changeSelect', 'delActivity', 'go']),
+      ...mapActions(['clear', 'getActivity', 'changeSelect', 'deleteActivity', 'go']),
       ...filter,
-      handleDelete(index, row) {
-        this.data = [id, idx];
-        this.$refs.dialog.show()
+      del(idx, {id, name}) {
+        this.$confirm(`确定删除活动[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.deleteActivity([id, idx]))
       },
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});

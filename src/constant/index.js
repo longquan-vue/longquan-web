@@ -36,6 +36,8 @@ export const defData = {
     deleted: '',
     status: '',
     files: [],
-    admin:{}
-  }
+    admin: {}
+  },
+  health: {},
+  recruit: {}
 };
