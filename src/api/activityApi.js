@@ -3,8 +3,8 @@ const BASE_PATH = '/activity';
 
 
 //获取活动列表
-export const findActivityApi = (data) => request({
-  url: `${BASE_PATH}/find`,
+export const findActivityApi = (data, del) => request({
+  url: `${BASE_PATH}/find/${del}`,
   data
 });
 //获取活动详情

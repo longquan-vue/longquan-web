@@ -92,10 +92,7 @@ const getWelfareDetail = async({commit, state}, data) => {
   }
 };
 //获取活动相关数据   活动列表
-const getActivity = async({commit, state}) => {
-  const activity = await findActivityApi(state.page);
-  commit(GET_DATA_LIST, activity);
-};
+const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page,0));
 //获取活动相关数据   活动报名列表
 const getEnter = async({commit, state}) => commit(GET_DATA_LIST, await findEntryListByIdApi(state.route.params.id, state.page));
 // 导出活动报名表单
