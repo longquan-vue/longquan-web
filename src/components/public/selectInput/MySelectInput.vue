@@ -1,6 +1,6 @@
 <template>
     <span>
-        {{title}}：
+        {{title}}{{title?'：':''}}
         <el-select v-model="key" style="width:120px;" @change="changeKey">
             <el-option v-for="(val, idx) in options" :key="idx" :label="val" :value="idx"></el-option>
         </el-select>
@@ -36,6 +36,7 @@
     },
     methods: {
       changeKey(v){
+        this.change && this.change(this.key, null);
         this.key = v;
         this.changed(this.val);
       },

@@ -23,10 +23,8 @@ export const getValue = (value, filedsStr) => {
     throw new Error('参数应为String')
   }
   const fileds = filedsStr.split('.')
-  console.log(fileds)
 
   for (const i in fileds) {
-    console.log(value, fileds[i])
     value = getFiled(value, fileds[i])
   }
 

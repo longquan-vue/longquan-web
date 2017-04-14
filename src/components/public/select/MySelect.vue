@@ -34,7 +34,6 @@
     },
     methods: {
       changed(v){
-        console.log(this.options)
         this.change(this.field, v)
       }
     }

@@ -1,5 +1,5 @@
-<style lang="css">
-  @import './activity.css';
+<style lang="less">
+  @import './activity.less';
 </style>
 <template>
   <div class="contentBox">
@@ -31,8 +31,8 @@
               </el-button>
               <el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单
               </el-button>
-              <el-button size="small" type="text" @click="">二维码</el-button>
-              <el-button size="small" type="text" @click="go(['activitySigned',scope.row.id])">签到管理</el-button>
+              <el-button size="small" type="text" @click="showCode(scope.row.ticket)">二维码</el-button>
+              <el-button size="small" type="text" @click="go(['activitySign',scope.row.id])">签到管理</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除
               </el-button>
             </template>
@@ -42,6 +42,10 @@
       <div class="pageSlide">
         <MyPagination :method="getActivity"/>
       </div>
+      <el-dialog v-model="show" size="tiny">
+        <h1 style="text-align: center;font-weight: bold">活动二维码</h1>
+        <img width="100%" :src="code" alt="活动二维码">
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -56,8 +60,8 @@
   export default {
     data() {
       return {
-        loadingData: true,// 控制loading显示
-        data: []
+        show: false,
+        code: ''
       }
     },
     components: {
@@ -78,6 +82,10 @@
         this.changeSelect({key, value});
         this.getActivity()
       },
+      showCode(ticket){
+        this.code = `https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${ticket}`
+        this.show = true;
+      }
     },
     created () {
       this.getActivity()

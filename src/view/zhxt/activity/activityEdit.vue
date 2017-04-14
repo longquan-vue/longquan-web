@@ -11,7 +11,7 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <el-form-item label="活动配图">
-            <MyUpload :files="data.files"/>
+            <MyUpload :files="data.files" :edit="data.edit"/>
           </el-form-item>
           <el-form-item label="活动名称" prop="name">
             <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
@@ -123,11 +123,11 @@
       MyUpload
     },
     computed: {
-      ...mapGetters(['data', 'action']),
+      ...mapGetters(['data']),
     },
     methods: {
       ...filter,
-      ...mapActions(['getActivityDetail', 'setList', 'clear', 'setData', 'go', 'upload']),
+      ...mapActions(['getActivityDetail', 'setList', 'clear', 'setData', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {

@@ -1,24 +1,14 @@
 // api
-import {
-  mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi,
-  signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi
-} from '../api/userApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi, updateUserApi, getSignApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
-import {
-  findActivityApi,
-  findEntryListByIdApi,
-  findActivityDetailApi,
-  createActivityApi,
-  deleteActivityApi,
-  entryActivityApi,
-  exportEntryApi
-} from '../api/activityApi'
+import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActivityApi, deleteActivityApi, entryActivityApi, exportEntryApi} from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
+import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
-import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST} from './mutation-types'
+import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING} from './mutation-types'
 // defData
 import {defData, CREATE} from '../constant'
 import router from '../router'
@@ -31,7 +21,9 @@ const clear = ({commit}, key = 'user') => {
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
 // 删除文件
-const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]))
+const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]));
+// 获取系统配置
+const getSetting = ({commit, state}) => !state.setting.id && getSysApi().then((sys) => commit(SETTING, sys))
 // go
 const go = ({commit}, [name, id]) => new Promise((resolve, reject) => resolve(router.push({name, params: id ? {id} : {}})))
 // goto
@@ -43,30 +35,24 @@ const changePage = ({commit, state}, page) => commit(PAGE, page ? page : {page: 
 //更改查询字段
 const changeSelect = ({commit, state}, data) => commit(CHANE_SELECT, data);
 //获取用户信息
-const getUser = async({commit, state}) => {
-  const {params:{id}}=state.route;
-  commit(SET_DATA, await getByIdApi(id));
-};
-//findUserList 获取用户列表
-const findUserList = async({commit, state}) => {
-  const userList = await findApi(state.page);
-  commit(GET_DATA_LIST, userList);
-};
+const getUser = async({commit, state}) => commit(SET_DATA, await getByIdApi(state.route.params.id));
+// 获取用户列表
+const findUserList = async({commit, state}) => commit(GET_DATA_LIST, await findApi(state.page));
+// 修改用户
+const updateUser = ({commit, state}, user) => updateUserApi(user);
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
 const getMine = ({commit, state}) => {
   if (!!state.login.id) {
-    return new Promise();
+    return new Promise((resolve) => resolve());
   }
-  return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
-    // TODO 处理未登录情况
-  });
-};
-//获取登录信息
-const getLogin = ({commit, state}) => {
-  if (!state.login.id) {
-    adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => go({commit, state}, ['login']))
+  if (state.route.path.split('/')[2] == 'fwh') {
+    return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
+      // TODO 处理未登录情况
+    });
+  } else {
+    return adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => go({commit}, ['login']));
   }
 };
 // 登录
@@ -85,6 +71,8 @@ const login = async({commit, state}, admin) => {
 const loginOut = ({commit, state}) => loginOutApi().then(() => go({commit, state}, ['login']).then(() => commit(GET_MINE, {})));
 //签到
 const singin = async({commit, state}) => state.login.isSign ? alert('签到', '您已签到!') : await signApi();
+// 获取签到记录
+const getSign = ({commit, state}, id) => getSignApi(id, state.page).then((data) => commit(GET_DATA_LIST, data))
 //获取我的福利
 const getMineWelfare = ({commit, state}) => getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineWelfareApi(state.login.id, 0, state.page)));
 //获取我的积分记录
@@ -109,10 +97,7 @@ const getWelfareDetail = async({commit, state}, data) => {
   }
 };
 //获取活动相关数据   活动列表
-const getActivity = async({commit, state}) => {
-  const activity = await findActivityApi(state.page);
-  commit(GET_DATA_LIST, activity);
-};
+const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page, 0));
 //获取活动相关数据   活动报名列表
 const getEnter = async({commit, state}) => commit(GET_DATA_LIST, await findEntryListByIdApi(state.route.params.id, state.page));
 // 导出活动报名表单
@@ -123,7 +108,7 @@ const getActivityDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.activity});
   } else {
-    commit(SET_DATA, await findActivityDetailApi(id));
+    commit(SET_DATA, {edit: false, ...await findActivityDetailApi(id)});
   }
 };
 //获取活动相关数据  报名
@@ -148,7 +133,7 @@ const gethealthDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.health});
   } else {
-    commit(SET_DATA, await findHealthDetailApi(id));
+    commit(SET_DATA, {edit: false, ...await findHealthDetailApi(id)});
   }
 };
 //获取招聘信息相关数据  列表
@@ -168,15 +153,18 @@ const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.quer
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置数组
 const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
+// 修改系统设置
+const changeSys = ({commit, state}, data) => commit(SETTING, data)
+// 保存系统设置
+const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！'))
 export default {
-  getMine,
   getMineWelfare,
   getUser,
   findUserList,
   delMethod,  //公共删除方法
   changePage,  // 改变page
   clearPage,  // 清除page
-  getLogin,//获取登录信息
+  getMine,//获取登录信息
   setData,// 设置对象
   setList, // 设置数组
   go,
@@ -207,5 +195,9 @@ export default {
   deleteActivity,// 删除活动
   delUser,//删除用户
   exportEntry, // 导出活动报名表单
+  updateUser, // 修改用户
+  getSetting,//获取系统设置
+  changeSys,//修改系统设置
+  saveSys,//保存系统设置
+  getSign,//获取签到记录
 }
-

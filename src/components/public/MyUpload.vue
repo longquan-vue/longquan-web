@@ -39,14 +39,15 @@
       type: {
         type: String,
         default: 'picture-card'
-      }
+      },
+      edit: Boolean
     },
     computed: {
       ...mapGetters(['action']),
     },
     watch: {
       files(val){
-        if (this.first) {
+        if (this.first && !this.edit) {
           val.forEach((v) => this.list.push({...v}))
         }
         this.first = false

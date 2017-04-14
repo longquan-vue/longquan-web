@@ -11,7 +11,7 @@
     </div>
     <div class="contentBoxCont">
       <div class="btnGroup mgb20">
-        <MySelect title="是否签到" field="sign" :options="{1:'未签到',2:'已签到'}" :change="change"/>
+        <MySelect title="是否签到" field="status" :options="{0:'未签到',1:'已签到'}" :change="change"/>
         <MySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','nickname':'昵称'}" def-key="name" :change="change"/>
       </div>
       <div class="btn mgb20">

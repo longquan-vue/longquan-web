@@ -37,7 +37,7 @@
       }
     },
     methods: {
-      ...mapActions(['getLogin', 'go', 'loginOut']),
+      ...mapActions(['getMine', 'go', 'loginOut']),
       handleCommand(command) {
         if (command == 'loginout') {
           this.loginOut();
@@ -45,7 +45,7 @@
       }
     },
     created () {
-      this.getLogin();
+      this.getMine();
     },
   }
 </script>
