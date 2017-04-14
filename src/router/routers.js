@@ -65,7 +65,14 @@ export default [
   // 网站主页
   {path: `${ROOT}/wzzy`},
   // 企业号
-  {path: `${ROOT}/qyh`},
+  {
+      path: `${ROOT}/qyh`,
+      component: require('../view/qyh/qyh/qyh.vue'),
+      children:[
+          {path: `${ROOT}/qyh/recruitManage`, component: require('../view/qyh/recruitManage/recruitManage.vue'),name:'recruitManage'},
+          {path: `${ROOT}/qyh/recruitManageEdit/:id`, component: require('../view/qyh/recruitManage/recruitManageEdit.vue') ,name:'recruitManageEdit'},
+      ]
+  },
   // 服务号
   {
     path: `${ROOT}/fwh/fwh`,
@@ -80,7 +87,7 @@ export default [
       {path: `${ROOT}/fwh/centerwelfare`, component: require('../view/fwh/center/centerwelfare.vue'), name: 'centerwelfare'}, //我的福利
       {path: `${ROOT}/fwh/centerhealth`, component: require('../view/fwh/center/centerhealth.vue'), name: 'centerhealth'}, //我的健身项目
       {path: `${ROOT}/fwh/centerrecruit`, component: require('../view/fwh/center/centerrecruit.vue'), name: 'centerrecruit'}, //我收藏的招聘信息
-      {path: `${ROOT}/fwh/centerrecruitdetail`, component: require('../view/fwh/center/centerrecruitdetail.vue'), name: 'centerrecruitdetail'}, //招聘信息详情
+      {path: `${ROOT}/fwh/centerrecruitdetail/:id`, component: require('../view/fwh/center/centerrecruitdetail.vue'), name: 'centerrecruitdetail'}, //招聘信息详情
       {path: `${ROOT}/fwh/centerwelfardetail`, component: require('../view/fwh/center/centerwelfardetail.vue'), name: 'centerwelfardetail'}, // 福利详情,
       {path: `${ROOT}/fwh/centeractivity`, component: require('../view/fwh/center/centeractivity.vue'), name: 'centeractivity'},  //我的活动
       {path: `${ROOT}/fwh/centeractivitydetail`, component: require('../view/fwh/center/centeractivitydetail.vue'), name: 'centeractivitydetail'},  //活动详情

@@ -39,16 +39,18 @@
             <p class="answerBoxTitle">共10题,当前第2题,答完问卷即可获得积分奖励</p>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="i in 20">
+                    <div class="swiper-slide" v-for="i in 10">
                         <p class="answerTitle"> {{i}} 、龙泉驿区如果要打造一款缤纷7色额娱乐场地，您喜欢的颜色是什么？(多选)</p>
-                        <checklist :name="'demo'+i"   required :options="commonList"   @on-change="(v)=>change(i,v)">
+                        <checklist :name="'demo'+i"   required :options="commonList"   @on-change="(v)=>change(i,v)" v-if="i%2!=0">
                         </checklist>
+                        <myTextarea v-if="i%2==0" placeholder="请输入问题答案哟" :max="150" :change="myTextareaChange"></myTextarea>
                     </div>
                 </div>
             </div>
             <div class="answerBtn">
                 <a class="prev" @click="switchSwiper(1)"><img src="../../../../static/wx/prev.png"></a>
-                <a class="next" @click="switchSwiper(2)"><img src="../../../../static/wx/next.png"></a>
+                <a class="next" @click="switchSwiper(2)" v-if="this.swip.activeIndex!=9"><img src="../../../../static/wx/next.png"></a>
+                <a class="next" @click="switchSwiper(2)" v-if="this.swip.activeIndex==9"><img src="../../../../static/wx/submit.png"></a>
             </div>
         </div>
 
@@ -112,6 +114,7 @@
     import {date3Filter} from '../../../filters'
     import { XImg , TransferDom, Popup   ,Scroller,XDialog,Checklist} from 'vux'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
+    import myTextarea from '../../../components/public/x-textarea/xtextarea.vue'
     import '../../../../static/swiper.js'
     export default{
         data(){
@@ -145,7 +148,7 @@
             TransferDom
         },
         components:{
-            XImg , Popup  , Scroller, XDialog, myImgDialog , Checklist
+            XImg , Popup  , Scroller, XDialog, myImgDialog , Checklist ,myTextarea
         },
         computed: {...mapGetters([ 'page']),
         },
@@ -175,12 +178,12 @@
             },
             isShow(val){
                 if (val==1){
-                    this.img='../../../../static/wx/succ.png';
-                    this.content='恭喜您！投票成功';
+                    this.img='';
+                    this.content='请回答此题后方可进入下一题';
                     this.btns={btn:'确定'};
                 }else if (val==2){
-                    this.img='../../../../static/wx/default.png';
-                    this.content='对不起，您已经投过票啦';
+                    this.img='../../../../static/wx/succ.png';
+                    this.content='恭喜您投票成功，获得50积分';
                     this.btns={btn:'确定'};
                 }
                 this.isshow=true;
@@ -198,19 +201,32 @@
             switchSwiper(index){
                 if (index==2){
                     console.log(this.saveQuestion[this.swip.activeIndex+1]);
-                    if (this.saveQuestion[this.swip.activeIndex+1].length==0){
-                      alert('请至少选择一个答案');
-                    }else {
-                      this.swip.slideNext();
-                      console.log(this.saveQuestion);
+                    if (this.saveQuestion[this.swip.activeIndex+1]){   //如果存在的话说明是 单选或者多选题
+                        if (this.saveQuestion[this.swip.activeIndex+1].length==0){
+                            this.isShow(1);
+                        }else {
+                            if (this.swip.activeIndex==9){
+                                this.isShow(2);
+                            }else {
+                                this.swip.slideNext();
+                            }
+                            console.log(this.saveQuestion);
+                        }
+                    }else {   //如果不存在 说明是 问答题
+                        this.isShow(1);
                     }
                 }else {
                     this.swip.slidePrev();
 
                 }
             },
-            change (idx,val) {
+            change (idx,val) {   //单选或者多选处理
                 this.saveQuestion[idx]=val;
+            },
+            myTextareaChange(v){   //问答处理
+                // console.log(this.swip.activeIndex+1);
+                this.saveQuestion[this.swip.activeIndex+1]=v;
+                console.log(this.saveQuestion);
             }
         },
         mounted () {

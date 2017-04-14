@@ -5,7 +5,7 @@
 <template>
     <div class="centerCruit" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
         <ul class="centerCruitList">
-            <li  @click="goto(['centerrecruitdetail',{id:item.id}])" v-for="(item,index) in list">
+            <li  @click="go(['centerrecruitdetail',item.id])" v-for="(item,index) in list">
                 <div class="listTitle" flex justify="between" items="center">
                     <span>{{item.name}}</span>
                     <a class="over" v-if="isEnd(item.end)">已结束</a>
@@ -40,7 +40,7 @@
         },
         computed: {...mapGetters(['list'])},
         methods:{
-            ...mapActions(['getRecruit','clear','goto']),
+            ...mapActions(['getRecruit','clear','goto','go']),
             ...filter
         },
         created () {
