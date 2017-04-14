@@ -36,6 +36,7 @@
     },
     methods: {
       changeKey(v){
+        this.change && this.change(this.key, null);
         this.key = v;
         this.changed(this.val);
       },

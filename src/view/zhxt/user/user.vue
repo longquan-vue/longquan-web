@@ -6,19 +6,19 @@
     <div class="contentBoxtitle"><span>用户列表</span></div>
     <div class="contentBoxCont">
       <div class="btnGroup mgb20">
-        <mySelect title="性别" field="sex" :options="{1:'男',2:'女'}" :change="change"/>
-        <myInput title="年龄" field="birthday" :format="ageFilter" end="岁以上" :change="change"/>
-        <mySelect title="婚姻" field="marriage" :options="{1:'已婚',2:'未婚'}" :change="change"/>
-        <mySelect title="职工认证" field="audit" :options="{0:'未认证',1:'认证中',2:'已认证',3:'认证失败'}" :change="change"/>
-        <mySelect title="是否冻结" field="marriage" :options="{0:'是',1:'否'}" :change="change"/>
-        <myInput title="积分" field="score" end="以上" :change="change"/>
-        <mySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" :change="change"/>
+        <MySelect title="性别" field="sex" :options="{1:'男',2:'女'}" :change="change"/>
+        <MyInput title="年龄" field="birthday" :format="ageFilter" end="岁以上" :change="change"/>
+        <MySelect title="婚姻" field="marriage" :options="{1:'已婚',2:'未婚'}" :change="change"/>
+        <MySelect title="职工认证" field="audit" :options="{0:'未认证',1:'认证中',2:'已认证',3:'认证失败'}" :change="change"/>
+        <MySelect title="是否冻结" field="marriage" :options="{0:'是',1:'否'}" :change="change"/>
+        <MyInput title="积分" field="score" end="以上" :change="change"/>
+        <MySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" :change="change"/>
       </div>
       <div class="btn mgb20" v-if="false">
-        <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
+        <!--<el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>-->
       </div>
       <div class="tableList mgb20">
-        <el-table :data="list" border style="width: 100%">
+        <MyTable :data="list">
           <MyColumn type="index" label="编号" fixed="left"/>
           <MyColumn prop="nickname" label="昵称" width="100"/>
           <MyColumn prop="name" label="姓名"/>
@@ -42,43 +42,38 @@
               <el-button size="small" type="text" @click="handleDelete(scope.row.id,scope.$index)">删除</el-button>
             </template>
           </MyColumn>
-        </el-table>
+        </MyTable>
       </div>
       <div class="pageSlide">
-        <myPage :method="findUserList"/>
+        <MyPagination :method="findUserList"/>
       </div>
     </div>
-    <myDialog title="提示" :data="data" content="您确定要删除此条信息吗" ref="dialog" :method="delUser"></myDialog>
   </div>
 </template>
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
-  import mySelect from '../../../components/public/select/MySelect.vue'
-  import myInput from '../../../components/public/select/MyInput.vue'
-  import mySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
-  import myPage from '../../../components/public/page/page.vue'
-  import myDialog from '../../../components/public/dialog/dialog.vue'
   import MyColumn from '../../../components/common/table/MyTableColumn'
+  import MyTable from '../../../components/common/table/MyTable'
+  import MyPagination from '../../../components/public/page/MyPagination.vue'
+  import MySelect from '../../../components/public/select/MySelect.vue'
+  import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
+  import MyInput from '../../../components/public/select/MyInput.vue'
   import filter from '../../../filters'
   export default {
-    data() {
-      return {
-        data: [],
-        show: false  //删除弹框控制
-      }
-    },
     components: {
-      mySelect, mySelectInput, myPage, myDialog, myInput, MyColumn
+      MySelect, MySelectInput, MyPagination, MyInput, MyColumn, MyTable
     },
     methods: {
       handleDelete(id, idx) {
-        this.data = [id, idx];
-        this.$refs.dialog.show()
+        this.$confirm(`确定删除用户[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.delUser([id, idx]))
       },
       ...mapActions(['findUserList', 'clear', 'changeSelect', 'delUser', 'go']),
       ...filter,
-      change(key, value){   //这是每个 change
-        console.log(this)
+      change(key, value){
         this.changeSelect({key, value});
         this.findUserList();
       },

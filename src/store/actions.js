@@ -40,7 +40,7 @@ const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().
 //获取我的信息
 const getMine = ({commit, state}) => {
   if (!!state.login.id) {
-    return new Promise();
+    return new Promise((resolve) => resolve());
   }
   return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
     // TODO 处理未登录情况
