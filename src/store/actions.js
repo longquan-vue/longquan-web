@@ -1,5 +1,5 @@
 // api
-import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi} from '../api/userApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi, updateUserApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
 import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActivityApi, deleteActivityApi, entryActivityApi, exportEntryApi} from '../api/activityApi'
@@ -33,23 +33,26 @@ const changePage = ({commit, state}, page) => commit(PAGE, page ? page : {page: 
 const changeSelect = ({commit, state}, data) => commit(CHANE_SELECT, data);
 //获取用户信息
 const getUser = async({commit, state}) => commit(SET_DATA, await getByIdApi(state.route.params.id));
-//findUserList 获取用户列表
+// 获取用户列表
 const findUserList = async({commit, state}) => commit(GET_DATA_LIST, await findApi(state.page));
+// 修改用户
+const updateUser = ({commit, state}, user) => updateUserApi(user);
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
 const getMine = ({commit, state}) => {
+  console.log(state.route.path.split('/')[2])
   if (!!state.login.id) {
     return new Promise((resolve) => resolve());
   }
-  return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
-    // TODO 处理未登录情况
-  });
-};
-//获取登录信息
-const getLogin = ({commit, state}) => {
-  if (!state.login.id) {
-    adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => go({commit, state}, ['login']))
+  if (state.route.path.split('/')[2] == 'fwh') {
+    return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
+      // TODO 处理未登录情况
+    });
+  } else {
+    return adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
+      // TODO 处理未登录情况
+    });
   }
 };
 // 登录
@@ -149,14 +152,13 @@ const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置数组
 const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
 export default {
-  getMine,
   getMineWelfare,
   getUser,
   findUserList,
   delMethod,  //公共删除方法
   changePage,  // 改变page
   clearPage,  // 清除page
-  getLogin,//获取登录信息
+  getMine,//获取登录信息
   setData,// 设置对象
   setList, // 设置数组
   go,
@@ -187,4 +189,5 @@ export default {
   deleteActivity,// 删除活动
   delUser,//删除用户
   exportEntry, // 导出活动报名表单
+  updateUser, // 修改用户
 }

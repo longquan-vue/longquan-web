@@ -39,7 +39,7 @@
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['useredit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="go(['userpoint',scope.row.id])">积分</el-button>
-              <el-button size="small" type="text" @click="handleDelete(scope.row.id,scope.$index)">删除</el-button>
+              <el-button size="small" type="text" @click="handleDelete(scope.row,scope.$index)">删除</el-button>
             </template>
           </MyColumn>
         </MyTable>
@@ -64,8 +64,8 @@
       MySelect, MySelectInput, MyPagination, MyInput, MyColumn, MyTable
     },
     methods: {
-      handleDelete(id, idx) {
-        this.$confirm(`确定删除用户[${name}]吗?`, '提示', {
+      handleDelete({id, nickname}, idx) {
+        this.$confirm(`确定删除用户[${nickname}]吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

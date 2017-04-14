@@ -41,8 +41,8 @@
             <el-row>
               <el-col :span="8">
                 <el-select v-model="point.type">
-                  <el-option label="增加" value="+"></el-option>
-                  <el-option label="减少" value="-"></el-option>
+                  <el-option label="增加" value="1"></el-option>
+                  <el-option label="减少" value="-1"></el-option>
                 </el-select>
               </el-col>
               <el-col :span="16">
@@ -53,7 +53,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="show = false">取 消</el-button>
-          <el-button type="primary" @click="show = false">确 定</el-button>
+          <el-button type="primary" @click="changePoint">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -65,13 +65,14 @@
   import MyTable from '../../../components/common/table/MyTable'
   import MyPagination from '../../../components/public/page/MyPagination.vue'
   import filter from '../../../filters'
+  import {success} from '../../../actions'
   export default {
     data() {
       return {
         dateValue: [], //时间筛选默认值
         show: false,
         point: {
-          type: '+'
+          type: '1'
         }
       }
     },
@@ -80,7 +81,7 @@
     },
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['getMineScore', 'clear', 'changeSelect', 'go', 'changePage']),
+      ...mapActions(['getMineScore', 'updateUser', 'clear', 'changeSelect', 'go', 'changePage']),
       ...filter,
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
@@ -99,8 +100,14 @@
         this.search();
       },
       showPoint({id, score}){
-        this.point = {...this.point, id, score, point:0      }        ;
+        this.point = {...this.point, id, score, point: 0};
         this.show = true
+      },
+      changePoint(){
+        const {id, score, type, point} =this.point
+        this.point.score = score + type * point
+        this.updateUser({id, score: this.point.score}).then(() => success('修改成功！'));
+        this.show = false;
       }
     },
     created () {
