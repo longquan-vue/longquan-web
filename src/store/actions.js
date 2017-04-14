@@ -1,12 +1,12 @@
 // api
-import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi, updateUserApi} from '../api/userApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi, updateUserApi, getSignApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
 import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActivityApi, deleteActivityApi, entryActivityApi, exportEntryApi} from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
-import {getSysApi} from '../api/systemApi'
+import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
 import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING} from './mutation-types'
 // defData
@@ -71,6 +71,8 @@ const login = async({commit, state}, admin) => {
 const loginOut = ({commit, state}) => loginOutApi().then(() => go({commit, state}, ['login']).then(() => commit(GET_MINE, {})));
 //签到
 const singin = async({commit, state}) => state.login.isSign ? alert('签到', '您已签到!') : await signApi();
+// 获取签到记录
+const getSign = ({commit, state}, id) => getSignApi(id, state.page).then((data) => commit(GET_DATA_LIST, data))
 //获取我的福利
 const getMineWelfare = ({commit, state}) => getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineWelfareApi(state.login.id, 0, state.page)));
 //获取我的积分记录
@@ -151,6 +153,10 @@ const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.quer
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置数组
 const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
+// 修改系统设置
+const changeSys = ({commit, state}, data) => commit(SETTING, data)
+// 保存系统设置
+const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！'))
 export default {
   getMineWelfare,
   getUser,
@@ -191,4 +197,7 @@ export default {
   exportEntry, // 导出活动报名表单
   updateUser, // 修改用户
   getSetting,//获取系统设置
+  changeSys,//修改系统设置
+  saveSys,//保存系统设置
+  getSign,//获取签到记录
 }

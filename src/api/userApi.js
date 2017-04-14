@@ -41,6 +41,11 @@ export const mineScoreApi = (id, del, data) => request({
   url: `/history/score/${id}/${del}`,
   data
 });
+//签到历史记录
+export const getSignApi = (id, data, del = 0) => request({
+  url: `/history/sign/${id}/${del}`,
+  data
+});
 //我的消息
 export const mineMsgApi = (data) => request({
   url: `/history/msg`,

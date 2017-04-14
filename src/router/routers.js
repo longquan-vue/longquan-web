@@ -15,7 +15,7 @@ export default [
     component: require('../view/zhxt/login/loginError.vue')
   },
   {
-    path: `${ROOT}/zhxt/home`,
+    path: `${ROOT}/zhxt`,
     component: require('../view/zhxt/Home/home.vue'),
     children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计

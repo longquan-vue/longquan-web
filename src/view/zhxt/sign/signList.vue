@@ -21,13 +21,13 @@
           <MyColumn prop="time" label="签到时间"/>
           <MyColumn label="操作" fixed="right">
             <template scope="scope">
-              <el-button type="text" size="small" @click="del(scope.$index, scope.row)">删除</el-button>
+              <el-button type="text" size="small" @click="delMethod(scope.$index)">删除</el-button>
             </template>
           </MyColumn>
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="findUserList"/>
+        <MyPagination :method="getSign"/>
       </div>
     </div>
   </div>
@@ -51,27 +51,28 @@
       }
     },
     methods: {
-      ...mapActions(['findUserList', 'clear', 'changeSelect', 'delUser', 'go']),
+      ...mapActions(['getSign', 'clear', 'changeSelect', 'delMethod', 'go']),
       ...filter,
+      change(key, value){
+        this.changeSelect({key, value});
+        this.getSign();
+      },
       search(){
         if (this.dateValue.length > 0) {
           this.changePage({start: this.dateValue[0].getTime(), end: this.dateValue[1].getTime()})
         } else {
           this.changePage({start: null, end: null})
         }
-        this.getMineScore();
+        this.getSign();
       },
       reset(){
         this.dateValue = [];
         this.search();
       },
-      del(){
-
-      }
     },
     computed: {...mapGetters(['list'])},
     created () {
-      this.findUserList();
+      this.getSign();
     },
     destroyed () {
       this.clear()

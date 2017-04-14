@@ -15,7 +15,7 @@ export default {
       state.loading = loading;
     },
     [SETTING] (state, setting) {
-      state.setting = setting || {};
+      state.setting = setting ? {...state.setting, ...setting} : {};
     },
     [GET_MINE] (state, login) {
       state.login = login || {};
