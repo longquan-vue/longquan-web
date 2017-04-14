@@ -6,8 +6,9 @@ import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActi
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
+import {getSysApi} from '../api/systemApi'
 // type
-import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST} from './mutation-types'
+import {DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING} from './mutation-types'
 // defData
 import {defData, CREATE} from '../constant'
 import router from '../router'
@@ -20,7 +21,9 @@ const clear = ({commit}, key = 'user') => {
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
 // 删除文件
-const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]))
+const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]));
+// 获取系统配置
+const getSetting = ({commit, state}) => !state.setting.id && getSysApi().then((sys) => commit(SETTING, sys))
 // go
 const go = ({commit}, [name, id]) => new Promise((resolve, reject) => resolve(router.push({name, params: id ? {id} : {}})))
 // goto
@@ -190,4 +193,5 @@ export default {
   delUser,//删除用户
   exportEntry, // 导出活动报名表单
   updateUser, // 修改用户
+  getSetting,//获取系统设置
 }

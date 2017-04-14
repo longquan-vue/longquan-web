@@ -9,3 +9,5 @@ export const SET_DATA = 'SET_DATA'
 export const GET_DATA_LIST = 'GET_DATA_LIST'
 export const DEL_DATA = 'DEL_DATA'
 export const DEL_LIST = 'DEL_LIST'
+// setting
+export const SETTING = 'SETTING'

@@ -1,5 +1,5 @@
 //操纵数据，修改
-import {SET_DATA, GET_DATA_LIST, DEL_DATA, GET_MINE, PAGE, CHANE_SELECT, LOADING, DEL_LIST} from './mutation-types'
+import {SET_DATA, GET_DATA_LIST, DEL_DATA, GET_MINE, PAGE, CHANE_SELECT, LOADING, DEL_LIST, SETTING} from './mutation-types'
 import {defData} from '../constant'
 export default {
   state: {
@@ -7,11 +7,15 @@ export default {
     page: {...defData.page},
     list: [],
     data: {admin: [], files: []},
-    loading: true
+    loading: true,
+    setting: {},
   },
   mutations: {
     [LOADING] (state, loading) {
       state.loading = loading;
+    },
+    [SETTING] (state, setting) {
+      state.setting = setting || {};
     },
     [GET_MINE] (state, login) {
       state.login = login || {};

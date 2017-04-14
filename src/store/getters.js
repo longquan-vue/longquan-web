@@ -3,6 +3,7 @@ const page = (state) => state.page;
 const data = (state) => state.data;
 const list = (state) => state.list;
 const loading = (state) => state.loading;
+const setting = (state) => state.setting;
 
 const action = (state) => {
   let url = '/rest/file/upload';
@@ -21,5 +22,6 @@ export default {
   data,
   list,
   action,
-  loading
+  loading,
+  setting
 }

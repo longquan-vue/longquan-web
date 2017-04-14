@@ -37,8 +37,8 @@
           <MyColumn prop="deleted" label="是否冻结用户" :formatter="freezeFilter" width="140"/>
           <MyColumn label="操作" fixed="right" width="150">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go(['useredit',scope.row.id])">编辑</el-button>
-              <el-button size="small" type="text" @click="go(['userpoint',scope.row.id])">积分</el-button>
+              <el-button type="text" size="small" @click="go(['userEdit',scope.row.id])">编辑</el-button>
+              <el-button size="small" type="text" @click="go(['userPoint',scope.row.id])">积分</el-button>
               <el-button size="small" type="text" @click="handleDelete(scope.row,scope.$index)">删除</el-button>
             </template>
           </MyColumn>

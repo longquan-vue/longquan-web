@@ -1,6 +1,6 @@
 <template>
     <div>
-        这里是通告
+        敬请等待
     </div>
 </template>
 
