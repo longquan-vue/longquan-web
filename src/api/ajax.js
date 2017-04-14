@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import {debug} from '../constant'
 import assertType from '../utils/assertType'
 Vue.use(VueAxios, axios);
 
@@ -41,7 +42,7 @@ export const request = ({method = 'post', url, data, options = {}} = {}) => {
     param1 = data
     param2 = options
   }
-  console.log(url, param1, param2)
+  debug('请求：', url, '\n参数：', data)
   return Vue.axios[method](url, param1, param2).catch(response => Promise.reject({
     code: 500,
     msg: '服务器繁忙'

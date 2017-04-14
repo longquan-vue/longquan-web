@@ -1,6 +1,6 @@
 <template>
     <span>
-        {{title}}：
+        {{title}}{{title?'：':''}}
         <el-select v-model="key" style="width:120px;" @change="changeKey">
             <el-option v-for="(val, idx) in options" :key="idx" :label="val" :value="idx"></el-option>
         </el-select>

@@ -32,7 +32,7 @@
               <el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单
               </el-button>
               <el-button size="small" type="text" @click="showCode(scope.row.ticket)">二维码</el-button>
-              <el-button size="small" type="text" @click="go(['activitySigned',scope.row.id])">签到管理</el-button>
+              <el-button size="small" type="text" @click="go(['activitySign',scope.row.id])">签到管理</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除
               </el-button>
             </template>

@@ -1,5 +1,5 @@
 <style lang="less">
-  @import 'recover.css';
+  @import './recover.less';
 </style>
 <template>
   <div class="recover">

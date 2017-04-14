@@ -44,7 +44,6 @@ const updateUser = ({commit, state}, user) => updateUserApi(user);
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
 const getMine = ({commit, state}) => {
-  console.log(state.route.path.split('/')[2])
   if (!!state.login.id) {
     return new Promise((resolve) => resolve());
   }
@@ -53,9 +52,7 @@ const getMine = ({commit, state}) => {
       // TODO 处理未登录情况
     });
   } else {
-    return adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
-      // TODO 处理未登录情况
-    });
+    return adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => go({commit}, ['login']));
   }
 };
 // 登录

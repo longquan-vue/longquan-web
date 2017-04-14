@@ -78,7 +78,6 @@
         },
         watch: {
             isShow(val) {
-                console.log(val + 'aaaaa');
                 this.show = val;//新增isShow的watch，监听变更并同步到show上
             },
             show(val){

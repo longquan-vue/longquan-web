@@ -19,7 +19,6 @@ export default {
       data.props.align = 'left'
       data.scopedSlots = {
         default(scope) {
-          console.log('scope', scope)
           const toggleExpand = () => {
             // 找到MyTreeTable
             const treeTableVueComponent = scope.store.table.$parent

@@ -30,7 +30,6 @@
         <MyPagination :method="getHealth"/>
       </div>
     </div>
-
   </div>
 </template>
 <script type="es6">
@@ -42,13 +41,6 @@
   import MyPagination from '../../../components/public/page/MyPagination.vue'
   import filter from '../../../filters'
   export default {
-    name: 'recruitment',
-    data() {
-      return {
-        tbindex: -1,
-        searchVal: '',
-      }
-    },
     components: {
       MySelect, MySelectInput, MyPagination, MyColumn, MyTable
     },
@@ -60,18 +52,6 @@
         this.changeSelect({key, value});
         this.getHealth();
       },
-      inputSearch(key, value){
-        // console.log(this.score);
-        this.changeSelect({key, value});
-        this.getHealth();
-      },
-      handleIconClicked(data){  //搜索的函数
-        console.log(data);
-        // let {key,value}=data;
-        // console.log({key,value});
-        this.changeSelect(data);
-        this.getHealth();
-      }
     },
     created () {
       this.getHealth();
