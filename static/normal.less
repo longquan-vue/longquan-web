@@ -12,3 +12,28 @@ li,ul{ list-style: none}
 //}
 em,i{ font-style: normal;}
 img{ object-fit: cover;}
+
+
+
+// 查看规则详情 弹窗
+.popupBox{
+  border-radius: 6px;width: 8rem;background-color: #ffffff;
+  .popupHead{
+    height: 1.333333rem;width: 100%;position: relative;color: #ffffff;font-size: 0.48rem;;
+    text-align: center;line-height: 1.333333rem;background-color: #FF780B;
+    img{ position: absolute;width: 0.6666667rem;height: 0.6666667rem;
+      right: 15px;top: 20%;
+    }
+  }
+  .popupCont{
+    padding: 15px; height: 10rem; overflow: scroll;font-size: 0.4rem;
+    li{ border-bottom: 1px solid #E7E7E7;
+      padding: 10px 0;
+      &:last-child{ border: none;}
+      i{ margin-left: 5px;}
+      div{ position: relative; text-align: left;
+        span{ position: absolute;right: 0;}
+      };
+    }
+  }
+}
