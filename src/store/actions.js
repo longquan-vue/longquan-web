@@ -1,19 +1,8 @@
 // api
-import {
-  mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi,
-  signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi
-} from '../api/userApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi} from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
-import {
-  findActivityApi,
-  findEntryListByIdApi,
-  findActivityDetailApi,
-  createActivityApi,
-  deleteActivityApi,
-  entryActivityApi,
-  exportEntryApi
-} from '../api/activityApi'
+import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActivityApi, deleteActivityApi, entryActivityApi, exportEntryApi} from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
@@ -43,15 +32,9 @@ const changePage = ({commit, state}, page) => commit(PAGE, page ? page : {page: 
 //更改查询字段
 const changeSelect = ({commit, state}, data) => commit(CHANE_SELECT, data);
 //获取用户信息
-const getUser = async({commit, state}) => {
-  const {params:{id}}=state.route;
-  commit(SET_DATA, await getByIdApi(id));
-};
+const getUser = async({commit, state}) => commit(SET_DATA, await getByIdApi(state.route.params.id));
 //findUserList 获取用户列表
-const findUserList = async({commit, state}) => {
-  const userList = await findApi(state.page);
-  commit(GET_DATA_LIST, userList);
-};
+const findUserList = async({commit, state}) => commit(GET_DATA_LIST, await findApi(state.page));
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
@@ -208,4 +191,3 @@ export default {
   delUser,//删除用户
   exportEntry, // 导出活动报名表单
 }
-
