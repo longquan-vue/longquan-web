@@ -92,7 +92,7 @@ const getWelfareDetail = async({commit, state}, data) => {
   }
 };
 //获取活动相关数据   活动列表
-const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page,0));
+const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page, 0));
 //获取活动相关数据   活动报名列表
 const getEnter = async({commit, state}) => commit(GET_DATA_LIST, await findEntryListByIdApi(state.route.params.id, state.page));
 // 导出活动报名表单
@@ -103,7 +103,7 @@ const getActivityDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.activity});
   } else {
-    commit(SET_DATA, await findActivityDetailApi(id));
+    commit(SET_DATA, {edit: false, ...await findActivityDetailApi(id)});
   }
 };
 //获取活动相关数据  报名
@@ -128,7 +128,7 @@ const gethealthDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.health});
   } else {
-    commit(SET_DATA, await findHealthDetailApi(id));
+    commit(SET_DATA, {edit: false, ...await findHealthDetailApi(id)});
   }
 };
 //获取招聘信息相关数据  列表
