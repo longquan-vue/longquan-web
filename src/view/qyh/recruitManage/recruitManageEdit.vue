@@ -61,13 +61,13 @@
             <div class="connectPerson" v-for="(domain, index) in data.linkmans" :key="index" style="background:#fff;padding-top:0.3rem" :class="{mg40:index!=0?true:false}">
                 <el-form-item label="联系人" :prop="'linkmans.' + index"
                               :rules="{ required: true, message: '联系人不能为空', trigger: 'change' }">
-                    <el-input v-model="domain" placeholder="请输入联系人名称"></el-input>
+                    <el-input :value="domain" placeholder="请输入联系人名称" @input="(v)=>setListVal(['linkmans.'+index,v])"></el-input>
                 </el-form-item>
                 <el-form-item label="联系电话" :prop="'phones.' + index"
                               :rules="{ required: true, message: '联系人电话不能为空', trigger: 'change' }">
-                    <el-input v-model="data.phones[index]" placeholder="请输入联系人电话" style="display:inline-block;"></el-input>
+                    <el-input :value="data.phones[index]" @input="(v)=>setListVal(['phones.'+index,v])" placeholder="请输入联系人电话" style="display:inline-block;"></el-input>
 
-                    <el-button v-if="index!=0" @click.prevent="removeDomain(domain)" style="margin-top:0.3rem;position:absolute;right:0">删除</el-button>
+                    <el-button v-if="index!=0" @click.prevent="removeDomain(index)" style="margin-top:0.3rem;position:absolute;right:0">删除</el-button>
                 </el-form-item>
             </div>
 
@@ -118,7 +118,7 @@
                     ],
                     desc: [
                         { required: true, message: '请填写活动形式', trigger: 'blur' }
-                    ]
+                    ],
                 }
             }
         },
@@ -127,7 +127,7 @@
         },
         computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['clear','goto','getRecruitDetail','setData']),
+            ...mapActions(['clear','goto','getRecruitDetail','setData','setList','delList','setListVal']),
             ...filter,
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -149,14 +149,17 @@
             changeEnd (value) {
                 this.setData({end:new Date(value).getTime()})
             },
-            removeDomain(item) {   //删除联系人
-                var index = this.ruleForm.linkmans.indexOf(item);
-                if (index !== -1) {
-                    this.ruleForm.linkmans.splice(index, 1)
-                }
+            removeDomain(index) {   //删除联系人
+                this.delList(['linkmans',index]);
+                this.delList(['phones',index]);
+                // var index = this.ruleForm.linkmans.indexOf(item);
+                // if (index !== -1) {
+                //     this.delList()
+                // }
             },
             addDomain() {    //新增联系人
-
+                this.setList({key:'linkmans',data:''});
+                this.setList({key:'phones',data:''});
             }
         },
         created () {
