@@ -2,257 +2,106 @@
 
 </style>
 <template>
-    <div class="contentBox">
-        <!--<transition name="move" mode="out-in"><router-view></router-view></transition>-->
-        <div class="contentBoxtitle"><span>红包福利列表</span></div>
-        <div class="contentBoxCont">
-            <div class="mgb20">
-                <span>
-                    <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围">
-                     </el-date-picker>
-                </span>
-
-                <span>
-                    福利状态：<el-select v-model="welfareSelect.value" placeholder="请选择" style="width:100px;">
-                            <el-option v-for="item in welfareSelect.options" :key="item.label" :label="item.label" :value="item.value">
-                            </el-option>
-                          </el-select>
-                </span>
-                <span>
-                     <el-select v-model="typeSelect.value" placeholder="请选择" style="width:120px;">
-                    <el-option v-for="item in typeSelect.options" :key="item.label" :label="item.label" :value="item.value">
-                    </el-option>
-                    </el-select>
-                    <el-input style="width:150px;"
-                              placeholder="请输入搜索内容"
-                              icon="search"
-                              v-model="searchVal"
-                              :on-icon-click="handleIconClick">
-                    </el-input>
-                </span>
-                <span style="float:right;">
-                    <el-button type="primary" icon="search">余额查询充值</el-button>
-                    <el-button type="primary" @click="add(2)" icon="plus" >添加红包福利</el-button>
-                </span>
-
-            </div>
-            <div class="tableList mgb20">
-                <el-table :data="tableData" border style="width: 100%">
-                    <el-table-column type="index" label="编号" fixed="left"></el-table-column>
-                    <el-table-column prop="name" label="福利名称"></el-table-column>
-                    <el-table-column prop="support" label="福利提供方" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="starttime" label="福利开始时间"></el-table-column>
-                    <el-table-column prop="endtime" label="福利结束时间"></el-table-column>
-                    <el-table-column prop="publishtime" label="福利发布时间" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="needpoint" label="兑换所需积分" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="all" label="福利总量" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="times" label="人均兑换次数" show-overflow-tooltip></el-table-column>
-                    <el-table-column prop="status" label="福利状态" show-overflow-tooltip></el-table-column>
-                    <el-table-column label="是否暂停" width="150px">
-                        <template scope="scope">
-                            <el-button type="primary"
-                                       size="small"
-                                       @click="handleEdit(scope.$index, scope.row)">暂停</el-button>
-                            <!--<el-button-->
-                                    <!--size="small"-->
-                                    <!--type="primary"-->
-                                    <!--@click="handlePoint">取消暂停</el-button>-->
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="操作" fixed="right" width="150px">
-                        <template scope="scope">
-                            <el-button type="text"
-                                       size="small"
-                                       @click="add(1)">编辑</el-button>
-                            <!--<el-button-->
-                                    <!--size="small"-->
-                                    <!--type="text"-->
-                                    <!--@click="handlePoint">兑换</el-button>-->
-                            <el-button
-                                    size="small"
-                                    type="text"
-                                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-            <div class="pageSlide">
-                <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="1000">
-                </el-pagination>
-            </div>
-        </div>
+  <div class="contentBox">
+    <div class="contentBoxtitle"><span>红包福利列表</span></div>
+    <div class="contentBoxCont">
+      <div class="mgb20">
+        <MySelect title="福利状态" field="status" :options="{0:'未开始',1:'进行中',2:'已暂停',3:'已结束'}" :change="change"/>
+        <MySelectInput :options="{'name':'福利名称','provider':'提供方名称'}" def-key="name" :change="change"/>
+        <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
+        <el-button type="primary" icon="search" @click="search">搜索</el-button>
+        <span style="float:right;">
+          <el-button type="primary" icon="search"  @click="">余额查询充值</el-button>
+          <el-button style="float:right;" type="primary" @click="go(['welfareTicketEdit','create'])" icon="plus">添加券类福利</el-button>
+        </span>
+      </div>
+      <div class="tableList mgb20">
+        <el-table :data="list" border style="width: 100%">
+          <MyColumn type="index" label="编号" fixed="left"/>
+          <MyColumn prop="name" label="福利名称" width="120"/>
+          <MyColumn prop="provider" label="福利提供方" width="120"/>
+          <MyColumn prop="provider" label="福利类型" width="120"/>
+          <MyColumn prop="startTime" label="福利开始时间" :formatter="({startTime})=>date3Filter(startTime)" width="160"/>
+          <MyColumn prop="endTime" label="福利结束时间" :formatter="({endTime})=>date3Filter(endTime)" width="160"/>
+          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="160"/>
+          <MyColumn prop="score" label="兑换所需积分" width="140"/>
+          <MyColumn prop="total" label="福利总量" width="120"/>
+          <MyColumn prop="total" label="剩余量" width="120"/>
+          <MyColumn prop="time" label="人均兑换次数" width="140"/>
+          <MyColumn prop="status" :formatter="stateType" label="福利状态" width="120"/>
+          <MyColumn label="是否暂停" width="150px">
+            <template scope="scope">
+              <el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>
+            </template>
+          </MyColumn>
+          <MyColumn label="操作" fixed="right" width="150px">
+            <template scope="scope">
+              <el-button type="text" size="small" @click="go(['welfareTicketEdit',scope.row.id])">编辑</el-button>
+              <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
+            </template>
+          </MyColumn>
+        </el-table>
+      </div>
+      <div class="pageSlide">
+        <MyPagination :method="getWelfare"/>
+      </div>
     </div>
+  </div>
 </template>
 <script type="es6">
-    export default {
-        data() {
-            return {
-                tableData: [{
-                    name:'万达电影票兑换券',
-                    support:'成都爱创业科技有限公司',
-                    starttime:'2017-03-25 10:30',
-                    endtime:'2017-03-28 18:30',
-                    publishtime:'2017-03-24 10:30',
-                    needpoint:520,
-                    all:'1000',
-                    times:1,
-                    status:'已结束'
-                }, {
-                    name:'万达电影票兑换券',
-                    support:'成都爱创业科技有限公司',
-                    starttime:'2017-03-25 10:30',
-                    endtime:'2017-03-28 18:30',
-                    publishtime:'2017-03-24 10:30',
-                    needpoint:520,
-                    all:'1000',
-                    times:1,
-                    status:'已结束'
-                },{
-                    name:'万达电影票兑换券',
-                    support:'成都爱创业科技有限公司',
-                    starttime:'2017-03-25 10:30',
-                    endtime:'2017-03-28 18:30',
-                    publishtime:'2017-03-24 10:30',
-                    needpoint:520,
-                    all:'1000',
-                    times:1,
-                    status:'已结束'
-                },{
-                    name:'万达电影票兑换券',
-                    support:'成都爱创业科技有限公司',
-                    starttime:'2017-03-25 10:30',
-                    endtime:'2017-03-28 18:30',
-                    publishtime:'2017-03-24 10:30',
-                    needpoint:520,
-                    all:'1000',
-                    times:1,
-                    status:'已结束'
-                },{
-                    name:'万达电影票兑换券',
-                    support:'成都爱创业科技有限公司',
-                    starttime:'2017-03-25 10:30',
-                    endtime:'2017-03-28 18:30',
-                    publishtime:'2017-03-24 10:30',
-                    needpoint:520,
-                    all:'1000',
-                    times:1,
-                    status:'已结束'
-                },],
-                currentPage: 1,
-                tbindex:-1,
-                formLabelWidth: '80px',
-                welfareSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '进行中'
-                    }, {
-                        value: '选项3',
-                        label: '未开始'
-                    }, {
-                        value: '选项4',
-                        label: '已结束'
-                    }, {
-                        value: '选项5',
-                        label: '已暂停'
-                    }],
-                    value: '选项1'
-                },
-                typeSelect:{
-                    options: [{
-                        value: '选项1',
-                        label: '全部'
-                    }, {
-                        value: '选项2',
-                        label: '福利名称'
-                    }, {
-                        value: '选项3',
-                        label: '提供方名称'
-                    }],
-                    value: '选项1'
-                },
-                searchVal:'',
-                activeIndex2:'1',
-                dateValue:''//筛选时间
-            }
-        },
-        components: {
-        },
-        computed: {
-
-        },
-        methods: {
-            handleDelete(index, row) {
-                console.log(index, row);
-                this.tbindex=index;
-                this.dialogVisible=true;
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                console.log(`当前页: ${val}`);
-
-            },
-            deleteClick(index){
-                this.tableData.splice(index,1);
-                this.dialogVisible=false;
-            },
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                        this.dialogFormVisible=false;
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.dialogFormVisible=false;
-                this.$refs[formName].resetFields();
-            },
-            handleError(){
-                this.$notify.error({
-                    title: '上传失败',
-                    message: '图片上传接口上传失败，可更改为自己的服务器接口'
-                });
-            },
-            handleIconClick(){  //搜索
-
-            },
-            handlePoint(){   //积分管理
-                this.$router.push('userpoint');
-            },
-            handleSelect(){  //选择菜单列表
-
-            },
-            add(status){   //增加券类优惠
-                this.$router.push({
-                    path: "welfarePackEdit",
-                    query: {
-                        id: status
-                    }
-                });
-            }
-        },
-        created () {
-
-        },
-        destroyed () {
-
+  import MyColumn from '../../../components/common/table/MyTableColumn'
+  import MyTable from '../../../components/common/table/MyTable'
+  import MyPagination from '../../../components/public/page/MyPagination.vue'
+  import {mapGetters, mapActions} from 'vuex'
+  import MySelect from '../../../components/public/select/MySelect.vue'
+  import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
+  import filter from '../../../filters'
+  export default {
+    data() {
+      return {
+        dateValue: []//筛选时间
+      }
+    },
+    components: {
+      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
+    },
+    computed: {...mapGetters(['list'])},
+    methods: {
+      ...mapActions(['clear', 'getWelfare', 'delWelfare', 'changePage', 'pauseWelfare', 'changeSelect', 'go']),
+      ...filter,
+      del(idx, {id, name}) {
+        this.$confirm(`确定删除福利[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.delWelfare([id, idx]))
+      },
+      change(key, value){   //这是每个 change
+        this.changeSelect({key, value});
+        this.getWelfare()
+      },
+      pause(idx, {id, status, name}){
+        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}福利[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.pauseWelfare([id, `${idx}.status`, status == 1 ? 2 : 1]))
+      },
+      search(){
+        if (this.dateValue.length > 0) {
+          this.changePage({start: this.dateValue[0].getTime(), end: this.dateValue[1].getTime()})
+        } else {
+          this.changePage({start: null, end: null})
         }
+        this.getWelfare();
+      },
+    },
+    created () {
+      this.getWelfare()
+    },
+    destroyed () {
+      this.clear('activity')
     }
+  }
 </script>
 

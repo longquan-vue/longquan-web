@@ -81,9 +81,11 @@
         <el-menu-item index="userList">用户列表</el-menu-item>
         <el-menu-item index="userCount">统计报表</el-menu-item>
       </el-submenu>
-      <el-menu-item index="setting">
-        <i class="el-icon-setting"></i>系统设置
-      </el-menu-item>
+      <el-submenu index="14">
+        <template slot="title"><i class="el-icon-setting"></i>系统设置</template>
+        <el-menu-item index="fwhSetting">服务号设置</el-menu-item>
+        <el-menu-item index="userCount">统计报表</el-menu-item>
+      </el-submenu>
       <el-menu-item index="authority">
         <i class="el-icon-setting"></i>权限角色管理
       </el-menu-item>

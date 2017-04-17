@@ -78,7 +78,7 @@ export default [
       {path: `${ROOT}/zhxt/poll/:id`, component: require('../view/zhxt/notice/notice.vue'), name: 'pollEdit'}, // 编辑投票调查
       {path: `${ROOT}/zhxt/PollCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'PollCount'}, // 投票调查统计
       /*系统设置*/
-      {path: `${ROOT}/zhxt/setting`, component: require('../view/zhxt/notice/notice.vue'), name: 'setting'},//系统设置
+      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting'},//系统设置
       /*结构配置*/
       {path: `${ROOT}/zhxt/configuration`, component: require('../view/zhxt/configuration/configuration.vue'), name: 'configuration'}, // 结构配置
       /*权限管理*/

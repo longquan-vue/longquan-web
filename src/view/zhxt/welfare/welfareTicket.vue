@@ -24,14 +24,16 @@
           <MyColumn prop="total" label="福利总量" width="120"/>
           <MyColumn prop="time" label="人均兑换次数" width="140"/>
           <MyColumn prop="status" :formatter="stateType" label="福利状态" width="120"/>
-          <MyColumn label="是否暂停" width="150px">
-            <template scope="scope">
-              <el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>
-            </template>
-          </MyColumn>
+          <!--<MyColumn label="是否暂停" width="150px">-->
+            <!--<template scope="scope">-->
+              <!--<el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>-->
+            <!--</template>-->
+          <!--</MyColumn>-->
           <MyColumn label="操作" fixed="right" width="150px">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['welfareTicketEdit',scope.row.id])">编辑</el-button>
+              <el-button type="text" size="small" @click="go('welfareTicketEdit', scope.row.id)">二维码</el-button>
+              <el-button type="text" size="small" @click="go('welfareTicketEdit', scope.row.id)">兑换</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>

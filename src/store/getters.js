@@ -4,6 +4,7 @@ const data = (state) => state.data;
 const list = (state) => state.list;
 const loading = (state) => state.loading;
 const setting = (state) => state.setting;
+const sub = (state) => state.setting && state.setting.sub ? JSON.parse(state.setting.sub) : {};
 
 const action = (state) => {
   let url = '/rest/file/upload';
@@ -23,5 +24,6 @@ export default {
   list,
   action,
   loading,
-  setting
+  setting,
+  sub
 }
