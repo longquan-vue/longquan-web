@@ -4,7 +4,7 @@
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span>活动报名列表</span>
+      <span>{{query.name}}---预约报名名单管理</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
@@ -21,22 +21,25 @@
       <div class="tableList mgb20">
         <MyTable :data="list" border style="width: 100%">
           <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称"/>
+          <MyColumn prop="start" :formatter="date4Filter2" label="时间段"/>
           <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="idCard" label="身份证"/>
           <MyColumn prop="sex" :formatter="sex2Filter" label="性别"/>
-          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻"/>
-          <MyColumn prop="birthday" :formatter="date2Filter" label="生日" width="120"/>
-          <MyColumn prop="phone" label="电话"/>
-          <MyColumn prop="address" label="邮寄地址" width="120"/>
-          <MyColumn prop="depName" label="所属单位" width="120"/>
-          <MyColumn prop="position" label="岗位名称" width="120"/>
-          <MyColumn prop="score" label="报名时间" width="120"/>
-          <MyColumn prop="audit" label="用户类型" :formatter="userFilter" width="120"/>
+          <MyColumn prop="idCard" label="身份证号"/>
+          <MyColumn prop="depName" label="所属单位"/>
+          <MyColumn prop="status" label="是否签到" :formatter="signFilter" width="120"/>
+          <!--<MyColumn label="操作" fixed="right" width="300px">-->
+            <!--<template scope="scope">-->
+              <!--<el-button type="text" size="small" @click="go(['activityEdit',scope.row.id])">编辑</el-button>-->
+              <!--<el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单</el-button>-->
+              <!--<el-button size="small" type="text" @click="showCode(scope.row.ticket)">二维码</el-button>-->
+              <!--<el-button size="small" type="text" @click="go(['activitySign',scope.row.id])">签到管理</el-button>-->
+              <!--<el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>-->
+            <!--</template>-->
+          <!--</MyColumn>-->
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="getEnter"/>
+        <MyPagination :method="getHealthEnter"/>
       </div>
     </div>
   </div>
@@ -54,23 +57,23 @@
       MySelect, MySelectInput, MyPagination, MyColumn, MyTable
     },
     methods: {
-      ...mapActions(['getEnter', 'changeSelect', 'clear', 'go', 'exportEntry']),
+      ...mapActions(['getHealthEnter', 'changeSelect', 'clear', 'go', 'exportHealthEntry']),
       ...filter,
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
-        this.getEnter();
+        this.getHealthEnter();
       },
       exportExl(){
         if (this.list.length <= 0) {
           return this.$alert('没有数据！', '提示', {type: 'warning'})
         }
         const newTab = window.open('about:blank');
-        this.exportEntry().then((url) => newTab.location.href = url)
+        this.exportHealthEntry().then((url) => newTab.location.href = url)
       }
     },
-    computed: {...mapGetters(['list'])},
+    computed: {...mapGetters(['list', 'query'])},
     created () {
-      this.getEnter();
+      this.getHealthEnter();
     },
     destroyed () {
       this.clear();

@@ -3,7 +3,7 @@
     <div class="contentBoxtitle">
       <span v-if="data.edit">添加健身活动</span>
       <span v-if="!data.edit">编辑健身活动</span>
-      <a @click="go(['health'])" style="float:right;">
+      <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
     </div>
@@ -83,9 +83,8 @@
               <el-input :value="date3Filter(data.created)" readonly></el-input>
             </el-form-item>
           </div>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm()">立即创建</el-button>
-            <el-button @click="resetForm()">重置</el-button>
+          <el-form-item style="text-align: center">
+            <el-button type="primary" @click="submitForm">保存</el-button>
           </el-form-item>
         </el-form>
       </div>

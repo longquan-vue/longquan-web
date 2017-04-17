@@ -8,7 +8,7 @@
       <div class="mgb20">
         <MySelect title="项目类型" field="type" :options="{1:'单人项目',2:'双人项目',3:'多人项目'}" :change="change"/>
         <MySelectInput title="搜索条件" :options="{'name':'项目名称'}" def-key="name" :change="change"/>
-        <el-button type="primary" @click="go(['healthEdit','create'])" icon="plus">添加健身项目</el-button>
+        <el-button style="float: right" type="primary" @click="go(['healthEdit','create'])" icon="plus">添加健身项目</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
@@ -19,7 +19,7 @@
           <MyColumn label="操作">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['healthEdit',scope.row.id])">编辑</el-button>
-              <el-button size="small" type="text" @click="go(['healthEdit',scope.row.id])">预约管理</el-button>
+              <el-button size="small" type="text" @click="go(['healthEnter',scope.row.id,{name:scope.row.name}])">预约管理</el-button>
               <el-button size="small" type="text" @click="">暂停</el-button>
               <el-button size="small" type="text" @click="">删除</el-button>
             </template>

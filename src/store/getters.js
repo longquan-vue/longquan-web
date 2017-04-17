@@ -4,6 +4,8 @@ const data = (state) => state.data;
 const list = (state) => state.list;
 const loading = (state) => state.loading;
 const setting = (state) => state.setting;
+const query = (state) => state.route.query;
+const params = (state) => state.route.params;
 const sub = (state) => state.setting && state.setting.sub ? JSON.parse(state.setting.sub) : {};
 
 const action = (state) => {
@@ -25,5 +27,7 @@ export default {
   action,
   loading,
   setting,
-  sub
+  sub,
+  query,
+  params
 }

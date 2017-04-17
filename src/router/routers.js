@@ -37,7 +37,8 @@ export default [
       /*运动*/
       {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health"}, // 运动列表
       {path: `${ROOT}/zhxt/health/:id`, component: require('../view/zhxt/health/healthEdit.vue'), name: "healthEdit"}, // 编辑运动
-      {path: `${ROOT}/zhxt/healthCount`, component: require('../view/zhxt/health/healthCount.vue'), name: "healthCount"}, // 编辑运动
+      {path: `${ROOT}/zhxt/healthCount`, component: require('../view/zhxt/health/healthCount.vue'), name: "healthCount"}, // 运动统计
+      {path: `${ROOT}/zhxt/healthEnter/:id`, component: require('../view/zhxt/health/healthEnter.vue'), name: "healthEnter"}, // 运动预约名单管理
       {path: `${ROOT}/zhxt/healthCode`, component: require('../view/zhxt/health/healthCode.vue'), name: "healthCode"}, // 现场签到二维码
       /*用户*/
       {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue'), name: 'userList'}, // 用户列表
@@ -64,7 +65,7 @@ export default [
       {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'adminCount'}, // 统计报表
       {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, // 我的公会
       /*工会组建*/
-      {path: `${ROOT}/zhxt/dep`, component: require('../view/zhxt/notice/notice.vue'), name: 'depList'}, // 工会列表
+      {path: `${ROOT}/zhxt/dep`, component: require('../view/zhxt/dep/dep.vue'), name: 'depList'}, // 工会列表
       {path: `${ROOT}/zhxt/dep/:id`, component: require('../view/zhxt/notice/notice.vue'), name: 'depEdit'}, // 编辑公会
       {path: `${ROOT}/zhxt/depEnter`, component: require('../view/zhxt/notice/notice.vue'), name: 'depEnter'}, // 申请列表
       {path: `${ROOT}/zhxt/depAudit`, component: require('../view/zhxt/notice/notice.vue'), name: 'depAudit'}, // 审核列表

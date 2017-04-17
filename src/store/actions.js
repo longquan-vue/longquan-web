@@ -21,13 +21,14 @@ import {
   findEntryListByIdApi,
   findActivityDetailApi,
   createActivityApi,
+  updateActivityApi,
   deleteActivityApi,
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
-import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
+import {findHealthApi, findHealthDetailApi, findHealthEnterApi,exportHealthEntryApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
@@ -47,10 +48,11 @@ const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx]
 // 获取系统配置
 const getSetting = ({commit, state}) => !state.setting.id && getSysApi().then((sys) => commit(SETTING, sys))
 // go
-const go = ({commit}, [name, id]) => new Promise((resolve, reject) => resolve(router.push({
-  name,
-  params: id ? {id} : {}
-})))
+const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) => resolve(!name ? router.back() : router.push({
+    name,
+    params: id ? {id} : {},
+    query
+  })))
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
 //清除page
@@ -160,20 +162,18 @@ const getActivityDetail = async({commit, state}) => {
 };
 //获取活动相关数据  报名
 const entryActivity = ({commit, state}) => entryActivityApi(state.route.query.id).then((data) => success('报名成功！')).catch((data) => error(data.msg));
-// //获取活动相关数据   创建活动
-// const createActivity = async({commit, state}) => {
-//     createActivityApi(state.activityDetail).then(function () {
-//         this.$message.success('提交成功！');
-//         window.location.reload();
-//     }).catch(function () {
-//         this.$message.error('提交失败！');
-//     });
-// };
-//
+//获取活动相关数据   创建活动
+const createActivity = ({commit, state}) => createActivityApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取活动相关数据   修改活动
+const updateActivity = ({commit, state}) => updateActivityApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取活动相关数据   删除活动
 const deleteActivity = async({commit}, [id, idx]) => deleteActivityApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx)));
 //获取健身项目相关数据   列表
 const getHealth = async({commit, state}) => commit(GET_DATA_LIST, await findHealthApi(state.page));
+//获取健身项目报名列表
+const getHealthEnter = async({commit, state}) => commit(GET_DATA_LIST, await findHealthEnterApi(state.route.params.id, state.page));
+//导出健身项目报名列表
+const exportHealthEntry = ({commit, state}) => exportHealthEntryApi(state.route.params.id, state.page);
 //获取健身项目相关数据   详情
 const gethealthDetail = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -237,12 +237,16 @@ export default {
   // convertWelfare,  //兑换福利
   getActivity,     //获取工会活动
   getActivityDetail,  //获取工会活动详情
+  updateActivity,//修改工会活动
+  createActivity,//创建工会活动
   entryActivity,  //报名工会活动
   getRecruit,  //获取招聘信息列表
   getRecruitDetail,  // 获取招聘信息详情
   entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表
+  getHealthEnter,   //获取健身中心报名列表
   gethealthDetail, //获取健身项目详情
+  exportHealthEntry, //导出健身中心报名列表
   loginOut,// 登出
   login,// 登录
   delFile,//删除文件
