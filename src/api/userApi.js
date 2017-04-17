@@ -46,6 +46,12 @@ export const getSignApi = (id, data, del = 0) => request({
   url: `/history/sign/${id}/${del}`,
   data
 });
+//签到周历史记录
+export const getWeekSignApi = () => request({
+    method: "get",
+    url: `/history/weekSign`,
+});
+
 //我的消息
 export const mineMsgApi = (data) => request({
   url: `/history/msg`,

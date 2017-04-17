@@ -126,7 +126,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filters from '../../../filters'
     import RollNotice from '../../../components/public/showNotice/RollNotice.vue'
     import { XDialog ,TransferDomDirective as TransferDom} from 'vux'
     import {convertApi} from '../../../api/welfareApi'
@@ -147,8 +147,8 @@
         },
         computed: {...mapGetters(['login','list','data'])},
         methods:{
-            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto','isEnd','isStart']),
-            date3Filter,
+            ...mapActions(['getMine','getWelfare','clear','getWelfareDetail','goto']),
+            filters,
             detail(index){
                 this.popupVisible=true;
             },

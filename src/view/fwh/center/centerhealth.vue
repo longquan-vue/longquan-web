@@ -32,9 +32,8 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
-    import { Toast ,MessageBox } from 'mint-ui';
     export default{
         data(){
             return{
@@ -44,27 +43,20 @@
         components:{
             appHead
         },
-        computed: {...mapGetters(['list', 'page']),
+        computed: {...mapGetters(['login', 'list']),
         },
         methods:{
-            ...mapActions(['goto','clear','getMineHealth']),
-            date3Filter,
-            isEnd(endTime){
-                return new Date().getTime()>endTime
-            },
+            ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage', 'clearPage']),
+            filters,
             openCode(){
-                Toast('调用微信接口 打开二维码扫描');
+
             },
             del(){
-                MessageBox.confirm('确定要执行此操作吗').then(function () {
-                    alert('点击了确定')
-                }).catch(function () {
-                    alert('点击了取消')
-                });
+
             }
         },
         created () {
-            this.getMineHealth();
+            this.getMineHealth();   //
         },
         destroyed(){
             this.clear()

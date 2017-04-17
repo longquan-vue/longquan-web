@@ -31,8 +31,7 @@
         </scroller>
 
 
-        <actionsheet v-model="show3" :menus="menus3" @on-click-menu="click" @on-click-menu-delete="onDelete"
-                     show-cancel></actionsheet>
+        <actionsheet v-model="show3" :menus="menus3" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
     </div>
 </template>
 
@@ -68,14 +67,11 @@
         },
         computed: {...mapGetters(['login', 'list'])},
         methods: {
-            ...mapActions(['getMineMsg', 'clear', 'delMethod', 'page', 'changePage', 'clearPage']),
+            ...mapActions(['getMineMsg', 'clear', 'delMethod', 'changePage', 'clearPage']),
             ...filter,
             del(index){
                 this.show3 = true;
                 this.idx = index;
-            },
-            click (key) {
-                console.log(key)
             },
             async onDelete () {
                 await this.delMethod(this.idx);
@@ -92,8 +88,8 @@
                     });
                     setTimeout(() => {
                         this.demo4Value.pullupStatus = 'default';
-                    }, 10)
-                    if (this.$store.state.page.page==this.$store.state.page.pages){
+                    }, 10);
+                    if (this.$store.state.page.page>this.$store.state.page.pages){
                       setTimeout(() => {
                         this.$refs.scroller.disablePullup();
                       }, 100)

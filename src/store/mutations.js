@@ -44,7 +44,7 @@ export default {
             state.data[key].splice(idx, 1)
         },
         [GET_DATA_LIST] (state, list) {   //获取列表
-            if (list) {
+            if (list&&list.page) {
                 if (state.page.series) {
                     state.list = [...state.list, ...list.list];
                 } else {
@@ -52,7 +52,9 @@ export default {
                 }
                 delete list.list;
                 state.page = {...state.page, ...list}
-            } else {
+            } else if(list){
+                state.list = [...state.list, ...list];
+            }else {
                 state.list = []
             }
         },
