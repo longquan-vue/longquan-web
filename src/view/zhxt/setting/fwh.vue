@@ -6,18 +6,19 @@
     <div class="contentBoxtitle">
       <span>服务号管理</span>
     </div>
-    <el-tabs v-model="type" type="card" @tab-click="changeType">
+    <el-tabs v-model="tab" type="card" @tab-click="changeType">
       <el-tab-pane label="关注设置" name="1"/>
       <el-tab-pane label="关注回复设置" name="2"/>
+      <el-tab-pane label="服务号菜单设置" name="3"/>
     </el-tabs>
-    <div class="contentBoxCont" v-if="type == '1'">
+    <div class="contentBoxCont" v-if="tab == '1'">
       <el-form :model="setting" ref="setting" label-width="120px" class="demo-ruleForm">
         <el-form-item label="关注送积分" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
           <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"></el-input>
         </el-form-item>
       </el-form>
     </div>
-    <div class="contentBoxCont fwh_setting" v-if="type == '2'">
+    <div class="contentBoxCont fwh_setting" v-if="tab == '2'">
       <el-form :model="sub" ref="sub" label-width="120px" class="demo-ruleForm">
         <el-form-item label="标题" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
           <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"></el-input>
@@ -45,6 +46,16 @@
         </el-form-item>
       </el-form>
     </div>
+    <div v-if="tab == '3'" class="fwh_menu">
+      <div v-for="item in menu">
+        <div class="name">{{item.name}}</div>
+        <div class="sub_btn" v-for="button in item.sub_button">
+          <span class="name">{{button.name}}</span>
+          <span>{{button.type}}</span>
+          <span>{{button.url}}</span>
+        </div>
+      </div>
+    </div>
     <div style="text-align: center">
       <el-button type="primary" @click="submitForm">提交</el-button>
     </div>
@@ -53,10 +64,12 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
+  import {getFwhMenuApi} from '../../../api/systemApi'
   export default{
     data(){
       return {
-        type: '1',
+        tab: '1',
+        menu: []
       }
     },
     computed: {
@@ -68,7 +81,7 @@
         this.$refs.setting.validate((valid) => valid ? this.saveSys() : false);
       },
       changeType(){
-        this.$router.replace({name: 'fwhSetting', query: {type: this.type}})
+        this.$router.replace({name: 'fwhSetting', query: {tab: this.tab}})
       },
       success(file){
         this.setSub({picurl: file.url})
@@ -86,11 +99,15 @@
           this.$message.error('上传图片大小不能超过 2MB!');
         }
         return isJPG && isLt2M;
-      }
+      },
     },
     created () {
-      this.type = this.$route.query.tab || '1'
+      this.tab = this.$route.query.tab || '1'
       this.getSetting();
+      getFwhMenuApi().catch(({menu:{button}}) => {
+        this.menu = button || [];
+        console.log(this.menu)
+      });
     },
   }
 </script>
