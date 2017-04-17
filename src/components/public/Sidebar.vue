@@ -15,7 +15,6 @@
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-date"></i>投票调查管理</template>
         <el-menu-item index="pollList">投票调查列表</el-menu-item>
-        <el-menu-item index="pollSetting">管理配置</el-menu-item>
         <el-menu-item index="PollCount">统计报表</el-menu-item>
       </el-submenu>
       <!--<el-submenu index="4">-->
@@ -27,7 +26,6 @@
       <el-submenu index="5">
         <template slot="title"><i class="el-icon-star-on"></i>招聘信息管理</template>
         <el-menu-item index="recruitList">招聘信息列表</el-menu-item>
-        <el-menu-item index="recruitSetting">管理配置</el-menu-item>
         <el-menu-item index="recruitCount">统计报表</el-menu-item>
       </el-submenu>
       <el-submenu index="6">
@@ -67,16 +65,15 @@
       <el-submenu index="11">
         <template slot="title"><i class="el-icon-star-on"></i>工会组建管理</template>
         <el-menu-item index="depList">工会列表</el-menu-item>
-        <el-menu-item index="entryDepList">申请列表</el-menu-item>
-        <el-menu-item index="auditDepList">审核列表</el-menu-item>
-        <el-menu-item index="depSetting">参数配置</el-menu-item>
+        <el-menu-item index="depEnter">申请列表</el-menu-item>
+        <el-menu-item index="depAudit">审核列表</el-menu-item>
         <el-menu-item index="depCount">统计报表</el-menu-item>
       </el-submenu>
       <el-submenu index="12">
         <template slot="title"><i class="el-icon-star-on"></i>工会职工认证管理</template>
         <el-menu-item index="adminList">职工列表</el-menu-item>
-        <el-menu-item index="auditList">审核列表</el-menu-item>
-        <el-menu-item index="department">我的工会</el-menu-item>
+        <el-menu-item index="adminAudit">审核列表</el-menu-item>
+        <el-menu-item index="myDep">我的工会</el-menu-item>
         <el-menu-item index="adminCount">统计报表</el-menu-item>
       </el-submenu>
       <el-submenu index="13">

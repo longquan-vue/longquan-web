@@ -16,9 +16,9 @@
           <MyColumn prop="nickname" label="昵称"/>
           <MyColumn prop="name" label="姓名"/>
           <MyColumn prop="depName" label="所属单位"/>
-          <MyColumn prop="certification" label="职工认证"/>
+          <MyColumn prop="audit" :formatter="userFilter" label="职工认证"/>
           <MyColumn prop="point" label="签到获得积分"/>
-          <MyColumn prop="time" label="签到时间"/>
+          <MyColumn prop="recording" :formatter="date8Filter" label="签到时间"/>
           <MyColumn label="操作" fixed="right">
             <template scope="scope">
               <el-button type="text" size="small" @click="delMethod(scope.$index)">删除</el-button>

@@ -2,7 +2,7 @@ import {request} from './ajax'
 const BASE_PATH = '/welfare'
 
 //获取积分福利兑换列表
-export const welfareApi = (data = {page: 1, pageSize: 10, sort: [], order: [], filed: [], keyWord: []},del = 0) => request({
+export const welfareApi = (data, del = 0) => request({
   url: `${BASE_PATH}/find/${del}`,
   data
 });
@@ -27,7 +27,11 @@ export const updateApi = (data) => request({
   data
 });
 //删除福利
-export const deleteApi = (id, del) => request({
+export const delWelfareApi = (id, del = 1) => request({
   method: "delete",
-  url: `${BASE_PATH}/${id}/${del}`,
+  url: `${BASE_PATH}/delete/${id}/${del}`,
+});
+//开启或暂停福利
+export const pauseWelfareApi = (id) => request({
+  url: `${BASE_PATH}/pause/${id}`,
 });
