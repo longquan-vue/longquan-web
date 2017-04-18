@@ -70,9 +70,8 @@
                 this.singin(this);
             },
             weekFilter(){
-                const week = moment().startOf('week');
                 return new Array(7).fill({}).map((val = {}, index) => {
-                    const sign = this.list.find((item) => week.add(1, 'days').isSame(moment(item.recording).startOf('day')));
+                    const sign = this.list.find((item) => moment().startOf('week').add(index+1, 'days').isSame(moment(item.recording).startOf('day')));
                     return {
                         sign: sign ? sign.score : null,
                         week: `星期${['一', '二', '三', '四', '五', '六', '日'][index]}`,
@@ -80,9 +79,9 @@
                 })
             }
         },
-        created () {
-            this.getWeekSign();
-            this.getMine();
+        async created () {
+            await this.getWeekSign();
+            await this.getMine();
         },
         destroyed(){
             this.clear()

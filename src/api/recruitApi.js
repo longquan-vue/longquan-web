@@ -29,9 +29,9 @@ export const updateApi = (data) => request({
     data
 });
 //删除招聘
-export const deleteRecruitApi = (id, del) => request({
+export const delRecruitApi = (id, del=1) => request({
     method: "delete",
-    url: `${BASE_PATH}/${id}/${del}`,
+    url: `${BASE_PATH}/delete/${id}/${del}`,
 });
 
 //报名招聘

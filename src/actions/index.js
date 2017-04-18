@@ -11,10 +11,10 @@ export const warning = (message = '删除成功！', opts = {duration: 2000, sho
 export const info = (message = '删除成功！', opts = {duration: 2000, showClose: true}) => new Promise((resolve) => resolve(Message.info({message, ...opts})));
 export const error = (message = '删除成功！', opts = {duration: 2000, showClose: true}) => new Promise((resolve) => resolve(Message.error({message, ...opts})));
 
-export const msg = (title = '提示', message = '', type = 'success', opts = {}) => MessageBox({title, message, type, ...opts});
-export const alert = (title = '提示', message = '', type = 'success', opts = {}) => MessageBox.alert({title, message, type, ...opts});
-export const confirm = (title = '提示', message = '', type = 'success', opts = {}) => MessageBox.confirm({title, message, type, ...opts});
-export const prompt = (title = '提示', message = '', type = 'success', opts = {}) => MessageBox.prompt({title, message, type, ...opts});
+export const msg = (message = '', type = 'success', title = '提示', opts = {}) => MessageBox(message, title, {type, ...opts});
+export const alert = (message = '', type = 'success', title = '提示', opts = {}) => MessageBox.alert(message, title, {type, ...opts});
+export const confirm = (message = '', type = 'success', title = '提示', opts = {}) => MessageBox.confirm(message, title, {type, ...opts});
+export const prompt = (message = '', type = 'success', title = '提示', opts = {}) => MessageBox.prompt(message, title, {type, ...opts});
 
 
 //app

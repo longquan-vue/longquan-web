@@ -35,10 +35,10 @@
       change: Function
     },
     methods: {
-      changeKey(v){
-        this.change && this.change(this.key, null);
-        this.key = v;
-        this.changed(this.val);
+      changeKey(){
+        if (this.val) {
+          this.change && this.change(this.key, this.val);
+        }
       },
       changed(v){
         const val = v.target ? v.target.value : v
