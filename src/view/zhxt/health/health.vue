@@ -20,8 +20,8 @@
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['healthEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="go(['healthEnter',scope.row.id,{name:scope.row.name}])">预约管理</el-button>
-              <el-button size="small" type="text" @click="">暂停</el-button>
-              <el-button size="small" type="text" @click="">删除</el-button>
+              <el-button size="small" type="text" @click="pause(scope.$index,scope.row)">{{scope.row.status == 1 ? '暂停' : '开启'}}</el-button>
+              <el-button size="small" type="text" @click="del(scope.$index,scope.row)">删除</el-button>
             </template>
           </MyColumn>
         </MyTable>
@@ -46,11 +46,25 @@
     },
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['getHealth', 'clear', 'changeSelect', 'go']),
+      ...mapActions(['getHealth', 'delHealth', 'pauseHealth', 'clear', 'changeSelect', 'go']),
       ...filter,
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
         this.getHealth();
+      },
+      del(idx, {id, name}) {
+        this.$confirm(`确定删除健身项目[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.delHealth([id, idx]))
+      },
+      pause(idx, {id, status, name}){
+        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}健身项目[${name}]吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => this.pauseHealth([id, `${idx}.status`, status == 1 ? 2 : 1]))
       },
     },
     created () {
