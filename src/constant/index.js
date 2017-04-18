@@ -5,6 +5,12 @@ export const debug = (...msg) => {
     console.debug(...msg)
   }
 }
+export const healthIcon = [
+  require('../../static/wx/button.png'),
+  require('../../static/wx/default.png'),
+  require('../../static/wx/aw.jpg'),
+  require('../../static/wx/centerbg.png')
+]
 export const defData = {
   user: {
     headimgurl: require('../../static/wx/aw.jpg'), nickname: '蕾姆', birthday: NOW, sex: 1,

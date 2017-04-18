@@ -28,7 +28,7 @@ import {
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
-import {findHealthApi, findHealthDetailApi, findHealthEnterApi,exportHealthEntryApi} from '../api/healthApi'
+import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
@@ -183,6 +183,10 @@ const gethealthDetail = async({commit, state}) => {
     commit(SET_DATA, {edit: false, ...await findHealthDetailApi(id)});
   }
 };
+//获取健身项目相关数据   创建健身项目
+const createHealth = ({commit, state}) => createHealthApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取健身项目相关数据   修改健身项目
+const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取招聘信息相关数据  列表
 const getRecruit = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitApi(state.page));
 //删除招聘信息
@@ -262,4 +266,6 @@ export default {
   delWelfare,// 删除福利
   pauseWelfare,// 暂停开启福利
   delRecruit,// 删除招聘信息
+  createHealth,//创建健身项目
+  updateHealth,//修改健身项目
 }

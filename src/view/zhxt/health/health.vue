@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './health.css';
+  @import 'health.less';
 </style>
 <template>
   <div class="contentBox">

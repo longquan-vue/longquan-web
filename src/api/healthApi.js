@@ -25,3 +25,13 @@ export const exportHealthEntryApi = (id, data) => request({
   url: `${BASE_PATH}/export/${id}`,
   data
 });
+//创建健身项目
+export const createHealthApi = (data) => request({
+  url: `${BASE_PATH}/create`,
+  data
+});
+//修改健身项目
+export const updateHealthApi = (data) => request({
+  url: `${BASE_PATH}/update`,
+  data
+});

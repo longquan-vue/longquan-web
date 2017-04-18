@@ -29,5 +29,5 @@ export default {
   setting,
   sub,
   query,
-  params
+  params,
 }
