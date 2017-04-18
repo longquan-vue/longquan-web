@@ -14,7 +14,7 @@ import {
   updateUserApi,
   getSignApi
 } from '../api/userApi'
-import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi} from '../api/welfareApi'
+import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
 import {
   findActivityApi,
@@ -137,13 +137,19 @@ const getWelfareDetail = async({commit, state}, data) => {
   const {query:{id, ticket, welfareId, used}}=state.route;
   if (welfareId) {
     commit(SET_DATA, {...await findWelfareByIdApi(welfareId), ticket, id, used});
+  } else if (state.route.params.id) {
+    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
   } else {
     commit(SET_DATA, data);
   }
 };
+//获取福利   创建福利
+const createWelfare = ({commit, state}) => createWelfareApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取福利   修改福利
+const updateWelfare = ({commit, state}) => updateWelfareApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 删除福利
 const delWelfare = ({commit, state}, [id, idx]) => delWelfareApi(id).then(() => commit(DEL_DATA, idx))
-// 删除福利
+// 暂停开启福利
 const pauseWelfare = ({commit, state}, [id, key, val]) => pauseWelfareApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取活动相关数据   活动列表
 const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page, 0));
@@ -268,4 +274,6 @@ export default {
   delRecruit,// 删除招聘信息
   createHealth,//创建健身项目
   updateHealth,//修改健身项目
+  createWelfare,//创建福利
+  updateWelfare,//修改福利
 }

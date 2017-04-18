@@ -25,9 +25,9 @@
           <MyColumn prop="time" label="人均兑换次数" width="140"/>
           <MyColumn prop="status" :formatter="stateType" label="福利状态" width="120"/>
           <!--<MyColumn label="是否暂停" width="150px">-->
-            <!--<template scope="scope">-->
-              <!--<el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>-->
-            <!--</template>-->
+          <!--<template scope="scope">-->
+          <!--<el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>-->
+          <!--</template>-->
           <!--</MyColumn>-->
           <MyColumn label="操作" fixed="right" width="150px">
             <template scope="scope">
@@ -67,7 +67,7 @@
       ...mapActions(['clear', 'getWelfare', 'delWelfare', 'changePage', 'pauseWelfare', 'changeSelect', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        this.$confirm(`确定删除福利[${name}]吗?`, '提示', {
+        this.$confirm(`确定删除券类福利[${name}]吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -78,7 +78,7 @@
         this.getWelfare()
       },
       pause(idx, {id, status, name}){
-        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}福利[${name}]吗?`, '提示', {
+        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}券类福利[${name}]吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -94,6 +94,7 @@
       },
     },
     created () {
+      this.changeSelect({key: 'type', value: 3})
       this.getWelfare()
     },
     destroyed () {

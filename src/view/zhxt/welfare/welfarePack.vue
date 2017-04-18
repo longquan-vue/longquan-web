@@ -11,8 +11,8 @@
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
         <span style="float:right;">
-          <el-button type="primary" icon="search"  @click="">余额查询充值</el-button>
-          <el-button style="float:right;" type="primary" @click="go(['welfareTicketEdit','create'])" icon="plus">添加券类福利</el-button>
+          <el-button type="primary" icon="search" @click="">余额查询充值</el-button>
+          <el-button style="float:right;" type="primary" @click="go(['welfarePackEdit','create'])" icon="plus">添加红包福利</el-button>
         </span>
       </div>
       <div class="tableList mgb20">
@@ -36,7 +36,7 @@
           </MyColumn>
           <MyColumn label="操作" fixed="right" width="150px">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go(['welfareTicketEdit',scope.row.id])">编辑</el-button>
+              <el-button type="text" size="small" @click="go(['welfarePackEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>
@@ -70,7 +70,7 @@
       ...mapActions(['clear', 'getWelfare', 'delWelfare', 'changePage', 'pauseWelfare', 'changeSelect', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        this.$confirm(`确定删除福利[${name}]吗?`, '提示', {
+        this.$confirm(`确定删除红包福利[${name}]吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -81,7 +81,7 @@
         this.getWelfare()
       },
       pause(idx, {id, status, name}){
-        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}福利[${name}]吗?`, '提示', {
+        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}红包福利[${name}]吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -97,6 +97,7 @@
       },
     },
     created () {
+      this.changeSelect({key: 'type', value: 2})
       this.getWelfare()
     },
     destroyed () {

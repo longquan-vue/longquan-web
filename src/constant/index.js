@@ -44,6 +44,16 @@ export const defData = {
     files: [],
     admin: {}
   },
-  health: {},
+  health: {
+    dates: [],
+    dates: [],
+    ends: [],
+    name: '',
+    picUrl: healthIcon[0],
+    score: 0,
+    starts: [],
+    total: 0,
+    type: 1
+  },
   recruit: {}
 };
