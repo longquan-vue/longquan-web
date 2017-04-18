@@ -1,133 +1,132 @@
 <template>
-    <div class="contentBox">
-        <div class="contentBoxtitle">
-            <span v-if="show==1">编辑红包福利</span>
-            <span v-else>新增红包福利</span>
-            <a @click="goBack" style="float:right;"><el-button type="primary" icon="arrow-left"></el-button></a>
-        </div>
-        <div class="contentBoxCont">
-            <div style="width:80%;margin:auto;">
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                    <el-form-item label="福利名称" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="福利总量" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="福利时间" prop="name">
-                        <el-date-picker v-model="ruleForm.time" type="datetimerange" placeholder="选择时间范围">
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="所需积分" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="兑换次数" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="福利提供方" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="福利提供方链接" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="兑换规则" prop="name">
-                        <el-input type="textarea" v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="微信红包祝福语" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <div v-if="show==1">
-                        <el-form-item label="福利发布者" prop="name">
-                            <el-input v-model="ruleForm.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="发布时间" prop="name">
-                            <el-input v-model="ruleForm.name"></el-input>
-                        </el-form-item>
-                    </div>
-                    <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </div>
-        </div>
+  <div class="contentBox">
+    <div class="contentBoxtitle">
+      <span v-if="!data.edit">编辑红包福利</span>
+      <span v-if="data.edit">新增红包福利</span>
+      <a @click="go()" style="float:right;">
+        <el-button type="primary" icon="arrow-left"></el-button>
+      </a>
     </div>
+    <div class="contentBoxCont">
+      <div style="width:80%;margin:auto;">
+        <el-form :model="data" :rules="rules" ref="data" label-width="140px" class="demo-data">
+          <el-form-item label="福利名称" prop="name">
+            <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
+          </el-form-item>
+          <el-form-item label="福利数量" prop="total">
+            <el-input :value="data.total" @input="(v)=>setData({total:v})"/>
+          </el-form-item>
+          <el-form-item label="福利类型" prop="name">
+            <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
+              <el-radio :label="0">所有用户可报名</el-radio>
+              <el-radio :label="1">认证用户可报名</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="福利时间" prop="startTime">
+            <el-col :span="11">
+              <el-form-item prop="start">
+                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始日期" :value="data.startTime" @input="(v)=>setData({startTime:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
+            <el-col :span="11">
+              <el-form-item prop="end">
+                <el-date-picker type="datetime" placeholder="选择结束日期" :value="data.endTime" @input="(v)=>setData({endTime:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="所需积分" prop="score">
+            <el-input :value="data.score" @input="(v)=>setData({score:v})"/>
+          </el-form-item>
+          <el-form-item label="人均兑换次数" prop="time">
+            <el-input :value="data.time" @input="(v)=>setData({time:v})"/>
+          </el-form-item>
+          <el-form-item label="福利提供方" prop="provider">
+            <el-input :value="data.provider" @input="(v)=>setData({provider:v})"/>
+          </el-form-item>
+          <el-form-item label="福利提供方链接" prop="website">
+            <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
+          </el-form-item>
+          <el-form-item label="兑换规则" prop="rule">
+            <quill-editor ref="myTextEditor" :content="data.rule" @input="(v)=>setData({rule:v})" :config="{}"/>
+          </el-form-item>
+          <el-form-item label="微信红包祝福语" prop="rule">
+            <el-input :value="data.wishing" @input="(v)=>setData({wishing:v})"/>
+          </el-form-item>
+          <div v-if="!data.edit">
+            <el-form-item label="福利发布者" prop="admin">
+              <el-input :value="data.admin.name" readonly/>
+            </el-form-item>
+            <el-form-item label="发布时间" prop="created">
+              <el-input :value="date3Filter(data.created)" readonly/>
+            </el-form-item>
+          </div>
+          <el-form-item style="text-align: center">
+            <el-button type="primary" @click="submitForm">保存</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+  </div>
 </template>
 <script type="es6">
-    export default {
-        data() {
-            return {
-                ruleForm: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
-                },
-                rules: {
-                    name: [
-                        { required: true, message: '请输入活动名称', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    ],
-                    region: [
-                        { required: true, message: '请选择活动区域', trigger: 'change' }
-                    ],
-                    date1: [
-                        { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-                    ],
-                    date2: [
-                        { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-                    ],
-                    type: [
-                        { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-                    ],
-                    resource: [
-                        { required: true, message: '请选择活动资源', trigger: 'change' }
-                    ],
-                    desc: [
-                        { required: true, message: '请填写活动形式', trigger: 'blur' }
-                    ]
-                },
-                show:false
-            }
+  import {mapGetters, mapActions} from 'vuex'
+  import filter from '../../../filters'
+  import MyUpload from '../../../components/public/MyUpload.vue'
+  export default {
+    data() {
+      return {
+        rules: {
+          name: [
+            {required: true, message: '请输入活动名称', trigger: 'blur'},
+            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+          ],
+          region: [
+            {required: true, message: '请选择活动区域', trigger: 'change'}
+          ],
+          date1: [
+            {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
+          ],
+          date2: [
+            {type: 'date', required: true, message: '请选择时间', trigger: 'change'}
+          ],
+          type: [
+            {type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change'}
+          ],
+          resource: [
+            {required: true, message: '请选择活动资源', trigger: 'change'}
+          ],
+          desc: [
+            {required: true, message: '请填写活动形式', trigger: 'blur'}
+          ]
         },
-        computed:{
-
-        },
-        mounted: function() {
-            this.isEdit();
-        },
-        methods:{
-            goBack(){
-                this.$router.go(-1);
-            },
-            isEdit(){  // 判断是否为 编辑 或者 新增
-                let status=this.$route.query.id;
-                if (status==1){
-                    this.show=true;
-                }else {
-                    this.show=false;
-                }
-            },
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
-            },
-            handleRemove(file, fileList) {  //删除图片
-                console.log(file, fileList);
-            }
-        }
+      }
+    },
+    components: {
+      MyUpload
+    },
+    computed: {
+      ...mapGetters(['data']),
+    },
+    methods: {
+      ...filter,
+      ...mapActions(['getWelfareDetail', 'createWelfare', 'updateWelfare', 'clear', 'setData', 'go']),
+      submitForm() {
+        this.$refs.data.validate((valid) => {
+          if (valid) {
+            this.data.edit ? this.createWelfare() : this.updateWelfare();
+          } else {
+            return false;
+          }
+        })
+      },
+    },
+    created () {
+      this.setData({type: 2})
+      this.getWelfareDetail()
+    },
+    destroyed () {
+      this.clear('welfare')
     }
+  }
 </script>

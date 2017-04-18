@@ -1,9 +1,9 @@
 <style lang="less">
-  @import './activity.less';
+  @import './style.less';
 </style>
 <template>
   <div class="contentBox">
-    <div class="contentBoxtitle"><span>活动列表</span></div>
+    <div class="contentBoxtitle"><span>工会列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
         <MySelect title="活动状态" field="status" :options="{1:'报名中',2:'已结束'}" :change="change"/>

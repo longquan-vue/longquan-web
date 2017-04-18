@@ -5,18 +5,16 @@
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>活动签到列表</span>
-      <a @click="go(['activityList'])" style="float:right;">
+      <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
     </div>
     <div class="contentBoxCont">
-      <div class="btnGroup mgb20">
+      <div class="mgb20">
         <MySelect title="是否签到" field="status" :options="{0:'未签到',1:'已签到'}" :change="change"/>
         <MySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','nickname':'昵称'}" def-key="name" :change="change"/>
-      </div>
-      <div class="btn mgb20">
         <!--<el-button type="primary" @click="" icon="plus">群发站内信</el-button>-->
-        <el-button type="primary" @click="exportExl">导出EXCEL</el-button>
+        <el-button style="float: right" type="primary" @click="exportExl">导出EXCEL</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
@@ -59,6 +57,9 @@
         this.getEnter();
       },
       exportExl(){
+        if (this.list.length <= 0) {
+          return this.$alert('没有数据！', '提示', {type: 'warning'})
+        }
         const newTab = window.open('about:blank');
         this.exportEntry().then((url) => newTab.location.href = url)
       }

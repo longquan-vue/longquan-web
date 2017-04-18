@@ -15,20 +15,21 @@ import {
   getSignApi,
     getWeekSignApi
 } from '../api/userApi'
-import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi} from '../api/welfareApi'
+import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
 import {
   findActivityApi,
   findEntryListByIdApi,
   findActivityDetailApi,
   createActivityApi,
+  updateActivityApi,
   deleteActivityApi,
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
-import {findHealthApi, findHealthDetailApi} from '../api/healthApi'
+import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 import {weekFilter} from '../filters'
 // type
@@ -41,7 +42,8 @@ import {msg, alert, confirm, prompt, success, error, info, warning,
     appAlert} from '../actions'
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
-  commit(GET_DATA_LIST);
+  commit(GET_DATA_LIST, []);
+  commit(PAGE)
 };
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
@@ -50,10 +52,11 @@ const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx]
 // 获取系统配置
 const getSetting = ({commit, state}) => !state.setting.id && getSysApi().then((sys) => commit(SETTING, sys))
 // go
-const go = ({commit}, [name, id]) => new Promise((resolve, reject) => resolve(router.push({
-  name,
-  params: id ? {id} : {}
-})))
+const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) => resolve(!name ? router.back() : router.push({
+    name,
+    params: id ? {id} : {},
+    query
+  })))
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
 //清除page
@@ -147,13 +150,19 @@ const getWelfareDetail = async({commit, state}, data) => {
   const {query:{id, ticket, welfareId, used}}=state.route;
   if (welfareId) {
     commit(SET_DATA, {...await findWelfareByIdApi(welfareId), ticket, id, used});
+  } else if (state.route.params.id) {
+    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
   } else {
     commit(SET_DATA, data);
   }
 };
+//获取福利   创建福利
+const createWelfare = ({commit, state}) => createWelfareApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取福利   修改福利
+const updateWelfare = ({commit, state}) => updateWelfareApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 删除福利
 const delWelfare = ({commit, state}, [id, idx]) => delWelfareApi(id).then(() => commit(DEL_DATA, idx))
-// 删除福利
+// 暂停开启福利
 const pauseWelfare = ({commit, state}, [id, key, val]) => pauseWelfareApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取活动相关数据   活动列表
 const getActivity = async({commit, state}) => commit(GET_DATA_LIST, await findActivityApi(state.page, 0));
@@ -172,20 +181,18 @@ const getActivityDetail = async({commit, state}) => {
 };
 //获取活动相关数据  报名
 const entryActivity = ({commit, state}) => entryActivityApi(state.route.query.id).then((data) => success('报名成功！')).catch((data) => error(data.msg));
-// //获取活动相关数据   创建活动
-// const createActivity = async({commit, state}) => {
-//     createActivityApi(state.activityDetail).then(function () {
-//         this.$message.success('提交成功！');
-//         window.location.reload();
-//     }).catch(function () {
-//         this.$message.error('提交失败！');
-//     });
-// };
-//
+//获取活动相关数据   创建活动
+const createActivity = ({commit, state}) => createActivityApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取活动相关数据   修改活动
+const updateActivity = ({commit, state}) => updateActivityApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取活动相关数据   删除活动
 const deleteActivity = async({commit}, [id, idx]) => deleteActivityApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx)));
 //获取健身项目相关数据   列表
 const getHealth = async({commit, state}) => commit(GET_DATA_LIST, await findHealthApi(state.page));
+//获取健身项目报名列表
+const getHealthEnter = async({commit, state}) => commit(GET_DATA_LIST, await findHealthEnterApi(state.route.params.id, state.page));
+//导出健身项目报名列表
+const exportHealthEntry = ({commit, state}) => exportHealthEntryApi(state.route.params.id, state.page);
 //获取健身项目相关数据   详情
 const gethealthDetail = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -195,6 +202,14 @@ const gethealthDetail = async({commit, state}) => {
     commit(SET_DATA, {edit: false, ...await findHealthDetailApi(id)});
   }
 };
+//获取健身项目相关数据   创建健身项目
+const createHealth = ({commit, state}) => createHealthApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取健身项目相关数据   修改健身项目
+const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+//获取健身项目相关数据   删除健身项目
+const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => commit(DEL_DATA, idx))
+//获取健身项目相关数据   暂停开启健身项目
+const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取招聘信息相关数据  列表
 const getRecruit = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitApi(state.page));
 //删除招聘信息
@@ -250,12 +265,16 @@ export default {
   // convertWelfare,  //兑换福利
   getActivity,     //获取工会活动
   getActivityDetail,  //获取工会活动详情
+  updateActivity,//修改工会活动
+  createActivity,//创建工会活动
   entryActivity,  //报名工会活动
   getRecruit,  //获取招聘信息列表
   getRecruitDetail,  // 获取招聘信息详情
   entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表
+  getHealthEnter,   //获取健身中心报名列表
   gethealthDetail, //获取健身项目详情
+  exportHealthEntry, //导出健身中心报名列表
   loginOut,// 登出
   login,// 登录
   delFile,//删除文件
@@ -271,4 +290,10 @@ export default {
   delWelfare,// 删除福利
   pauseWelfare,// 暂停开启福利
   delRecruit,// 删除招聘信息
+  createHealth,//创建健身项目
+  updateHealth,//修改健身项目
+  createWelfare,//创建福利
+  updateWelfare,//修改福利
+  delHealth,// 删除健身活动
+  pauseHealth,//暂停开启健身项目
 }

@@ -83,9 +83,8 @@
               <el-input :value="date3Filter(data.created)" readonly></el-input>
             </el-form-item>
           </div>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm()">立即创建</el-button>
-            <el-button @click="resetForm()">重置</el-button>
+          <el-form-item style="text-align: center">
+            <el-button type="primary" @click="submitForm">保存</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -127,11 +126,11 @@
     },
     methods: {
       ...filter,
-      ...mapActions(['getActivityDetail', 'setList', 'clear', 'setData', 'go']),
+      ...mapActions(['getActivityDetail', 'createActivity', 'updateActivity', 'setList', 'clear', 'setData', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            this.createActivity();
+            this.data.edit ? this.createActivity() : this.updateActivity();
           } else {
             this.$message.error('*号字段必须填写');
             return false;

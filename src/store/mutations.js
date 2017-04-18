@@ -79,7 +79,7 @@ export default {
       }
     },
     [PAGE] (state, page) {
-      state.page = page ? {...state.page, ...page} : defData.page;
+      state.page = page ? {...state.page, ...page} : {...defData.page, sort: [], order: [], filed: [], keyWord: []};
     },
     [CHANE_SELECT](state, {key, value}){
       const i = state.page.filed.indexOf(key);

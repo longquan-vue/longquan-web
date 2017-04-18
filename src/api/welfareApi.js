@@ -7,7 +7,7 @@ export const welfareApi = (data, del = 0) => request({
   data
 });
 //创建福利
-export const createApi = (data) => request({
+export const createWelfareApi = (data) => request({
   url: `${BASE_PATH}/create`,
   data
 });
@@ -21,8 +21,7 @@ export const convertApi = (id) => request({
   url: `${BASE_PATH}/convert/${id}`,
 });
 //修改福利
-export const updateApi = (data) => request({
-  method: "put",
+export const updateWelfareApi = (data) => request({
   url: `${BASE_PATH}/update`,
   data
 });

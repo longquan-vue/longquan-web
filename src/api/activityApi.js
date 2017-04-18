@@ -23,8 +23,7 @@ export const findEntryListByIdApi = (id, data) => request({
   data
 });
 //修改活动
-export const updateApi = (data) => request({
-  method: "put",
+export const updateActivityApi = (data) => request({
   url: `${BASE_PATH}/update`,
   data
 });
