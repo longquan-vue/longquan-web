@@ -40,6 +40,7 @@ import {msg, alert, confirm, prompt, success, error, info, warning} from '../act
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
   commit(GET_DATA_LIST, []);
+  commit(PAGE)
 };
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);

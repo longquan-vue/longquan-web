@@ -98,7 +98,7 @@
       this.getWelfare()
     },
     destroyed () {
-      this.clear('activity')
+      this.clear('welfare')
     }
   }
 </script>
