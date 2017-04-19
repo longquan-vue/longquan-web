@@ -19,8 +19,8 @@
           <MyColumn prop="address" label="公司地址" width="120"/>
           <MyColumn prop="num" label="招聘人数" width="120"/>
           <MyColumn prop="pay" label="薪资待遇" width="120"/>
-          <MyColumn prop="linkmans" label="联系人" width="120"/>
-          <MyColumn prop="phones" label="联系电话" width="120"/>
+          <MyColumn prop="linkmans" label="联系人" :formatter="({linkmans})=>linkmans.join('，')" width="120"/>
+          <MyColumn prop="phones" label="联系电话" :formatter="({phones})=>phones.join('，')" width="120"/>
           <MyColumn prop="claim" label="招聘要求" width="120"/>
           <MyColumn prop="treatment" label="福利待遇" width="120"/>
           <MyColumn prop="depatrment" label="发布机关" width="120"/>
@@ -28,7 +28,7 @@
           <MyColumn label="操作" width="160">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['recruitEdit', scope.row.id])">编辑</el-button>
-              <el-button type="text" size="small" @click="go(['recruitEdit', scope.row.id])">报名意向</el-button>
+              <el-button type="text" size="small" @click="go(['recruitEnter', scope.row.id,{name:scope.row.name}])">报名意向</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>

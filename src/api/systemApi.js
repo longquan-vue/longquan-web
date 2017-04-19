@@ -11,7 +11,7 @@ export const getSysApi = () => request({method: 'get', url: `${BASE_PATH}/settin
 // 获取服务号自定义菜单
 export const getFwhMenuApi = () => request({method: 'get', url: `/wechat/fwMenu`})
 // 创建服务号自定义菜单
-export const createFwhMenuApi = () => request({method: 'post', url: `/wechat/fwMenu`})
+export const createFwhMenuApi = (data) => request({method: 'post', url: `/wechat/fwMenu`, data, options: {headers: {'Content-Type': 'text/plain'}}})
 // 删除服务号自定义菜单
 export const delFwhMenuApi = () => request({method: 'delete', url: `/wechat/fwMenu`})
 

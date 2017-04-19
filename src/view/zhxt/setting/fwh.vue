@@ -46,15 +46,28 @@
         </el-form-item>
       </el-form>
     </div>
-    <div v-if="tab == '3'" class="fwh_menu">
-      <div v-for="item in menu">
-        <div class="name">{{item.name}}</div>
-        <div class="sub_btn" v-for="button in item.sub_button">
-          <span class="name">{{button.name}}</span>
-          <span>{{button.type}}</span>
-          <span>{{button.url}}</span>
-        </div>
-      </div>
+    <div v-for="item in menu.button" v-if="tab == '3'" class="fwh_menu">
+      <el-row>
+        <el-col :span="3" class="menu_title">一级菜单：</el-col>
+        <el-col :span="21">
+          <el-input v-model="item.name"/>
+        </el-col>
+      </el-row>
+      <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
+        <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
+        <el-col class="sub_button" :span="5">
+          <el-input v-model="button.name"/>
+        </el-col>
+        <el-col class="sub_button" :span="4">
+          <el-select v-model="button.type">
+            <el-option label="页面" value="view"/>
+            <el-option label="事件" value="click" disabled/>
+          </el-select>
+        </el-col>
+        <el-col class="sub_button" :span="11">
+          <el-input v-model="button.url"/>
+        </el-col>
+      </el-row>
     </div>
     <div style="text-align: center">
       <el-button type="primary" @click="submitForm">提交</el-button>
@@ -64,12 +77,12 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
-  import {getFwhMenuApi} from '../../../api/systemApi'
+  import {getFwhMenuApi,delFwhMenuApi,createFwhMenuApi} from '../../../api/systemApi'
   export default{
     data(){
       return {
         tab: '1',
-        menu: []
+        menu: {}
       }
     },
     computed: {
@@ -78,7 +91,13 @@
     methods: {
       ...mapActions(['getSetting', 'saveSys', 'changeSys', 'go', 'upload']),
       submitForm() {
-        this.$refs.setting.validate((valid) => valid ? this.saveSys() : false);
+          if(this.tab==3){
+            this.$confirm('是否需要设置服务号菜单?', '提示', {
+              type: 'warning'
+            }).then(() => delFwhMenuApi().then(()=>createFwhMenuApi(this.menu).then(()=>this.$alert('设置成功！','提示',{type:'success'})).catch(()=>this.$alert('设置失败！','提示',{type:'error'}))))
+          }else{
+            this.$refs.setting.validate((valid) => valid ? this.saveSys() : false)
+          }
       },
       changeType(){
         this.$router.replace({name: 'fwhSetting', query: {tab: this.tab}})
@@ -104,10 +123,7 @@
     created () {
       this.tab = this.$route.query.tab || '1'
       this.getSetting();
-      getFwhMenuApi().catch(({menu:{button}}) => {
-        this.menu = button || [];
-        console.log(this.menu)
-      });
+      getFwhMenuApi().catch(({menu}) => this.menu = menu);
     },
   }
 </script>

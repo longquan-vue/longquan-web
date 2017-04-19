@@ -27,7 +27,7 @@ import {
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi,createRecruitApi, updateRecruitApi} from '../api/recruitApi'
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi,createRecruitApi, updateRecruitApi,exportRecruitEntryApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
@@ -219,6 +219,8 @@ const createRecruit = ({commit, state}) => createRecruitApi(state.data).then(() 
 const updateRecruit = ({commit, state}) => updateRecruitApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取招聘信息相关数据  报名列表
 const getRecruitSigin = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitEntryListByIdApi(state.route.params.id,state.page));
+//获取招聘信息相关数据  导出报名列表
+const exportRecruitEntry = ({commit, state}) =>exportRecruitEntryApi(state.route.params.id,state.page)
 //删除招聘信息
 const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_LIST, idx))
 //获取招聘信息相关数据   招聘详情
@@ -245,7 +247,7 @@ const delList = ({commit, state}, [key, idx]) => commit(DEL_LIST, [key, idx])
 // 修改系统设置
 const changeSys = ({commit, state}, data) => commit(SETTING, data)
 // 保存系统设置
-const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！'))
+const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！')).catch(()=>error('修改失败！'))
 export default {
   getMineWelfare,
   getUser,
@@ -280,6 +282,7 @@ export default {
   // entryActivity,  //报名工会活动
   getRecruit,  //获取招聘信息列表
   getRecruitSigin,  ////获取招聘报名列表
+  exportRecruitEntry,  ////导出招聘报名列表
   getRecruitDetail,  // 获取招聘信息详情
   // entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表

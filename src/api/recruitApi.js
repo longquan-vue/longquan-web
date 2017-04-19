@@ -22,6 +22,11 @@ export const findRecruitEntryListByIdApi = (id,data) => request({
     url: `${BASE_PATH}/entryList/${id}`,
     data
 });
+//查询报名列表
+export const exportRecruitEntryApi = (id,data) => request({
+    url: `${BASE_PATH}/export/${id}`,
+    data
+});
 //修改招聘
 export const updateRecruitApi = (data) => request({
     url: `${BASE_PATH}/update`,
