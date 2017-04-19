@@ -59,17 +59,19 @@ export default {
       }
     },
     [GET_DATA_LIST] (state, list) {   //获取列表
-      if (list) {
-        if (state.page.series) {
-          state.list = [...state.list, ...list.list];
-        } else {
-          state.list = list.list;
+        if (list&&list.pages) {
+            if (state.page.series) {
+                state.list = [...state.list, ...list.list];
+            } else {
+                state.list = list.list;
+            }
+            delete list.list;
+            state.page = {...state.page, ...list}
+        } else if(list){
+            state.list = [...state.list, ...list];
+        }else {
+            state.list = []
         }
-        delete list.list;
-        state.page = {...state.page, ...list}
-      } else {
-        state.list = []
-      }
     },
     [DEL_DATA] (state, idx) {   //删除数据
       if (state.list[idx]) {

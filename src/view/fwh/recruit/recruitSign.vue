@@ -51,6 +51,11 @@
             <a @click="subMit()" class="baoming">提交</a>
             <p style="font-size:0.32rem;color:#999999;text-align: center;">提示：请认真填写每项信息，方便招聘人员了解你！</p>
         </div>
+
+
+
+        <myImgDialog @on-result-change="onResultChange" :img="img" :bgImg="bgImg" :def="def" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
+
     </div>
 </template>
 
@@ -61,6 +66,8 @@
     import appHead from '../../../components/public/apphead/Apphead.vue'
     import { XInput, Group, XButton, Cell ,XSwitch} from 'vux'
     import { required, minLength, between ,maxLength} from 'vuelidate/lib/validators'
+    import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
+    import {entryRecruitApi} from '../../../api/recruitApi'
     export default{
         data(){
             return{
@@ -70,7 +77,14 @@
                 address:'',
                 sex:1,
                 merrige:1,
-                job:2
+                job:2,
+                isshow:false,//控制弹窗
+                img:'',//控制弹窗图片  如果图片存在的话就没有背景，如果图片不存在就有背景
+                title:'提示',   //控制弹窗标题
+                content:'兑换成功',  //控制弹窗内容
+                btns: {btn:'确定'},
+                bgImg:'',
+                def:false
             }
         },
         validations: {
@@ -89,12 +103,31 @@
             },
         },
         components:{
-            appHead, XInput, XButton, Group, Cell ,XSwitch
+            appHead, XInput, XButton, Group, Cell ,XSwitch ,myImgDialog
         },
         computed: {...mapGetters(['login','list'])},
         methods:{
-            ...mapActions(['getMineMsg','clear','isEnd','goto','entryRecruit']),
+            ...mapActions(['getMineMsg','clear','isEnd','goto']),
             ...filter,
+            isShow(val){
+                if (val==1){
+                    this.def=false;
+                    this.img = '../../../../static/wx/succ.png';
+                    this.content='提交成功';
+                    this.btns={btn:'确定'};
+                    this.isshow=true;
+                }else {
+                    this.def=true;
+                    this.img = '../../../../static/wx/default.png';
+                    this.content='您已经报过名啦';
+                    this.btns={btn:'确定'};
+                    this.isshow=true;
+                }
+
+            },
+            onResultChange(val){
+                this.isshow=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+            },
             subMit(){
                 console.log(this.$v);
                 let data = {
@@ -107,7 +140,11 @@
                if(this.$v.$invalid){
                   this.$v.$touch();
                }else {
-                   this.entryRecruit(data);
+                   entryRecruitApi(this.$store.state.route.query.id, data).then(() => {
+                       this.isShow(1);
+                   }).catch((data) => {
+                       this.isShow(2);
+                   });
                }
             }
         },

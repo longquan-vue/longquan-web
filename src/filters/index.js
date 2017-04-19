@@ -22,10 +22,10 @@ export const date6Filter = (time) => dateFilter(time, 'MM-DD HH:mm');
 export const date7Filter = (time) => dateFilter(time, 'YYYY年MM月');
 export const date8Filter = ({recording}) => dateFilter(recording, 'YYYY-MM-DD HH:mm')
 export const ageFilter = (age) => age ? moment().subtract(age - 0, 'years').format('x') - 0 : null;
+
 //是否结束、开始过滤器
-export const isEnd = (endTime) => {
-  return new Date().getTime() > endTime;
-};
+export const isEnd = (endTime) => new Date().getTime() > endTime;
+export const isStart = (startTime) => new Date().getTime() < startTime;
 //单人，双人，多人项目
 export const itemFilter = (item) => ['多人项目', '单人项目', '双人项目', '多人项目'][item] || '多人项目';
 export const spotType = ({type}) => ['多人项目', '单人项目', '双人项目', '多人项目'][type] || '多人项目';
@@ -65,6 +65,7 @@ export default {
   auditFilter,
   group,
   isEnd,
+  isStart,
   ageFilter,
   freezeFilter,
   itemFilter,
@@ -72,6 +73,6 @@ export default {
   entryType,
   stateType,
   userFilter,
-  signFilter
+  signFilter,
 }
 

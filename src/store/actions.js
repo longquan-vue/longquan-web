@@ -12,7 +12,8 @@ import {
   deleteApi,
   delUserApi,
   updateUserApi,
-  getSignApi
+  getSignApi,
+    getWeekSignApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
@@ -30,13 +31,15 @@ import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi,cre
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
+import {weekFilter} from '../filters'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
 import {defData, CREATE} from '../constant'
 import router from '../router'
 // action
-import {msg, alert, confirm, prompt, success, error, info, warning} from '../actions'
+import {msg, alert, confirm, prompt, success, error, info, warning,
+    appAlert} from '../actions'
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
   commit(GET_DATA_LIST, []);
@@ -101,7 +104,16 @@ const loginOut = ({commit, state}) => loginOutApi().then(() => go({
   state
 }, ['login']).then(() => commit(GET_MINE, {})));
 //签到
-const singin = async({commit, state}) => state.login.isSign ? alert('签到', '您已签到!') : await signApi();
+const singin = ({commit, state},obj) => {
+    state.login.isSign ? appAlert(obj,'您已签到') : signApi().then((res)=>{
+        appAlert(obj,'签到成功');
+        commit(GET_MINE,{...state.login,isSign:true});
+        commit(CHANGE_LIST,[state.list.length+'', res]);
+    }).catch(()=>appAlert(obj,'签到失败，请重试'));
+};
+// 获取周签到记录
+const getWeekSign = ({commit, state}) => getWeekSignApi().then((data) => commit(GET_DATA_LIST, data))
+
 // 获取签到记录
 const getSign = ({commit, state}, id) => getSignApi(id, state.page).then((data) => commit(GET_DATA_LIST, data))
 //获取我的福利
@@ -125,7 +137,7 @@ const getMineActivity = ({commit, state}) => getMine({
   state
 }).then(async() => commit(GET_DATA_LIST, await mineActivityApi(1, state.page)));
 //获取我的健身项目
-const getMineHealth = ({commit, state}) => getMine({
+const getMineHealth = ({commit, state}) =>state.page.page <= state.page.pages && getMine({
   commit,
   state
 }).then(async() => commit(GET_DATA_LIST, await mineHealthApi(1, state.page)));
@@ -253,6 +265,7 @@ export default {
   getMineHealth,  //获取我的健身项目
   getWelfare,    //获取福利列表
   singin,      //签到
+  getWeekSign, //签到自然周
   // convertWelfare,  //兑换福利
   getActivity,     //获取工会活动
   getActivityDetail,  //获取工会活动详情
