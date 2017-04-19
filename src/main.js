@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import {sync} from 'vuex-router-sync'
-import Mint from 'mint-ui'
-import 'mint-ui/lib/style.css';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import App from './App'
@@ -13,12 +11,12 @@ import VueQuillEditor from 'vue-quill-editor'
 import Vuelidate from 'vuelidate'
 import Socket from './socket/index'
 import VueCookie from 'vue-cookie'
+import {AlertPlugin} from 'vux'
 
 sync(store, router)
 
 Vue.use(ElementUI)
-
-Vue.use(Mint)
+Vue.use(AlertPlugin);
 Vue.use(animate)
 Vue.use(VueQuillEditor)
 Vue.use(Vuelidate)

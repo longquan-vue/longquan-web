@@ -67,7 +67,7 @@
             ...mapActions(['clear', 'getMine', 'singin', 'getWeekSign', 'goto']),
             ...filter,
             sign(){
-                this.singin(this);
+                this.singin(this.$vux);
             },
             weekFilter(){
                 return new Array(7).fill({}).map((val = {}, index) => {

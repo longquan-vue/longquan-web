@@ -7,12 +7,13 @@
     <div class="contentBoxCont">
       <div class="mgb20">
         <MySelect title="招聘状态" field="status" :options="{1:'报名中',2:'已结束'}" :change="change"/>
-        <MySelectInput :options="{'name':'活动名称','company':'用人单位','address':'公司地址'}" def-key="name" :change="change"/>
-        <el-button style="float:right;" type="primary" @click="go(['activityEdit','create'])" icon="plus">添加招聘信息</el-button>
+        <MySelectInput :options="{'job':'招聘职位','company':'用人单位','address':'公司地址'}" def-key="job" :change="change"/>
+        <el-button style="float:right;" type="primary" @click="go(['recruitEdit','create'])" icon="plus">添加招聘信息</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" label="编号"/>
+          <MyColumn prop="name" label="标题" width="120"/>
           <MyColumn prop="job" label="招聘职位" width="120"/>
           <MyColumn prop="company" label="用人单位" width="120"/>
           <MyColumn prop="address" label="公司地址" width="120"/>
@@ -24,9 +25,10 @@
           <MyColumn prop="treatment" label="福利待遇" width="120"/>
           <MyColumn prop="depatrment" label="发布机关" width="120"/>
           <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="120"/>
-          <MyColumn label="操作" width="140">
+          <MyColumn label="操作" width="160">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go('recruitEdit', scope.row.id)">编辑</el-button>
+              <el-button type="text" size="small" @click="go(['recruitEdit', scope.row.id])">编辑</el-button>
+              <el-button type="text" size="small" @click="go(['recruitEdit', scope.row.id])">报名意向</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>
