@@ -192,24 +192,19 @@
             },
             async convertWelfare(index){     //兑换福利
                 const id=this.$store.state.list[index].id;
-                // const ticket=this.$store.state.list[index].ticket;
-                // const used=this.$store.state.list[index].used;
-                // const welfareId=this.$store.state.list[index].welfareId;
-                // console.log("id",id);
-                // console.log("ticket",ticket);
-                // console.log("used",used);
-                // console.log("welfareId",welfareId);
-                this.isShow(2);
-
-                // await convertApi(id).then(()=>{
-                //     this.popupOpen=true;
-                // }).catch((data)=>{
-                //     Message({
-                //         message: data.msg,
-                //         type: 'error',
-                //         duration:1000
-                //     });
-                // });
+                if (this.$store.state.login.score<this.$store.state.list[index].score){  //如果当前积分数 小于 福利所需积分数
+                    this.isShow(1);
+                }else {
+                    await convertApi(id).then(()=>{
+                        this.isShow(2);
+                    }).catch((data)=>{
+                        Message({
+                            message: data.msg,
+                            type: 'error',
+                            duration:1000
+                        });
+                    });
+                }
             }
         },
         mounted(){

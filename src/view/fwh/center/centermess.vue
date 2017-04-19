@@ -82,17 +82,18 @@
             load4 () {
                 setTimeout(async() => {
                     await this.changePage();
-                    await this.getMineMsg();
-                    this.$nextTick(() => {
-                        this.$refs.scroller.reset()
-                    });
-                    setTimeout(() => {
-                        this.demo4Value.pullupStatus = 'default';
-                    }, 10);
                     if (this.$store.state.page.page>this.$store.state.page.pages){
-                      setTimeout(() => {
-                        this.$refs.scroller.disablePullup();
-                      }, 100)
+                        setTimeout(() => {
+                            this.$refs.scroller.disablePullup();
+                        }, 100)
+                    }else {
+                        await this.getMineMsg();
+                        this.$nextTick(() => {
+                            this.$refs.scroller.reset()
+                        });
+                        setTimeout(() => {
+                            this.demo4Value.pullupStatus = 'default';
+                        }, 10);
                     }
                 }, 2000)
             }
