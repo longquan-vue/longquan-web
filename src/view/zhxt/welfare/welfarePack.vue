@@ -11,7 +11,7 @@
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
         <span style="float:right;">
-          <el-button type="primary" icon="search" @click="">余额查询充值</el-button>
+          <a href="https://pay.weixin.qq.com/index.php/core/cashmanage/fund_withdraw" style="padding-right: 10px" target="_blank"><el-button type="primary" icon="search">余额查询充值</el-button></a>
           <el-button style="float:right;" type="primary" @click="go(['welfarePackEdit','create'])" icon="plus">添加红包福利</el-button>
         </span>
       </div>

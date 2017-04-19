@@ -26,7 +26,7 @@ import {
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi} from '../api/recruitApi'
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi,createRecruitApi,updateRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
@@ -200,6 +200,10 @@ const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => co
 const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取招聘信息相关数据  列表
 const getRecruit = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitApi(state.page));
+//获取招聘信息相关数据  创建
+const createRecruit = ({commit, state}) => createRecruitApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+//获取招聘信息相关数据  修改
+const updateRecruit = ({commit, state}) => updateRecruitApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //删除招聘信息
 const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_LIST, idx))
 //获取招聘信息相关数据   招聘详情
@@ -208,7 +212,7 @@ const getRecruitDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.recruit});
   } else {
-    commit(SET_DATA, await findRecruitDetailApi(id));
+    commit(SET_DATA, {...await findRecruitDetailApi(id),edit:false});
   }
 };
 //获取招聘信息相关数据  报名
@@ -283,4 +287,6 @@ export default {
   updateWelfare,//修改福利
   delHealth,// 删除健身活动
   pauseHealth,//暂停开启健身项目
+  createRecruit,//创建招聘信息
+  updateRecruit,//修改招聘信息
 }

@@ -23,8 +23,7 @@ export const findEntryListByIdApi = (id,data) => request({
     data
 });
 //修改招聘
-export const updateApi = (data) => request({
-    method: "put",
+export const updateRecruitApi = (data) => request({
     url: `${BASE_PATH}/update`,
     data
 });
