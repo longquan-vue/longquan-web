@@ -1,6 +1,17 @@
 //操纵数据，修改
 import {
-  SET_DATA, GET_DATA_LIST, DEL_DATA, GET_MINE, PAGE, CHANE_SELECT, LOADING, DEL_LIST, SETTING, SET_LIST_VAL, CHANGE_LIST
+    SET_DATA,
+    GET_DATA_LIST,
+    DEL_DATA,
+    GET_MINE,
+    PAGE,
+    CHANE_SELECT,
+    LOADING,
+    DEL_LIST,
+    SETTING,
+    SET_LIST_VAL,
+    CHANGE_LIST,
+    SET_LOGIN
 } from './mutation-types'
 import {defData} from '../constant'
 export default {
@@ -25,6 +36,9 @@ export default {
     [SET_DATA] (state, data) { // 修改值
       state.data = data ? {...state.data, ...data} : {};
     },
+      [SET_LOGIN] (state, login) { // 修改值
+          state.login = login ? {...state.login, ...login} : {};
+      },
     [SET_LIST_VAL](state, [key, val]){
       const keys = key.split('.')
       switch (keys.length) {

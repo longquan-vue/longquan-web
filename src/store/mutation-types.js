@@ -4,6 +4,7 @@ export const CHANE_SELECT = 'CHANE_SELECT'
 export const LOADING = 'LOADING'
 // login
 export const GET_MINE = 'GET_MINE'
+export const SET_LOGIN = 'SET_LOGIN'
 // data
 export const SET_DATA = 'SET_DATA'
 export const GET_DATA_LIST = 'GET_DATA_LIST'

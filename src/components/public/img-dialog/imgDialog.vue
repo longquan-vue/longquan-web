@@ -54,15 +54,15 @@
                     </div>
                 </div>
 
-                <img :src="bgImg" style="width:100%;">
-                <div class="bg-content">
+                <img :src="bgImg" style="width:100%;" v-if="!img">
+                <div class="bg-content" v-if="!img">
                     <p>{{content}}</p>
                     <div class="dialog-btn" v-if="btns.btn">
                         <a @click="close(btns.action)" >{{btns.btn}}</a>
                     </div>
                     <div class="dialog-btn2" v-if="!btns.btn">
-                        <a @click="close(btns.action)">取消</a>
-                        <a @click="cancle(btns.cancelAction)">确定</a>
+                        <a @click="close(btns.action)">{{btns.btn1}}</a>
+                        <a @click="cancle(btns.cancelAction)">{{btns.btn2}}</a>
                     </div>
                 </div>
             </div>
