@@ -27,7 +27,7 @@ import {
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, createRecruitApi, updateRecruitApi} from '../api/recruitApi'
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi,createRecruitApi, updateRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
@@ -44,7 +44,7 @@ import {
 } from '../actions'
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
-  commit(GET_DATA_LIST, []);
+  commit(GET_DATA_LIST, null);
   commit(PAGE)
 };
 //上传文件
@@ -181,7 +181,7 @@ const getActivityDetail = async({commit, state}) => {
   }
 };
 //获取活动相关数据  报名
-const entryActivity = ({commit, state}) => entryActivityApi(state.route.query.id).then((data) => success('报名成功！')).catch((data) => error(data.msg));
+// const entryActivity = ({commit, state}) => entryActivityApi(state.route.params.id).then((data) => success('报名成功！')).catch((data) => error(data.msg));
 //获取活动相关数据   创建活动
 const createActivity = ({commit, state}) => createActivityApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 //获取活动相关数据   修改活动
@@ -211,12 +211,14 @@ const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() =>
 const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => commit(DEL_DATA, idx))
 //获取健身项目相关数据   暂停开启健身项目
 const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
-//获取招聘信息相关数据  列表
+//获取招聘信息相关数据  招聘列表
 const getRecruit = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitApi(state.page));
 //获取招聘信息相关数据  创建
 const createRecruit = ({commit, state}) => createRecruitApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 //获取招聘信息相关数据  修改
 const updateRecruit = ({commit, state}) => updateRecruitApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+//获取招聘信息相关数据  报名列表
+const getRecruitSigin = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitEntryListByIdApi(state.route.params.id,state.page));
 //删除招聘信息
 const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_LIST, idx))
 //获取招聘信息相关数据   招聘详情
@@ -229,7 +231,7 @@ const getRecruitDetail = async({commit, state}) => {
   }
 };
 //获取招聘信息相关数据  报名
-const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.query.id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
+// const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.query.id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
 // 设置值
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置数组
@@ -272,10 +274,11 @@ export default {
   getActivityDetail,  //获取工会活动详情
   updateActivity,//修改工会活动
   createActivity,//创建工会活动
-  entryActivity,  //报名工会活动
+  // entryActivity,  //报名工会活动
   getRecruit,  //获取招聘信息列表
+  getRecruitSigin,  ////获取招聘报名列表
   getRecruitDetail,  // 获取招聘信息详情
-  entryRecruit,  //报名招聘
+  // entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表
   getHealthEnter,   //获取健身中心报名列表
   gethealthDetail, //获取健身项目详情

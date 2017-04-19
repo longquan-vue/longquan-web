@@ -18,7 +18,7 @@ export const createRecruitApi = (data) => request({
     data
 });
 //查询报名列表
-export const findEntryListByIdApi = (id,data) => request({
+export const findRecruitEntryListByIdApi = (id,data) => request({
     url: `${BASE_PATH}/entryList/${id}`,
     data
 });
