@@ -51,7 +51,7 @@
       }
     },
     methods: {
-      ...mapActions(['getSign', 'clear', 'changeSelect', 'delMethod', 'go']),
+      ...mapActions(['getSign', 'clear', 'changeSelect', 'delMethod','changePage', 'go']),
       ...filter,
       change(key, value){
         this.changeSelect({key, value});

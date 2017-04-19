@@ -59,7 +59,7 @@ export default {
       }
     },
     [GET_DATA_LIST] (state, list) {   //获取列表
-        if (list&&list.pages) {
+        if (list&&list.pageSize) {
             if (state.page.series) {
                 state.list = [...state.list, ...list.list];
             } else {

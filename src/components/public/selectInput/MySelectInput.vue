@@ -14,7 +14,8 @@
     data(){
       return {
         key: this.defKey,
-        val: this.defVal
+        val: this.defVal,
+        old: this.defKey
       }
     },
     props: {
@@ -36,8 +37,10 @@
     },
     methods: {
       changeKey(){
-        if (this.val) {
-          this.change && this.change(this.key, this.val);
+        if (this.val && this.change) {
+          this.change(this.old, null);
+          this.change(this.key, this.val);
+          this.old = this.key;
         }
       },
       changed(v){
