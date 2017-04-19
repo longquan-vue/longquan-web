@@ -41,14 +41,17 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-          <el-row v-for="(linkman,idx) in data.linkmans" :key="idx">
+          <el-row v-for="(item,idx) in linkmanList" :key="idx" style="margin-bottom: 0">
             <el-form-item label="联系人" prop="linkman">
-              <el-input :value="linkman" @input="(v)=>setData({linkmans:v})"/>
+              <el-input :value="item.linkman" @input="(v)=>setListVal(['linkmans.'+idx,v])"/>
             </el-form-item>
             <el-form-item label="联系电话" prop="phone">
-              <el-input :value="data.phones[idx]" @input="(v)=>setData({phones:v})"/>
+              <el-input :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
             </el-form-item>
           </el-row>
+          <el-form-item label="" prop="phone">
+            <img src="/static/zhxt/add.png" alt="add" style="width: 36px;height: 36px;cursor: pointer" @click="addLinkman">
+          </el-form-item>
           <el-form-item label="招聘要求" prop="claim">
             <quill-editor :content="data.claim" @input="(v)=>setData({claim:v})" :config="{}"/>
           </el-form-item>
@@ -96,6 +99,7 @@
             {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
           ],
         },
+        linkmanList: []
       }
     },
     components: {
@@ -104,9 +108,14 @@
     computed: {
       ...mapGetters(['data']),
     },
+    watch: {
+      data(){
+        this.setLinkmanList()
+      }
+    },
     methods: {
       ...filter,
-      ...mapActions(['getRecruitDetail', 'createRecruit', 'updateRecruit', 'setList', 'clear', 'setData', 'go']),
+      ...mapActions(['getRecruitDetail', 'createRecruit', 'updateRecruit', 'setListVal', 'clear', 'setData', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
@@ -117,9 +126,14 @@
           }
         });
       },
-      resetForm() {
-        this.$refs.ruleForm.resetFields();
+      setLinkmanList(){
+        this.linkmanList = this.data && this.data.linkmans ? this.data.linkmans.map((linkman, idx) => ({linkman, phone: this.data.phones[idx]})) : []
       },
+      addLinkman(){
+        this.setListVal([`linkmans.${this.data.linkmans.length}`, ''])
+        this.setListVal([`phones.${this.data.phones.length}`, ''])
+        this.setLinkmanList();
+      }
     },
     created () {
       this.getRecruitDetail()
