@@ -33,7 +33,7 @@ import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntr
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 import {weekFilter} from '../filters'
 // type
-import {SET_LIST_VAL, DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
+import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
 import {defData, CREATE} from '../constant'
 import router from '../router'
@@ -234,6 +234,8 @@ const getRecruitDetail = async({commit, state}) => {
 // const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.query.id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
 // 设置值
 const setData = ({commit}, data) => commit(SET_DATA, data)
+// 设置LOGIN
+const setLogin = ({commit}, login) => commit(SET_LOGIN, login)
 // 设置数组
 const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
 // 设置数组
@@ -253,6 +255,7 @@ export default {
   clearPage,  // 清除page
   getMine,//获取登录信息
   setData,// 设置对象
+  setLogin,// 设置login
   setList, // 设置数组
   delList, //删除数组
   setListVal,//设置数组值
