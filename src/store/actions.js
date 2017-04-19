@@ -13,7 +13,7 @@ import {
   delUserApi,
   updateUserApi,
   getSignApi,
-    getWeekSignApi
+  getWeekSignApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
@@ -27,7 +27,7 @@ import {
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi,createRecruitApi,updateRecruitApi} from '../api/recruitApi'
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, createRecruitApi, updateRecruitApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
@@ -38,8 +38,10 @@ import {SET_LIST_VAL, DEL_DATA, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_S
 import {defData, CREATE} from '../constant'
 import router from '../router'
 // action
-import {msg, alert, confirm, prompt, success, error, info, warning,
-    appAlert} from '../actions'
+import {
+  msg, alert, confirm, prompt, success, error, info, warning,
+  appAlert
+} from '../actions'
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
   commit(GET_DATA_LIST, []);
@@ -104,13 +106,12 @@ const loginOut = ({commit, state}) => loginOutApi().then(() => go({
   state
 }, ['login']).then(() => commit(GET_MINE, {})));
 //签到
-const singin = ({commit, state},obj) => {
-    state.login.isSign ? appAlert(obj,'您已签到') : signApi().then((res)=>{
-        appAlert(obj,'签到成功');
-        commit(GET_MINE,{...state.login,isSign:true});
-        commit(CHANGE_LIST,[state.list.length+'', res]);
-    }).catch(()=>appAlert(obj,'签到失败，请重试'));
-};
+const singin = ({commit, state}, vux) => state.login.isSign ? appAlert(vux, '您已签到') : signApi().then((res) => {
+    appAlert(vux, '签到成功');
+    commit(GET_MINE, {...state.login, isSign: true});
+    commit(CHANGE_LIST, [state.list.length + '', res]);
+  }).catch(() => appAlert(vux, '签到失败，请重试'));
+
 // 获取周签到记录
 const getWeekSign = ({commit, state}) => getWeekSignApi().then((data) => commit(GET_DATA_LIST, data))
 
@@ -137,7 +138,7 @@ const getMineActivity = ({commit, state}) => getMine({
   state
 }).then(async() => commit(GET_DATA_LIST, await mineActivityApi(1, state.page)));
 //获取我的健身项目
-const getMineHealth = ({commit, state}) =>state.page.page <= state.page.pages && getMine({
+const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages && getMine({
   commit,
   state
 }).then(async() => commit(GET_DATA_LIST, await mineHealthApi(1, state.page)));
@@ -224,7 +225,7 @@ const getRecruitDetail = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.recruit});
   } else {
-    commit(SET_DATA, {...await findRecruitDetailApi(id),edit:false});
+    commit(SET_DATA, {...await findRecruitDetailApi(id), edit: false});
   }
 };
 //获取招聘信息相关数据  报名

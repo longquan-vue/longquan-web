@@ -109,7 +109,6 @@
     import { mapActions } from 'vuex'
     import moment from 'moment';
     import {searchFilter} from '../../../filters'
-    import { Toast } from 'mint-ui';
     export default{
         data(){
             return{

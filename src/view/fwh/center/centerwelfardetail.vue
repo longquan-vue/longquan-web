@@ -52,7 +52,6 @@
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
-    import { Toast ,MessageBox } from 'mint-ui';
     export default{
         data(){
             return{
@@ -67,7 +66,7 @@
             ...mapActions(['goto','getWelfareDetail']),
             date3Filter,
             code(){
-                Toast('调用微信接口 打开二维码扫描');
+                console.log('调用微信接口 打开二维码扫描');
             }
         },
         created () {
