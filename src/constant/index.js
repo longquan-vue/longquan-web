@@ -21,3 +21,36 @@ export const defData = {
   health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 0, type: 1},
   recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',}
 };
+export const fwhMenu = {
+  "button": [{
+    "name": "工会之声",
+    "sub_button": [
+      {"name": "官方网站", "type": "view", "url": "http://java.ichuangye.cn"},
+      {"name": "最新动态", "type": "view", "url": "http://java.ichuangye.cn"},
+      {"name": "活动展示", "type": "view", "url": "http://java.ichuangye.cn"},
+      {"name": "劳模风采", "type": "view", "url": "http://java.ichuangye.cn"},
+      {"name": "投票调查", "type": "view", "url": "http://java.ichuangye.cn"}
+    ]
+  },
+    {
+      "name": "为您服务",
+      "sub_button": [
+        {"name": "公示公告", "type": "view", "url": "http://java.ichuangye.cn"},
+        {"name": "招聘信息", "type": "view", "url": "http://java.ichuangye.cn"},
+        {"name": "兴趣联盟", "type": "view", "url": "http://java.ichuangye.cn"},
+        {"name": "我有话说", "type": "view", "url": "http://java.ichuangye.cn"},
+        {"name": "市民服务", "type": "view", "url": "http://java.ichuangye.cn"}
+      ]
+    },
+    {
+      "name": "活动福利",
+      "sub_button": [
+        {"name": "积分签到", "type": "view", "url": "http://java.ichuangye.cn/view/fwh/signin?appType=fwh"},
+        {"name": "积分福利社", "type": "view", "url": "http://java.ichuangye.cn/view/fwh/welfare?appType=fwh"},
+        {"name": "工会活动", "type": "view", "url": "http://java.ichuangye.cn/view/fwh/activity?appType=fwh"},
+        {"name": "健身中心", "type": "view", "url": "http://java.ichuangye.cn/view/fwh/health?appType=fwh"},
+        {"name": "个人中心", "type": "view", "url": "http://java.ichuangye.cn/view/fwh/center?appType=fwh"}
+      ]
+    }
+  ]
+}
