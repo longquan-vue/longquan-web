@@ -1,21 +1,10 @@
 <style lang="less">
     @import "../../../../static/normal";
-    @import "centeredit";
+    @import "./centeredit.less";
 </style>
 <template>
    <div class="centeredit">
        <form>
-           <div class="centereditHead">
-               <el-upload
-                       class="avatar-uploader"
-                       action="https://jsonplaceholder.typicode.com/posts/"
-                       :show-file-list="false"
-                       :on-success="handleAvatarScucess"
-                       :before-upload="beforeAvatarUpload">
-                   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-               </el-upload>
-           </div>
            <div class="formDiv">
                <p>基本资料</p>
                <el-form :model="login" label-position="right" :rules="rules" ref="login" label-width="90px" class="demo-login" >
@@ -70,7 +59,7 @@
                                <el-input :value="login.idCard" placeholder="请输入身份证号" @input="(v)=>setLogin({idCard:v})"></el-input>
                            </el-form-item>
                            <el-form-item label="所属单位" prop="department">
-                               <el-input :value="login.depName" placeholder="请选择所属单位" @input="(v)=>setLogin({depName:v})"></el-input>
+                               <el-input :value="login.depName" placeholder="请选择所属单位" readonly @focus="openDepart"></el-input>
                            </el-form-item>
                            <el-form-item label="岗位名称" prop="position">
                                <el-input :value="login.position" placeholder="请输入岗位名称" @input="(v)=>setLogin({position:v})"></el-input>
@@ -111,6 +100,28 @@
 
        <myImgDialog @on-result-change="onResultChange" :img="img" :bgImg="bgImg" :def="def" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
+       <div v-transfer-dom>
+           <x-dialog v-model="departmentPop" class="dialog-demo" :scroll="false" :hideOnBlur="true">
+               <div class="popup">
+                   <div class="popTitle">
+                       所属单位 <img src="../../../../static/wx/del.png" @click="departmentPop=false">
+                   </div>
+                   <div class="popContent">
+                       <div class="search">
+                           <el-input placeholder="您也可以搜索单位哦" icon="search" v-model="searchVal">
+                           </el-input>
+                       </div>
+                       <el-radio-group v-model="radio2" @change="radioChange">
+                           <el-radio :label="item.val" v-for="(item, index) in items" :key="index" v-if="searchFilter(item.val,searchVal)">{{searchFilter(item.val,searchVal)}}</el-radio>
+                       </el-radio-group>
+                   </div>
+                   <div class="popBtn">
+                       <img src="../../../../static/wx/popbtn.png" @click="selectVal">
+                   </div>
+               </div>
+           </x-dialog>
+       </div>
+
    </div>
 </template>
 
@@ -122,6 +133,7 @@
     import { Datetime, Group, XButton } from 'vux'
     import {updateUserApi} from '../../../api/userApi'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
+    import {XDialog, TransferDomDirective as TransferDom} from 'vux'
     export default{
         data(){
             return{
@@ -133,6 +145,7 @@
                 btns: {btn:'确定'},
                 bgImg:'',
                 def:false,
+                departmentPop:false,
                 rules: {
                     // name: [
                     //     { required: true, message: '请输入昵称', trigger: 'blur' },
@@ -194,32 +207,21 @@
                     { val:'r单位'},
                     { val:'s单位'},
                 ],
-                value5:''
+                value5:'',
+                radio2:'',
+                searchVal:'',
             }
         },
+        directives: {
+            TransferDom
+        },
         components:{
-            Datetime, Group, XButton , myImgDialog
+            Datetime, Group, XButton , myImgDialog , XDialog
         },
         computed: {...mapGetters(['login'])},
         methods:{
             ...mapActions(['clear','go','getMine','setLogin']),
             ...filters,
-            handleAvatarScucess(res, file) {
-                // this.imageUrl = URL.createObjectURL(file.raw);
-            },
-            beforeAvatarUpload(file) {
-                this.imageUrl = URL.createObjectURL(file);
-                const isJPG = file.type === 'image/jpeg';
-                const isLt2M = file.size / 1024 / 1024 < 1;
-
-                if (!isJPG) {
-                    console.log('上传头像图片只能是 JPG 格式!');
-                }
-                if (!isLt2M) {
-                    console.log('上传头像图片大小不能超过 1MB!');
-                }
-                return isJPG && isLt2M;
-            },
             isShow(val){
                 if (val==1){
                     this.def=false;
@@ -261,9 +263,19 @@
                 console.log('change', value);
                 this.setLogin({birthday:new Date(value).getTime()})
             },
+            openDepart(){
+                this.departmentPop = true;
+                // console.log(1);
+            },
             changeRadio(val){
                 console.log('change', val);
             },
+            radioChange(val){
+                console.log('change', val);
+            },
+            selectVal(val){
+                console.log('select', val);
+            }
         },
         created () {
             this.getMine();
