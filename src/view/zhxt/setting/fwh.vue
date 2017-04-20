@@ -5,6 +5,7 @@
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>服务号管理</span>
+      <span style="float: right"><el-button type="primary" icon="upload" :loading="sync" @click="syncfwh">同步服务号</el-button></span>
     </div>
     <el-tabs v-model="tab" type="card" @tab-click="changeType">
       <el-tab-pane label="关注设置" name="1"/>
@@ -46,7 +47,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div v-for="item in menu.button" v-if="tab == '3'" class="fwh_menu">
+    <div v-for="(item,index) in menu.button" v-if="tab == '3'" class="fwh_menu">
       <el-row>
         <el-col :span="3" class="menu_title">一级菜单：</el-col>
         <el-col :span="21">
@@ -59,13 +60,17 @@
           <el-input v-model="button.name"/>
         </el-col>
         <el-col class="sub_button" :span="4">
-          <el-select v-model="button.type">
+          <el-select v-model="button.type" @change="setButton(index,idx)">
             <el-option label="页面" value="view"/>
             <el-option label="事件" value="click" disabled/>
           </el-select>
         </el-col>
         <el-col class="sub_button" :span="11">
-          <el-input v-model="button.url"/>
+          <el-input v-model="button.url" v-if="button.type == 'view'"/>
+          <el-select v-model="button.key" v-if="button.type == 'click'">
+            <el-option label="页面" value="view" disabled/>
+            <el-option label="事件" value="click" disabled/>
+          </el-select>
         </el-col>
       </el-row>
     </div>
@@ -77,12 +82,14 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
-  import {getFwhMenuApi,delFwhMenuApi,createFwhMenuApi} from '../../../api/systemApi'
+  import {getFwhMenuApi, delFwhMenuApi, createFwhMenuApi, syncfwhApi} from '../../../api/systemApi'
+  import {alert, confirm} from '../../../actions'
   export default{
     data(){
       return {
         tab: '1',
-        menu: {}
+        menu: {},
+        sync: false
       }
     },
     computed: {
@@ -90,14 +97,16 @@
     },
     methods: {
       ...mapActions(['getSetting', 'saveSys', 'changeSys', 'go', 'upload']),
+      syncfwh(){
+        this.sync = true;
+        syncfwhApi().then(() => alert('同步成功！').then(() => this.sync = false)).catch(() => alert('同步失败！', 'error').then(() => this.sync = false))
+      },
       submitForm() {
-          if(this.tab==3){
-            this.$confirm('是否需要设置服务号菜单?', '提示', {
-              type: 'warning'
-            }).then(() => delFwhMenuApi().then(()=>createFwhMenuApi(this.menu).then(()=>this.$alert('设置成功！','提示',{type:'success'})).catch(()=>this.$alert('设置失败！','提示',{type:'error'}))))
-          }else{
-            this.$refs.setting.validate((valid) => valid ? this.saveSys() : false)
-          }
+        if (this.tab == 3) {
+          confirm('是否需要设置服务号菜单?', 'warning').then(() => delFwhMenuApi().then(() => createFwhMenuApi(this.menu).then(() => alert('设置成功！')).catch(() => alert('设置失败！', 'error'))))
+        } else {
+          this.$refs.setting.validate((valid) => valid ? this.saveSys() : false)
+        }
       },
       changeType(){
         this.$router.replace({name: 'fwhSetting', query: {tab: this.tab}})
@@ -108,14 +117,18 @@
       setSub(sub){
         this.changeSys({sub: JSON.stringify({...this.sub, ...sub})})
       },
+      setButton(index, idx){
+        this.menu.button[index].sub_button[idx].key || this.$set(this.menu.button[index].sub_button[idx], 'key', 'view')
+        this.menu.button[index].sub_button[idx].url || this.$set(this.menu.button[index].sub_button[idx], 'url', 'http://java.ichuangye.cn')
+      },
       before(file){
         const isJPG = file.type == 'image/jpeg' || file.type == 'image/png';
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isJPG) {
-          this.$message.error('上传图片只能是 JPG 或者 PNG 格式!');
+          alert('上传图片只能是 JPG 或者 PNG 格式!', 'error');
         }
         if (!isLt2M) {
-          this.$message.error('上传图片大小不能超过 2MB!');
+          alert('上传图片大小不能超过 2MB!', 'error');
         }
         return isJPG && isLt2M;
       },

@@ -3,8 +3,8 @@
     <div class="logo">后台管理系统</div>
     <div class="nav">
       <el-menu theme="dark" :default-active="onRoutesNav" class="el-menu-demo" mode="horizontal" router>
-        <el-menu-item index="/view/glpt/oa/count">企业号</el-menu-item>
-        <el-menu-item index="/view/glpt/recruitment">服务号</el-menu-item>
+        <!--<el-menu-item index="/view/glpt/oa/count">企业号</el-menu-item>-->
+        <!--<el-menu-item index="/view/glpt/recruitment">服务号</el-menu-item>-->
       </el-menu>
     </div>
     <div class="user-info">
