@@ -195,6 +195,7 @@ const getHealthEnter = async({commit, state}) => commit(GET_DATA_LIST, await fin
 const exportHealthEntry = ({commit, state}) => exportHealthEntryApi(state.route.params.id, state.page);
 //获取健身项目相关数据   详情
 const gethealthDetail = async({commit, state}) => {
+  await getMine({commit, state});
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.health});
