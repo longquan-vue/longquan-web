@@ -95,7 +95,8 @@
     import { mapActions } from 'vuex'
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
-    import { Datetime, Group, XButton } from 'vux'
+    import { Datetime, Group, XButton , XDialog, TransferDomDirective as TransferDom} from 'vux'
+    import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
 
     export default{
         data(){
@@ -122,8 +123,11 @@
                 }
             }
         },
+        directives: {
+            TransferDom
+        },
         components:{
-            appHead,Datetime, Group, XButton
+            appHead,Datetime, Group, XButton, myImgDialog , XDialog
         },
         computed: {...mapGetters(['data'])},
         methods:{

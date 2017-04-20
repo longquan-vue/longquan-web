@@ -40,6 +40,7 @@
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import MyPagination from '../../../components/public/page/MyPagination.vue'
   import filter from '../../../filters'
+  import {confirm} from '../../../actions'
   export default {
     components: {
       MySelect, MySelectInput, MyPagination, MyColumn, MyTable
@@ -53,18 +54,10 @@
         this.getHealth();
       },
       del(idx, {id, name}) {
-        this.$confirm(`确定删除健身项目[${name}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.delHealth([id, idx]))
+        confirm(`确定删除健身项目[${name}]吗?`, 'warning').then(() => this.delHealth([id, idx]))
       },
       pause(idx, {id, status, name}){
-        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}健身项目[${name}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.pauseHealth([id, `${idx}.status`, status == 1 ? 2 : 1]))
+        confirm(`确定${status == 1 ? '暂停' : '开启'}健身项目[${name}]吗?`, 'warning').then(() => this.pauseHealth([id, `${idx}.status`, status == 1 ? 2 : 1]))
       },
     },
     created () {

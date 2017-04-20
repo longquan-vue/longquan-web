@@ -17,9 +17,9 @@
                            <el-radio :label="2">女</el-radio>
                        </el-radio-group>
                    </el-form-item>
-                   <el-form-item label="生日" prop="birth" >
+                   <el-form-item label="生日" prop="birthday" >
 
-                           <datetime title="" v-model="value5" placeholder="开始时间" :min-year=1980 :max-year=2018 format="YYYY-MM-DD" @on-change="changeStart"
+                           <datetime title="" v-model="birthday" placeholder="开始时间" :min-year=1980 :max-year=2018 format="YYYY-MM-DD" @on-change="changeStart"
                                      confirm-text="完成" clear-text="清除" cancel-text="取消">
                                <el-form-item prop="start" style="padding-left:0;padding-right:0;background:none;">
                                    <el-input :value="dateFilter(login.birthday)" placeholder="请选择生日" readonly></el-input>
@@ -50,15 +50,15 @@
                            <el-radio :label="1" >不是工会职工</el-radio>
                        </el-radio-group>
                    </el-form-item>
-                   <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
+                   <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                        <div v-if="login.audit==2">
                            <el-form-item label="姓名" prop="name">
                                <el-input :value="login.name" placeholder="请输入姓名" @input="(v)=>setLogin({name:v})"></el-input>
                            </el-form-item>
-                           <el-form-item label="身份证号" prop="idcard">
+                           <el-form-item label="身份证号" prop="idCard">
                                <el-input :value="login.idCard" placeholder="请输入身份证号" @input="(v)=>setLogin({idCard:v})"></el-input>
                            </el-form-item>
-                           <el-form-item label="所属单位" prop="department">
+                           <el-form-item label="所属单位" prop="depName">
                                <el-input :value="login.depName" placeholder="请选择所属单位" readonly @focus="openDepart"></el-input>
                            </el-form-item>
                            <el-form-item label="岗位名称" prop="position">
@@ -76,27 +76,6 @@
                </el-form>
            </div>
        </form>
-       <!--<mt-datetime-picker ref="picker" type="date" @confirm="handleConfirm" :startDate="new Date(0)">-->
-       <!--</mt-datetime-picker>-->
-       <!--<mt-popup v-model="popupOpen" popup-transition="popup-fade" style="background:none;">-->
-           <!--<div class="popup">-->
-               <!--<div class="popTitle">-->
-                    <!--所属单位 <img src="../../../../static/wx/del.png" @click="popupOpen=false">-->
-               <!--</div>-->
-               <!--<div class="popContent">-->
-                   <!--<div class="search">-->
-                       <!--<el-input placeholder="您也可以搜索单位哦" icon="search" v-model="searchVal">-->
-                       <!--</el-input>-->
-                   <!--</div>-->
-                   <!--<el-radio-group v-model="radio2" @change="radioChange">-->
-                       <!--<el-radio :label="item.val" v-for="(item, index) in items" :key="index" v-if="searchFilter(item.val,searchVal)">{{searchFilter(item.val,searchVal)}}</el-radio>-->
-                   <!--</el-radio-group>-->
-               <!--</div>-->
-               <!--<div class="popBtn">-->
-                   <!--<img src="../../../../static/wx/popbtn.png" @click="selectVal">-->
-               <!--</div>-->
-           <!--</div>-->
-       <!--</mt-popup>-->
 
        <myImgDialog @on-result-change="onResultChange" :img="img" :bgImg="bgImg" :def="def" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
@@ -111,7 +90,7 @@
                            <el-input placeholder="您也可以搜索单位哦" icon="search" v-model="searchVal">
                            </el-input>
                        </div>
-                       <el-radio-group v-model="radio2" @change="radioChange">
+                       <el-radio-group v-model="radio2">
                            <el-radio :label="item.val" v-for="(item, index) in items" :key="index" v-if="searchFilter(item.val,searchVal)">{{searchFilter(item.val,searchVal)}}</el-radio>
                        </el-radio-group>
                    </div>
@@ -128,7 +107,6 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import moment from 'moment';
     import filters from '../../../filters'
     import { Datetime, Group, XButton } from 'vux'
     import {updateUserApi} from '../../../api/userApi'
@@ -146,45 +124,47 @@
                 bgImg:'',
                 def:false,
                 departmentPop:false,
+                birthday:this.dateFilter(this.$store.state.login.birthday),
                 rules: {
-                    // name: [
-                    //     { required: true, message: '请输入昵称', trigger: 'blur' },
-                    //     { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    // ],
-                    // sex: [
-                    //     { required: true, message: '请选择性别', trigger: 'change' }
-                    // ],
-                    // marriage: [
-                    //     { required: true, message: '请选择性别', trigger: 'change' }
-                    // ],
-                    // birth: [
-                    //     { required: true, message: '请选择生日', trigger: 'change' }
-                    // ],
-                    // phone: [
-                    //     { required: true, message: '请填写电话号码', trigger: 'change' }
-                    // ],
-                    // address: [
-                    //     { required: true, message: '请填写住址', trigger: 'change' }
-                    // ],
-                    // email: [
-                    //     { required: true, message: '请填写邮箱', trigger: 'change' }
-                    // ],
-                    // jobaccreditation: [
-                    //     { required: true, message: '请选择是否为工会职工', trigger: 'change' }
-                    // ],
-                    // truename: [
-                    //     { required: true, message: '请填写名字', trigger: 'change' },
-                    //     { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
-                    // ],
-                    // idcard: [
-                    //     { required: true, message: '请填写身份证号码', trigger: 'change' },
-                    // ],
-                    // department: [
-                    //     { required: true, message: '请选择所属单位', trigger: 'change' }
-                    // ],
-                    // jobname: [
-                    //     { required: true, message: '请填写岗位名称', trigger: 'change' }
-                    // ]
+                    nickname: [
+                        { required: true, message: '请输入昵称' },
+                        { min: 2, max: 6, message: '长度在 2 到 6 个字符'}
+                    ],
+                    sex: [
+                        { type:'number',required: true, message: '请选择性别', trigger: 'change' }
+                    ],
+                    marriage: [
+                        { type:'number',required: true, message: '请选择婚姻状态', trigger: 'change' }
+                    ],
+                    birthday: [
+                        { required: true, message: '请选择生日', trigger: 'change' }
+                    ],
+                    phone: [
+                        { required: true, message: '请填写电话号码', trigger: 'change' }
+                    ],
+                    address: [
+                        { required: true, message: '请填写邮寄地址', trigger: 'change' }
+                    ],
+                    email: [
+                        { required: true, message: '请填写邮箱', trigger: 'change' }
+                    ],
+                    audit: [
+                        { type:'number',required: true, message: '请选择是否为工会职工', trigger: 'change' }
+                    ],
+                    name: [
+                        { required: true, message: '请填写名字', trigger: 'change' },
+                        { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'change' }
+                    ],
+                    idCard: [
+                        { required: true, message: '请填写身份证号码', trigger: 'change' },
+                    ],
+                    depName: [
+                        { required: true, message: '请选择所属单位', trigger: 'change' }
+                    ],
+                    position: [
+                        { required: true, message: '请填写岗位名称', trigger: 'change' },
+                        { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'change' }
+                    ]
                 },
                 items:[
                     { val:'a单位'},
@@ -244,7 +224,6 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-
                         updateUserApi(this.$store.state.login).then(()=>{
                             this.isShow(1);
                         }).catch(()=>{
@@ -265,20 +244,16 @@
             },
             openDepart(){
                 this.departmentPop = true;
-                // console.log(1);
             },
-            changeRadio(val){
-                console.log('change', val);
-            },
-            radioChange(val){
-                console.log('change', val);
-            },
-            selectVal(val){
-                console.log('select', val);
+            selectVal(){
+                if (this.radio2){
+                    this.setLogin({depName:this.radio2})
+                }
+                this.departmentPop = false;
             }
         },
-        created () {
-            this.getMine();
+        async created () {
+            await this.getMine();
         },
         destroyed(){
             this.clear()

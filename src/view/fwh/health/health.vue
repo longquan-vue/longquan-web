@@ -14,7 +14,7 @@
         </div>
         <div class="healthList">
             <ul>
-                <li flex @click="goto(['healthDetail',{id:item.id}])" v-for="(item,index) in list">
+                <li flex @click="go(['healthDetail',item.id])" v-for="(item,index) in list">
                     <div flex items="center"><img :src="item.picUrl"></div>
                     <div box="1">{{item.name}}</div>
                     <div class="">
@@ -44,7 +44,7 @@
         computed: {...mapGetters([ 'page','list']),
         },
         methods:{
-            ...mapActions(['goto','clear','getHealth','clearPage']),
+            ...mapActions(['go','clear','getHealth','clearPage']),
             date3Filter,
         },
         created () {
