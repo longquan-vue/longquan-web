@@ -14,4 +14,8 @@ export const getFwhMenuApi = () => request({method: 'get', url: `/wechat/fwMenu`
 export const createFwhMenuApi = (data) => request({method: 'post', url: `/wechat/fwMenu`, data, options: {headers: {'Content-Type': 'text/plain'}}})
 // 删除服务号自定义菜单
 export const delFwhMenuApi = () => request({method: 'delete', url: `/wechat/fwMenu`})
+// 同步服务号
+export const syncfwhApi = () => request({url: `/wechat/syncfwh`})
+// 同步企业号
+export const syncqyhApi = () => request({url: `/wechat/syncqyh`})
 
