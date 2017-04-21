@@ -1,6 +1,6 @@
 <style lang="less" scoped>
     @import "../../../../static/normal.less";
-    .centerMessHead{ height: 50px;background-color: #FC5757;color: #ffffff;z-index: 9999;
+    .centerMessHead{ height: 50px;background-color: #FC5757;color: #ffffff;z-index: 20;
         position: fixed;left: 0;top: 0;text-align: center;width: 100%;line-height: 50px;;
         img{ width: 11px;}
         .a{ border: 1px solid #ffffff;border-radius: 15px;height: 0.6rem;width: 1.46666666rem;
