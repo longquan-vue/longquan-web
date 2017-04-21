@@ -12,8 +12,8 @@ export const updatePollApi = (data) => request({
   data
 });
 //获取投票调查列表
-export const pollListApi = (data) => request({
-  url: `${BASE_PATH}/find`,
+export const pollListApi = (data, del = 0) => request({
+  url: `${BASE_PATH}/find/${del}`,
   data
 });
 //查询详情

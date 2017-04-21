@@ -55,8 +55,8 @@
     methods: {
       ...mapActions(['clear', 'getPollList', 'changeSelect', 'delPoll', 'go']),
       ...filter,
-      del(idx, {id, name}) {
-        confirm(`确定删除调查问卷[${name}]吗?`, 'warning').then(() => this.delPoll([id, idx]))
+      del(idx, {id, title}) {
+        confirm(`确定删除调查问卷[${title}]吗?`, 'warning').then(() => this.delPoll([id, idx]))
       },
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});

@@ -223,7 +223,7 @@ const getRecruitSigin = async({commit, state}) => commit(GET_DATA_LIST, await fi
 //获取招聘信息相关数据  导出报名列表
 const exportRecruitEntry = ({commit, state}) => exportRecruitEntryApi(state.route.params.id, state.page)
 //删除招聘信息
-const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_LIST, idx))
+const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_DATA, idx))
 //获取招聘信息相关数据   招聘详情
 const getRecruitDetail = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -265,7 +265,7 @@ const createPoll = ({commit, state}) => createPollApi(state.data).then(() => suc
 // 修改投票调查
 const updatePoll = ({commit, state}) => updatePollApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //删除投票调查
-const delPoll = ({commit, state}, [id, idx]) => delPollApi(id).then(() => commit(DEL_LIST, idx))
+const delPoll = ({commit, state}, [id, idx]) => delPollApi(id).then(() => commit(DEL_DATA, idx))
 export default {
   getMineWelfare,
   getUser,
