@@ -1,4 +1,5 @@
 import moment from 'moment'
+import Base64 from 'Base64'
 // 性别过滤器   0->未知,1->男,2->女
 export const sexFilter = (sex) => ['未知', '男', '女'][sex] || '未知'
 export const freezeFilter = ({deleted}) => ['否', '是'][deleted] || '否'
@@ -65,8 +66,13 @@ export const groupList = (list = [], {flagFn = () => false, field = 'start', key
 
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
+export const encode = (str) => Base64.btoa(str);
+export const decode = (str) => Base64.atob(str);
+
 
 export default {
+  encode,
+  decode,
   sexFilter,
   sex2Filter,
   marriageFilter,

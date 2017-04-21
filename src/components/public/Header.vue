@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="logo">后台管理系统</div>
+    <div class="logo"><img :src="setting.logo" alt="logo">后台管理系统</div>
     <div class="nav">
       <el-menu theme="dark" :default-active="onRoutesNav" class="el-menu-demo" mode="horizontal" router>
         <!--<el-menu-item index="/view/glpt/oa/count">企业号</el-menu-item>-->
@@ -22,11 +22,10 @@
 </template>
 
 <script type="es6">
-  import {mapGetters} from 'vuex'
-  import {mapActions} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   export default {
     computed: {
-      ...mapGetters(['login']),
+      ...mapGetters(['login', 'setting']),
       onRoutesNav(){
         if (this.$route.path.indexOf('oa') > 0) {
           return '/view/oa/count';
@@ -37,7 +36,7 @@
       }
     },
     methods: {
-      ...mapActions(['getMine', 'go', 'loginOut']),
+      ...mapActions(['getMine', 'getSetting', 'go', 'loginOut']),
       handleCommand(command) {
         if (command == 'loginout') {
           this.loginOut();
@@ -45,6 +44,7 @@
       }
     },
     created () {
+      this.getSetting();
       this.getMine();
     },
   }
@@ -73,6 +73,13 @@
     float: left;
     width: 250px;
     text-align: center;
+  }
+
+  .header .logo img {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+    margin-right: 15px;
   }
 
   .user-info {

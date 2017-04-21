@@ -59,10 +59,10 @@ export default [
       {path: `${ROOT}/zhxt/welfarePrev`, component: require('../view/zhxt/welfare/welfarePrev.vue'), name: 'welfarePrev'},//福利预告
       {path: `${ROOT}/zhxt/welfarePrev/:id`, component: require('../view/zhxt/welfare/welfarePrevEdit.vue'), name: 'welfarePrevEdit'},//编辑福利预告
       /*工会职工*/
-      {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/notice/notice.vue'), name: 'adminList'}, // 职工列表
-      {path: `${ROOT}/zhxt/admin/:id`, component: require('../view/zhxt/notice/notice.vue'), name: 'adminEdit'}, // 编辑职工
-      {path: `${ROOT}/zhxt/adminAudit`, component: require('../view/zhxt/notice/notice.vue'), name: 'adminAudit'}, // 审核列表
-      {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'adminCount'}, // 统计报表
+      {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/admin/admin.vue'), name: 'adminList'}, // 职工列表
+      {path: `${ROOT}/zhxt/admin/:id`, component: require('../view/zhxt/admin/adminEdit.vue'), name: 'adminEdit'}, // 编辑职工
+      {path: `${ROOT}/zhxt/adminAudit`, component: require('../view/zhxt/admin/adminAudit.vue'), name: 'adminAudit'}, // 审核列表
+      {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/admin/adminCount.vue'), name: 'adminCount'}, // 统计报表
       {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, // 我的公会
       /*工会组建*/
       {path: `${ROOT}/zhxt/dep`, component: require('../view/zhxt/dep/dep.vue'), name: 'depList'}, // 工会列表

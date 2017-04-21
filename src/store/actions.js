@@ -16,7 +16,7 @@ import {
   getWeekSignApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
-import {adminApi, loginOutApi, loginApi} from '../api/adminApi'
+import {adminApi, loginOutApi, loginApi, adminListApi, auditAdminApi, createAdminApi, delAdminApi, exportAdminApi, getAdminApi, updateAdminApi} from '../api/adminApi'
 import {
   findActivityApi,
   findEntryListByIdApi,
@@ -266,6 +266,23 @@ const createPoll = ({commit, state}) => createPollApi(state.data).then(() => suc
 const updatePoll = ({commit, state}) => updatePollApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //删除投票调查
 const delPoll = ({commit, state}, [id, idx]) => delPollApi(id).then(() => commit(DEL_DATA, idx))
+// 获取投票调查详情
+const getAdmin = async({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {edit: true, ...defData.poll});
+  } else {
+    commit(SET_DATA, {...await getPollApi(id), edit: false});
+  }
+};
+// 获取投票调查列表
+const getAdminList = async({commit, state}) => commit(GET_DATA_LIST, await adminListApi(state.page));
+// 创建投票调查
+const createAdmin = ({commit, state}) => createAdminApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改投票调查
+const updateAdmin = ({commit, state}) => updateAdminApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+//删除投票调查
+const delAdmin = ({commit, state}, [id, idx]) => delAdminApi(id).then(() => commit(DEL_DATA, idx))
 export default {
   getMineWelfare,
   getUser,
@@ -335,4 +352,9 @@ export default {
   createPoll,// 创建投票调查
   updatePoll,// 修改投票调查
   delPoll,// 修改投票调查
+  createAdmin,//创建职工
+  delAdmin,//删除职工
+  getAdmin,//获取职工详情
+  updateAdmin,//修改职工
+  getAdminList,//获取职工列表
 }

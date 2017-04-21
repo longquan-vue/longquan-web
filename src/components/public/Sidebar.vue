@@ -65,19 +65,19 @@
       <!--<el-menu-item index="markdown">统计报表</el-menu-item>-->
       <!--</el-submenu>-->
       <!--<el-submenu index="11">-->
-        <!--<template slot="title"><i class="el-icon-menu"></i>工会组建管理</template>-->
-        <!--<el-menu-item index="depList">工会列表</el-menu-item>-->
-        <!--<el-menu-item index="depEnter">申请列表</el-menu-item>-->
-        <!--<el-menu-item index="depAudit">审核列表</el-menu-item>-->
-        <!--<el-menu-item index="depCount">统计报表</el-menu-item>-->
+      <!--<template slot="title"><i class="el-icon-menu"></i>工会组建管理</template>-->
+      <!--<el-menu-item index="depList">工会列表</el-menu-item>-->
+      <!--<el-menu-item index="depEnter">申请列表</el-menu-item>-->
+      <!--<el-menu-item index="depAudit">审核列表</el-menu-item>-->
+      <!--<el-menu-item index="depCount">统计报表</el-menu-item>-->
       <!--</el-submenu>-->
-      <!--<el-submenu index="12">-->
-        <!--<template slot="title"><i class="el-icon-menu"></i>工会职工认证管理</template>-->
-        <!--<el-menu-item index="adminList">职工列表</el-menu-item>-->
-        <!--<el-menu-item index="adminAudit">审核列表</el-menu-item>-->
+      <el-submenu index="12">
+        <template slot="title"><i class="el-icon-menu"></i>工会职工管理</template>
+        <el-menu-item index="adminList">职工列表</el-menu-item>
+        <el-menu-item index="adminAudit">审核列表</el-menu-item>
         <!--<el-menu-item index="myDep">我的工会</el-menu-item>-->
-        <!--<el-menu-item index="adminCount">统计报表</el-menu-item>-->
-      <!--</el-submenu>-->
+        <el-menu-item index="adminCount">统计报表</el-menu-item>
+      </el-submenu>
       <el-submenu index="13">
         <template slot="title"><i class="el-icon-menu"></i>用户管理</template>
         <el-menu-item index="userList">用户列表</el-menu-item>
@@ -89,13 +89,13 @@
         <!--<el-menu-item index="userCount">统计报表</el-menu-item>-->
       </el-submenu>
       <!--<el-menu-item index="authority">-->
-        <!--<i class="el-icon-setting"></i>权限角色管理-->
+      <!--<i class="el-icon-setting"></i>权限角色管理-->
       <!--</el-menu-item>-->
       <!--<el-menu-item index="configuration">-->
-        <!--<i class="el-icon-setting"></i>网站站点管理-->
+      <!--<i class="el-icon-setting"></i>网站站点管理-->
       <!--</el-menu-item>-->
       <!--<el-menu-item index="recover">-->
-        <!--<i class="el-icon-setting"></i>回收站-->
+      <!--<i class="el-icon-setting"></i>回收站-->
       <!--</el-menu-item>-->
     </el-menu>
   </div>
