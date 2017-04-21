@@ -26,12 +26,45 @@
           >div{
             padding-right: 0.82666667rem;
             a{ width: 1.04rem;height: 1.04rem;border-radius: 1.04rem;overflow: hidden;
-              background-color: #F0F0F0;
+              background-color: #F0F0F0;text-align: center;
+              span{ font-size: 20px;width: 100%;height: 100%;display: block}
               img{ width: 100%;height: 100%;}
               &.lasta{ background-color: #a2a2a2;color: #ffffff;text-align: center;line-height: 1rem;}
             }
           }
         }
+      }
+    }
+    .noHealth{ text-align: center;padding-top: 1rem;font-size: 0.4rem;color: #666666;
+        img{ width: 3rem}
+    }
+  }
+}
+
+.healthPersonCont{
+  padding: 1rem 0.3rem;background-color: #ffffff;height: 100%;position: relative;
+  .closePopup{ width: 0.666667rem;height: 0.666667rem;text-align: center;display: block;line-height:0.666667rem;
+    color: #ffffff;font-size: 0.5rem;position: absolute;right: 0.3rem;top: 0.3rem;
+    background-color: rgba(0,0,0,.8);border-radius: 50%;z-index: 1;
+  }
+  >p{  color: #666666; font-size: 0.3733333rem;line-height: 1rem;text-align: center}
+  ul{
+    li{
+      .timeLine{ color: #CCCCCC;font-size: 0.32rem;position: relative;
+        line-height: 0.533333rem;text-align: center;
+        &:before{ width: 38%;left: 0;height: 1px;background-color: #E7E7E7;
+          top: 49%;position: absolute;content: '';
+        }
+        &:after{
+          width: 38%;right: 0;height: 1px;background-color: #E7E7E7;
+          top: 49%;position: absolute;content: '';
+        }
+      }
+      .siginList{
+        padding: 0.3rem 0;
+        .weui-grid{ padding: 0 0 0.3rem 0;text-align: center}
+        img{ width: 1.02rem;height: 1.02rem;border-radius: 1.02rem;}
+        .weui-grids:before,.weui-grid:before,.weui-grids:after,.weui-grid:after{ border: none;}
       }
     }
   }

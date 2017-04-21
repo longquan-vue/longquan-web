@@ -137,7 +137,7 @@
                         { type:'number',required: true, message: '请选择婚姻状态', trigger: 'change' }
                     ],
                     birthday: [
-                        { required: true, message: '请选择生日', trigger: 'change' }
+                        { type:'number',required: true, message: '请选择生日', trigger: 'change' }
                     ],
                     phone: [
                         { required: true, message: '请填写电话号码', trigger: 'change' }

@@ -25,39 +25,18 @@
                          :disable-future="disableFuture">
         </inline-calendar>
 
-        <div class="healthCont">
+        <div class="healthCont" v-if="showList">
             <p>报名详情({{itemFilter(data.total)}}),可以{{data.total}}人同时报名</p>
             <ul>
-                <!--<li v-for="(item,index) in groupList(list,{flagFn:(item)=>login.id==item.id})"-->
-                <!--v-if="groupList.length!=0">-->
-                <!--<div class="timeLine">-->
-                <!--<span>{{HHmmFilter(item.start)}}&#45;&#45;{{HHmmFilter(item.end)}}</span>-->
-                <!--</div>-->
-                <!--<div class="siginList" flex items="center">-->
-                <!--<div box="1" flex justify="between">-->
-                <!--<a v-for="u in 4">-->
-                <!--<img :src="item.list[u-1].headimgurl" v-if="item.list[u-1]">-->
-                <!--</a>-->
-                <!--<a @click="goto(['healthPerson'])" class="lasta" v-if="item.list.length>4">...</a>-->
-                <!--<a v-if="item.list.length<=4"></a>-->
-                <!--</div>-->
-                <!--<a class="ising" v-if="!item.flag"-->
-                <!--@click="entry({id:data.id,starts:[item.start],ends:[item.end]},value)">报名</a>-->
-                <!--<a class="ising" v-if="item.flag"-->
-                <!--@click="noentry({id:data.id,starts:[item.start],ends:[item.end]},value)">取消报名</a>-->
-                <!--<a class="over" v-if="item.num >= data.total" @click="">已满员</a>-->
-                <!--</div>-->
-                <!--</li>-->
-
                 <li v-for="(item,index) in data.starts">
                     <div class="timeLine">
                         <span>{{HHmmFilter(item)}}--{{HHmmFilter(data.ends[index])}}</span>
                     </div>
                     <div class="siginList" flex items="center">
                         <div box="1" flex justify="between">
-                            <a v-for="u in 5">
+                            <a v-for="u in 5" :class="{'lasta':group[index] && group[index].list[u-1] && u == 5}">
                                 <img :src="group[index] && group[index].list[u-1].headimgurl" v-if="group[index] && group[index].list[u-1] && u < 5">
-                                <span v-if="group[index] && group[index].list[u-1] && u == 5">...</span>
+                                <span v-if="group[index] && group[index].list[u-1] && u == 5" @click="openPerson(index)">...</span>
                             </a>
                         </div>
                         <a class="ising" v-if="!(group[index] && group[index].flag)" @click="entry({id:data.id,starts:[item],ends:[data.ends[index]]},value)">报名</a>
@@ -65,24 +44,50 @@
                         <a class="over" v-if="group[index] && group[index].num >= data.total" @click="">已满员</a>
                     </div>
                 </li>
-
             </ul>
+        </div>
+        <div class="healthCont" v-if="!showList">
+            <div class="noHealth">
+                <img src="../../../../static/wx/default.png">
+                <p>该日期未开启项目！</p>
+            </div>
         </div>
 
         <myConfirmDialog @on-result-change="onResultChange" :title="title" :content="content" :btns="btns"
                          :isShow="isshow"></myConfirmDialog>
 
-
+        <popup v-model="showEntryList" height="100%" v-if="group[idx]">
+            <div class="healthPersonCont">
+                <a @click="showEntryList=false" class="closePopup">X</a>
+                <p>报名详情(多人项目),可以14人同时报名</p>
+                <ul>
+                    <li>
+                        <div class="timeLine">
+                            <span>10:31-10:50</span>
+                        </div>
+                        <div class="siginList" flex items="center" >
+                            <grid :rows="7" style="width:100%">
+                                <grid-item v-for="(item,index) in group[idx].list" :key="index">
+                                    <span class="grid-center"><a @click="go(['personMess',item.id])"><img :src="item.headimgurl"></a></span>
+                                </grid-item>
+                            </grid>
+                        </div>
+                    </li>
+                </ul>
+                <a class="baoming" v-if="!group[idx].flag" @click="entry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">报名</a>
+                <a class="baoming" v-if="group[idx].flag" @click="noentry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">取消报名</a>
+                <a class="baoming" v-if="group[idx].num >= data.total" @click="">已满员</a>
+            </div>
+        </popup>
     </div>
 </template>
 
 <script type="es6">
-    import {InlineCalendar, Group} from 'vux'
+    import {InlineCalendar, Group ,Popup ,Grid, GridItem} from 'vux'
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
-    import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
     import moment from 'moment'
     import {entryHealthApi, cancelEntryHealthApi} from '../../../api/healthApi'
     import myConfirmDialog from '../../../components/public/confirmDialog/confirmDialog.vue'
@@ -111,17 +116,25 @@
                 title: '提示',   //控制弹窗标题
                 content: '兑换成功',  //控制弹窗内容
                 btns: {},
+                showList:false,  // 选中日期当天是否有 开启项目
+                showEntryList:false,   //展示报名人员详情
+                idx:0,   // 展开哪个时间段的报名人员详情
             }
         },
         watch: {
             value(newval, oldval){
                 // console.log(oldval+'老');
-                console.log(newval + '新');
-                this.change('created', moment(newval).format('x') * 1)
+                // console.log(newval + '新');
+                if (this.$store.state.data.date.includes(newval)){
+                    this.showList = true;
+                    this.change('created', moment(newval).format('x') * 1)
+                }else {
+                    this.showList = false;
+                }
             }
         },
         components: {
-            appHead, Group, InlineCalendar, myConfirmDialog
+            appHead, Group, InlineCalendar, myConfirmDialog , Popup ,Grid, GridItem
         },
         computed: {
             ...mapGetters(['data', 'list', 'login']),
@@ -130,7 +143,7 @@
             }
         },
         methods: {
-            ...mapActions(['goto', 'gethealthDetail', 'clear', 'getHealthEnter', 'changeSelect']),
+            ...mapActions(['go', 'gethealthDetail', 'clear', 'getHealthEnter', 'changeSelect']),
             ...filters,
             calenderClick(){
                 console.log(this.value);
@@ -147,6 +160,15 @@
                             cancelEntryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
                                 window.location.reload();
                             });
+                        }
+                    };
+                }else if (val == 3) { // 没有认证
+                    // this.img = '../../../../static/wx/succ.png';
+                    this.content = '请先完善个人信息并通过职工认证';
+                    this.btns = {
+                        btn1: '去认证', btn2: '取消', action: () => {
+                            // console.log('点击了去认证')
+                            this.go(['centeredit'])
                         }
                     };
                 }
@@ -174,12 +196,21 @@
                 this.getHealthEnter()
             },
             entry(data, date){
-                entryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
-                    this.isShow(1);
-                });
+                if (this.$store.state.login.audit == 2){
+                    entryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
+                        this.isShow(1);
+                    });
+                }else {
+                    this.isShow(3);
+                }
             },
-            noentry(data, date){
+            noentry(data, date){  //取消报名
                 this.isShow(2, data, date)
+            },
+            openPerson(index){
+                this.idx = index;
+                this.showEntryList = true;
+                console.log(this.idx);
             }
         },
         async created () {
