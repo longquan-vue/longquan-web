@@ -74,7 +74,7 @@ export default [
       {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList'}, // 招聘信息列表
       {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit'}, // 编辑招聘信息
       {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter'}, // 意向报名列表
-      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'recruitCount'}, // 招聘信息统计
+      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/recruit/recruitCount.vue'), name: 'recruitCount'}, // 招聘信息统计
       /*投票调查*/
       {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList'}, // 投票列表
       {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit'}, // 编辑投票
