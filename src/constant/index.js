@@ -29,7 +29,7 @@ export const defData = {
     time: 0,
     repetition: 0,
     days: 0,
-    sync: '[]',
+    sync: '["0","1"]',
     rule: '',
     admin: {},
     created: '',
