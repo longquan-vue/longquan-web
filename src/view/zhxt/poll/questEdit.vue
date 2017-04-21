@@ -1,90 +1,95 @@
+<style lang="less">
+  @import "./poll.less";
+</style>
 <template>
-  <div class="contentBox">
+  <div class="contentBox poll">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">添加工会活动</span>
-      <span v-if="!data.edit">编辑工会活动</span>
-      <a @click="go(['activityList'])" style="float:right;">
+      <span v-if="data.edit">添加问卷</span>
+      <span v-if="!data.edit">编辑问卷</span>
+      <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
     </div>
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="活动配图">
-            <MyUpload :files="data.files" :edit="data.edit"/>
-          </el-form-item>
-          <el-form-item label="活动名称" prop="name">
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="活动时间" required>
-            <el-col :span="11">
-              <el-form-item prop="start">
-                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始日期" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
-            <el-col :span="11">
-              <el-form-item prop="end">
-                <el-date-picker type="datetime" placeholder="选择结束日期" :value="data.end" @input="(v)=>setData({end:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="报名时间" required>
-            <el-col :span="11">
-              <el-form-item prop="entryStart">
-                <el-date-picker type="datetime" placeholder="选择开始日期" :value="data.entryStart" @input="(v)=>setData({entryStart:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
-            <el-col :span="11">
-              <el-form-item prop="entryEnd">
-                <el-date-picker type="datetime" placeholder="选择结束日期" :value="data.entryEnd" @input="(v)=>setData({entryEnd:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="报名人数" prop="total">
-            <el-input :value="data.total" @input="(v)=>setData({total:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="报名权限" prop="entry">
-            <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
-              <el-radio :label="0">所有用户可报名</el-radio>
-              <el-radio :label="1">认证用户可报名</el-radio>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="报名所需积分" prop="score">
-            <el-input :value="data.score" @input="(v)=>setData({score:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="主办方" prop="sponsor">
-            <el-input :value="data.sponsor" @input="(v)=>setData({sponsor:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="协办方" prop="coSponsor">
-            <el-input :value="data.coSponsor" @input="(v)=>setData({coSponsor:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="承办方" prop="organizer">
-            <el-input :value="data.organizer" @input="(v)=>setData({organizer:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="活动地点" prop="place">
-            <el-input :value="data.place" @input="(v)=>setData({place:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="福利提供方链接" prop="website">
-            <el-input :value="data.website" @input="(v)=>setData({website:v})"></el-input>
-          </el-form-item>
-          <el-form-item label="活动内容" prop="detail">
-            <quill-editor ref="myTextEditor" :content="data.detail" @input="(v)=>setData({detail:v})" :config="{}"></quill-editor>
-          </el-form-item>
-          <el-form-item label="活动规则介绍" prop="rule">
-            <quill-editor ref="myTextEditor" :content="data.rule" @input="(v)=>setData({rule:v})" :config="{}"></quill-editor>
-          </el-form-item>
-          <div v-if="!data.edit">
-            <el-form-item label="福利发布者" prop="admin">
-              <el-input v-model="data.admin.name" readonly></el-input>
+          <div v-if="step == 0">
+            <el-form-item label="问卷标题" prop="name">
+              <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
             </el-form-item>
-            <el-form-item label="发布时间" prop="created">
-              <el-input :value="date3Filter(data.created)" readonly></el-input>
+            <el-form-item label="问卷描述" prop="desc">
+              <el-input :value="data.desc" @input="(v)=>setData({desc:v})"></el-input>
+            </el-form-item>
+            <el-form-item label="调查时间" required>
+              <el-col :span="11">
+                <el-form-item prop="start">
+                  <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <el-col class="line" :span="2" style="text-align:center;">-</el-col>
+              <el-col :span="11">
+                <el-form-item prop="end">
+                  <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择结束时间" :value="data.end" @input="(v)=>setData({end:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
+                </el-form-item>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="积分奖励" prop="score">
+              <el-input :value="data.score" @input="(v)=>setData({score:v})"></el-input>
+            </el-form-item>
+            <el-form-item label="答题次数" prop="time">
+              <el-input :value="data.time" @input="(v)=>setData({time:v})"></el-input>
+            </el-form-item>
+            <el-form-item label="同步显示" prop="sync">
+              <el-checkbox-group :value="data.sync" @input="(v)=>setData({sync:v})">
+                <el-checkbox label="0">网站</el-checkbox>
+                <el-checkbox label="1">服务号</el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+            <el-form-item label="答题规则" prop="rule">
+              <quill-editor :content="data.rule" @input="(v)=>setData({rule:v})" :config="{}"></quill-editor>
+            </el-form-item>
+            <div v-if="!data.edit">
+              <el-form-item label="发布者" prop="admin">
+                <el-input v-model="data.admin.name" readonly></el-input>
+              </el-form-item>
+              <el-form-item label="发布时间" prop="created">
+                <el-input :value="date3Filter(data.created)" readonly></el-input>
+              </el-form-item>
+            </div>
+          </div>
+          <div v-if="step == 1">
+            <div v-for="(item,idx) in questions">
+              <div class="tap"><span class="num">第 {{numFilter(idx+1)}} 项 --- {{item.name}}</span><span class="stop" @click="$set(item,'stop',!item.stop)">{{item.stop?'展开':'收起'}}</span><span class="del" @click="delQuestions(idx)">删除</span></div>
+              <div v-show="!item.stop">
+                <el-form-item label="问题题目：" prop="name">
+                  <el-input :value="item.name" @input="(v)=>setQuestions('questions.'+idx+'.name',v)"></el-input>
+                </el-form-item>
+                <el-form-item label="问题类型：" prop="type">
+                  <el-radio-group :value="item.type" @input="(v)=>setQuestions('questions.'+idx+'.type',v)">
+                    <el-radio :label="0">单选</el-radio>
+                    <el-radio :label="1">多选</el-radio>
+                    <el-radio :label="2">问答</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="选项：" v-if="item.type == 0 || item.type == 1">
+                  <div v-for="(opt,index) in item.options" style="padding-bottom: 15px">
+                    <el-input :value="opt.name" @input="(v)=>setQuestions('questions.'+idx+'.options.'+index+'.name',v)">
+                      <template slot="prepend">{{['A','B','C','D','E','F','G','H','I','J','K','L'][index]}}：</template>
+                      <el-button slot="append" icon="delete" @click="delOptions(idx,index)"></el-button>
+                    </el-input>
+                  </div>
+                  <el-button type="primary" @click="addOptions(idx,item.options.length)" icon="plus">添加选项</el-button>
+                </el-form-item>
+              </div>
+            </div>
+            <el-form-item>
+              <el-button type="primary" @click="addQuestions" icon="plus">添加问题</el-button>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">
-            <el-button type="primary" @click="submitForm">保存</el-button>
+            <el-button type="primary" @click="step = step-1" v-if="step > 0">上一步</el-button>
+            <el-button type="primary" @click="submitForm" v-if="step == 1">保存</el-button>
+            <el-button type="primary" @click="step = step+1" v-if="step < 1">下一步</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -95,9 +100,12 @@
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
   import MyUpload from '../../../components/public/MyUpload.vue'
+  import {alert} from '../../../actions'
   export default {
     data() {
       return {
+        step: 0,
+        questions: [],
         rules: {
           name: [
             {required: true, message: '请输入活动名称', trigger: 'change'},
@@ -118,15 +126,20 @@
         },
       }
     },
+    watch: {
+      data(){
+        this.setQuestions();
+      }
+    },
     components: {
       MyUpload
     },
     computed: {
-      ...mapGetters(['data']),
+      ...mapGetters(['action', 'data']),
     },
     methods: {
       ...filter,
-      ...mapActions(['getActivityDetail', 'createActivity', 'updateActivity', 'setList', 'clear', 'setData', 'go']),
+      ...mapActions(['getPoll', 'createActivity', 'updateActivity', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
@@ -137,15 +150,37 @@
           }
         });
       },
-      resetForm() {
-        this.$refs.ruleForm.resetFields();
+      setQuestions(key, val){
+        if (key && val) {
+          this.setListVal([key, val]);
+        }
+        this.questions = this.data.questions.map((q) => ({...q}))
       },
+      addOptions(idx, index){
+        if (index >= 5) {
+          return alert('配图最多为五张！', 'error')
+        }
+        this.setListVal(['questions.' + idx + '.options.' + index, {name: ''}]);
+        this.setQuestions();
+      },
+      delOptions(idx, index){
+        this.delList(['questions.' + idx + '.options', index]);
+        this.setQuestions();
+      },
+      delQuestions(index){
+        this.delList(['questions', index]);
+        this.setQuestions();
+      },
+      addQuestions(){
+        this.setListVal(['questions.' + this.questions.length, {name: '', options: [], type: 0}]);
+        this.setQuestions();
+      }
     },
     created () {
-      this.getActivityDetail()
+      this.getPoll()
     },
     destroyed () {
-      this.clear('activity')
+      this.clear('poll')
     }
   }
 </script>

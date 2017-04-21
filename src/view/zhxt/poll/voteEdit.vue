@@ -71,7 +71,7 @@
               <div class="tap"><span class="num">第 {{1+idx}} 项 --- {{item.name}}</span><span class="stop" @click="$set(item,'stop',!item.stop)">{{item.stop?'展开':'收起'}}</span><span class="del" @click="delQuestions(idx)">删除</span></div>
               <div v-show="!item.stop">
                 <el-form-item label="标题：" prop="name">
-                  <el-input :value="item.name" @input="(v)=>setListVal(['questions.'+idx+'.name',v])"></el-input>
+                  <el-input :value="item.name" @input="(v)=>setQuestions('questions.'+idx+'.name',v)"></el-input>
                 </el-form-item>
                 <el-form-item label="配图：">
                   <div v-for="(opt,index) in item.options" style="padding-bottom: 15px;position: relative;">
@@ -82,12 +82,12 @@
                         :action="action"
                         :show-file-list="false"
                         :http-request="upload"
-                        :on-success="({url})=>setListVal(['questions.'+idx+'.options.'+index+'.picUrl',url])">
+                        :on-success="({url})=>setQuestions('questions.'+idx+'.options.'+index+'.picUrl',url)">
                         <img v-if="opt.picUrl" :src="opt.picUrl" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                       </el-upload>
                       <div class="desc">说明：
-                        <el-input :value="opt.desc" class="desc" style="top: 36px;" type="textarea" :rows="7" @input="(v)=>setListVal(['questions.'+idx+'.options.'+index+'.desc',v])"></el-input>
+                        <el-input :value="opt.desc" class="desc" style="top: 36px;" type="textarea" :rows="7" @input="(v)=>setQuestions('questions.'+idx+'.options.'+index+'.desc',v)"></el-input>
                       </div>
                     </el-row>
                   </div>
@@ -152,7 +152,7 @@
     },
     methods: {
       ...filter,
-      ...mapActions(['getPoll', 'createActivity', 'updateActivity', 'setList', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
+      ...mapActions(['getPoll', 'createActivity', 'updateActivity', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
@@ -163,7 +163,10 @@
           }
         });
       },
-      setQuestions(){
+      setQuestions(key, val){
+        if (key && val) {
+          this.setListVal([key, val]);
+        }
         this.questions = this.data.questions.map((q) => ({...q}))
       },
       addOptions(idx, index){

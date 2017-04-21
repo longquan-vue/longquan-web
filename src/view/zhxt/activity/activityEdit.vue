@@ -3,7 +3,7 @@
     <div class="contentBoxtitle">
       <span v-if="data.edit">添加工会活动</span>
       <span v-if="!data.edit">编辑工会活动</span>
-      <a @click="go(['activityList'])" style="float:right;">
+      <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"></el-button>
       </a>
     </div>

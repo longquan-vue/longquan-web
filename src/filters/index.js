@@ -41,59 +41,61 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
 export const userFilter = ({audit}) => ['普通用户', '普通用户', '职工认证用户'][audit] || '普通用户'
 export const group = (list, field = 'recording', filter = date7Filter) => {
-    const g = {};
-    list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
-    return g;
+  const g = {};
+  list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
+  return g;
 };
 
 // 报名列表过滤
 export const groupList = (list = [], {flagFn = () => false, field = 'start', keys = ['start', 'end']}) => {
-    const g = [];
-    list.map((item, idx) => {
-        if (idx > 0 && item[field] == g[g.length - 1][field]) {
-            g[g.length - 1].list.push(item);
-            g[g.length - 1].num += 1;
-            g[g.length - 1].flag = flagFn && flagFn(item);
-        } else {
-            g.push({num: 1, flag: flagFn && flagFn(item), list: [item]});
-            keys.map((key) => g[g.length - 1][key] = item[key]);
-        }
-    });
-    console.log(g);
-    return g;
+  const g = [];
+  list.map((item, idx) => {
+    if (idx > 0 && item[field] == g[g.length - 1][field]) {
+      g[g.length - 1].list.push(item);
+      g[g.length - 1].num += 1;
+      g[g.length - 1].flag = flagFn && flagFn(item);
+    } else {
+      g.push({num: 1, flag: flagFn && flagFn(item), list: [item]});
+      keys.map((key) => g[g.length - 1][key] = item[key]);
+    }
+  });
+  console.log(g);
+  return g;
 };
 
+export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 
 export default {
-    sexFilter,
-    sex2Filter,
-    marriageFilter,
-    marriage2Filter,
-    dateFilter,
-    dateFilter2,
-    date2Filter,
-    date3Filter,
-    date4Filter,
-    date4Filter2,
-    date5Filter,
-    date6Filter,
-    date7Filter,
-    date8Filter,
-    diffFilter,
-    searchFilter,
-    auditFilter,
-    group,
-    isEnd,
-    isStart,
-    ageFilter,
-    freezeFilter,
-    itemFilter,
-    spotType,
-    entryType,
-    stateType,
-    userFilter,
-    signFilter,
-    HHmmFilter,
-    groupList
+  sexFilter,
+  sex2Filter,
+  marriageFilter,
+  marriage2Filter,
+  dateFilter,
+  dateFilter2,
+  date2Filter,
+  date3Filter,
+  date4Filter,
+  date4Filter2,
+  date5Filter,
+  date6Filter,
+  date7Filter,
+  date8Filter,
+  diffFilter,
+  searchFilter,
+  auditFilter,
+  group,
+  isEnd,
+  isStart,
+  ageFilter,
+  freezeFilter,
+  itemFilter,
+  spotType,
+  entryType,
+  stateType,
+  userFilter,
+  signFilter,
+  HHmmFilter,
+  groupList,
+  numFilter
 }
 

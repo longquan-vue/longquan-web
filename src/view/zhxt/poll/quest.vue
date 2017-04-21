@@ -8,7 +8,7 @@
       <div class="mgb20">
         <MySelect title="问卷状态" field="status" :options="{1:'报名中',2:'已结束'}" :change="change"/>
         <MySelectInput :options="{'name':'问卷名称'}" def-key="name" :change="change"/>
-        <el-button style="float: right" type="primary" @click="go(['activityEdit','create'])" icon="plus">添加问卷</el-button>
+        <el-button style="float: right" type="primary" @click="go(['questEdit','create'])" icon="plus">添加问卷</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
@@ -24,8 +24,8 @@
           <MyColumn prop="score" label="同步显示" width="160"/>
           <MyColumn label="操作" fixed="right" width="300px">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go(['activityEdit',scope.row.id])">编辑</el-button>
-              <el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">导出问卷统计结果</el-button>
+              <el-button type="text" size="small" @click="go(['questEdit',scope.row.id])">编辑</el-button>
+              <el-button size="small" type="text" @click="go(['questEdit',scope.row.id])">导出问卷统计结果</el-button>
               <el-button size="small" type="text" @click="">导出全部答案</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
