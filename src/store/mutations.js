@@ -11,7 +11,8 @@ import {
     SETTING,
     SET_LIST_VAL,
     CHANGE_LIST,
-    SET_LOGIN
+    SET_LOGIN,
+    SET_LIST_KEY_VAL
 } from './mutation-types'
 import {defData} from '../constant'
 export default {

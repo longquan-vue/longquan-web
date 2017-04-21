@@ -43,3 +43,13 @@ export const delHealthApi = (id, del = 1) => request({
 export const pauseHealthApi = (id) => request({
   url: `${BASE_PATH}/pause/${id}`
 });
+//报名
+export const entryHealthApi = (data) => request({
+    url: `${BASE_PATH}/entry`,
+    data
+});
+//取消报名
+export const cancelEntryHealthApi = (data) => request({
+    url: `${BASE_PATH}/cancelEntry`,
+    data
+});

@@ -20,6 +20,7 @@ export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'Y
 export const diffFilter = (date, type) => moment().diff(date, type)
 export const date6Filter = (time) => dateFilter(time, 'MM-DD HH:mm');
 export const date7Filter = (time) => dateFilter(time, 'YYYY年MM月');
+export const HHmmFilter = (date) => dateFilter(date, 'HH:mm')
 export const date8Filter = ({recording}) => dateFilter(recording, 'YYYY-MM-DD HH:mm')
 export const ageFilter = (age) => age ? moment().subtract(age - 0, 'years').format('x') - 0 : null;
 
@@ -29,8 +30,8 @@ export const isStart = (startTime) => new Date().getTime() < startTime;
 //单人，双人，多人项目
 export const itemFilter = (item) => ['多人项目', '单人项目', '双人项目', '多人项目'][item] || '多人项目';
 export const spotType = ({type}) => ['多人项目', '单人项目', '双人项目', '多人项目'][type] || '多人项目';
-export const entryType = ({entry}) => ['所有用户可报名', '认证用户可报名'][entry]|| '所有用户可报名';
-export const stateType = ({status}) => ['未开始', '进行中','暂停','已结束'][status]|| '未开始';
+export const entryType = ({entry}) => ['所有用户可报名', '认证用户可报名'][entry] || '所有用户可报名';
+export const stateType = ({status}) => ['未开始', '进行中', '暂停', '已结束'][status] || '未开始';
 
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
@@ -40,39 +41,59 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
 export const userFilter = ({audit}) => ['普通用户', '普通用户', '职工认证用户'][audit] || '普通用户'
 export const group = (list, field = 'recording', filter = date7Filter) => {
-  const g = {};
-  list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
-  return g;
+    const g = {};
+    list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
+    return g;
 };
 
+// 报名列表过滤
+export const groupList = (list = [], {flagFn = () => false, field = 'start', keys = ['start', 'end']}) => {
+    const g = [];
+    list.map((item, idx) => {
+        if (idx > 0 && item[field] == g[g.length - 1][field]) {
+            g[g.length - 1].list.push(item);
+            g[g.length - 1].num += 1;
+            g[g.length - 1].flag = flagFn && flagFn(item);
+        } else {
+            g.push({num: 1, flag: flagFn && flagFn(item), list: [item]});
+            keys.map((key) => g[g.length - 1][key] = item[key]);
+        }
+    });
+    console.log(g);
+    return g;
+};
+
+
 export default {
-  sexFilter,
-  sex2Filter,
-  marriageFilter,
-  marriage2Filter,
-  dateFilter,
-  dateFilter2,
-  date2Filter,
-  date3Filter,
-  date4Filter,
-  date4Filter2,
-  date5Filter,
-  date6Filter,
-  date7Filter,
-  date8Filter,
-  diffFilter,
-  searchFilter,
-  auditFilter,
-  group,
-  isEnd,
-  isStart,
-  ageFilter,
-  freezeFilter,
-  itemFilter,
-  spotType,
-  entryType,
-  stateType,
-  userFilter,
-  signFilter,
+    sexFilter,
+    sex2Filter,
+    marriageFilter,
+    marriage2Filter,
+    dateFilter,
+    dateFilter2,
+    date2Filter,
+    date3Filter,
+    date4Filter,
+    date4Filter2,
+    date5Filter,
+    date6Filter,
+    date7Filter,
+    date8Filter,
+    diffFilter,
+    searchFilter,
+    auditFilter,
+    group,
+    isEnd,
+    isStart,
+    ageFilter,
+    freezeFilter,
+    itemFilter,
+    spotType,
+    entryType,
+    stateType,
+    userFilter,
+    signFilter,
+    HHmmFilter,
+    groupList
 }
 

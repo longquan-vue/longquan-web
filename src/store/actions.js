@@ -31,7 +31,6 @@ import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, fi
 import {fileApi, delFileApi} from '../api/fileApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
-import {weekFilter} from '../filters'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -196,6 +195,7 @@ const getHealthEnter = async({commit, state}) => commit(GET_DATA_LIST, await fin
 const exportHealthEntry = ({commit, state}) => exportHealthEntryApi(state.route.params.id, state.page);
 //获取健身项目相关数据   详情
 const gethealthDetail = async({commit, state}) => {
+  await getMine({commit, state});
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.health});
@@ -208,7 +208,7 @@ const createHealth = ({commit, state}) => createHealthApi(state.data).then(() =>
 //获取健身项目相关数据   修改健身项目
 const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取健身项目相关数据   删除健身项目
-const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => commit(DEL_DATA, idx))
+const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => success('删除成功！').then(()=>commit(DEL_DATA, idx)))
 //获取健身项目相关数据   暂停开启健身项目
 const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取招聘信息相关数据  招聘列表
