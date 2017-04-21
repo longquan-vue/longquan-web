@@ -7,14 +7,20 @@
         <div class="healthList">
             <ul>
                 <li flex v-for="(item,index) in list">
-                    <div flex items="center"><img :src="item.picUrl"></div>
+                    <div flex items="center" @click="go(['healthManageDetail',item.id])"><img :src="item.picUrl"></div>
                     <div box="1">{{item.name}}</div>
                     <div class="">
-                        <img src="../../../../static/wx/reEdit.png" @click="go(['healthDetail',item.id])">
+                        <img src="../../../../static/wx/reEdit.png" @click="go(['healthManageEdit',item.id])">
                         <img src="../../../../static/wx/repause.png" @click="pause(index,item)" v-if="item.status==1">
                         <img src="../../../../static/wx/restart.png" @click="pause(index,item)" v-if="item.status==2">
                         <img src="../../../../static/wx/recover.png" @click="del(index,item)">
                     </div>
+                </li>
+                <li flex>
+                    <div flex items="center">
+                        <a @click="go(['healthManageEdit','create'])"><img src="../../../../static/wx/add.png"></a>
+                    </div>
+                    <div box="1">添加健身项目</div>
                 </li>
             </ul>
         </div>

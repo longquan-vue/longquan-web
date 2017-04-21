@@ -1,6 +1,5 @@
 <style lang="less">
-    @import "../../../../static/normal.less";
-    @import "healthDetail.less";
+
 </style>
 <template>
     <div class="healthDetail" style="background-color: #ffffff;height: 100%;overflow: scroll;padding-top:50px;">
@@ -33,15 +32,12 @@
                         <span>{{HHmmFilter(item)}}--{{HHmmFilter(data.ends[index])}}</span>
                     </div>
                     <div class="siginList" flex items="center">
-                        <div box="1" flex justify="between">
-                            <a v-for="u in 5" :class="{'lasta':group[index] && group[index].list[u-1] && u == 5}">
-                                <img @click="go(['personMess',group[index] && group[index].list[u-1].id])" :src="group[index] && group[index].list[u-1].headimgurl" v-if="group[index] && group[index].list[u-1] && u < 5">
-                                <span v-if="group[index] && group[index].list[u-1] && u == 5" @click="openPerson(index)">...</span>
+                        <div box="1" flex justify="between" style="padding-right:0">
+                            <a v-for="u in 7" :class="{'lasta':group[index] && group[index].list[u-1] && u == 7}">
+                                <img @click="go(['personMess',group[index] && group[index].list[u-1].id])" :src="group[index] && group[index].list[u-1].headimgurl" v-if="group[index] && group[index].list[u-1] && u < 7">
+                                <span v-if="group[index] && group[index].list[u-1] && u == 7" @click="openPerson(index)">...</span>
                             </a>
                         </div>
-                        <a class="ising" v-if="!(group[index] && group[index].flag)" @click="entry({id:data.id,starts:[item],ends:[data.ends[index]]},value)">报名</a>
-                        <a class="ising" v-if="group[index] && group[index].flag" @click="noentry({id:data.id,starts:[item],ends:[data.ends[index]]},value)">取消报名</a>
-                        <a class="over" v-if="group[index] && group[index].num >= data.total" @click="">已满员</a>
                     </div>
                 </li>
             </ul>
@@ -74,9 +70,6 @@
                         </div>
                     </li>
                 </ul>
-                <a class="baoming" v-if="!group[idx].flag" @click="entry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">报名</a>
-                <a class="baoming" v-if="group[idx].flag" @click="noentry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">取消报名</a>
-                <a class="baoming" v-if="group[idx].num >= data.total" @click="">已满员</a>
             </div>
         </popup>
     </div>
@@ -123,8 +116,6 @@
         },
         watch: {
             value(newval, oldval){
-                // console.log(oldval+'老');
-                // console.log(newval + '新');
                 if (this.$store.state.data.date.includes(newval)){
                     this.showList = true;
                     this.change('created', moment(newval).format('x') * 1)
@@ -148,33 +139,6 @@
             calenderClick(){
                 console.log(this.value);
             },
-            isShow(val, data, date){
-                if (val == 1) {   //报名成功
-                    this.content = '恭喜您！报名成功';
-                    this.btns = {btn: '确定'};
-                } else if (val == 2) { // 取消
-                    // this.img = '../../../../static/wx/succ.png';
-                    this.content = '是否确定取消预约报名';
-                    this.btns = {
-                        btn1: '是', btn2: '否', action: () => {
-                            cancelEntryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
-                                window.location.reload();
-                            });
-                        }
-                    };
-                }else if (val == 3) { // 没有认证
-                    // this.img = '../../../../static/wx/succ.png';
-                    this.content = '请先完善个人信息并通过职工认证';
-                    this.btns = {
-                        btn1: '去认证', btn2: '取消', action: () => {
-                            // console.log('点击了去认证')
-                            this.go(['centeredit'])
-                        }
-                    };
-                }
-
-                this.isshow = true;
-            },
             onResultChange(val){
                 this.isshow = val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
@@ -194,18 +158,6 @@
             change(key, value){   //这是每个 change
                 this.changeSelect({key, value});
                 this.getHealthEnter()
-            },
-            entry(data, date){
-                if (this.$store.state.login.audit == 2){
-                    entryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
-                        this.isShow(1);
-                    });
-                }else {
-                    this.isShow(3);
-                }
-            },
-            noentry(data, date){  //取消报名
-                this.isShow(2, data, date)
             },
             openPerson(index){
                 this.idx = index;
