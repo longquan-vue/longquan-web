@@ -6,7 +6,7 @@
     <div class="contentBoxtitle"><span>投票选举列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="投票状态" field="status" :options="{1:'报名中',2:'已结束'}" :change="change"/>
+        <MySelect title="问卷状态" field="status" :options="{0:'未开始',1:'进行中',2:'已结束'}" :change="change"/>
         <MyInput title="投票名称" field="entry" :change="change"/>
         <el-button style="float: right" type="primary" @click="go(['voteEdit','create'])" icon="plus">添加投票</el-button>
       </div>
@@ -21,7 +21,7 @@
           <MyColumn prop="time" label="投票次数（次/天/人）" width="120"/>
           <MyColumn prop="days" label="连续可投天数" :formatter="entryType" width="160"/>
           <MyColumn prop="repetition" label="是否可以重复投票" width="120"/>
-          <MyColumn prop="sync" label="同步显示" width="160"/>
+          <MyColumn prop="sync" label="同步显示" :formatter="syncFilter" width="160"/>
           <MyColumn prop="status" label="操作" :formatter="stateType" width="120"/>
           <MyColumn label="操作" fixed="right" width="300px">
             <template scope="scope">

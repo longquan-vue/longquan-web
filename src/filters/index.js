@@ -14,7 +14,7 @@ export const dateFilter2 = (date, pattern = 'YYYY-M-DD') => date ? moment(date).
 export const date2Filter = ({birthday}) => dateFilter(birthday)
 export const date3Filter = (birthday) => dateFilter(birthday, 'YYYY-MM-DD HH:mm')
 
-export const date4Filter = ({start, end}) => dateFilter(start, 'YYYY-MM-DD HH:mm') + '--' + dateFilter(end, 'YYYY-MM-DD HH:mm')
+export const date4Filter = ({start, end}) => dateFilter(start, 'YYYY-MM-DD HH:mm') + ' 至 ' + dateFilter(end, 'YYYY-MM-DD HH:mm')
 export const date4Filter2 = ({start, end}) => dateFilter(start, 'HH:mm') + '--' + dateFilter(end, 'HH:mm')
 export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'YYYY-MM-DD HH:mm') + '--' + dateFilter(entryEnd, 'YYYY-MM-DD HH:mm')
 export const diffFilter = (date, type) => moment().diff(date, type)
@@ -64,6 +64,7 @@ export const groupList = (list = [], {flagFn = () => false, field = 'start', key
 };
 
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
+export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
 
 export default {
   sexFilter,
@@ -96,6 +97,7 @@ export default {
   signFilter,
   HHmmFilter,
   groupList,
-  numFilter
+  numFilter,
+  syncFilter
 }
 

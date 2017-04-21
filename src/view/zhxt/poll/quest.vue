@@ -6,22 +6,22 @@
     <div class="contentBoxtitle"><span>问卷调查列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="问卷状态" field="status" :options="{1:'报名中',2:'已结束'}" :change="change"/>
+        <MySelect title="问卷状态" field="status" :options="{0:'未开始',1:'进行中',2:'已结束'}" :change="change"/>
         <MySelectInput :options="{'name':'问卷名称'}" def-key="name" :change="change"/>
         <el-button style="float: right" type="primary" @click="go(['questEdit','create'])" icon="plus">添加问卷</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="title" label="问卷标题" width="120"/>
-          <MyColumn prop="score" label="积分奖励"/>
-          <MyColumn prop="status" label="问卷状态"/>
-          <MyColumn prop="start" label="调查时间" :formatter="date4Filter" width="170"/>
-          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="170"/>
-          <MyColumn prop="time" label="人均答题次数" width="120"/>
-          <MyColumn prop="entry" label="题数" :formatter="entryType" width="160"/>
-          <MyColumn prop="current" label="答卷数量" width="120"/>
-          <MyColumn prop="sync" label="同步显示" width="160"/>
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="title" label="问卷标题" min-width="100"/>
+          <MyColumn prop="score" label="积分奖励" min-width="100"/>
+          <MyColumn prop="status" label="问卷状态" min-width="100"/>
+          <MyColumn prop="start" label="调查时间" :formatter="date4Filter" min-width="100"/>
+          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="160"/>
+          <MyColumn prop="time" label="人均答题次数" min-width="130"/>
+          <MyColumn prop="questionNum" label="题数" min-width="70"/>
+          <MyColumn prop="answerNum" label="答卷数量" min-width="100"/>
+          <MyColumn prop="sync" label="同步显示" :formatter="syncFilter" min-width="130"/>
           <MyColumn label="操作" fixed="right" width="300px">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['questEdit',scope.row.id])">编辑</el-button>
