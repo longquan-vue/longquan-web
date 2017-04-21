@@ -8,14 +8,13 @@
             <div class="height:44px;">
                 <sticky :check-sticky-support="false">
                     <tab :line-width=2 active-color='#fc378c' v-model="index">
-                        <tab-item class="vux-center" :selected="demo2 === item"
-                                  v-for="(item, index) in list2" @click="demo2 = item" :key="index">{{item}}</tab-item>
+                        <tab-item class="vux-center" :selected="demo2 === item" v-for="(item, index) in list2" @click="change(item)" :key="index">{{item}}</tab-item>
                     </tab>
                 </sticky>
             </div>
             <div class="tab-box">
                 <ul v-if="index==0" class="askListUl">
-                    <li @click="goto(['pollquestion',{id:'zhongcheng'}])">
+                    <li @click="goto(['pollquestion',{id:'zhongcheng'}])" v-for="(item,index) in list">
                         <div class="askListHead">
                             <div class="askListHeadBox1">
                                 <h3>1.问卷调查关于“2017龙泉驿区环境卫生”全面问卷调查普查关于“2017龙泉驿区环境卫生”全面问卷调查普查</h3>
@@ -57,14 +56,14 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filter from '../../../filters'
     import { Tab, TabItem, Sticky, Divider, XButton, Swiper, SwiperItem } from 'vux'
 
     export default{
         data(){
             return{
                 list2: ['问卷调查', '投票选举'],
-                demo2: '美食',
+                demo2: '问卷调查',
                 index:0
             }
         },
@@ -80,11 +79,20 @@
         computed: {...mapGetters([ 'page','list']),
         },
         methods:{
-            ...mapActions(['goto','clear','getHealth','clearPage']),
-            date3Filter,
+            ...mapActions(['clear', 'getPollList', 'changeSelect', 'delPoll', 'go']),
+            ...filter,
+            change(item){
+                this.demo2 = item;
+                if (this.demo2 == '问卷调查'){
+                    this.changeSelect({key: 'type', value: 0});
+                }else {
+                    this.changeSelect({key: 'type', value: 1});
+                }
+            }
         },
         created () {
-
+            this.changeSelect({key: 'type', value: 0});
+            this.getPollList()
         },
         destroyed(){
             this.clear()
