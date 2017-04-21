@@ -27,8 +27,9 @@ import {
   entryActivityApi,
   exportEntryApi
 } from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi,createRecruitApi, updateRecruitApi,exportRecruitEntryApi} from '../api/recruitApi'
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
+import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
@@ -208,7 +209,7 @@ const createHealth = ({commit, state}) => createHealthApi(state.data).then(() =>
 //获取健身项目相关数据   修改健身项目
 const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取健身项目相关数据   删除健身项目
-const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => success('删除成功！').then(()=>commit(DEL_DATA, idx)))
+const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => success('删除成功！').then(() => commit(DEL_DATA, idx)))
 //获取健身项目相关数据   暂停开启健身项目
 const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取招聘信息相关数据  招聘列表
@@ -218,11 +219,11 @@ const createRecruit = ({commit, state}) => createRecruitApi(state.data).then(() 
 //获取招聘信息相关数据  修改
 const updateRecruit = ({commit, state}) => updateRecruitApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取招聘信息相关数据  报名列表
-const getRecruitSigin = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitEntryListByIdApi(state.route.params.id,state.page));
+const getRecruitSigin = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitEntryListByIdApi(state.route.params.id, state.page));
 //获取招聘信息相关数据  导出报名列表
-const exportRecruitEntry = ({commit, state}) =>exportRecruitEntryApi(state.route.params.id,state.page)
+const exportRecruitEntry = ({commit, state}) => exportRecruitEntryApi(state.route.params.id, state.page)
 //删除招聘信息
-const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_LIST, idx))
+const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_DATA, idx))
 //获取招聘信息相关数据   招聘详情
 const getRecruitDetail = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -247,7 +248,24 @@ const delList = ({commit, state}, [key, idx]) => commit(DEL_LIST, [key, idx])
 // 修改系统设置
 const changeSys = ({commit, state}, data) => commit(SETTING, data)
 // 保存系统设置
-const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！')).catch(()=>error('修改失败！'))
+const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 获取投票调查详情
+const getPoll = async({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {edit: true, ...defData.poll});
+  } else {
+    commit(SET_DATA, {...await getPollApi(id), edit: false});
+  }
+};
+// 获取投票调查列表
+const getPollList = async({commit, state}) => commit(GET_DATA_LIST, await pollListApi(state.page));
+// 创建投票调查
+const createPoll = ({commit, state}) => createPollApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改投票调查
+const updatePoll = ({commit, state}) => updatePollApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+//删除投票调查
+const delPoll = ({commit, state}, [id, idx]) => delPollApi(id).then(() => commit(DEL_DATA, idx))
 export default {
   getMineWelfare,
   getUser,
@@ -312,4 +330,9 @@ export default {
   pauseHealth,//暂停开启健身项目
   createRecruit,//创建招聘信息
   updateRecruit,//修改招聘信息
+  getPollList,// 获取调查列表
+  getPoll,// 获取调查详情
+  createPoll,// 创建投票调查
+  updatePoll,// 修改投票调查
+  delPoll,// 修改投票调查
 }

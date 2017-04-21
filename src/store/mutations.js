@@ -56,7 +56,19 @@ export default {
       }
     },
     [DEL_LIST] (state, [key, idx]) {
-      state.data[key].splice(idx, 1)
+      const keys = key.split('.')
+      switch (keys.length) {
+        case 1:
+          return state.data[keys[0]].splice(idx, 1)
+        case 2:
+          return state.data[keys[0]][keys[1]].splice(idx, 1)
+        case 3:
+          return state.data[keys[0]][keys[1]][keys[2]].splice(idx, 1)
+        case 4:
+          return state.data[keys[0]][keys[1]][keys[2]][keys[3]].splice(idx, 1)
+        case 5:
+          return state.data[keys[0]][keys[1]][keys[2]][keys[3]][keys[4]].splice(idx, 1)
+      }
     },
     [CHANGE_LIST] (state, [key, val]) {
       const keys = key.split('.')

@@ -1,0 +1,68 @@
+.poll {
+  .tap {
+    border-bottom: 2px dashed #d9d9d9;
+    position: relative;
+    top: -30px;
+    height: 30px;
+    & > span {
+      position: absolute;
+      font-size: 16px;
+      background: #FFFFFF;
+      display: inline-block;
+      padding: 0 15px;
+      top: 17px;
+    }
+    .num {
+      font-size: 16px;
+      left: 30px;
+    }
+    .stop {
+      right: 62px;
+      cursor: pointer;
+    }
+    .del {
+      right: 0;
+      cursor: pointer;
+    }
+  }
+  .avatar_box {
+    height: 200px;
+    position: relative;
+    .desc {
+      padding-left: 215px;
+      width: 100%;
+      position: absolute;
+      right: 0;
+    }
+    .av_tip {
+      height: 200px;
+      line-height: 200px;
+      padding-left: 15px;
+      float: left;
+    }
+    .avatar-uploader {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      z-index: 1;
+      .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        line-height: 0;
+        &:hover {
+          border-color: #20a0ff;
+        }
+        .avatar {
+          width: 200px;
+          height: 200px;
+        }
+      }
+      .avatar-uploader-icon {
+        color: #8c939d;
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+      }
+    }
+  }
+}

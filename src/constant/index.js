@@ -19,7 +19,22 @@ export const defData = {
     current: '', type: '', deleted: '', status: '', files: [], admin: {}
   },
   health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 0, type: 1},
-  recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',}
+  recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
+  poll: {
+    title: '',
+    description: '',
+    start: '',
+    end: '',
+    score: 0,
+    time: 0,
+    repetition: 0,
+    days: 0,
+    sync: '[]',
+    rule: '',
+    admin: {},
+    created: '',
+    questions: []
+  }
 };
 export const fwhMenu = {
   "button": [{

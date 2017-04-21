@@ -14,8 +14,10 @@
       <!--</el-submenu>-->
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-date"></i>投票调查管理</template>
-        <el-menu-item index="pollList">投票调查列表</el-menu-item>
-        <el-menu-item index="PollCount">统计报表</el-menu-item>
+        <el-menu-item index="questList">问卷调查列表</el-menu-item>
+        <el-menu-item index="questCount">问卷调查统计</el-menu-item>
+        <el-menu-item index="voteList">投票选举列表</el-menu-item>
+        <el-menu-item index="voteCount">投票选举统计</el-menu-item>
       </el-submenu>
       <!--<el-submenu index="4">-->
       <!--<template slot="title"><i class="el-icon-menu"></i>回音壁管理</template>-->

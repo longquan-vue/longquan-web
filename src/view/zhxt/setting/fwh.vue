@@ -36,7 +36,7 @@
               <img v-if="sub.picurl" :src="sub.picurl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
-            <span>提示：支持JPG、PNG格式，360*200px</span>
+            <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
           </div>
         </el-form-item>
         <el-form-item label="描述" prop="description" :rules="[{required:true,message:'描述不能为空'}]">

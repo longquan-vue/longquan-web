@@ -76,9 +76,12 @@ export default [
       {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter'}, // 意向报名列表
       {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'recruitCount'}, // 招聘信息统计
       /*投票调查*/
-      {path: `${ROOT}/zhxt/poll`, component: require('../view/zhxt/notice/notice.vue'), name: 'pollList'}, // 投票调查列表
-      {path: `${ROOT}/zhxt/poll/:id`, component: require('../view/zhxt/notice/notice.vue'), name: 'pollEdit'}, // 编辑投票调查
-      {path: `${ROOT}/zhxt/PollCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'PollCount'}, // 投票调查统计
+      {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList'}, // 投票列表
+      {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit'}, // 编辑投票
+      {path: `${ROOT}/zhxt/voteCount`, component: require('../view/zhxt/poll/voteCount.vue'), name: 'voteCount'}, // 投票统计
+      {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList'}, // 调查列表
+      {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit'}, // 编辑调查
+      {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount'}, // 调查统计
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting'},//系统设置
       /*结构配置*/
