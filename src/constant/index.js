@@ -21,25 +21,19 @@ export const defData = {
   health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 0, type: 1},
   recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
   poll: {
-    name: '投票调查',
-    desc: '投票调查描述',
-    start: 1492574052497,
-    end: 1492794052497,
-    score: 500,
-    time: 5,
-    repeat: 0,
-    days: 200,
-    sync: ['0', '1'],
-    rule: '<h3>1、规则都是假的！</h3><h3>2、没有规则！</h3>',
-    admin: {name: '钟十八'},
-    created: 1492684372947,
-    questions: [{
-      name: '刘亦非',
-      options: [{
-        picUrl: 'https://imgsa.baidu.com/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=37e5a3c1b951f819e5280b18bbdd2188/0bd162d9f2d3572c1f28b9368313632763d0c315.jpg',
-        desc: '大大美女'
-      }]
-    }]
+    title: '',
+    description: '',
+    start: '',
+    end: '',
+    score: 0,
+    time: 0,
+    repetition: 0,
+    days: 0,
+    sync: '[]',
+    rule: '',
+    admin: {},
+    created: '',
+    questions: []
   }
 };
 export const fwhMenu = {

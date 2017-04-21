@@ -13,16 +13,15 @@
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="name" label="投票选举标题" width="120"/>
-          <MyColumn prop="sponsor" label="积分奖励（积分/天）"/>
-          <MyColumn prop="coSponsor" label="问卷状态"/>
-          <MyColumn prop="organizer" label="承办方"/>
-          <MyColumn prop="start" label="投票时间" :formatter="date5Filter" width="170"/>
-          <MyColumn prop="entryStart" label="发布时间" :formatter="date4Filter" width="170"/>
-          <MyColumn prop="place" label="投票次数（次/天/人）" width="120"/>
-          <MyColumn prop="entry" label="连续可投天数" :formatter="entryType" width="160"/>
-          <MyColumn prop="current" label="是否可以重复投票" width="120"/>
-          <MyColumn prop="score" label="同步显示" width="160"/>
+          <MyColumn prop="title" label="投票选举标题" width="120"/>
+          <MyColumn prop="score" label="积分奖励（积分/天）"/>
+          <MyColumn prop="status" label="问卷状态"/>
+          <MyColumn prop="start" label="投票时间" :formatter="date4Filter" width="170"/>
+          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="170"/>
+          <MyColumn prop="time" label="投票次数（次/天/人）" width="120"/>
+          <MyColumn prop="days" label="连续可投天数" :formatter="entryType" width="160"/>
+          <MyColumn prop="repetition" label="是否可以重复投票" width="120"/>
+          <MyColumn prop="sync" label="同步显示" width="160"/>
           <MyColumn prop="status" label="操作" :formatter="stateType" width="120"/>
           <MyColumn label="操作" fixed="right" width="300px">
             <template scope="scope">
@@ -34,7 +33,7 @@
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="getActivity"/>
+        <MyPagination :method="getPollList"/>
       </div>
     </div>
   </div>
@@ -54,18 +53,19 @@
     },
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['clear', 'getActivity', 'changeSelect', 'deleteActivity', 'go']),
+      ...mapActions(['clear', 'getPollList', 'changeSelect', 'delPoll', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        confirm(`确定删除投票调查[${name}]吗?`, 'warning').then(() => this.deleteActivity([id, idx]))
+        confirm(`确定删除投票调查[${name}]吗?`, 'warning').then(() => this.delPoll([id, idx]))
       },
       change(key, value){   //这是每个 change
         this.changeSelect({key, value});
-        this.getActivity()
+        this.getPollList()
       },
     },
     created () {
-      this.getActivity()
+      this.changeSelect({key: 'type', value: 1});
+      this.getPollList()
     },
     destroyed () {
       this.clear('poll')

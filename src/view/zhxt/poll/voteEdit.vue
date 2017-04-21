@@ -14,11 +14,11 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <div v-if="step == 0">
-            <el-form-item label="投票选举标题" prop="name">
-              <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
+            <el-form-item label="投票选举标题" prop="title">
+              <el-input :value="data.title" @input="(v)=>setData({title:v})"></el-input>
             </el-form-item>
             <el-form-item label="投票选举描述" prop="desc">
-              <el-input :value="data.desc" @input="(v)=>setData({desc:v})"></el-input>
+              <el-input :value="data.description" @input="(v)=>setData({description:v})"></el-input>
             </el-form-item>
             <el-form-item label="投票选举时间" required>
               <el-col :span="11">
@@ -39,8 +39,8 @@
             <el-form-item label="人均投票次数" prop="time">
               <el-input :value="data.time" @input="(v)=>setData({time:v})"></el-input>
             </el-form-item>
-            <el-form-item label="是否重复投票" prop="repeat">
-              <el-radio-group :value="data.repeat" @input="(v)=>setData({repeat:v})">
+            <el-form-item label="是否重复投票" prop="repetition">
+              <el-radio-group :value="data.repetition" @input="(v)=>setData({repetition:v})">
                 <el-radio :label="0">单日可以重复投票给同一对象</el-radio>
                 <el-radio :label="1">单日不能重复投票给同一对象</el-radio>
               </el-radio-group>
@@ -49,7 +49,7 @@
               <el-input :value="data.days" @input="(v)=>setData({days:v})"></el-input>
             </el-form-item>
             <el-form-item label="同步显示" prop="sync">
-              <el-checkbox-group :value="data.sync" @input="(v)=>setData({sync:v})">
+              <el-checkbox-group :value="JSON.parse(data.sync||'[]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
                 <el-checkbox label="0">网站</el-checkbox>
                 <el-checkbox label="1">服务号</el-checkbox>
               </el-checkbox-group>
@@ -70,11 +70,11 @@
             <div v-for="(item,idx) in questions">
               <div class="tap"><span class="num">第 {{1+idx}} 项 --- {{item.name}}</span><span class="stop" @click="$set(item,'stop',!item.stop)">{{item.stop?'展开':'收起'}}</span><span class="del" @click="delQuestions(idx)">删除</span></div>
               <div v-show="!item.stop">
-                <el-form-item label="标题：" prop="name">
-                  <el-input :value="item.name" @input="(v)=>setQuestions('questions.'+idx+'.name',v)"></el-input>
+                <el-form-item label="标题：" prop="title">
+                  <el-input :value="item.title" @input="(v)=>setQuestions('questions.'+idx+'.title',v)"></el-input>
                 </el-form-item>
                 <el-form-item label="配图：">
-                  <div v-for="(opt,index) in item.options" style="padding-bottom: 15px;position: relative;">
+                  <div v-for="(opt,index) in item.files" style="padding-bottom: 15px;position: relative;">
                     <div style="position: absolute;right: 15px;cursor: pointer;z-index: 2;" @click="delOptions(idx,index)">删除</div>
                     <el-row class="avatar_box">
                       <el-upload
@@ -82,16 +82,16 @@
                         :action="action"
                         :show-file-list="false"
                         :http-request="upload"
-                        :on-success="({url})=>setQuestions('questions.'+idx+'.options.'+index+'.picUrl',url)">
-                        <img v-if="opt.picUrl" :src="opt.picUrl" class="avatar">
+                        :on-success="(file)=>setQuestions('questions.'+idx+'.files.'+index,file)">
+                        <img v-if="opt.url" :src="opt.url" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                       </el-upload>
                       <div class="desc">说明：
-                        <el-input :value="opt.desc" class="desc" style="top: 36px;" type="textarea" :rows="7" @input="(v)=>setQuestions('questions.'+idx+'.options.'+index+'.desc',v)"></el-input>
+                        <el-input :value="opt.description" class="description" style="top: 36px;" type="textarea" :rows="7" @input="(v)=>setQuestions('questions.'+idx+'.files.'+index+'.description',v)"></el-input>
                       </div>
                     </el-row>
                   </div>
-                  <el-button type="primary" @click="addOptions(idx,item.options.length)" icon="plus">添加配图</el-button>
+                  <el-button type="primary" @click="addOptions(idx,item.files.length)" icon="plus">添加配图</el-button>
                 </el-form-item>
               </div>
             </div>
@@ -120,9 +120,8 @@
         step: 0,
         questions: [],
         rules: {
-          name: [
+          title: [
             {required: true, message: '请输入活动名称', trigger: 'change'},
-            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change'}
           ],
           start: [
             {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
@@ -152,11 +151,11 @@
     },
     methods: {
       ...filter,
-      ...mapActions(['getPoll', 'createActivity', 'updateActivity', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
+      ...mapActions(['getPoll', 'createPoll', 'updatePoll', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            this.data.edit ? this.createActivity() : this.updateActivity();
+            this.data.edit ? this.createPoll() : this.updatePoll();
           } else {
             this.$message.error('*号字段必须填写');
             return false;
@@ -167,17 +166,17 @@
         if (key && val) {
           this.setListVal([key, val]);
         }
-        this.questions = this.data.questions.map((q) => ({...q}))
+        this.questions = this.data && this.data.questions ? this.data.questions.map((q) => ({...q})) : []
       },
       addOptions(idx, index){
         if (index >= 5) {
           return alert('配图最多为五张！', 'error')
         }
-        this.setListVal(['questions.' + idx + '.options.' + index, {picUrl: '', desc: ''}]);
+        this.setListVal(['questions.' + idx + '.files.' + index, {url: '', description: ''}]);
         this.setQuestions();
       },
       delOptions(idx, index){
-        this.delList(['questions.' + idx + '.options', index]);
+        this.delList(['questions.' + idx + '.files', index]);
         this.setQuestions();
       },
       delQuestions(index){
@@ -185,11 +184,12 @@
         this.setQuestions();
       },
       addQuestions(){
-        this.setListVal(['questions.' + this.questions.length, {name: '', options: []}]);
+        this.setListVal(['questions.' + this.questions.length, {name: '', files: []}]);
         this.setQuestions();
       }
     },
     created () {
+      this.setData({type: 1})
       this.getPoll()
     },
     destroyed () {

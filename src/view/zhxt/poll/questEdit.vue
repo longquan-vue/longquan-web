@@ -14,11 +14,11 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <div v-if="step == 0">
-            <el-form-item label="问卷标题" prop="name">
-              <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
+            <el-form-item label="问卷标题" prop="title">
+              <el-input :value="data.title" @input="(v)=>setData({title:v})"></el-input>
             </el-form-item>
-            <el-form-item label="问卷描述" prop="desc">
-              <el-input :value="data.desc" @input="(v)=>setData({desc:v})"></el-input>
+            <el-form-item label="问卷描述" prop="description">
+              <el-input :value="data.description" @input="(v)=>setData({description:v})"></el-input>
             </el-form-item>
             <el-form-item label="调查时间" required>
               <el-col :span="11">
@@ -40,7 +40,7 @@
               <el-input :value="data.time" @input="(v)=>setData({time:v})"></el-input>
             </el-form-item>
             <el-form-item label="同步显示" prop="sync">
-              <el-checkbox-group :value="data.sync" @input="(v)=>setData({sync:v})">
+              <el-checkbox-group :value="JSON.parse(data.sync||'[]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
                 <el-checkbox label="0">网站</el-checkbox>
                 <el-checkbox label="1">服务号</el-checkbox>
               </el-checkbox-group>
@@ -59,21 +59,21 @@
           </div>
           <div v-if="step == 1">
             <div v-for="(item,idx) in questions">
-              <div class="tap"><span class="num">第 {{numFilter(idx+1)}} 项 --- {{item.name}}</span><span class="stop" @click="$set(item,'stop',!item.stop)">{{item.stop?'展开':'收起'}}</span><span class="del" @click="delQuestions(idx)">删除</span></div>
+              <div class="tap"><span class="num">第 {{numFilter(idx+1)}} 项 --- {{item.title}}</span><span class="stop" @click="$set(item,'stop',!item.stop)">{{item.stop?'展开':'收起'}}</span><span class="del" @click="delQuestions(idx)">删除</span></div>
               <div v-show="!item.stop">
-                <el-form-item label="问题题目：" prop="name">
-                  <el-input :value="item.name" @input="(v)=>setQuestions('questions.'+idx+'.name',v)"></el-input>
+                <el-form-item label="问题题目：" prop="title">
+                  <el-input :value="item.title" @input="(v)=>setQuestions('questions.'+idx+'.title',v)"></el-input>
                 </el-form-item>
                 <el-form-item label="问题类型：" prop="type">
                   <el-radio-group :value="item.type" @input="(v)=>setQuestions('questions.'+idx+'.type',v)">
-                    <el-radio :label="0">单选</el-radio>
-                    <el-radio :label="1">多选</el-radio>
-                    <el-radio :label="2">问答</el-radio>
+                    <el-radio :label="1">单选</el-radio>
+                    <el-radio :label="2">多选</el-radio>
+                    <el-radio :label="3">问答</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="选项：" v-if="item.type == 0 || item.type == 1">
+                <el-form-item label="选项：" v-if="item.type == 1 || item.type == 2">
                   <div v-for="(opt,index) in item.options" style="padding-bottom: 15px">
-                    <el-input :value="opt.name" @input="(v)=>setQuestions('questions.'+idx+'.options.'+index+'.name',v)">
+                    <el-input v-model="opt.name" @change="(v)=>setQuestions('questions.'+idx+'.options',JSON.stringify(item.options))">
                       <template slot="prepend">{{['A','B','C','D','E','F','G','H','I','J','K','L'][index]}}：</template>
                       <el-button slot="append" icon="delete" @click="delOptions(idx,index)"></el-button>
                     </el-input>
@@ -139,11 +139,11 @@
     },
     methods: {
       ...filter,
-      ...mapActions(['getPoll', 'createActivity', 'updateActivity', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
+      ...mapActions(['getPoll', 'createPoll', 'updatePoll', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            this.data.edit ? this.createActivity() : this.updateActivity();
+            this.data.edit ? this.createPoll() : this.updatePoll();
           } else {
             this.$message.error('*号字段必须填写');
             return false;
@@ -154,29 +154,30 @@
         if (key && val) {
           this.setListVal([key, val]);
         }
-        this.questions = this.data.questions.map((q) => ({...q}))
+        this.questions = this.data && this.data.questions ? this.data.questions.map((q) => ({...q, options: JSON.parse(q.options)})) : []
       },
       addOptions(idx, index){
         if (index >= 5) {
           return alert('配图最多为五张！', 'error')
         }
-        this.setListVal(['questions.' + idx + '.options.' + index, {name: ''}]);
-        this.setQuestions();
+        this.questions[idx].options.push({name: ''});
+        this.setQuestions('questions.' + idx + '.options', JSON.stringify(this.questions[idx].options));
       },
       delOptions(idx, index){
-        this.delList(['questions.' + idx + '.options', index]);
-        this.setQuestions();
+        this.questions[idx].options.splice(index, 1);
+        this.setQuestions('questions.' + idx + '.options', JSON.stringify(this.questions[idx].options));
       },
       delQuestions(index){
         this.delList(['questions', index]);
         this.setQuestions();
       },
       addQuestions(){
-        this.setListVal(['questions.' + this.questions.length, {name: '', options: [], type: 0}]);
+        this.setListVal(['questions.' + this.questions.length, {name: '', options: '[]', type: 1}]);
         this.setQuestions();
       }
     },
     created () {
+      this.setData({type: 0})
       this.getPoll()
     },
     destroyed () {

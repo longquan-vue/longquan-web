@@ -29,6 +29,7 @@ import {
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
 import {fileApi, delFileApi} from '../api/fileApi'
+import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
 // type
@@ -208,7 +209,7 @@ const createHealth = ({commit, state}) => createHealthApi(state.data).then(() =>
 //获取健身项目相关数据   修改健身项目
 const updateHealth = ({commit, state}) => updateHealthApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //获取健身项目相关数据   删除健身项目
-const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => success('删除成功！').then(()=>commit(DEL_DATA, idx)))
+const delHealth = ({commit, state}, [id, idx]) => delHealthApi(id).then(() => success('删除成功！').then(() => commit(DEL_DATA, idx)))
 //获取健身项目相关数据   暂停开启健身项目
 const pauseHealth = ({commit, state}, [id, key, val]) => pauseHealthApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 //获取招聘信息相关数据  招聘列表
@@ -254,11 +255,17 @@ const getPoll = async({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.poll});
   } else {
-    commit(SET_DATA, {...await findRecruitDetailApi(id), edit: false});
+    commit(SET_DATA, {...await getPollApi(id), edit: false});
   }
 };
 // 获取投票调查列表
-const getPollList = async({commit, state}) => commit(GET_DATA_LIST, await findRecruitEntryListByIdApi(state.route.params.id, state.page));
+const getPollList = async({commit, state}) => commit(GET_DATA_LIST, await pollListApi(state.page));
+// 创建投票调查
+const createPoll = ({commit, state}) => createPollApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改投票调查
+const updatePoll = ({commit, state}) => updatePollApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+//删除投票调查
+const delPoll = ({commit, state}, [id, idx]) => delPollApi(id).then(() => commit(DEL_LIST, idx))
 export default {
   getMineWelfare,
   getUser,
@@ -325,4 +332,7 @@ export default {
   updateRecruit,//修改招聘信息
   getPollList,// 获取调查列表
   getPoll,// 获取调查详情
+  createPoll,// 创建投票调查
+  updatePoll,// 修改投票调查
+  delPoll,// 修改投票调查
 }
