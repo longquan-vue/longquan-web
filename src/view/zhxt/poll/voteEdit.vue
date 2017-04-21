@@ -184,7 +184,7 @@
         this.setQuestions();
       },
       addQuestions(){
-        this.setListVal(['questions.' + this.questions.length, {name: '', files: []}]);
+        this.setListVal(['questions.' + this.questions.length, {name: '', files: [], type: 0}]);
         this.setQuestions();
       }
     },
