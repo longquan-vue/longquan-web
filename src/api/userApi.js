@@ -64,8 +64,13 @@ export const mineActivityApi = (del, data) => request({
 });
 //我的健身
 export const mineHealthApi = (del, data) => request({
-  url: `/history/health/${del}`,
+  url: `/history/sport/${del}`,
   data
+});
+//我的收藏招聘信息
+export const mineRecruitApi = (del, data) => request({
+    url: `/history/getRecurit/${del}`,
+    data
 });
 //删除API
 export const deleteApi = (id, del) => request({
