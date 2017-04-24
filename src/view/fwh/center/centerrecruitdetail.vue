@@ -55,13 +55,13 @@
             <ul>
                 <li flex>
                     <div box="2">招聘要求 : </div>
-                    <div box="8" v-html="data.claim"></div>
+                    <div box="8" v-html="decode(data.claim)"></div>
                 </li>
             </ul>
             <ul>
                 <li flex>
                     <div box="2">福利待遇 : </div>
-                    <div box="8" v-html="data.treatment"></div>
+                    <div box="8" v-html="decode(data.treatment)"></div>
                 </li>
             </ul>
             <ul>

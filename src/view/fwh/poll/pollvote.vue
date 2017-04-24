@@ -10,7 +10,7 @@
                     <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
                 </div>
                 <div box="4" flex items="center" justify="center" class="headTitle">
-                    <h2>2017龙泉驿区环境投票选举啦啦啦啦选举啦啦啦啦选举啦啦啦啦</h2>
+                    <h2>{{data.title}}</h2>
                 </div>
                 <div box="1" flex items="center">
                     <a class="a" @click="openRules()">规则</a>
@@ -23,53 +23,38 @@
                 <a><em>按号数</em> ↑↓</a>
             </p>
             <ul flex justify="between" wrap="wrap">
-                <li v-for="(src,idx) in list">
-                    <div class="imgBox" @click="showImg()">
-                        <x-img :src="src" :webp-src="`${src}?type=webp`" default-src="../../../../static/wx/test/def.png"
+                <li v-for="(item,index) in data.questions">
+                    <div class="imgBox" @click="showImg(index)">
+                        <x-img :src="item.files[0].url" :webp-src="`${item.files[0].url}?type=webp`" default-src="../../../../static/wx/test/def.png"
                                @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error"
                                :offset="-100" container=".pollvote" :delay="1000"
                         ></x-img>
-                        <p flex justify="between"><span>865票</span><i>5图</i></p>
+                        <p flex justify="between"><span>{{item.num?item.num:0}}票</span><i>{{item.files.length}}图</i></p>
                     </div>
                     <div class="messBox">
-                        <p><i>18</i> <span>吴亦凡</span></p>
-                        <p>哟，各位大哥大爷小姐姐来投我呀投我呀</p>
+                        <p><i>{{item.id}}</i> <span>{{item.title}}</span></p>
+                        <p>{{item.files[0].description}}</p>
                         <p>
-                            <a @click="isShow(1)" v-if="idx%2==0">投票</a>
-                            <a @click="isShow(2)" style="background-color:#9c9c9c;" v-if="idx%2!=0">已投票</a>
+                            <a @click="isShow(1)">投票</a>
                         </p>
                     </div>
                 </li>
             </ul>
         </div>
+
         <popup v-model="showImgDetail" height="100%">
             <div class="popupImgDetail">
                 <a @click="showImgDetail=false" class="closePopup">X</a>
                 <swiper :show-dots="false" height="100%" :index="index" @on-index-change="demo_onIndexChange">
-                    <swiper-item class="swiper-demo-img" v-for="(item, index) in list" :key="index" style="background:#333">
-                        <img :src="item" class="swiperImg">
+                    <swiper-item class="swiper-demo-img" v-for="(item, index) in data.questions[idx].files" :key="index" style="background:#333">
+                        <img :src="item.url" class="swiperImg">
                         <div class="swiperMess">
-                            <h2>2011年，李忠桔从重庆科技学院汽车检测与维修专业毕业来到成都汽车职业学院</h2>
-                            <!--<scroller lock-x height="6rem" ref="scrollerEvent" :scrollbarY="true">-->
-                                <!--<div class="swiperMessBox">-->
-                                    <!--2011年，李忠桔从重庆科技学院汽车检测与维修专业毕业来到成都汽车职业学院，担任实训课教师。6年的时间，从他手中带出的优秀操作能手数不胜数，在校园的各个荣誉展板上，几乎都能看见“李忠桔”三个字以及他带领的精英团队合照。-->
-                                    <!--3月3日上午，记者在实训车间见到了正在给学生演示发动机拆装的李忠桔，演示前，李忠桔细心地用遮盖布盖住汽车前盖的边沿以保护好车子表面的漆体，其实像这样细致规范的操作步骤，不仅是李忠桔对自己的要求，也是对学生的要求，也正是这样的细心细致，才让李忠桔在比赛-->
-                                    <!--间，从他手中带出的优秀操作能手数不胜数，在校园的各2011年，李忠桔从重庆科技学院汽车检测与维修专业毕业来到成都汽车职业学院，担任实训课教师。6年的时间，从他手中带出的优秀操作能手数不胜数，在校园的各个荣誉展板上，几乎都能看见“李忠桔”三个字以及他带领的精英团队合照。-->
-                                    <!--3月3日上午，记者在实训车间见到了正在给学生演示发动机拆装的李忠桔，演示前，李忠桔细心地用遮盖布盖住汽车前盖的边沿以保护好车子表面的漆体，其实像这样细致规范的操作步骤，不仅是李忠桔对自己的要求，也是对学生的要求，也正是这样的细心细致，才让李忠桔在比赛-->
-                                    <!--间，从他手中带出的优秀操作能手数不胜数，在校园的各-->
-                                <!--</div>-->
-                            <!--</scroller>-->
-                            <div class="swiperMessBox">
-                                2011年，李忠桔从重庆科技学院汽车检测与维修专业毕业来到成都汽车职业学院，担任实训课教师。6年的时间，从他手中带出的优秀操作能手数不胜数，在校园的各个荣誉展板上，几乎都能看见“李忠桔”三个字以及他带领的精英团队合照。
-                                3月3日上午，记者在实训车间见到了正在给学生演示发动机拆装的李忠桔，演示前，李忠桔细心地用遮盖布盖住汽车前盖的边沿以保护好车子表面的漆体，其实像这样细致规范的操作步骤，不仅是李忠桔对自己的要求，也是对学生的要求，也正是这样的细心细致，才让李忠桔在比赛
-                                间，从他手中带出的优秀操作能手数不胜数，在校园的各2011年，李忠桔从重庆科技学院汽车检测与维修专业毕业来到成都汽车职业学院，担任实训课教师。6年的时间，从他手中带出的优秀操作能手数不胜数，在校园的各个荣誉展板上，几乎都能看见“李忠桔”三个字以及他带领的精英团队合照。
-                                3月3日上午，记者在实训车间见到了正在给学生演示发动机拆装的李忠桔，演示前，李忠桔细心地用遮盖布盖住汽车前盖的边沿以保护好车子表面的漆体，其实像这样细致规范的操作步骤，不仅是李忠桔对自己的要求，也是对学生的要求，也正是这样的细心细致，才让李忠桔在比赛
-                                间，从他手中带出的优秀操作能手数不胜数，在校园的各
-                            </div>
+                            <h2>{{data.questions[idx].title}}</h2>
+                            <div class="swiperMessBox">{{item.description}}</div>
                         </div>
                     </swiper-item>
                 </swiper>
-                <div class="showSwiperItem">图 {{index+1}}/{{list.length}}</div>
+                <div class="showSwiperItem">图 {{index+1}}/{{data.questions[idx].files.length}}</div>
             </div>
         </popup>
 
@@ -85,48 +70,39 @@
                         <ul>
                             <li flex>
                                 <span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称: </span>
-                                <div  box="5">2017龙泉优秀职工投票选举</div>
+                                <div  box="5">{{data.title}}</div>
                             </li>
                             <li flex>
                                 <span>积分奖励: </span>
-                                <div box="5">50
+                                <div box="5">{{data.score}}
                                     <span>积分/天</span>
                                 </div>
                             </li>
                             <li flex>
                                 <span>投票次数: </span>
-                                <div box="5">5
+                                <div box="5">{{data.time}}
                                     <span>次/天/人</span>
                                 </div>
                             </li>
                             <li flex>
                                 <span>连续可投: </span>
-                                <div box="5">30
+                                <div box="5">{{data.days}}
                                     <span>天</span>
                                 </div>
                             </li>
                             <li flex>
                                 <span>重复投票: </span>
-                                <div box="5">单日不能重复投票给同一对象</div>
+                                <div box="5">{{data.repetition==0?'单日不能重复投票给同一对象':'单日能重复投票给同一对象'}}</div>
                             </li>
                             <li flex>
                                 <span>投票时间: </span>
-                                <div box="5">2017-4-20 10:20 至 2017-08-20 10:30</div>
+                                <div box="5">{{date3Filter(data.start)}} 至 {{date3Filter(data.end)}}</div>
                             </li>
                             <li flex>
                                 <span>答题规则:</span>
-                                <div box="5">规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则
-                                    规则规则规则规则规则规则规则</div>
+                                <div box="5" v-html="data.rule"></div>
                             </li>
                         </ul>
-                        <!--<div class="rules" flex>-->
-                        <!--<span>规则:</span>-->
-                        <!--<div class="">-->
-                        <!--<p>1、规则11111111</p>-->
-                        <!--<p>2、规则11111111</p>-->
-                        <!--<p>3、规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111规则11111111</p>-->
-                        <!--</div>-->
-                        <!--</div>-->
                     </div>
                 </div>
             </x-dialog>
@@ -140,7 +116,7 @@
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
-    import {date3Filter} from '../../../filters'
+    import filters from '../../../filters'
     import { XImg , TransferDom, Popup ,Swiper ,SwiperItem ,Scroller,XDialog} from 'vux'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
     export default{
@@ -158,6 +134,7 @@
                 ],
                 showImgDetail:false,
                 index:0,
+                idx:0,
                 popupVisible:false,
                 isshow:false,//控制弹窗
                 img:'../../../../static/wx/succ.png',//控制弹窗图片
@@ -172,22 +149,20 @@
         components:{
             XImg , Popup ,Swiper ,SwiperItem ,Scroller,XDialog,myImgDialog
         },
-        computed: {...mapGetters([ 'page']),
+        computed: {...mapGetters([ 'page','data']),
         },
         methods:{
-            ...mapActions(['goto','clear','getHealth','clearPage']),
-            date3Filter,
+            ...mapActions(['go','clear','getPoll','clearPage']),
+            ...filters,
             success (src, ele) {
                 console.log('success load', src);
             },
             error (src, ele, msg) {
                 console.log('error load', msg, src);
             },
-            showImg(id){
+            showImg(idx){
+                this.idx = idx;
                 this.showImgDetail = true;
-                // this.$nextTick(() => {
-                //     this.$refs.scrollerEvent.reset()
-                // })
             },
             demo_onIndexChange(index){    //轮播
                 this.index=index;
@@ -215,6 +190,7 @@
 
         },
         created () {
+            this.getPoll();
             // this.$nextTick(() => {
             //     this.$refs.scrollerEvent.reset({top: 0});
             // })
