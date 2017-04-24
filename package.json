@@ -27,7 +27,7 @@
     "vuelidate": "^0.4.3",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.1.2",
-    "vux": "^2.2.1-rc.7"
+    "vux": "^2.2.1-rc.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
