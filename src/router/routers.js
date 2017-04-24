@@ -83,7 +83,7 @@ export default [
       {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit'}, // 编辑调查
       {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount'}, // 调查统计
       /*系统设置*/
-      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting'},//系统设置
+      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: '系统设置'},//系统设置
       /*结构配置*/
       {path: `${ROOT}/zhxt/configuration`, component: require('../view/zhxt/configuration/configuration.vue'), name: 'configuration'}, // 结构配置
       /*权限管理*/
@@ -97,15 +97,15 @@ export default [
   {path: `${ROOT}/wzzy`},
   // 企业号
   {
-      path: `${ROOT}/qyh`,
-      component: require('../view/qyh/qyh/qyh.vue'),
-      children:[
-          {path: `${ROOT}/qyh/recruitManage`, component: require('../view/qyh/recruitManage/recruitManage.vue'),name:'recruitManage'},
-          {path: `${ROOT}/qyh/recruitManageEdit/:id`, component: require('../view/qyh/recruitManage/recruitManageEdit.vue') ,name:'recruitManageEdit'},
-          {path: `${ROOT}/qyh/healthManage`, component: require('../view/qyh/healthManage/healthManage.vue'),name:'healthManage'},
-          {path: `${ROOT}/qyh/healthManageDetail/:id`, component: require('../view/qyh/healthManage/healthManageDetail.vue'), name: 'healthManageDetail'}, //健身中心项目详情
-          {path: `${ROOT}/qyh/healthManageEdit/:id`, component: require('../view/qyh/healthManage/healthManageEdit.vue'),name:'healthManageEdit'},
-      ]
+    path: `${ROOT}/qyh`,
+    component: require('../view/qyh/qyh/qyh.vue'),
+    children: [
+      {path: `${ROOT}/qyh/recruitManage`, component: require('../view/qyh/recruitManage/recruitManage.vue'), name: 'recruitManage'},
+      {path: `${ROOT}/qyh/recruitManageEdit/:id`, component: require('../view/qyh/recruitManage/recruitManageEdit.vue'), name: 'recruitManageEdit'},
+      {path: `${ROOT}/qyh/healthManage`, component: require('../view/qyh/healthManage/healthManage.vue'), name: 'healthManage'},
+      {path: `${ROOT}/qyh/healthManageDetail/:id`, component: require('../view/qyh/healthManage/healthManageDetail.vue'), name: 'healthManageDetail'}, //健身中心项目详情
+      {path: `${ROOT}/qyh/healthManageEdit/:id`, component: require('../view/qyh/healthManage/healthManageEdit.vue'), name: 'healthManageEdit'},
+    ]
   },
   // 服务号
   {

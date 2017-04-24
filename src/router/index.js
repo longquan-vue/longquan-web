@@ -6,4 +6,5 @@ const router = new Router({
   mode: 'history',
   routes
 })
+router.afterEach(route => route.meta ? document.title = route.meta : '')
 export default router
