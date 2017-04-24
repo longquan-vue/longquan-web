@@ -143,12 +143,12 @@ const getMineActivity = ({commit, state}) => state.page.page <= state.page.pages
 const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages && getMine({
   commit,
   state
-}).then(async() => commit(GET_DATA_LIST, await mineHealthApi(1, state.page)));
+}).then(async() => commit(GET_DATA_LIST, await mineHealthApi(0, state.page)));
 //获取我的收藏的招聘信息
 const getMineRecruit = ({commit, state}) => state.page.page <= state.page.pages && getMine({
     commit,
     state
-}).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(1, state.page)));
+}).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(0, state.page)));
 
 //公共删除方法
 const delMethod = async({commit, state}, idx) => deleteApi(state.list[idx].id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));

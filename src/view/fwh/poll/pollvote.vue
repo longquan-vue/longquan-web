@@ -1,5 +1,4 @@
 <style lang="less" scoped>
-    @import "../../../../static/normal.less";
     @import "./pollvote.less";
 </style>
 <template>
@@ -25,7 +24,7 @@
             <ul flex justify="between" wrap="wrap">
                 <li v-for="(item,index) in data.questions">
                     <div class="imgBox" @click="showImg(index)">
-                        <x-img :src="item.files[0].url" :webp-src="`${item.files[0].url}?type=webp`" default-src="../../../../static/wx/test/def.png"
+                        <x-img :src="item.files[0] && item.files[0].url" :webp-src="`${item.files[0] && item.files[0].url}?type=webp`" default-src="../../../../static/wx/test/def.png"
                                @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error"
                                :offset="-100" container=".pollvote" :delay="1000"
                         ></x-img>
@@ -33,7 +32,7 @@
                     </div>
                     <div class="messBox">
                         <p><i>{{item.id}}</i> <span>{{item.title}}</span></p>
-                        <p>{{item.files[0].description}}</p>
+                        <p>{{item.files[0] && item.files[0].description}}</p>
                         <p>
                             <a @click="isShow(1)">投票</a>
                         </p>
@@ -100,7 +99,7 @@
                             </li>
                             <li flex>
                                 <span>答题规则:</span>
-                                <div box="5" v-html="data.rule"></div>
+                                <div box="5" v-html="decode(data.rule)"></div>
                             </li>
                         </ul>
                     </div>
@@ -189,8 +188,8 @@
         mounted () {
 
         },
-        created () {
-            this.getPoll();
+       async created () {
+            await this.getPoll();
             // this.$nextTick(() => {
             //     this.$refs.scrollerEvent.reset({top: 0});
             // })
