@@ -1,12 +1,12 @@
-<style lang="less">
-
+<style lang="less" scoped>
+  @import "./health.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>{{query.name}}---预约报名名单管理</span>
       <a @click="go()" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -19,23 +19,14 @@
         <el-button style="float: right" type="primary" @click="exportExl">导出EXCEL</el-button>
       </div>
       <div class="tableList mgb20">
-        <MyTable :data="list" border style="width: 100%">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="start" :formatter="date4Filter2" label="时间段"/>
-          <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="sex" :formatter="sex2Filter" label="性别"/>
-          <MyColumn prop="idCard" label="身份证号"/>
-          <MyColumn prop="depName" label="所属单位"/>
-          <MyColumn prop="status" label="是否签到" :formatter="signFilter" width="120"/>
-          <!--<MyColumn label="操作" fixed="right" width="300px">-->
-            <!--<template scope="scope">-->
-              <!--<el-button type="text" size="small" @click="go(['activityEdit',scope.row.id])">编辑</el-button>-->
-              <!--<el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单</el-button>-->
-              <!--<el-button size="small" type="text" @click="showCode(scope.row.ticket)">二维码</el-button>-->
-              <!--<el-button size="small" type="text" @click="go(['activitySign',scope.row.id])">签到管理</el-button>-->
-              <!--<el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>-->
-            <!--</template>-->
-          <!--</MyColumn>-->
+        <MyTable :data="list">
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="start" :formatter="date4Filter2" label="时间段" min-width="150"/>
+          <MyColumn prop="name" label="姓名" min-width="100"/>
+          <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
+          <MyColumn prop="idCard" label="身份证号" min-width="150"/>
+          <MyColumn prop="depName" label="所属单位" min-width="150"/>
+          <MyColumn prop="status" label="是否签到" :formatter="signFilter" min-width="120"/>
         </MyTable>
       </div>
       <div class="pageSlide">
@@ -52,31 +43,30 @@
   import MyColumn from '../../../components/common/table/MyTableColumn'
   import MyTable from '../../../components/common/table/MyTable'
   import filter from '../../../filters'
+  import {alert} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
+    computed: {...mapGetters(['list', 'query'])},
     methods: {
       ...mapActions(['getHealthEnter', 'changeSelect', 'clear', 'go', 'exportHealthEntry']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getHealthEnter();
       },
       exportExl(){
         if (this.list.length <= 0) {
-          return this.$alert('没有数据！', '提示', {type: 'warning'})
+          return alert('没有数据！', 'warning')
         }
         const newTab = window.open('about:blank');
         this.exportHealthEntry().then((url) => newTab.location.href = url)
       }
     },
-    computed: {...mapGetters(['list', 'query'])},
     created () {
       this.getHealthEnter();
     },
     destroyed () {
-      this.clear();
+      this.clear('health');
     }
   }
 </script>

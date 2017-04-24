@@ -1,5 +1,5 @@
-<style lang="less">
-
+<style lang="less" scoped>
+  @import "./welfare.less";
 </style>
 <template>
   <div class="contentBox">
@@ -16,31 +16,31 @@
         </span>
       </div>
       <div class="tableList mgb20">
-        <el-table :data="list" border style="width: 100%">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="name" label="福利名称" width="120"/>
-          <MyColumn prop="provider" label="福利提供方" width="120"/>
-          <MyColumn prop="provider" label="福利类型" width="120"/>
-          <MyColumn prop="startTime" label="福利开始时间" :formatter="({startTime})=>date3Filter(startTime)" width="160"/>
-          <MyColumn prop="endTime" label="福利结束时间" :formatter="({endTime})=>date3Filter(endTime)" width="160"/>
-          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="160"/>
-          <MyColumn prop="score" label="兑换所需积分" width="140"/>
-          <MyColumn prop="total" label="福利总量" width="120"/>
-          <MyColumn prop="total" label="剩余量" width="120"/>
-          <MyColumn prop="time" label="人均兑换次数" width="140"/>
-          <MyColumn prop="status" :formatter="stateType" label="福利状态" width="120"/>
-          <MyColumn label="是否暂停" width="150px">
+        <MyTable :data="list">
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="name" label="福利名称" min-width="120"/>
+          <MyColumn prop="provider" label="福利提供方" min-width="120"/>
+          <MyColumn prop="provider" label="福利类型" min-width="120"/>
+          <MyColumn prop="startTime" label="福利开始时间" :formatter="({startTime})=>date3Filter(startTime)" min-width="160"/>
+          <MyColumn prop="endTime" label="福利结束时间" :formatter="({endTime})=>date3Filter(endTime)" min-width="160"/>
+          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="160"/>
+          <MyColumn prop="score" label="兑换所需积分" min-width="140"/>
+          <MyColumn prop="total" label="福利总量" min-width="120"/>
+          <MyColumn prop="total" label="剩余量" min-width="120"/>
+          <MyColumn prop="time" label="人均兑换次数" min-width="140"/>
+          <MyColumn prop="status" :formatter="stateType" label="福利状态" min-width="120"/>
+          <MyColumn label="是否暂停" width="100">
             <template scope="scope">
               <el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>
             </template>
           </MyColumn>
-          <MyColumn label="操作" fixed="right" width="150px">
+          <MyColumn label="操作" fixed="right" width="110">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['welfarePackEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>
-        </el-table>
+        </MyTable>
       </div>
       <div class="pageSlide">
         <MyPagination :method="getWelfare"/>
@@ -56,36 +56,27 @@
   import MySelect from '../../../components/public/select/MySelect.vue'
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import filter from '../../../filters'
+  import {confirm} from '../../../actions'
   export default {
     data() {
       return {
-        dateValue: []//筛选时间
+        dateValue: []
       }
     },
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
       ...mapActions(['clear', 'getWelfare', 'delWelfare', 'changePage', 'pauseWelfare', 'changeSelect', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        this.$confirm(`确定删除红包福利[${name}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.delWelfare([id, idx]))
+        confirm(`确定删除红包福利[${name}]吗?`, 'warning').then(() => this.delWelfare([id, idx]))
       },
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getWelfare()
       },
       pause(idx, {id, status, name}){
-        this.$confirm(`确定${status == 1 ? '暂停' : '开启'}红包福利[${name}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.pauseWelfare([id, `${idx}.status`, status == 1 ? 2 : 1]))
+        confirm(`确定${status == 1 ? '暂停' : '开启'}红包福利[${name}]吗?`, 'warning').then(() => this.pauseWelfare([id, `${idx}.status`, status == 1 ? 2 : 1]))
       },
       search(){
         if (this.dateValue.length > 0) {
@@ -97,7 +88,7 @@
       },
     },
     created () {
-      this.changeSelect({key: 'type', value: 2})
+      this.changeSelect({key: 'type', value: 2});
       this.getWelfare()
     },
     destroyed () {

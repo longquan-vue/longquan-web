@@ -72,7 +72,7 @@ const getUser = async({commit, state}) => commit(SET_DATA, await getByIdApi(stat
 // 获取用户列表
 const findUserList = async({commit, state}) => commit(GET_DATA_LIST, await findApi(state.page));
 // 修改用户
-const updateUser = ({commit, state}, user) => updateUserApi(user);
+const updateUser = ({commit, state}) => updateUserApi(state.data).then(() => success('修改成功!'));
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
@@ -152,9 +152,9 @@ const getWelfareDetail = async({commit, state}, data) => {
   if (welfareId) {
     commit(SET_DATA, {...await findWelfareByIdApi(welfareId), ticket, id, used});
   } else if (state.route.params.id) {
-    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
+    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true, ...defData.welfare} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
   } else {
-    commit(SET_DATA, data);
+    commit(SET_DATA, data || defData.welfare);
   }
 };
 //获取福利   创建福利

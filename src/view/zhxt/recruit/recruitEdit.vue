@@ -4,7 +4,7 @@
       <span v-if="data.edit">添加招聘信息</span>
       <span v-if="!data.edit">编辑招聘信息</span>
       <a @click="go()" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -17,10 +17,14 @@
             <el-input :value="data.job" @input="(v)=>setData({job:v})"/>
           </el-form-item>
           <el-form-item label="招聘人数" prop="num">
-            <el-input :value="data.num" @input="(v)=>setData({num:v})"/>
+            <el-input :value="data.num" @input="(v)=>setData({num:v})">
+              <template slot="append">人</template>
+            </el-input>
           </el-form-item>
           <el-form-item label="薪资待遇" prop="pay">
-            <el-input :value="data.pay" @input="(v)=>setData({pay:v})"/>
+            <el-input :value="data.pay" @input="(v)=>setData({pay:v})">
+              <template slot="append">元/月</template>
+            </el-input>
           </el-form-item>
           <el-form-item label="招聘单位" prop="company">
             <el-input :value="data.company" @input="(v)=>setData({company:v})"/>
@@ -28,13 +32,13 @@
           <el-form-item label="单位地址" prop="address">
             <el-input :value="data.address" @input="(v)=>setData({address:v})"/>
           </el-form-item>
-          <el-form-item label="招聘时间" required>
+          <el-form-item label="招聘时间" prop="start">
             <el-col :span="11">
               <el-form-item prop="start">
                 <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
               </el-form-item>
             </el-col>
-            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
+            <el-col class="line" :span="2" style="text-align:center;">至</el-col>
             <el-col :span="11">
               <el-form-item prop="end">
                 <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择结束时间" :value="data.end" @input="(v)=>setData({end:v&&v.getTime()})" style="width: 100%;"/>
@@ -49,7 +53,7 @@
               <el-input :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
             </el-form-item>
           </el-row>
-          <el-form-item label="" prop="phone">
+          <el-form-item label="">
             <img src="/static/zhxt/add.png" alt="add" style="width: 36px;height: 36px;cursor: pointer" @click="addLinkman">
           </el-form-item>
           <el-form-item label="招聘要求" prop="claim">
@@ -78,36 +82,22 @@
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
   import MyUpload from '../../../components/public/MyUpload.vue'
+  import {required, number, array} from '../../../constant/rules'
   export default {
     data() {
       return {
+        linkmanList: [],
         rules: {
-          name: [
-            {required: true, message: '请输入活动名称', trigger: 'change'},
-            {min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'change'}
-          ],
-          start: [
-            {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
-          ],
-          end: [
-            {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
-          ],
-          entryStart: [
-            {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
-          ],
-          entryEnd: [
-            {type: 'number', required: true, message: '请选择开始日期', trigger: 'change'}
-          ],
+          name: required('请输入招聘标题...', {max: 20}),
+          company: required('请输入招聘单位...'),
+          address: required('请输入单位地址...'),
+          linkman: required('请输入联系人姓名...'),
+          phone: required('请输入联系电话...'),
         },
-        linkmanList: []
       }
     },
-    components: {
-      MyUpload
-    },
-    computed: {
-      ...mapGetters(['data']),
-    },
+    components: {MyUpload},
+    computed: {...mapGetters(['data']),},
     watch: {
       data(){
         this.setLinkmanList()

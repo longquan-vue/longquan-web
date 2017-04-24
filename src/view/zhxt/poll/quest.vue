@@ -39,18 +39,16 @@
   </div>
 </template>
 <script type="es6">
+  import {mapGetters, mapActions} from 'vuex'
   import MyColumn from '../../../components/common/table/MyTableColumn'
   import MyTable from '../../../components/common/table/MyTable'
   import MyPagination from '../../../components/public/page/MyPagination.vue'
-  import {mapGetters, mapActions} from 'vuex'
   import MySelect from '../../../components/public/select/MySelect.vue'
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import filter from '../../../filters'
   import {confirm} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
       ...mapActions(['clear', 'getPollList', 'changeSelect', 'delPoll', 'go']),
@@ -58,7 +56,7 @@
       del(idx, {id, title}) {
         confirm(`确定删除调查问卷[${title}]吗?`, 'warning').then(() => this.delPoll([id, idx]))
       },
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getPollList()
       },

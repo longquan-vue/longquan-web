@@ -1,9 +1,12 @@
+<style lang="less" scoped>
+  @import "./health.less";
+</style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>到场签到二维码</span>
-      <a @click="go(['health'])" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+      <a @click="go()" style="float:right;">
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont" style="text-align: center">

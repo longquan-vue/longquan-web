@@ -1,9 +1,14 @@
+<style lang="less" scoped>
+  @import "recruit.less";
+</style>
 <template>
   <div class="usercount">
     <div class="contentBox">
       <div class="contentBoxtitle">
         <span>活动统计报表</span>
-        <!--<a @click="goBack" style="float:right;"><el-button type="primary" icon="arrow-left"></el-button></a>-->
+        <a @click="go()" style="float:right;">
+          <el-button type="primary" icon="arrow-left"/>
+        </a>
       </div>
       <div class="contentBoxCont">
         <el-row :gutter="20">
@@ -85,21 +90,14 @@
   </div>
 </template>
 <script type="es6">
+  import {mapActions} from 'vuex'
   export default {
     data() {
-      return {
-
-      }
+      return {}
     },
-    computed:{
-    },
-    methods:{
-      goBack(){
-        this.$router.go(-1);
-      },
+    computed: {},
+    methods: {
+      ...mapActions(['go']),
     }
   }
 </script>
-<style scoped lang="less">
-
-</style>
