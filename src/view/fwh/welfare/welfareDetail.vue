@@ -28,7 +28,7 @@
                </ul>
            </div>
        </div>
-       <a href="javascript:;">查看更多</a>
+       <a href="javascript:;" @click="loadMore">查看更多</a>
    </div>
 </template>
 
@@ -47,8 +47,26 @@
         },
         computed: {...mapGetters(['login','data','list'])},
         methods:{
-            ...mapActions(['clear','getMineScore']),
-            ...filter
+            ...mapActions(['clear','getMineScore','changePage']),
+            ...filter,
+            loadMore(){
+              setTimeout(async() => {
+                await this.changePage();
+                if (this.$store.state.page.page>this.$store.state.page.pages){
+                  // setTimeout(() => {
+                  //   this.$refs.scroller.disablePullup();
+                  // }, 100)
+                }else {
+                  await this.getMineScore();
+                  // this.$nextTick(() => {
+                  //   this.$refs.scroller.reset()
+                  // });
+                  // setTimeout(() => {
+                  //   this.demo4Value.pullupStatus = 'default';
+                  // }, 10);
+                }
+              }, 2000)
+            }
         },
         created () {
             this.getMineScore();
