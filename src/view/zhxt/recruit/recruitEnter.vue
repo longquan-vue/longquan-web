@@ -1,12 +1,12 @@
-<style lang="less">
-
+<style lang="less" scoped>
+  @import "recruit.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>{{query.name}}---意向报名名单管理</span>
       <a @click="go()" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -18,24 +18,15 @@
         <el-button style="float: right" type="primary" @click="exportExl">导出EXCEL</el-button>
       </div>
       <div class="tableList mgb20">
-        <MyTable :data="list" border style="width: 100%">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="name" label="年龄"/>
-          <MyColumn prop="sex" :formatter="sex2Filter" label="性别"/>
-          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻"/>
-          <MyColumn prop="phone" label="联系电话"/>
-          <MyColumn prop="province" :formatter="({province,city})=>province+'·'+city" label="籍贯"/>
-          <MyColumn prop="exp" label="有无相关工作经验" :formatter="signFilter" width="160"/>
-          <!--<MyColumn label="操作" fixed="right" width="300px">-->
-          <!--<template scope="scope">-->
-          <!--<el-button type="text" size="small" @click="go(['activityEdit',scope.row.id])">编辑</el-button>-->
-          <!--<el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">查看报名表单</el-button>-->
-          <!--<el-button size="small" type="text" @click="showCode(scope.row.ticket)">二维码</el-button>-->
-          <!--<el-button size="small" type="text" @click="go(['activitySign',scope.row.id])">签到管理</el-button>-->
-          <!--<el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>-->
-          <!--</template>-->
-          <!--</MyColumn>-->
+        <MyTable :data="list">
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="name" label="姓名" min-width="80"/>
+          <MyColumn prop="name" label="年龄" min-width="80"/>
+          <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
+          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻" min-width="80"/>
+          <MyColumn prop="phone" label="联系电话" min-width="80"/>
+          <MyColumn prop="province" :formatter="({province,city})=>province+'·'+city" label="籍贯" min-width="80"/>
+          <MyColumn prop="exp" label="有无相关工作经验" :formatter="signFilter" min-width="160"/>
         </MyTable>
       </div>
       <div class="pageSlide">
@@ -52,14 +43,13 @@
   import MyColumn from '../../../components/common/table/MyTableColumn'
   import MyTable from '../../../components/common/table/MyTable'
   import filter from '../../../filters'
+  import {alert} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     methods: {
       ...mapActions(['getRecruitSigin', 'changeSelect', 'clear', 'go', 'exportRecruitEntry']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         if (key == 'province') {
           this.changeSelect({key: 'city', value});
         }
@@ -68,7 +58,7 @@
       },
       exportExl(){
         if (this.list.length <= 0) {
-          return this.$alert('没有数据！', '提示', {type: 'warning'})
+          return alert('没有数据！', 'warning')
         }
         const newTab = window.open('about:blank');
         this.exportRecruitEntry().then((url) => newTab.location.href = url)
@@ -79,7 +69,7 @@
       this.getRecruitSigin();
     },
     destroyed () {
-      this.clear();
+      this.clear('recruit');
     }
   }
 </script>

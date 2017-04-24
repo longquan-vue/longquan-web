@@ -1,12 +1,12 @@
-<style lang="less">
-
+<style lang="less" scoped>
+  @import "./activity.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>活动签到列表</span>
       <a @click="go()" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -18,17 +18,17 @@
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称"/>
-          <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="idCard" label="身份证"/>
-          <MyColumn prop="sex" :formatter="sex2Filter" label="性别"/>
-          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻"/>
-          <MyColumn prop="birthday" :formatter="date2Filter" label="生日" width="120"/>
-          <MyColumn prop="phone" label="电话"/>
-          <MyColumn prop="depName" label="所属公司" width="120"/>
-          <MyColumn prop="audit" label="用户类型" :formatter="userFilter" width="130"/>
-          <MyColumn prop="status" label="是否已签到" :formatter="signFilter" width="120"/>
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="nickname" label="昵称" min-width="80"/>
+          <MyColumn prop="name" label="姓名" min-width="80"/>
+          <MyColumn prop="idCard" label="身份证" min-width="100"/>
+          <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
+          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻" min-width="80"/>
+          <MyColumn prop="birthday" :formatter="date2Filter" label="生日" min-width="120"/>
+          <MyColumn prop="phone" label="电话" min-width="120"/>
+          <MyColumn prop="depName" label="所属公司" min-width="120"/>
+          <MyColumn prop="audit" label="用户类型" :formatter="userFilter" min-width="130"/>
+          <MyColumn prop="status" label="是否已签到" :formatter="signFilter" min-width="120"/>
         </MyTable>
       </div>
       <div class="pageSlide">
@@ -45,31 +45,30 @@
   import MyColumn from '../../../components/common/table/MyTableColumn'
   import MyTable from '../../../components/common/table/MyTable'
   import filter from '../../../filters'
+  import {alert} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
+    computed: {...mapGetters(['list'])},
     methods: {
       ...mapActions(['getEnter', 'changeSelect', 'go', 'clear']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getEnter();
       },
       exportExl(){
         if (this.list.length <= 0) {
-          return this.$alert('没有数据！', '提示', {type: 'warning'})
+          return alert('没有数据！', 'warning')
         }
         const newTab = window.open('about:blank');
         this.exportEntry().then((url) => newTab.location.href = url)
       }
     },
-    computed: {...mapGetters(['list'])},
     created () {
       this.getEnter();
     },
     destroyed () {
-      this.clear();
+      this.clear('activity');
     }
   }
 </script>

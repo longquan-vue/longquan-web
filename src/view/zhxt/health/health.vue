@@ -1,5 +1,5 @@
-<style lang="less">
-  @import 'health.less';
+<style lang="less" scoped>
+  @import './health.less';
 </style>
 <template>
   <div class="contentBox">
@@ -13,10 +13,10 @@
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" label="编号"/>
-          <MyColumn prop="name" label="名称"/>
-          <MyColumn prop="type" label="类型" :formatter="spotType"/>
-          <MyColumn prop="score" label="报名所需积分"/>
-          <MyColumn label="操作">
+          <MyColumn prop="name" label="名称" min-width="100"/>
+          <MyColumn prop="type" label="类型" :formatter="spotType" min-width="100"/>
+          <MyColumn prop="score" label="报名所需积分" min-width="150"/>
+          <MyColumn label="操作" width="200">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['healthEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="go(['healthEnter',scope.row.id,{name:scope.row.name}])">预约管理</el-button>
@@ -42,14 +42,12 @@
   import filter from '../../../filters'
   import {confirm} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
       ...mapActions(['getHealth', 'delHealth', 'pauseHealth', 'clear', 'changeSelect', 'go']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getHealth();
       },
@@ -64,7 +62,7 @@
       this.getHealth();
     },
     destroyed () {
-      this.clear()
+      this.clear('health')
     }
   }
 </script>

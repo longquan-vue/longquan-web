@@ -1,4 +1,4 @@
-<style lang="less">
+<style lang="less" scoped>
   @import "./style.less";
 </style>
 <template>
@@ -15,14 +15,14 @@
     <div class="contentBoxCont" v-if="tab == '1'">
       <el-form :model="setting" ref="setting" label-width="120px" class="demo-ruleForm">
         <el-form-item label="关注送积分" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
-          <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"></el-input>
+          <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
     <div class="contentBoxCont fwh_setting" v-if="tab == '2'">
       <el-form :model="sub" ref="sub" label-width="120px" class="demo-ruleForm">
         <el-form-item label="标题" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
-          <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"></el-input>
+          <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
         </el-form-item>
         <el-form-item label="图片" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
           <div class="avatar_box">
@@ -34,16 +34,16 @@
               :on-success="success"
               :before-upload="before">
               <img v-if="sub.picurl" :src="sub.picurl" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <i v-else class="el-icon-plus avatar-uploader-icon"/>
             </el-upload>
             <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
           </div>
         </el-form-item>
         <el-form-item label="描述" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
-          <el-input type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"></el-input>
+          <el-input type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>
         </el-form-item>
         <el-form-item label="URL链接地址" prop="url" :rules="[{required:true,message:'URL链接地址不能为空'}]">
-          <el-input :value="sub.url" auto-complete="off" @input="(v)=>setSub({url:v})" style="width:90%;"></el-input>
+          <el-input :value="sub.url" auto-complete="off" @input="(v)=>setSub({url:v})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
@@ -92,11 +92,9 @@
         sync: false
       }
     },
-    computed: {
-      ...mapGetters(['setting', 'sub', 'action']),
-    },
+    computed: {...mapGetters(['setting', 'sub', 'action']),},
     methods: {
-      ...mapActions(['getSetting', 'saveSys', 'changeSys', 'go', 'upload']),
+      ...mapActions(['getSetting', 'saveSys', 'changeSys', 'upload']),
       syncfwh(){
         this.sync = true;
         syncfwhApi().then(() => alert('同步成功！').then(() => this.sync = false)).catch(() => alert('同步失败！', 'error').then(() => this.sync = false))

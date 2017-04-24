@@ -13,18 +13,18 @@
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" label="编号"/>
-          <MyColumn prop="name" label="标题" width="120"/>
-          <MyColumn prop="job" label="招聘职位" width="120"/>
-          <MyColumn prop="company" label="用人单位" width="120"/>
-          <MyColumn prop="address" label="公司地址" width="120"/>
-          <MyColumn prop="num" label="招聘人数" width="120"/>
-          <MyColumn prop="pay" label="薪资待遇" width="120"/>
-          <MyColumn prop="linkmans" label="联系人" :formatter="({linkmans})=>linkmans.join('，')" width="120"/>
-          <MyColumn prop="phones" label="联系电话" :formatter="({phones})=>phones.join('，')" width="120"/>
-          <MyColumn prop="claim" label="招聘要求" width="120"/>
-          <MyColumn prop="treatment" label="福利待遇" width="120"/>
-          <MyColumn prop="depatrment" label="发布机关" width="120"/>
-          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" width="120"/>
+          <MyColumn prop="name" label="标题" min-width="120"/>
+          <MyColumn prop="job" label="招聘职位" min-width="120"/>
+          <MyColumn prop="company" label="用人单位" min-width="120"/>
+          <MyColumn prop="address" label="公司地址" min-width="120"/>
+          <MyColumn prop="num" label="招聘人数" min-width="120"/>
+          <MyColumn prop="pay" label="薪资待遇" min-width="120"/>
+          <MyColumn prop="linkmans" label="联系人" :formatter="({linkmans})=>linkmans.join('，')" min-width="120"/>
+          <MyColumn prop="phones" label="联系电话" :formatter="({phones})=>phones.join('，')" min-width="120"/>
+          <MyColumn prop="claim" label="招聘要求" min-width="120"/>
+          <MyColumn prop="treatment" label="福利待遇" min-width="120"/>
+          <MyColumn prop="depatrment" label="发布机关" min-width="120"/>
+          <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="160"/>
           <MyColumn label="操作" width="160">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['recruitEdit', scope.row.id])">编辑</el-button>
@@ -48,31 +48,26 @@
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import MyPagination from '../../../components/public/page/MyPagination.vue'
   import filter from '../../../filters'
+  import {confirm} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['getRecruit', 'clear','delRecruit', 'changeSelect', 'go']),
+      ...mapActions(['getRecruit', 'clear', 'delRecruit', 'changeSelect', 'go']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getRecruit();
       },
       del(idx, {id, name}){
-        this.$confirm(`确定删除招聘信息[${name}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.delRecruit([id, idx]))
+        confirm(`确定删除招聘信息[${name}]吗?`, 'warning').then(() => this.delRecruit([id, idx]))
       }
     },
     created () {
       this.getRecruit();
     },
     destroyed () {
-      this.clear()
+      this.clear('recruit')
     }
   }
 </script>

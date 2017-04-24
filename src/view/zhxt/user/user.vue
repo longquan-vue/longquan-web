@@ -15,26 +15,26 @@
         <MySelectInput title="搜索条件" :options="{'name':'姓名','idCard':'身份证号','depName':'所属单位','phone':'电话号码','nickname':'昵称'}" def-key="name" :change="change"/>
       </div>
       <div class="btn mgb20" v-if="false">
-        <!--<el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>-->
+        <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称" width="100"/>
-          <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="idCard" label="身份证"/>
-          <MyColumn prop="sex" :formatter="sex2Filter" label="性别"/>
-          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻"/>
-          <MyColumn prop="birthday" :formatter="date2Filter" label="生日" width="120"/>
-          <MyColumn prop="phone" label="电话"/>
-          <MyColumn prop="mail" label="邮箱"/>
-          <MyColumn prop="address" label="邮寄地址" width="120"/>
-          <MyColumn prop="depName" label="所属单位" width="120"/>
-          <MyColumn prop="position" label="岗位名称" width="120"/>
-          <MyColumn prop="audit" :formatter="auditFilter" label="职工认证" width="120"/>
-          <MyColumn prop="score" label="剩余积分" width="120"/>
-          <MyColumn prop="created" label="注册日期" :formatter="date3Filter" width="160"/>
-          <MyColumn prop="deleted" label="是否冻结用户" :formatter="freezeFilter" width="140"/>
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="nickname" label="昵称" min-width="100"/>
+          <MyColumn prop="name" label="姓名" min-width="100"/>
+          <MyColumn prop="idCard" label="身份证" min-width="140"/>
+          <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
+          <MyColumn prop="marriage" :formatter="marriage2Filter" label="婚姻" min-width="80"/>
+          <MyColumn prop="birthday" :formatter="date2Filter" label="生日" min-width="120"/>
+          <MyColumn prop="phone" label="电话" min-width="140"/>
+          <MyColumn prop="mail" label="邮箱" min-width="120"/>
+          <MyColumn prop="address" label="邮寄地址" min-width="120"/>
+          <MyColumn prop="depName" label="所属单位" min-width="120"/>
+          <MyColumn prop="position" label="岗位名称" min-width="120"/>
+          <MyColumn prop="audit" :formatter="auditFilter" label="职工认证" min-width="120"/>
+          <MyColumn prop="score" label="剩余积分" min-width="120"/>
+          <MyColumn prop="created" label="注册日期" :formatter="date3Filter" min-width="160"/>
+          <MyColumn prop="deleted" label="是否冻结用户" :formatter="freezeFilter" min-width="140"/>
           <MyColumn label="操作" fixed="right" width="150">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['userEdit',scope.row.id])">编辑</el-button>
@@ -59,26 +59,21 @@
   import MySelectInput from '../../../components/public/selectInput/MySelectInput.vue'
   import MyInput from '../../../components/public/select/MyInput.vue'
   import filter from '../../../filters'
+  import {confirm} from '../../../actions'
   export default {
-    components: {
-      MySelect, MySelectInput, MyPagination, MyInput, MyColumn, MyTable
-    },
+    components: {MySelect, MySelectInput, MyPagination, MyInput, MyColumn, MyTable},
+    computed: {...mapGetters(['list'])},
     methods: {
-      handleDelete({id, nickname}, idx) {
-        this.$confirm(`确定删除用户[${nickname}]吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => this.delUser([id, idx]))
-      },
       ...mapActions(['findUserList', 'clear', 'changeSelect', 'delUser', 'go']),
       ...filter,
+      handleDelete({id, nickname}, idx) {
+        confirm(`确定删除用户[${nickname}]吗?`, 'warning').then(() => this.delUser([id, idx]))
+      },
       change(key, value){
         this.changeSelect({key, value});
         this.findUserList();
       },
     },
-    computed: {...mapGetters(['list'])},
     created () {
       this.findUserList();
     },

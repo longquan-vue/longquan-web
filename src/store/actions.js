@@ -33,6 +33,7 @@ import {fileApi, delFileApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
+import {findArticleApi, createArticleApi} from '../api/articleApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -73,7 +74,7 @@ const getUser = async({commit, state}) => commit(SET_DATA, await getByIdApi(stat
 // 获取用户列表
 const findUserList = async({commit, state}) => commit(GET_DATA_LIST, await findApi(state.page));
 // 修改用户
-const updateUser = ({commit, state}, user) => updateUserApi(user);
+const updateUser = ({commit, state}) => updateUserApi(state.data).then(() => success('修改成功!'));
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
@@ -159,9 +160,9 @@ const getWelfareDetail = async({commit, state}, data) => {
   if (welfareId) {
     commit(SET_DATA, {...await findWelfareByIdApi(welfareId), ticket, id, used});
   } else if (state.route.params.id) {
-    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
+    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true, ...defData.welfare} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
   } else {
-    commit(SET_DATA, data);
+    commit(SET_DATA, data || defData.welfare);
   }
 };
 //获取福利   创建福利
@@ -290,6 +291,8 @@ const createAdmin = ({commit, state}) => createAdminApi(state.data).then(() => s
 const updateAdmin = ({commit, state}) => updateAdminApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //删除投票调查
 const delAdmin = ({commit, state}, [id, idx]) => delAdminApi(id).then(() => commit(DEL_DATA, idx))
+// 获取文章列表
+const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_DATA_LIST, await findArticleApi(state.page, del, type));
 export default {
   getMineWelfare,
   getUser,
@@ -365,4 +368,5 @@ export default {
   getAdmin,//获取职工详情
   updateAdmin,//修改职工
   getAdminList,//获取职工列表
+  findArticle,//获取文章列表
 }

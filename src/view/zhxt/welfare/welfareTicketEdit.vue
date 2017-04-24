@@ -1,10 +1,13 @@
+<style lang="less" scoped>
+  @import "welfare.less";
+</style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span v-if="!data.edit">编辑券类福利</span>
       <span v-if="data.edit">新增券类福利</span>
       <a @click="go()" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -17,7 +20,9 @@
             <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="福利数量" prop="total">
-            <el-input :value="data.total" @input="(v)=>setData({total:v})"/>
+            <el-input :value="data.total" @input="(v)=>setData({total:v})">
+              <template slot="append">份</template>
+            </el-input>
           </el-form-item>
           <el-form-item label="福利类型" prop="name">
             <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
@@ -27,22 +32,22 @@
           </el-form-item>
           <el-form-item label="兑换时间" prop="startTime">
             <el-col :span="11">
-              <el-form-item prop="start">
-                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始日期" :value="data.startTime" @input="(v)=>setData({startTime:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
+              <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间..." :value="data.startTime" @input="(v)=>setData({startTime:v&&v.getTime()})" style="width: 100%;"/>
             </el-col>
-            <el-col class="line" :span="2" style="text-align:center;">-</el-col>
+            <el-col class="line" :span="2" style="text-align:center;">至</el-col>
             <el-col :span="11">
-              <el-form-item prop="end">
-                <el-date-picker type="datetime" placeholder="选择结束日期" :value="data.endTime" @input="(v)=>setData({endTime:v&&v.getTime()})" style="width: 100%;"></el-date-picker>
-              </el-form-item>
+              <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择结束时间..." :value="data.endTime" @input="(v)=>setData({endTime:v&&v.getTime()})" style="width: 100%;"/>
             </el-col>
           </el-form-item>
           <el-form-item label="所需积分" prop="score">
-            <el-input :value="data.score" @input="(v)=>setData({score:v})"/>
+            <el-input :value="data.score" @input="(v)=>setData({score:v})">
+              <template slot="append">积分</template>
+            </el-input>
           </el-form-item>
           <el-form-item label="人均兑换次数" prop="time">
-            <el-input :value="data.time" @input="(v)=>setData({time:v})"/>
+            <el-input :value="data.time" @input="(v)=>setData({time:v})">
+              <template slot="append">次/人</template>
+            </el-input>
           </el-form-item>
           <el-form-item label="福利提供方" prop="provider">
             <el-input :value="data.provider" @input="(v)=>setData({provider:v})"/>
@@ -51,7 +56,7 @@
             <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
           <el-form-item label="兑换规则" prop="rule">
-            <quill-editor ref="myTextEditor" :content="data.rule" @input="(v)=>setData({rule:v})" :config="{}"/>
+            <quill-editor ref="myTextEditor" :content="decode(data.rule)" @input="(v)=>setData({rule:encode(v)})" :config="{}"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="福利发布者" prop="admin">
@@ -73,41 +78,25 @@
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
   import MyUpload from '../../../components/public/MyUpload.vue'
+  import {number, required, array} from '../../../constant/rules'
   export default {
     data() {
       return {
         rules: {
-          name: [
-            {required: true, message: '请输入活动名称', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
-          ],
-          region: [
-            {required: true, message: '请选择活动区域', trigger: 'change'}
-          ],
-          date1: [
-            {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
-          ],
-          date2: [
-            {type: 'date', required: true, message: '请选择时间', trigger: 'change'}
-          ],
-          type: [
-            {type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change'}
-          ],
-          resource: [
-            {required: true, message: '请选择活动资源', trigger: 'change'}
-          ],
-          desc: [
-            {required: true, message: '请填写活动形式', trigger: 'blur'}
-          ]
+          files: array(),
+          name: required('请输入福利名称...', {max: 15}),
+          total: number('请输入福利数量...'),
+          entry: number('请选择福利类型...'),
+          startTime: number('请选择福利时间...'),
+          score: number('请输入福利积分...', {min: 0}),
+          time: number('请输入人均兑换次数...'),
+          provider: required('请输入提供方...'),
+          rule: required('请输入兑换规则...'),
         },
       }
     },
-    components: {
-      MyUpload
-    },
-    computed: {
-      ...mapGetters(['data']),
-    },
+    components: {MyUpload},
+    computed: {...mapGetters(['data']),},
     methods: {
       ...filter,
       ...mapActions(['getWelfareDetail', 'createWelfare', 'updateWelfare', 'clear', 'setData', 'go']),

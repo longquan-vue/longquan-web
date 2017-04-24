@@ -2,8 +2,8 @@
   <div class="contentBox">
     <div class="contentBoxtitle">
       <span>积分记录</span>
-      <a @click="go(['userList'])" style="float:right;">
-        <el-button type="primary" icon="arrow-left"></el-button>
+      <a @click="go()" style="float:right;">
+        <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
     <div class="contentBoxCont">
@@ -13,16 +13,15 @@
         <el-button type="primary" @click="reset">重置</el-button>
       </div>
       <div class="tableList mgb20">
-        <MyTable :data="list" border style="width: 100%">
-          <MyColumn type="index" label="编号" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称"/>
-          <MyColumn prop="name" label="姓名"/>
-          <MyColumn prop="depName" label="所属单位"/>
-          <MyColumn prop="title" label="描述"/>
-          <MyColumn prop="recording" label="时间" :formatter="date8Filter" width="160"/>
-          <MyColumn prop="point" label="获得积分" width="100"/>
-          <!--<MyColumn prop="score" label="剩余积分" width="100"/>-->
-          <MyColumn label="操作" fixed="right" width="120">
+        <MyTable :data="list">
+          <MyColumn type="index" fixed="left"/>
+          <MyColumn prop="nickname" label="昵称" min-width="100"/>
+          <MyColumn prop="name" label="姓名" min-width="100"/>
+          <MyColumn prop="depName" label="所属单位" min-width="140"/>
+          <MyColumn prop="title" label="描述" min-width="140"/>
+          <MyColumn prop="recording" label="时间" :formatter="date8Filter" min-width="160"/>
+          <MyColumn prop="point" label="获得积分" min-width="100"/>
+          <MyColumn label="操作" width="120">
             <template scope="scope">
               <el-button type="text" size="small" @click="showPoint(scope.row)">积分管理</el-button>
             </template>
@@ -35,18 +34,18 @@
       <el-dialog title="积分管理" v-model="show" size="tiny">
         <el-form :model="point">
           <el-form-item label="当前积分" label-width="80px">
-            <el-input v-model="point.score" auto-complete="off"></el-input>
+            <el-input v-model="point.score" auto-complete="on"/>
           </el-form-item>
           <el-form-item label="积分管理" label-width="80px">
             <el-row>
               <el-col :span="8">
                 <el-select v-model="point.type">
-                  <el-option label="增加" value="1"></el-option>
-                  <el-option label="减少" value="-1"></el-option>
+                  <el-option label="增加" value="1"/>
+                  <el-option label="减少" value="-1"/>
                 </el-select>
               </el-col>
               <el-col :span="16">
-                <el-input v-model="point.point" auto-complete="off"></el-input>
+                <el-input v-model="point.point" auto-complete="on"/>
               </el-col>
             </el-row>
           </el-form-item>
@@ -69,21 +68,19 @@
   export default {
     data() {
       return {
-        dateValue: [], //时间筛选默认值
+        dateValue: [],
         show: false,
         point: {
           type: '1'
         }
       }
     },
-    components: {
-      MyPagination, MyColumn, MyTable
-    },
+    components: {MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
       ...mapActions(['getMineScore', 'updateUser', 'clear', 'changeSelect', 'go', 'changePage']),
       ...filter,
-      change(key, value){   //这是每个 change
+      change(key, value){
         this.changeSelect({key, value});
         this.getMineScore();
       },
