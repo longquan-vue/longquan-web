@@ -12,7 +12,8 @@
                     <h2>招聘详情</h2>
                 </div>
                 <div box="1" flex items="center">
-                    <a class="a" @click="collect">收藏</a>
+                    <a class="a" @click="collect(1)" v-if="data.favorite==0">收藏</a>
+                    <a class="a" @click="collect(0)" v-if="data.favorite!=0">取消收藏</a>
                 </div>
             </div>
         </div>
@@ -111,14 +112,14 @@
         },
         computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['goto','clear','getRecruitDetail']),
+            ...mapActions(['goto','clear','getRecruitDetail','setData']),
             ...filter,
             isShow(val, data, date){
                 if (val == 1) {   //报名成功
-                    this.content = '恭喜您！收藏成功';
+                    this.content = '成功';
                     this.btns = {btn: '确定'};
                 } else if (val == 2) { // 取消
-                    this.content = '收藏失败，请重新收藏!';
+                    this.content = '失败，请重新收藏!';
                     this.btns = {btn: '确定'};
                 }
                 this.isshow = true;
@@ -126,8 +127,20 @@
             onResultChange(val){
                 this.isshow = val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
-            collect(){
-                collectRecruitApi(this.$store.state.data.id).then(()=>this.isShow(1)).catch(()=>this.isShow(2));
+            collect(status){
+                if (status == 1){
+                    collectRecruitApi(this.$store.state.data.id).then(()=>{
+                        this.isShow(1);
+                        this.setData({favorite:1});
+                        // this.getRecruitDetail();
+                    }).catch(()=>this.isShow(2));
+                }else {
+                    uncollectRecruitApi(this.$store.state.data.id,2).then(()=>{
+                        this.isShow(1);
+                        this.setData({favorite:0});
+                        // this.getRecruitDetail();
+                    }).catch(()=>this.isShow(2));
+                }
             }
         },
         created () {
