@@ -43,3 +43,13 @@ export const entryRecruitApi = (id,data) => request({
     url: `${BASE_PATH}/entry/${id}`,
     data
 });
+
+//收藏招聘
+export const collectRecruitApi = (id) => request({
+    url: `${BASE_PATH}/favorite/${id}`,
+});
+
+//取消收藏
+export const uncollectRecruitApi = (id) => request({
+    url: `${BASE_PATH}/unfavorite/${id}`,
+});

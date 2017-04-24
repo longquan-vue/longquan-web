@@ -28,20 +28,25 @@
         <div class="healthCont" v-if="showList">
             <p>报名详情({{itemFilter(data.total)}}),可以{{data.total}}人同时报名</p>
             <ul>
-                <li v-for="(item,index) in data.starts">
+                <li v-for="(item,index) in group">
                     <div class="timeLine">
-                        <span>{{HHmmFilter(item)}}--{{HHmmFilter(data.ends[index])}}</span>
+                        <span>{{HHmmFilter(data.starts[item.idx])}}--{{HHmmFilter(data.ends[item.idx])}}</span>
                     </div>
                     <div class="siginList" flex items="center">
                         <div box="1" flex justify="between">
-                            <a v-for="u in 5" :class="{'lasta':group[index] && group[index].list[u-1] && u == 5}">
-                                <img @click="go(['personMess',group[index] && group[index].list[u-1].id])" :src="group[index] && group[index].list[u-1].headimgurl" v-if="group[index] && group[index].list[u-1] && u < 5">
-                                <span v-if="group[index] && group[index].list[u-1] && u == 5" @click="openPerson(index)">...</span>
+                            <a v-for="u in 5" :class="{'lasta':item.list[u-1] && u == 5}">
+                                <img @click="go(['personMess',item.list[u-1].id])"
+                                     :src="item.list[u-1].headimgurl"
+                                     v-if="item.list[u-1] && u < 5">
+                                <span v-if="item.list[u-1] && u == 5"
+                                      @click="openPerson(item)">...</span>
                             </a>
                         </div>
-                        <a class="ising" v-if="!(group[index] && group[index].flag)" @click="entry({id:data.id,starts:[item],ends:[data.ends[index]]},value)">报名</a>
-                        <a class="ising" v-if="group[index] && group[index].flag" @click="noentry({id:data.id,starts:[item],ends:[data.ends[index]]},value)">取消报名</a>
-                        <a class="over" v-if="group[index] && group[index].num >= data.total" @click="">已满员</a>
+                        <a class="ising" v-if="!item.flag"
+                           @click="entry({id:data.id,starts:[data.starts[item.idx]],ends:[data.ends[item.idx]]},value)">报名</a>
+                        <a class="ising" v-if="item.flag"
+                           @click="noentry({id:data.id,starts:[data.starts[item.idx]],ends:[data.ends[item.idx]]},value)">取消报名</a>
+                        <a class="over" v-if="item.num >= data.total" @click="">已满员</a>
                     </div>
                 </li>
             </ul>
@@ -65,17 +70,20 @@
                         <div class="timeLine">
                             <span>10:31-10:50</span>
                         </div>
-                        <div class="siginList" flex items="center" >
+                        <div class="siginList" flex items="center">
                             <grid :rows="7" style="width:100%">
                                 <grid-item v-for="(item,index) in group[idx].list" :key="index">
-                                    <span class="grid-center"><a @click="go(['personMess',item.id])"><img :src="item.headimgurl"></a></span>
+                                    <span class="grid-center"><a @click="go(['personMess',item.id])"><img
+                                            :src="item.headimgurl"></a></span>
                                 </grid-item>
                             </grid>
                         </div>
                     </li>
                 </ul>
-                <a class="baoming" v-if="!group[idx].flag" @click="entry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">报名</a>
-                <a class="baoming" v-if="group[idx].flag" @click="noentry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">取消报名</a>
+                <a class="baoming" v-if="!group[idx].flag"
+                   @click="entry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">报名</a>
+                <a class="baoming" v-if="group[idx].flag"
+                   @click="noentry({id:data.id,starts:[data.starts[idx]],ends:[data.ends[idx]]},value)">取消报名</a>
                 <a class="baoming" v-if="group[idx].num >= data.total" @click="">已满员</a>
             </div>
         </popup>
@@ -83,7 +91,7 @@
 </template>
 
 <script type="es6">
-    import {InlineCalendar, Group ,Popup ,Grid, GridItem} from 'vux'
+    import {InlineCalendar, Group, Popup, Grid, GridItem} from 'vux'
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import filters from '../../../filters'
@@ -116,30 +124,30 @@
                 title: '提示',   //控制弹窗标题
                 content: '兑换成功',  //控制弹窗内容
                 btns: {},
-                showList:false,  // 选中日期当天是否有 开启项目
-                showEntryList:false,   //展示报名人员详情
-                idx:0,   // 展开哪个时间段的报名人员详情
+                showList: false,  // 选中日期当天是否有 开启项目
+                showEntryList: false,   //展示报名人员详情
+                idx: 0,   // 展开哪个时间段的报名人员详情
             }
         },
         watch: {
             value(newval, oldval){
                 // console.log(oldval+'老');
                 // console.log(newval + '新');
-                if (this.$store.state.data.date.includes(newval)){
+                if (this.$store.state.data.date.includes(newval)) {
                     this.showList = true;
                     this.change('created', moment(newval).format('x') * 1)
-                }else {
+                } else {
                     this.showList = false;
                 }
             }
         },
         components: {
-            appHead, Group, InlineCalendar, myConfirmDialog , Popup ,Grid, GridItem
+            appHead, Group, InlineCalendar, myConfirmDialog, Popup, Grid, GridItem
         },
         computed: {
             ...mapGetters(['data', 'list', 'login']),
             group(){
-                return this.groupList(this.list, {flagFn: (item) => this.login.id == item.id})
+                return this.groupMap(this.list, {flagFn: (item) => this.login.id == item.id, group: this.data.starts})
             }
         },
         methods: {
@@ -158,11 +166,11 @@
                     this.btns = {
                         btn1: '是', btn2: '否', action: () => {
                             cancelEntryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
-                                window.location.reload();
+                                this.getHealthEnter()
                             });
                         }
                     };
-                }else if (val == 3) { // 没有认证
+                } else if (val == 3) { // 没有认证
                     // this.img = '../../../../static/wx/succ.png';
                     this.content = '请先完善个人信息并通过职工认证';
                     this.btns = {
@@ -196,11 +204,12 @@
                 this.getHealthEnter()
             },
             entry(data, date){
-                if (this.$store.state.login.audit == 2){
+                if (this.$store.state.login.audit == 2) {
                     entryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
+                        this.getHealthEnter()
                         this.isShow(1);
                     });
-                }else {
+                } else {
                     this.isShow(3);
                 }
             },

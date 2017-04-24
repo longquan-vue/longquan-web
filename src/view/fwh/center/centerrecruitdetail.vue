@@ -12,7 +12,7 @@
                     <h2>招聘详情</h2>
                 </div>
                 <div box="1" flex items="center">
-                    <a class="a" @click="collect()">收藏</a>
+                    <a class="a" @click="collect">收藏</a>
                 </div>
             </div>
         </div>
@@ -82,6 +82,10 @@
             </ul>
 
         </div>
+
+        <myConfirmDialog @on-result-change="onResultChange" :title="title" :content="content" :btns="btns"
+                         :isShow="isshow"></myConfirmDialog>
+
         <a @click="goto(['recruitSign',{id:data.id}])" class="baoming">意向报名</a>
     </div>
 </template>
@@ -91,25 +95,39 @@
     import { mapActions } from 'vuex'
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
-    import {Message} from 'element-ui';
+    import {collectRecruitApi,uncollectRecruitApi} from  '../../../api/recruitApi'
+    import myConfirmDialog from '../../../components/public/confirmDialog/confirmDialog.vue'
     export default{
         data(){
             return{
+                isshow: false,//控制弹窗
+                title: '提示',   //控制弹窗标题
+                content: '兑换成功',  //控制弹窗内容
+                btns: {},
             }
         },
         components:{
-            appHead
+            appHead , myConfirmDialog
         },
         computed: {...mapGetters(['data'])},
         methods:{
             ...mapActions(['goto','clear','getRecruitDetail']),
             ...filter,
+            isShow(val, data, date){
+                if (val == 1) {   //报名成功
+                    this.content = '恭喜您！收藏成功';
+                    this.btns = {btn: '确定'};
+                } else if (val == 2) { // 取消
+                    this.content = '收藏失败，请重新收藏!';
+                    this.btns = {btn: '确定'};
+                }
+                this.isshow = true;
+            },
+            onResultChange(val){
+                this.isshow = val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+            },
             collect(){
-                Message({
-                    message: '收藏成功',
-                    type: 'success',
-                    duration: 1000
-                });
+                collectRecruitApi(this.$store.state.data.id).then(()=>this.isShow(1)).catch(()=>this.isShow(2));
             }
         },
         created () {
