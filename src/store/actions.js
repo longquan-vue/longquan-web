@@ -32,7 +32,7 @@ import {fileApi, delFileApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
-import {findArticleApi, createArticleApi} from '../api/articleApi'
+import {findArticleApi, createArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -286,6 +286,23 @@ const updateAdmin = ({commit, state}) => updateAdminApi(state.data).then(() => s
 const delAdmin = ({commit, state}, [id, idx]) => delAdminApi(id).then(() => commit(DEL_DATA, idx))
 // 获取文章列表
 const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_DATA_LIST, await findArticleApi(state.page, del, type));
+// 创建文章
+const createArticle = ({commit, state}) => createArticleApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改文章
+const updateArticle = ({commit, state}) => updateAdminApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 获取文章详情
+const getArticle = async({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {edit: true, ...defData.article});
+  } else {
+    commit(SET_DATA, {...await getArticleApi(id), edit: false});
+  }
+};
+//删除文章
+const delArticle = ({commit, state}, [id, idx]) => delArticleApi(id).then(() => commit(DEL_DATA, idx))
+//切换文章状态
+const pauseArticle = ({commit, state}, [id, key, val]) => pauseArticleApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 export default {
   getMineWelfare,
   getUser,
@@ -361,4 +378,8 @@ export default {
   updateAdmin,//修改职工
   getAdminList,//获取职工列表
   findArticle,//获取文章列表
+  getArticle,//获取文章详情
+  createArticle,//创建文章
+  delArticle,//删除文章
+  pauseArticle,//切换文章状态
 }
