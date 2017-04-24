@@ -112,7 +112,7 @@
         },
         computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['goto','clear','getRecruitDetail','setData']),
+            ...mapActions(['goto','clear','getRecruitDetail','setData','getMine']),
             ...filter,
             isShow(val, data, date){
                 if (val == 1) {   //报名成功
@@ -143,8 +143,9 @@
                 }
             }
         },
-        created () {
-            this.getRecruitDetail();
+        async created () {
+            await this.getMine();
+            await this.getRecruitDetail();
         },
         destroyed(){
             this.clear()

@@ -5,7 +5,8 @@
 <template>
     <div class="centerCruit" style="background-color: #F0F0F0;height: 100%;overflow: scroll;padding-top:50px;">
         <appHead title="我收藏的招聘信息"></appHead>
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50">
+
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50" v-if="list.length>0">
             <div class="scrollerBox">
                 <ul class="centerCruitList">
                     <li  @click="go(['centerrecruitdetail',item.id])" v-for="(item,index) in list">
@@ -32,6 +33,9 @@
                 <span v-show="scroller.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
+
+        <nothing v-if="list.length==0" title="没有活动！" content="请留意近期公会活动，公会不定期举办各类活动"></nothing>
+
     </div>
 </template>
 
@@ -40,6 +44,7 @@
     import { mapActions } from 'vuex'
     import filter from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import nothing from '../../../components/public/nothing/nothing.vue'
     import { TransferDomDirective as TransferDom, Scroller, Spinner} from 'vux'
     export default{
         data(){
@@ -53,7 +58,7 @@
             TransferDom
         },
         components:{
-            appHead,Scroller, Spinner
+            appHead,Scroller, Spinner ,nothing
         },
         computed: {...mapGetters(['login','list'])},
         methods:{
