@@ -32,6 +32,7 @@ import {fileApi, delFileApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
+import {findArticleApi, createArticleApi} from '../api/articleApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -283,6 +284,8 @@ const createAdmin = ({commit, state}) => createAdminApi(state.data).then(() => s
 const updateAdmin = ({commit, state}) => updateAdminApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 //删除投票调查
 const delAdmin = ({commit, state}, [id, idx]) => delAdminApi(id).then(() => commit(DEL_DATA, idx))
+// 获取文章列表
+const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_DATA_LIST, await findArticleApi(state.page, del, type));
 export default {
   getMineWelfare,
   getUser,
@@ -357,4 +360,5 @@ export default {
   getAdmin,//获取职工详情
   updateAdmin,//修改职工
   getAdminList,//获取职工列表
+  findArticle,//获取文章列表
 }
