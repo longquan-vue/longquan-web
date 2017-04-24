@@ -13,7 +13,8 @@ import {
   delUserApi,
   updateUserApi,
   getSignApi,
-  getWeekSignApi
+  getWeekSignApi,
+  mineRecruitApi
 } from '../api/userApi'
 import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
 import {adminApi, loginOutApi, loginApi, adminListApi, auditAdminApi, createAdminApi, delAdminApi, exportAdminApi, getAdminApi, updateAdminApi} from '../api/adminApi'
@@ -134,7 +135,7 @@ const getMineMsg = ({commit, state}) => state.page.page <= state.page.pages && g
   state
 }).then(async() => commit(GET_DATA_LIST, await mineMsgApi(state.page)));
 //获取我的工会活动
-const getMineActivity = ({commit, state}) => getMine({
+const getMineActivity = ({commit, state}) => state.page.page <= state.page.pages && getMine({
   commit,
   state
 }).then(async() => commit(GET_DATA_LIST, await mineActivityApi(1, state.page)));
@@ -143,6 +144,12 @@ const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages &
   commit,
   state
 }).then(async() => commit(GET_DATA_LIST, await mineHealthApi(1, state.page)));
+//获取我的收藏的招聘信息
+const getMineRecruit = ({commit, state}) => state.page.page <= state.page.pages && getMine({
+    commit,
+    state
+}).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(1, state.page)));
+
 //公共删除方法
 const delMethod = async({commit, state}, idx) => deleteApi(state.list[idx].id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取福利  兑换列表
@@ -326,6 +333,7 @@ export default {
   getMineMsg,    //获取我的消息记录
   getMineActivity,  //获取我的工会活动
   getMineHealth,  //获取我的健身项目
+  getMineRecruit, //获取我的收藏的招聘信息
   getWelfare,    //获取福利列表
   singin,      //签到
   getWeekSign, //签到自然周

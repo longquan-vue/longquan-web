@@ -6,7 +6,7 @@
     <div class="centerMess">
         <appHead title="我报名的健身项目"></appHead>
         <ul class="centerMessList">
-            <li v-for="(item,index) in list" flex @click="goto(['centeractivitydetail'])">
+            <li v-for="(item,index) in list" flex @click="go(['centeractivitydetail',item.id])">
                 <div>
                     <img :src="item.picUrl">
                 </div>
@@ -46,7 +46,7 @@
         computed: {...mapGetters(['login', 'list']),
         },
         methods:{
-            ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage', 'clearPage']),
+            ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage','go']),
             filters,
             openCode(){
 

@@ -44,16 +44,12 @@
     export default{
         data(){
             return {
-                show: false,//控制弹窗
-                content: '啦啦啦',
-                showSuccess: false,
                 show3: false,
                 idx: 0,
                 menus3: {
                     'title.noop': '确定咩?<br/><span style="color:#666;font-size:12px;">删除后就无法撤消了哦</span>',
                     delete: '<span style="color:red">删除</span>'
                 },
-                n4: 10,
                 demo4Value: {
                     pullupStatus: ''
                 },
