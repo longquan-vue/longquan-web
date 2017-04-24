@@ -50,6 +50,6 @@ export const collectRecruitApi = (id) => request({
 });
 
 //取消收藏
-export const uncollectRecruitApi = (id) => request({
-    url: `${BASE_PATH}/unfavorite/${id}`,
+export const uncollectRecruitApi = (id,del) => request({
+    url: `${BASE_PATH}/unfavorite/${id}/${del}`,
 });
