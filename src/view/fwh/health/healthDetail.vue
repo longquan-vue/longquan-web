@@ -39,7 +39,7 @@
                                      :src="item.list[u-1].headimgurl"
                                      v-if="item.list[u-1] && u < 5">
                                 <span v-if="item.list[u-1] && u == 5"
-                                      @click="openPerson(item)">...</span>
+                                      @click="openPerson(item.idx)">...</span>
                             </a>
                         </div>
                         <a class="ising" v-if="!item.flag"

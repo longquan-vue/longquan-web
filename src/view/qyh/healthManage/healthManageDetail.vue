@@ -27,15 +27,18 @@
         <div class="healthCont" v-if="showList">
             <p>报名详情({{itemFilter(data.total)}}),可以{{data.total}}人同时报名</p>
             <ul>
-                <li v-for="(item,index) in data.starts">
+                <li v-for="(item,index) in group">
                     <div class="timeLine">
-                        <span>{{HHmmFilter(item)}}--{{HHmmFilter(data.ends[index])}}</span>
+                        <span>{{HHmmFilter(data.starts[item.idx])}}--{{HHmmFilter(data.ends[item.idx])}}</span>
                     </div>
                     <div class="siginList" flex items="center">
                         <div box="1" flex justify="between" style="padding-right:0">
-                            <a v-for="u in 7" :class="{'lasta':group[index] && group[index].list[u-1] && u == 7}">
-                                <img @click="go(['personMess',group[index] && group[index].list[u-1].id])" :src="group[index] && group[index].list[u-1].headimgurl" v-if="group[index] && group[index].list[u-1] && u < 7">
-                                <span v-if="group[index] && group[index].list[u-1] && u == 7" @click="openPerson(index)">...</span>
+                            <a v-for="u in 7" :class="{'lasta':item.list[u-1] && u == 7}">
+                                <img @click="go(['personMess',item.list[u-1].id])"
+                                     :src="item.list[u-1].headimgurl"
+                                     v-if="item.list[u-1] && u < 7">
+                                <span v-if="item.list[u-1] && u == 7"
+                                      @click="openPerson(item.idx)">...</span>
                             </a>
                         </div>
                     </div>
@@ -130,7 +133,7 @@
         computed: {
             ...mapGetters(['data', 'list', 'login']),
             group(){
-                return this.groupList(this.list, {flagFn: (item) => this.login.id == item.id})
+                return this.groupMap(this.list, {flagFn: (item) => this.login.id == item.id, group: this.data.starts})
             }
         },
         methods: {
