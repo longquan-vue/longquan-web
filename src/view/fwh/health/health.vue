@@ -12,7 +12,7 @@
                 </marquee>
             </div>
         </div>
-        <div class="healthList" v-if="list.length》=0">
+        <div class="healthList" v-if="list.length>0">
             <ul>
                 <li flex @click="go(['healthDetail',item.id])" v-for="(item,index) in list">
                     <div flex items="center"><img :src="item.picUrl"></div>
