@@ -33,6 +33,30 @@ export default {
             {title: '工会资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
           ]
         },
+        {
+          title: '办事指南管理',
+          children: [
+            {title: '办事指南列表', path: `${ROOT}/zhxt/article/guide`},
+            {title: '办事类型设置', path: `${ROOT}/zhxt/article/guideSetting`},
+            {title: '办事指南统计', path: `${ROOT}/zhxt/article/guideCount`}
+          ]
+        },
+        {
+          title: '先进人物管理',
+          children: [
+            {title: '先进人物列表', path: `${ROOT}/zhxt/article/advanced`},
+            {title: '先进类型设置', path: `${ROOT}/zhxt/article/advancedSetting`},
+            {title: '先进人物统计', path: `${ROOT}/zhxt/article/advancedCount`}
+          ]
+        },
+        {
+          title: '资料中心管理',
+          children: [
+            {title: '资料中心列表', path: `${ROOT}/zhxt/article/resource`},
+            {title: '资料类型设置', path: `${ROOT}/zhxt/article/resourceSetting`},
+            {title: '资料中心统计', path: `${ROOT}/zhxt/article/resourceCount`}
+          ]
+        },
       ]
     },
     {
@@ -104,6 +128,8 @@ export default {
       title: '系统设置',
       children: [
         {title: '服务号设置', path: `${ROOT}/zhxt/setting/fwh`},
+        {title: '二维码管理', path: `${ROOT}/zhxt/setting/ticket`},
+        {title: '联系我们', path: `${ROOT}/zhxt/setting/relation`},
       ]
     },
   ]
