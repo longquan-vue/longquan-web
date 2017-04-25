@@ -25,6 +25,14 @@ export default {
             {title: '活动展示统计', path: `${ROOT}/zhxt/article/activityCount`}
           ]
         },
+        {
+          title: '工会资讯管理',
+          children: [
+            {title: '工会资讯列表', path: `${ROOT}/zhxt/article/info`},
+            {title: '资讯类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
+            {title: '工会资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
+          ]
+        },
       ]
     },
     {

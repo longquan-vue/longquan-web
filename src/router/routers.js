@@ -32,6 +32,11 @@ export default [
       {path: `${ROOT}/zhxt/article/activity/:id`, component: require('../view/zhxt/article/activity/activityEdit.vue'), name: 'actEdit', meta: {title: '修改工会文件'}}, // 修改工会文件
       {path: `${ROOT}/zhxt/article/activitySetting`, component: require('../view/zhxt/article/activity/activitySetting.vue'), name: 'actSetting', meta: {title: '文件类型设置'}}, // 工会文件类型设置
       {path: `${ROOT}/zhxt/article/activityCount`, component: require('../view/zhxt/article/activity/activityCount.vue'), name: 'actCount', meta: {title: '工会文件统计'}}, // 工会文件类型设置
+      /*文章 -- 工会资讯管理*/
+      {path: `${ROOT}/zhxt/article/info`, component: require('../view/zhxt/article/info/info.vue'), name: 'info', meta: {title: '工会资讯列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/info/:id`, component: require('../view/zhxt/article/info/infoEdit.vue'), name: 'infoEdit', meta: {title: '修改工会资讯'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/infoSetting`, component: require('../view/zhxt/article/info/infoSetting.vue'), name: 'infoSetting', meta: {title: '资讯类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/infoCount`, component: require('../view/zhxt/article/info/infoCount.vue'), name: 'infoCount', meta: {title: '工会资讯统计'}}, // 工会文件类型设置
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动

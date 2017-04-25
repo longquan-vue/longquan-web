@@ -1,11 +1,11 @@
 <style lang="less" scoped>
-  @import "activity.less";
+  @import "info.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">发布活动展示</span>
-      <span v-if="!data.edit">修改活动展示</span>
+      <span v-if="data.edit">发布工会资讯</span>
+      <span v-if="!data.edit">修改工会资讯</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -16,9 +16,9 @@
           <el-form-item label="标题" prop="title">
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
-          <el-form-item label="活动类型" prop="subType">
-            <el-select :value="data.subType" placeholder="请选择活动类型..." @input="(v)=>setData({subType:v})">
-              <el-option v-for="(val,key) in articleType.activity" :label="val" :key="key" :value="key"/>
+          <el-form-item label="资讯类型" prop="subType">
+            <el-select :value="data.subType" placeholder="请选择资讯类型..." @input="(v)=>setData({subType:v})">
+              <el-option v-for="(val,key) in articleType.info" :label="val" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
           <el-form-item label="配图" prop="pics">
@@ -86,7 +86,7 @@
       },
     },
     created () {
-      this.setData({type: 7});
+      this.setData({type: 5});
       this.getArticle()
     },
     destroyed () {
