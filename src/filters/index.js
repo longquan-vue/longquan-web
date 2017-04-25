@@ -1,5 +1,4 @@
 import moment from 'moment'
-import Base64 from 'Base64'
 // 性别过滤器   0->未知,1->男,2->女
 export const sexFilter = (sex) => ['未知', '男', '女'][sex] || '未知'
 export const freezeFilter = ({deleted}) => ['否', '是'][deleted] || '否'
@@ -42,78 +41,82 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
 export const userFilter = ({audit}) => ['普通用户', '普通用户', '职工认证用户'][audit] || '普通用户'
 export const group = (list, field = 'recording', filter = date7Filter) => {
-    const g = {};
-    list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
-    return g;
+  const g = {};
+  list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
+  return g;
 };
 
 // 报名列表过滤
 export const groupList = (list = [], {flagFn = () => false, field = 'start', keys = ['start', 'end']}) => {
-    const g = [];
-    list.map((item, idx) => {
-        if (idx > 0 && item[field] == g[g.length - 1][field]) {
-            g[g.length - 1].list.push(item);
-            g[g.length - 1].num += 1;
-            g[g.length - 1].flag = flagFn && flagFn(item);
-        } else {
-            g.push({num: 1, flag: flagFn && flagFn(item), list: [item]});
-            keys.map((key) => g[g.length - 1][key] = item[key]);
-        }
-    });
-    return g;
+  const g = [];
+  list.map((item, idx) => {
+    if (idx > 0 && item[field] == g[g.length - 1][field]) {
+      g[g.length - 1].list.push(item);
+      g[g.length - 1].num += 1;
+      g[g.length - 1].flag = flagFn && flagFn(item);
+    } else {
+      g.push({num: 1, flag: flagFn && flagFn(item), list: [item]});
+      keys.map((key) => g[g.length - 1][key] = item[key]);
+    }
+  });
+  return g;
 };
 export const groupMap = (list = [], {flagFn = () => false, filed = 'start', keys = ['start', 'end'], group = []}) => {
-    const m = {};
-    group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
-    list.map((item) => {
-        m[moment(item[filed]).format('HH:mm')].list.push(item);
-        m[moment(item[filed]).format('HH:mm')].num += 1;
-        m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
-        keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
-    });
-    return m
+  const m = {};
+  group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
+  list.map((item) => {
+    m[moment(item[filed]).format('HH:mm')].list.push(item);
+    m[moment(item[filed]).format('HH:mm')].num += 1;
+    m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
+    keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
+  });
+  return m
 }
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
-export const encode = (str = '') => Base64.btoa(str);
-export const decode = (str = '') => Base64.atob(str);
+export const encode = (str = '') => (new Buffer(str, 'utf8')).toString('base64');
+export const decode = (str = '') => (new Buffer(str, 'base64').toString('utf8'));
+export const filesFilter = (files = []) => files.map(({name}) => name).join('，')
+export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p + num, 0)
 
 
 export default {
-    encode,
-    decode,
-    sexFilter,
-    sex2Filter,
-    marriageFilter,
-    marriage2Filter,
-    dateFilter,
-    dateFilter2,
-    date2Filter,
-    date3Filter,
-    date4Filter,
-    date4Filter2,
-    date5Filter,
-    date6Filter,
-    date7Filter,
-    date8Filter,
-    diffFilter,
-    searchFilter,
-    auditFilter,
-    group,
-    isEnd,
-    isStart,
-    ageFilter,
-    freezeFilter,
-    itemFilter,
-    spotType,
-    entryType,
-    stateType,
-    userFilter,
-    signFilter,
-    HHmmFilter,
-    groupList,
-    numFilter,
-    syncFilter,
-    groupMap
+  filesNumFilter,
+  filesFilter,
+  encode,
+  decode,
+  sexFilter,
+  sex2Filter,
+  marriageFilter,
+  marriage2Filter,
+  dateFilter,
+  dateFilter2,
+  date2Filter,
+  date3Filter,
+  date4Filter,
+  date4Filter2,
+  date5Filter,
+  date6Filter,
+  date7Filter,
+  date8Filter,
+  diffFilter,
+  searchFilter,
+  auditFilter,
+  group,
+  isEnd,
+  isStart,
+  ageFilter,
+  freezeFilter,
+  itemFilter,
+  spotType,
+  entryType,
+  stateType,
+  userFilter,
+  signFilter,
+  HHmmFilter,
+  groupList,
+  numFilter,
+  syncFilter,
+  groupMap
 }
 

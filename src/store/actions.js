@@ -33,7 +33,7 @@ import {fileApi, delFileApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
-import {findArticleApi, createArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
+import {findArticleApi, createArticleApi,updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -296,7 +296,7 @@ const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_D
 // 创建文章
 const createArticle = ({commit, state}) => createArticleApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改文章
-const updateArticle = ({commit, state}) => updateAdminApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取文章详情
 const getArticle = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -390,4 +390,5 @@ export default {
   createArticle,//创建文章
   delArticle,//删除文章
   pauseArticle,//切换文章状态
+  updateArticle,//修改文章
 }

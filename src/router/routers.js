@@ -19,16 +19,11 @@ export default [
     component: require('../view/zhxt/Home/home.vue'),
     children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计
-      /*文章*/
-      {path: `${ROOT}/zhxt/tips`, component: require('../view/zhxt/tips/tips.vue'), name: 'tips'}, // 公告
+      /*文章 -- 公示公告*/
+      {path: `${ROOT}/zhxt/tips`, component: require('../view/zhxt/article/tips/tips.vue'), name: 'tips', meta: {title: '公示公告列表'}}, // 公示公告列表
+      {path: `${ROOT}/zhxt/tips/:id`, component: require('../view/zhxt/article/tips/editTips.vue'), name: 'editTips', meta: {title: '修改公示公告'}}, // 修改公示公告
+      /*文章 -- 公示公告*/
       {path: `${ROOT}/zhxt/notice`, component: require('../view/zhxt/notice/notice.vue'), name: 'notice'}, // 通告
-      {path: `${ROOT}/zhxt/innerNews`, component: require('../view/zhxt/innerNews/innerNews.vue'), name: 'innerNews'}, // 内部新闻
-      {path: `${ROOT}/zhxt/rules`, component: require('../view/zhxt/rules/rules.vue'), name: 'rules'}, // 政策法规
-      {path: `${ROOT}/zhxt/innerFile`, component: require('../view/zhxt/innerFile/innerFile.vue'), name: 'innerFile'}, // 内部文件
-      {path: `${ROOT}/zhxt/approval`, component: require('../view/zhxt/approval/approval.vue'), name: 'approval'}, // 申请采购
-      {path: `${ROOT}/zhxt/HonorManage`, component: require('../view/zhxt/HonorManage/HonorManage.vue'), name: 'HonorManage'}, // 荣誉管理
-      {path: `${ROOT}/zhxt/innerActivity`, component: require('../view/zhxt/innerActivity/innerActivity.vue'), name: 'innerActivity'}, // 内部活动
-      {path: `${ROOT}/zhxt/innerMeeting`, component: require('../view/zhxt/innerMeeting/innerMeeting.vue'), name: 'innerMeeting'}, // 内部会议
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动
@@ -85,12 +80,6 @@ export default [
       {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}}, // 调查统计
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},//系统设置
-      /*结构配置*/
-      {path: `${ROOT}/zhxt/configuration`, component: require('../view/zhxt/configuration/configuration.vue'), name: 'configuration'}, // 结构配置
-      /*权限管理*/
-      {path: `${ROOT}/zhxt/authority`, component: require('../view/zhxt/authority/authority.vue'), name: 'authority'}, // 权限管理
-      /*回收站*/
-      {path: `${ROOT}/zhxt/recover`, component: require('../view/zhxt/recover/recover.vue'), name: 'recover'}, // 回收站
     ]
   },
 

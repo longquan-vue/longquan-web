@@ -9,7 +9,6 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "Base64": "^1.0.1",
     "animate.css": "^3.5.2",
     "axios": "^0.16.1",
     "china-area-data": "^3.0.0",
