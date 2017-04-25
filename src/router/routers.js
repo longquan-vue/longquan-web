@@ -20,13 +20,18 @@ export default [
     children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计
       /*文章 -- 公示公告*/
-      {path: `${ROOT}/zhxt/tips`, component: require('../view/zhxt/article/tips/tips.vue'), name: 'tips', meta: {title: '公示公告列表'}}, // 公示公告列表
-      {path: `${ROOT}/zhxt/tips/:id`, component: require('../view/zhxt/article/tips/editTips.vue'), name: 'editTips', meta: {title: '修改公示公告'}}, // 修改公示公告
+      {path: `${ROOT}/zhxt/article/tips`, component: require('../view/zhxt/article/tips/tips.vue'), name: 'tips', meta: {title: '公示公告列表'}}, // 公示公告列表
+      {path: `${ROOT}/zhxt/article/tips/:id`, component: require('../view/zhxt/article/tips/editTips.vue'), name: 'editTips', meta: {title: '修改公示公告'}}, // 修改公示公告
       /*文章 -- 工会文件管理*/
-      {path: `${ROOT}/zhxt/docs`, component: require('../view/zhxt/article/docs/docs.vue'), name: 'docs', meta: {title: '工会文件列表'}}, // 工会文件列表
-      {path: `${ROOT}/zhxt/docs/:id`, component: require('../view/zhxt/article/docs/docsEdit.vue'), name: 'docsEdit', meta: {title: '修改工会文件'}}, // 修改工会文件
-      {path: `${ROOT}/zhxt/docsSetting`, component: require('../view/zhxt/article/docs/docsSetting.vue'), name: 'docsSetting', meta: {title: '文件类型设置'}}, // 工会文件类型设置
-      {path: `${ROOT}/zhxt/docsCount`, component: require('../view/zhxt/article/docs/docsCount.vue'), name: 'docsCount', meta: {title: '工会文件统计'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/docs`, component: require('../view/zhxt/article/docs/docs.vue'), name: 'docs', meta: {title: '工会文件列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/docs/:id`, component: require('../view/zhxt/article/docs/docsEdit.vue'), name: 'docsEdit', meta: {title: '修改工会文件'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/docsSetting`, component: require('../view/zhxt/article/docs/docsSetting.vue'), name: 'docsSetting', meta: {title: '文件类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/docsCount`, component: require('../view/zhxt/article/docs/docsCount.vue'), name: 'docsCount', meta: {title: '工会文件统计'}}, // 工会文件类型设置
+      /*文章 -- 活动展示管理*/
+      {path: `${ROOT}/zhxt/article/activity`, component: require('../view/zhxt/article/activity/activity.vue'), name: 'act', meta: {title: '工会文件列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/activity/:id`, component: require('../view/zhxt/article/activity/activityEdit.vue'), name: 'actEdit', meta: {title: '修改工会文件'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/activitySetting`, component: require('../view/zhxt/article/activity/activitySetting.vue'), name: 'actSetting', meta: {title: '文件类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/activityCount`, component: require('../view/zhxt/article/activity/activityCount.vue'), name: 'actCount', meta: {title: '工会文件统计'}}, // 工会文件类型设置
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动

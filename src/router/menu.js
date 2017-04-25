@@ -7,14 +7,22 @@ export default {
       children: [
         {
           title: '公示公告管理',
-          children: [{title: '公示公告列表', path: `${ROOT}/zhxt/tips`}]
+          children: [{title: '公示公告列表', path: `${ROOT}/zhxt/article/tips`}]
         },
         {
           title: '工会文件管理',
           children: [
-            {title: '工会文件列表', path: `${ROOT}/zhxt/docs`},
-            {title: '文件类型设置', path: `${ROOT}/zhxt/docsSetting`},
-            {title: '工会文件统计', path: `${ROOT}/zhxt/docsCount`}
+            {title: '工会文件列表', path: `${ROOT}/zhxt/article/docs`},
+            {title: '文件类型设置', path: `${ROOT}/zhxt/article/docsSetting`},
+            {title: '工会文件统计', path: `${ROOT}/zhxt/article/docsCount`}
+          ]
+        },
+        {
+          title: '活动展示管理',
+          children: [
+            {title: '活动展示列表', path: `${ROOT}/zhxt/article/activity`},
+            {title: '活动类型设置', path: `${ROOT}/zhxt/article/activitySetting`},
+            {title: '活动展示统计', path: `${ROOT}/zhxt/article/activityCount`}
           ]
         },
       ]
