@@ -72,7 +72,22 @@ export const groupMap = (list = [], {flagFn = () => false, filed = 'start', keys
         keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
     });
     return m
-}
+};
+//问题选择过滤
+export const answerList = (val) => {
+    let arr = JSON.parse(val);
+    const l=[];
+    arr.forEach((item,index)=>{
+        l.push(item.name);
+    });
+    return l;
+};
+//ABCDE过滤器
+export const words = (val) => ['A', 'B', 'C', 'D','E','F','G'][val] || 'A';
+
+
+
+
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
 export const encode = (str = '') => Base64.btoa(str);
@@ -114,6 +129,8 @@ export default {
     groupList,
     numFilter,
     syncFilter,
-    groupMap
+    groupMap,
+    answerList,
+    words
 }
 

@@ -47,7 +47,7 @@
         },
         methods:{
             ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage','go']),
-            filters,
+            ...filters,
             openCode(){
 
             },

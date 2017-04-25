@@ -27,7 +27,11 @@
           }
         }
       }
-      .askListHeadBox2{ padding: 0.3rem 0;color: #999999;font-size: 0.32rem;line-height: 0.55rem}
+      .askListHeadBox2{ margin: 0.3rem 0;color: #999999;font-size: 0.32rem;line-height: 0.55rem; }
+      .askListHeadBoxHidden{display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;}
     }
     .askListFoot{
       span{ color: #999999;}
@@ -56,6 +60,21 @@
 .pollvote .swiper-slide{
   min-height: 4rem;
 }
+.singleChoice{
+    padding: 0.4rem;background: #ffffff;
+    .el-radio-group{
+        width: 100%;
+        .el-radio{ display: block;margin-left: 0;margin-bottom: 0.3rem}
+    }
+    .el-checkbox-group{ width: 100%;
+        .el-checkbox{ display: block;margin-left: 0;margin-bottom: 0.3rem}
+    }
+
+}
+
+
+
+
 
 .baoming{ width: 7.3466666667rem;height: 1.44rem;display: block;;margin:20px auto;
   background: url("../../../../static/wx/yellowbtn.png") no-repeat center;
