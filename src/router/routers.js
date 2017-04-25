@@ -37,6 +37,21 @@ export default [
       {path: `${ROOT}/zhxt/article/info/:id`, component: require('../view/zhxt/article/info/infoEdit.vue'), name: 'infoEdit', meta: {title: '修改工会资讯'}}, // 修改工会文件
       {path: `${ROOT}/zhxt/article/infoSetting`, component: require('../view/zhxt/article/info/infoSetting.vue'), name: 'infoSetting', meta: {title: '资讯类型设置'}}, // 工会文件类型设置
       {path: `${ROOT}/zhxt/article/infoCount`, component: require('../view/zhxt/article/info/infoCount.vue'), name: 'infoCount', meta: {title: '工会资讯统计'}}, // 工会文件类型设置
+      /*文章 -- 办事指南管理*/
+      {path: `${ROOT}/zhxt/article/guide`, component: require('../view/zhxt/article/guide/guide.vue'), name: 'guide', meta: {title: '办事指南列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/guide/:id`, component: require('../view/zhxt/article/guide/guideEdit.vue'), name: 'guideEdit', meta: {title: '修改办事指南'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/guideSetting`, component: require('../view/zhxt/article/guide/guideSetting.vue'), name: 'guideSetting', meta: {title: '办事指南类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/guideCount`, component: require('../view/zhxt/article/guide/guideCount.vue'), name: 'guideCount', meta: {title: '办事指南统计'}}, // 工会文件类型设置
+      /*文章 -- 先进人物管理*/
+      {path: `${ROOT}/zhxt/article/advanced`, component: require('../view/zhxt/article/advanced/advanced.vue'), name: 'advanced', meta: {title: '先进人物列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/advanced/:id`, component: require('../view/zhxt/article/advanced/advancedEdit.vue'), name: 'advancedEdit', meta: {title: '修改先进人物'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/advancedSetting`, component: require('../view/zhxt/article/advanced/advancedSetting.vue'), name: 'advancedSetting', meta: {title: '先进类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/advancedCount`, component: require('../view/zhxt/article/advanced/advancedCount.vue'), name: 'advancedCount', meta: {title: '先进人物统计'}}, // 工会文件类型设置
+      /*文章 -- 资料中心管理*/
+      {path: `${ROOT}/zhxt/article/resource`, component: require('../view/zhxt/article/resource/resource.vue'), name: 'resource', meta: {title: '资料中心列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/resource/:id`, component: require('../view/zhxt/article/resource/resourceEdit.vue'), name: 'resourceEdit', meta: {title: '修改资料中心'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/resourceSetting`, component: require('../view/zhxt/article/resource/resourceSetting.vue'), name: 'resourceSetting', meta: {title: '资料类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/resourceCount`, component: require('../view/zhxt/article/resource/resourceCount.vue'), name: 'resourceCount', meta: {title: '资料中心统计'}}, // 工会文件类型设置
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动
@@ -93,6 +108,8 @@ export default [
       {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}}, // 调查统计
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},//系统设置
+      {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},//二维码管理
+      {path: `${ROOT}/zhxt/setting/relation`, component: require('../view/zhxt/setting/relation.vue'), name: 'relationSetting', meta: {title: '联系我们'}},//联系我们
     ]
   },
 
