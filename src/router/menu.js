@@ -8,7 +8,14 @@ export default {
         {
           title: '公示公告管理',
           children: [{title: '公示公告列表', path: `${ROOT}/zhxt/tips`}]
-        }
+        },
+        {
+          title: '工会文件管理',
+          children: [
+            {title: '工会文件列表', path: `${ROOT}/zhxt/docs`},
+            {title: '文件类型设置', path: `${ROOT}/zhxt/docsSetting`}
+          ]
+        },
       ]
     },
     {

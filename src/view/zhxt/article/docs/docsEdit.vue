@@ -1,11 +1,11 @@
 <style lang="less" scoped>
-  @import "./tips.less";
+  @import "./docs.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">发布公示公告</span>
-      <span v-if="!data.edit">修改公示公告</span>
+      <span v-if="data.edit">发布工会文件</span>
+      <span v-if="!data.edit">修改工会文件</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -16,13 +16,18 @@
           <el-form-item label="标题" prop="title">
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
+          <el-form-item label="文件类型" prop="subType">
+            <el-select :value="data.subType" placeholder="请选择文件类型..." @input="(v)=>setData({subType:v})">
+              <el-option v-for="(val,key) in articleType.file" :label="val" :key="key" :value="key"/>
+            </el-select>
+          </el-form-item>
           <!--<el-form-item label="配图" prop="pics">-->
           <!--<MyUpload :files="data.pics" filed="pics" :edit="data.edit"/>-->
           <!--</el-form-item>-->
           <el-form-item label="同步显示" prop="sync">
             <el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
               <el-checkbox :label="0">网站</el-checkbox>
-              <el-checkbox :label="1">服务号</el-checkbox>
+              <!--<el-checkbox :label="1">服务号</el-checkbox>-->
               <el-checkbox :label="2">企业号</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
@@ -65,7 +70,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'articleType']),},
     methods: {
       ...filter,
       ...mapActions(['getArticle', 'createArticle', 'updateArticle', 'clear', 'setData', 'go']),
@@ -81,7 +86,7 @@
       },
     },
     created () {
-      this.setData({type: 0});
+      this.setData({type: 4});
       this.getArticle()
     },
     destroyed () {
