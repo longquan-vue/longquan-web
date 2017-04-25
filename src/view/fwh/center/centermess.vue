@@ -29,7 +29,7 @@
                 <span v-show="demo4Value.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
-        <nothing title="暂无福利~" content="您可以去福利中心领取福利" v-if="list.length==0"></nothing>
+        <nothing title="暂无消息~" content="" v-if="list.length==0"></nothing>
 
         <actionsheet v-model="show3" :menus="menus3" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
     </div>

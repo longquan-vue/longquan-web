@@ -4,7 +4,8 @@
 <template>
     <div class="centeractivity" style="background-color: #F0F0F0;padding-top:50px;height: 100%;overflow: scroll">
         <appHead title="我的活动"></appHead>
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50">
+
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50" v-if="list.length==0">
             <div class="scrollerBox">
                 <ul class="centerMessList">
                     <li @click="go(['centeractivitydetail',item.id])" v-for="(item,index) in list">
@@ -36,6 +37,7 @@
                 <span v-show="scroller.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
+        <nothing title="您没有报名的工会活动哦！" content="您可以去工会活动列表报名您喜欢的工会活动" v-if="list.length==0"></nothing>
 
         <actionsheet v-model="showDel" :menus="delMenu" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
     </div>
@@ -46,6 +48,7 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import nothing from '../../../components/public/nothing/nothing.vue'
     import { TransferDomDirective as TransferDom, Scroller, Spinner,Actionsheet} from 'vux'
     export default{
         data(){
@@ -65,7 +68,7 @@
             TransferDom
         },
         components:{
-            appHead ,Scroller, Spinner ,Actionsheet
+            appHead ,Scroller, Spinner ,Actionsheet ,nothing
         },
         computed: {...mapGetters(['list', 'page']),
         },
