@@ -19,6 +19,7 @@ export default [
     component: require('../view/zhxt/Home/home.vue'),
     children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计
+      /*文章*/
       {path: `${ROOT}/zhxt/tips`, component: require('../view/zhxt/tips/tips.vue'), name: 'tips'}, // 公告
       {path: `${ROOT}/zhxt/notice`, component: require('../view/zhxt/notice/notice.vue'), name: 'notice'}, // 通告
       {path: `${ROOT}/zhxt/innerNews`, component: require('../view/zhxt/innerNews/innerNews.vue'), name: 'innerNews'}, // 内部新闻
@@ -29,35 +30,35 @@ export default [
       {path: `${ROOT}/zhxt/innerActivity`, component: require('../view/zhxt/innerActivity/innerActivity.vue'), name: 'innerActivity'}, // 内部活动
       {path: `${ROOT}/zhxt/innerMeeting`, component: require('../view/zhxt/innerMeeting/innerMeeting.vue'), name: 'innerMeeting'}, // 内部会议
       /*活动*/
-      {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: '工会活动列表'},//活动列表
-      {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: '修改工会活动'},//编辑活动
-      {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'), name: "activityEnter", meta: '工会活动报名详情'},//活动报名列表
-      {path: `${ROOT}/zhxt/activitySign/:id`, component: require('../view/zhxt/activity/activitySign.vue'), name: "activitySign", meta: '工会活动签到详情'},//活动签到列表
-      {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'), name: "activityCount", meta: '工会活动统计'},//活动统计
+      {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
+      {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动
+      {path: `${ROOT}/zhxt/activityEnter/:id`, component: require('../view/zhxt/activity/activityEnter.vue'), name: "activityEnter", meta: {title: '工会活动报名详情'}},//活动报名列表
+      {path: `${ROOT}/zhxt/activitySign/:id`, component: require('../view/zhxt/activity/activitySign.vue'), name: "activitySign", meta: {title: '工会活动签到详情'}},//活动签到列表
+      {path: `${ROOT}/zhxt/activityCount`, component: require('../view/zhxt/activity/activityCount.vue'), name: "activityCount", meta: {title: '工会活动统计'}},//活动统计
       /*运动*/
-      {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health", meta: '健身项目列表'}, // 运动列表
-      {path: `${ROOT}/zhxt/health/:id`, component: require('../view/zhxt/health/healthEdit.vue'), name: "healthEdit", meta: '修改健身项目'}, // 编辑运动
-      {path: `${ROOT}/zhxt/healthCount`, component: require('../view/zhxt/health/healthCount.vue'), name: "healthCount", meta: '健身项目统计'}, // 运动统计
-      {path: `${ROOT}/zhxt/healthEnter/:id`, component: require('../view/zhxt/health/healthEnter.vue'), name: "healthEnter", meta: '健身项目预约名单'}, // 运动预约名单管理
-      {path: `${ROOT}/zhxt/healthCode`, component: require('../view/zhxt/health/healthCode.vue'), name: "healthCode", meta: '健身项目签到二维码'}, // 现场签到二维码
+      {path: `${ROOT}/zhxt/health`, component: require('../view/zhxt/health/health.vue'), name: "health", meta: {title: '健身项目列表'}}, // 运动列表
+      {path: `${ROOT}/zhxt/health/:id`, component: require('../view/zhxt/health/healthEdit.vue'), name: "healthEdit", meta: {title: '修改健身项目'}}, // 编辑运动
+      {path: `${ROOT}/zhxt/healthCount`, component: require('../view/zhxt/health/healthCount.vue'), name: "healthCount", meta: {title: '健身项目统计'}}, // 运动统计
+      {path: `${ROOT}/zhxt/healthEnter/:id`, component: require('../view/zhxt/health/healthEnter.vue'), name: "healthEnter", meta: {title: '健身项目预约名单'}}, // 运动预约名单管理
+      {path: `${ROOT}/zhxt/healthCode`, component: require('../view/zhxt/health/healthCode.vue'), name: "healthCode", meta: {title: '健身项目签到二维码'}}, // 现场签到二维码
       /*用户*/
-      {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue'), name: 'userList', meta: '用户列表'}, // 用户列表
-      {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/userEdit.vue'), name: "userEdit", meta: '修改用户'}, // 修改用户
-      {path: `${ROOT}/zhxt/userPoint/:id`, component: require('../view/zhxt/user/userPoint.vue'), name: 'userPoint', meta: '用户积分详情'}, // 用户积分
-      {path: `${ROOT}/zhxt/userCount`, component: require('../view/zhxt/user/userCount.vue'), name: 'userCount', meta: '用户统计'}, // 用户统计
+      {path: `${ROOT}/zhxt/user`, component: require('../view/zhxt/user/user.vue'), name: 'userList', meta: {title: '用户列表'}}, // 用户列表
+      {path: `${ROOT}/zhxt/user/:id`, component: require('../view/zhxt/user/userEdit.vue'), name: "userEdit", meta: {title: '修改用户'}}, // 修改用户
+      {path: `${ROOT}/zhxt/userPoint/:id`, component: require('../view/zhxt/user/userPoint.vue'), name: 'userPoint', meta: {title: '用户积分详情'}}, // 用户积分
+      {path: `${ROOT}/zhxt/userCount`, component: require('../view/zhxt/user/userCount.vue'), name: 'userCount', meta: {title: '用户统计'}}, // 用户统计
       /*签到*/
-      {path: `${ROOT}/zhxt/sign`, component: require('../view/zhxt/sign/signList.vue'), name: 'signList', meta: '用户签到列表'}, // 签到列表
-      {path: `${ROOT}/zhxt/signSetting`, component: require('../view/zhxt/sign/signSetting.vue'), name: 'signSetting', meta: '用户签到设置'},// 签到设置
-      {path: `${ROOT}/zhxt/signCount`, component: require('../view/zhxt/sign/signCount.vue'), name: 'signCount', meta: '用户签到统计'},// 签到统计
+      {path: `${ROOT}/zhxt/sign`, component: require('../view/zhxt/sign/signList.vue'), name: 'signList', meta: {title: '用户签到列表'}}, // 签到列表
+      {path: `${ROOT}/zhxt/signSetting`, component: require('../view/zhxt/sign/signSetting.vue'), name: 'signSetting', meta: {title: '用户签到设置'}},// 签到设置
+      {path: `${ROOT}/zhxt/signCount`, component: require('../view/zhxt/sign/signCount.vue'), name: 'signCount', meta: {title: '用户签到统计'}},// 签到统计
       /*福利*/
-      {path: `${ROOT}/zhxt/welfareTicket`, component: require('../view/zhxt/welfare/welfareTicket.vue'), name: 'welfareTicket', meta: '券类福利列表'},// 券类福利
-      {path: `${ROOT}/zhxt/welfareTicket/:id`, component: require('../view/zhxt/welfare/welfareTicketEdit.vue'), name: 'welfareTicketEdit', meta: '修改券类福利'},// 编辑券类福利
-      {path: `${ROOT}/zhxt/welfareTicketCount`, component: require('../view/zhxt/welfare/welfareTicketCount.vue'), name: 'welfareTicketCount', meta: '券类福利统计'},// 券类福利统计
-      {path: `${ROOT}/zhxt/welfarePack`, component: require('../view/zhxt/welfare/welfarePack.vue'), name: 'welfarePack', meta: '红包福利列表'},//红包福利
-      {path: `${ROOT}/zhxt/welfarePack/:id`, component: require('../view/zhxt/welfare/welfarePackEdit.vue'), name: 'welfarePackEdit', meta: '修改红包福利'},//编辑红包福利
-      {path: `${ROOT}/zhxt/welfarePackCount`, component: require('../view/zhxt/welfare/welfarePackCount.vue'), name: 'welfarePackCount', meta: '红包福利统计'},//红包福利统计
-      {path: `${ROOT}/zhxt/welfarePrev`, component: require('../view/zhxt/welfare/welfarePrev.vue'), name: 'welfarePrev', meta: '福利预告列表'},//福利预告
-      {path: `${ROOT}/zhxt/welfarePrev/:id`, component: require('../view/zhxt/welfare/welfarePrevEdit.vue'), name: 'welfarePrevEdit', meta: '修改福利预告'},//编辑福利预告
+      {path: `${ROOT}/zhxt/welfareTicket`, component: require('../view/zhxt/welfare/welfareTicket.vue'), name: 'welfareTicket', meta: {title: '券类福利列表'}},// 券类福利
+      {path: `${ROOT}/zhxt/welfareTicket/:id`, component: require('../view/zhxt/welfare/welfareTicketEdit.vue'), name: 'welfareTicketEdit', meta: {title: '修改券类福利'}},// 编辑券类福利
+      {path: `${ROOT}/zhxt/welfareTicketCount`, component: require('../view/zhxt/welfare/welfareTicketCount.vue'), name: 'welfareTicketCount', meta: {title: '券类福利统计'}},// 券类福利统计
+      {path: `${ROOT}/zhxt/welfarePack`, component: require('../view/zhxt/welfare/welfarePack.vue'), name: 'welfarePack', meta: {title: '红包福利列表'}},//红包福利
+      {path: `${ROOT}/zhxt/welfarePack/:id`, component: require('../view/zhxt/welfare/welfarePackEdit.vue'), name: 'welfarePackEdit', meta: {title: '修改红包福利'}},//编辑红包福利
+      {path: `${ROOT}/zhxt/welfarePackCount`, component: require('../view/zhxt/welfare/welfarePackCount.vue'), name: 'welfarePackCount', meta: {title: '红包福利统计'}},//红包福利统计
+      {path: `${ROOT}/zhxt/welfarePrev`, component: require('../view/zhxt/welfare/welfarePrev.vue'), name: 'welfarePrev', meta: {title: '福利预告列表'}},//福利预告
+      {path: `${ROOT}/zhxt/welfarePrev/:id`, component: require('../view/zhxt/welfare/welfarePrevEdit.vue'), name: 'welfarePrevEdit', meta: {title: '修改福利预告'}},//编辑福利预告
       /*工会职工*/
       {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/admin/admin.vue'), name: 'adminList'}, // 职工列表
       {path: `${ROOT}/zhxt/admin/:id`, component: require('../view/zhxt/admin/adminEdit.vue'), name: 'adminEdit'}, // 编辑职工
@@ -71,19 +72,19 @@ export default [
       {path: `${ROOT}/zhxt/depAudit`, component: require('../view/zhxt/notice/notice.vue'), name: 'depAudit'}, // 审核列表
       {path: `${ROOT}/zhxt/depCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'depCount'}, // 工会统计
       /*招聘信息*/
-      {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: '招聘信息列表'}, // 招聘信息列表
-      {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: '修改招聘信息'}, // 编辑招聘信息
-      {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter', meta: '意向报名列表'}, // 意向报名列表
-      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/recruit/recruitCount.vue'), name: 'recruitCount', meta: '招聘信息统计'}, // 招聘信息统计
+      {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}}, // 招聘信息列表
+      {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: {title: '修改招聘信息'}}, // 编辑招聘信息
+      {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter', meta: {title: '意向报名列表'}}, // 意向报名列表
+      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/recruit/recruitCount.vue'), name: 'recruitCount', meta: {title: '招聘信息统计'}}, // 招聘信息统计
       /*投票调查*/
-      {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList', meta: '投票选举列表'}, // 投票列表
-      {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit', meta: '修改投票选举'}, // 编辑投票
-      {path: `${ROOT}/zhxt/voteCount`, component: require('../view/zhxt/poll/voteCount.vue'), name: 'voteCount', meta: '投票选举统计'}, // 投票统计
-      {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList', meta: '问卷调查列表'}, // 调查列表
-      {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit', meta: '修改问卷调查'}, // 编辑调查
-      {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: '问卷调查统计'}, // 调查统计
+      {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList', meta: {title: '投票选举列表'}}, // 投票列表
+      {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit', meta: {title: '修改投票选举'}}, // 编辑投票
+      {path: `${ROOT}/zhxt/voteCount`, component: require('../view/zhxt/poll/voteCount.vue'), name: 'voteCount', meta: {title: '投票选举统计'}}, // 投票统计
+      {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList', meta: {title: '问卷调查列表'}}, // 调查列表
+      {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit', meta: {title: '修改问卷调查'}}, // 编辑调查
+      {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}}, // 调查统计
       /*系统设置*/
-      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: '服务号设置'},//系统设置
+      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},//系统设置
       /*结构配置*/
       {path: `${ROOT}/zhxt/configuration`, component: require('../view/zhxt/configuration/configuration.vue'), name: 'configuration'}, // 结构配置
       /*权限管理*/
