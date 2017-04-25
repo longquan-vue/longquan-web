@@ -4,7 +4,8 @@
 </style>
 <template>
     <div class="centeractivity" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore">
+
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" v-if="list.length>0">
             <div class="scrollerBox">
                 <ul class="centerMessList">
                     <li @click="go(['centeractivitydetail',item.id])" v-for="(item,index) in list">
@@ -36,8 +37,9 @@
                       :class="{'rotate': scroller.pullupStatus === 'down'}">↑</span>
                 <span v-show="scroller.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
-
         </scroller>
+        <nothing title="暂无公会活动哦！" content="请留意公会活动，会不定期更新各种精彩的活动" v-if="list.length==0"></nothing>
+
     </div>
 </template>
 
@@ -46,6 +48,7 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import { TransferDomDirective as TransferDom, Scroller, Spinner} from 'vux'
+    import nothing from '../../../components/public/nothing/nothing.vue'
     export default{
         data(){
             return{
@@ -58,7 +61,7 @@
             TransferDom
         },
         components:{
-             Scroller, Spinner
+             Scroller, Spinner ,nothing
         },
         computed: {...mapGetters([ 'page','list']),
         },

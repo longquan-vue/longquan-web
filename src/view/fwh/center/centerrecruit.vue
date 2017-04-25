@@ -34,7 +34,7 @@
             </div>
         </scroller>
 
-        <nothing v-if="list.length==0" title="没有活动！" content="请留意近期公会活动，公会不定期举办各类活动"></nothing>
+        <nothing v-if="list.length==0" title="没有收藏的招聘信息！" content="您可以去招聘信息列表选择您喜欢的职位"></nothing>
 
     </div>
 </template>

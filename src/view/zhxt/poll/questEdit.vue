@@ -78,7 +78,7 @@
                 <el-form-item label="选项：" v-if="item.type == 1 || item.type == 2" :prop="'questions.'+idx+'.options'" :rules="[{ required: true, message: '请设置选项...',min:20}]">
                   <div v-for="(opt,index) in item.options" style="padding-bottom: 15px">
                     <el-input v-model="opt.name" @change="(v)=>setQuestions('questions.'+idx+'.options',JSON.stringify(item.options))">
-                      <template slot="prepend">{{['A','B','C','D','E','F','G','H','I','J','K','L'][index]}}：</template>
+                      <template slot="prepend">{{words(index)}}：</template>
                       <el-button slot="append" icon="delete" @click="delOptions(idx,index)"/>
                     </el-input>
                   </div>

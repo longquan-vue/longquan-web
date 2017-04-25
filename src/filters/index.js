@@ -62,16 +62,19 @@ export const groupList = (list = [], {flagFn = () => false, field = 'start', key
   return g;
 };
 export const groupMap = (list = [], {flagFn = () => false, filed = 'start', keys = ['start', 'end'], group = []}) => {
-  const m = {};
-  group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
-  list.map((item) => {
-    m[moment(item[filed]).format('HH:mm')].list.push(item);
-    m[moment(item[filed]).format('HH:mm')].num += 1;
-    m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
-    keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
-  });
-  return m
-}
+    const m = {};
+    group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
+    list.map((item) => {
+        m[moment(item[filed]).format('HH:mm')].list.push(item);
+        m[moment(item[filed]).format('HH:mm')].num += 1;
+        m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
+        keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
+    });
+    return m
+};
+//ABCDE过滤器
+export const words = (val) => ['A', 'B', 'C', 'D','E','F','G','H','I','J'][val] || 'A';
+
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
 export const encode = (str = '') => (new Buffer(str, 'utf8')).toString('base64');
@@ -117,6 +120,7 @@ export default {
   groupList,
   numFilter,
   syncFilter,
-  groupMap
+  groupMap,
+  words
 }
 

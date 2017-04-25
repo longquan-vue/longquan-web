@@ -12,7 +12,7 @@
                 </marquee>
             </div>
         </div>
-        <div class="healthList">
+        <div class="healthList" v-if="list.length>0">
             <ul>
                 <li flex @click="go(['healthDetail',item.id])" v-for="(item,index) in list">
                     <div flex items="center"><img :src="item.picUrl"></div>
@@ -24,6 +24,8 @@
                 </li>
             </ul>
         </div>
+
+        <nothing title="暂无健身项目哦！" content="请留意健身项目，会不定期更新各种健身项目" v-if="list.length==0"></nothing>
     </div>
 </template>
 
@@ -32,6 +34,7 @@
     import { mapActions } from 'vuex'
     import {date3Filter} from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import nothing from '../../../components/public/nothing/nothing.vue'
     export default{
         data(){
             return{
@@ -39,7 +42,7 @@
             }
         },
         components:{
-            appHead
+            appHead,nothing
         },
         computed: {...mapGetters([ 'page','list']),
         },

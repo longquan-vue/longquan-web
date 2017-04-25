@@ -6,7 +6,7 @@
     <div class="centerMess" style="background-color: #F0F0F0;padding-top:50px;;">
         <appHead title="我的消息" style="background:#FFB033"></appHead>
 
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="demo4Value" @on-pullup-loading="load4" height="-50">
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="demo4Value" @on-pullup-loading="load4" height="-50" v-if="list.length>0">
             <!--content slot-->
             <div class="centerMessList">
                 <ul>
@@ -29,7 +29,7 @@
                 <span v-show="demo4Value.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
-
+        <nothing title="暂无消息~" content="" v-if="list.length==0"></nothing>
 
         <actionsheet v-model="show3" :menus="menus3" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
     </div>
@@ -41,6 +41,7 @@
     import filter from '../../../filters'
     import {Actionsheet, TransferDomDirective as TransferDom, Scroller, Spinner} from 'vux'
     import appHead from '../../../components/public/apphead/Apphead.vue'
+    import nothing from '../../../components/public/nothing/nothing.vue'
     export default{
         data(){
             return {
@@ -59,7 +60,7 @@
             TransferDom
         },
         components: {
-            appHead, Actionsheet, Scroller, Spinner
+            appHead, Actionsheet, Scroller, Spinner ,nothing
         },
         computed: {...mapGetters(['login', 'list'])},
         methods: {
