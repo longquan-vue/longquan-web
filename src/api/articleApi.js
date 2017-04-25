@@ -6,6 +6,11 @@ export const createArticleApi = (data) => request({
   url: `${BASE_PATH}/create`,
   data
 });
+//修改
+export const updateArticleApi = (data) => request({
+  url: `${BASE_PATH}/update`,
+  data
+});
 //搜索文章列表
 export const findArticleApi = (data, del = 0, type = -1) => request({
   url: `${BASE_PATH}/find/${del}/${type}`,

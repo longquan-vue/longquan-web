@@ -8,11 +8,12 @@
       </el-menu>
     </div>
     <div class="user-info">
+      <span class="cache" @click="clearCache"><img src="/static/zhxt/load.png" alt="clear">清除缓存</span>
       <el-dropdown trigger="click" @command="handleCommand">
-                <span class="el-dropdown-link">
-                    <img class="user-logo" src="../../../static/logo.png">
-                    {{login.name}}
-                </span>
+        <span class="el-dropdown-link">
+            <img class="user-logo" :src="login.avatar">
+            {{login.name}}
+        </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="loginout">退出</el-dropdown-item>
         </el-dropdown-menu>
@@ -23,6 +24,8 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
+  import {clearApi} from '../../api/systemApi'
+  import {alert} from '../../actions'
   export default {
     computed: {
       ...mapGetters(['login', 'setting']),
@@ -41,6 +44,9 @@
         if (command == 'loginout') {
           this.loginOut();
         }
+      },
+      clearCache(){
+        clearApi().then(() => alert('清理完成!'))
       }
     },
     created () {
@@ -87,6 +93,18 @@
     padding-right: 50px;
     font-size: 16px;
     color: #fff;
+  }
+
+  .user-info .cache {
+    display: inline-block;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  .user-info .cache img {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
   }
 
   .user-info .el-dropdown-link {

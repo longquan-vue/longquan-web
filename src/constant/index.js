@@ -12,18 +12,17 @@ export const healthIcon = [
   require('../../static/wx/centerbg.png')
 ]
 export const defData = {
-    user: {headimgurl: require('../../static/wx/aw.jpg'), nickname: '蕾姆', birthday: NOW, sex: 1, marriage: 0, score: 0, msgNum: 0, welfNum: 0, actNum: 0, audit: 0},
-    page: {page: 1, pages: 1, pageSize: 10, sort: [], order: [], filed: [], keyWord: [], start: null, end: null, series: false},
-    activity: {
-      name: '', start: '', end: '', entryStart: '', entryEnd: '', entry: 0, score: 0, sponsor: '', coSponsor: '', organizer: '', place: '', website: '', detail: '', rule: '', created: '', total: 0, files: [], admin: {}
-    },
-    health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 1, type: 1},
-    recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
-    poll: {title: '', description: '', start: '', end: '', score: 0, time: 0, repetition: 0, days: 0, sync: '[0,1]', rule: '', admin: {}, created: '', questions: []},
-    welfare: {admin: {}, endTime: '', entry: 0, files: [], name: '', provider: '', rule: '', score: 0, startTime: '', time: 0, total: 0, website: '', wishing: ''},
-    article: {content: '', picUrl: '', created: '', status: '', files: [], pics: [], admins: [], admin: {}, dep: {}}
-  }
-  ;
+  user: {headimgurl: require('../../static/wx/aw.jpg'), nickname: '蕾姆', birthday: NOW, sex: 1, marriage: 0, score: 0, msgNum: 0, welfNum: 0, actNum: 0, audit: 0},
+  page: {page: 1, pages: 1, pageSize: 10, sort: [], order: [], filed: [], keyWord: [], start: null, end: null, series: false},
+  activity: {
+    name: '', start: '', end: '', entryStart: '', entryEnd: '', entry: 0, score: 0, sponsor: '', coSponsor: '', organizer: '', place: '', website: '', detail: '', rule: '', created: '', total: 0, files: [], admin: {}
+  },
+  health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 1, type: 1},
+  recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
+  poll: {title: '', description: '', start: '', end: '', score: 0, time: 0, repetition: 0, days: 0, sync: '[0,1]', rule: '', admin: {}, created: '', questions: []},
+  welfare: {admin: {}, endTime: '', entry: 0, files: [], name: '', provider: '', rule: '', score: 0, startTime: '', time: 0, total: 0, website: '', wishing: ''},
+  article: {title: '', subType: '', content: '', sync: '[0,1,2]', created: '', status: '', files: [], pics: [], admins: [], admin: {}, dep: {}}
+}
 export const fwhMenu = {
   "button": [{
     "name": "工会之声",

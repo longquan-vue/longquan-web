@@ -8,10 +8,12 @@ const router = new Router({
   routes
 })
 router.afterEach(route => {
-  if (route.meta && route.params.id == CREATE) {
-    document.title = "添加" + route.meta.substr(2)
-  } else if (route.meta) {
-    document.title = route.meta
+  if (route.meta.title && route.params.id == CREATE) {
+    document.title = "添加" + route.meta.title.substr(2)
+  } else if (route.meta.title) {
+    document.title = route.meta.title
+  } else {
+    document.title = '龙泉总工会'
   }
 })
 export default router
