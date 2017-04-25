@@ -13,7 +13,8 @@ export default {
           title: '工会文件管理',
           children: [
             {title: '工会文件列表', path: `${ROOT}/zhxt/docs`},
-            {title: '文件类型设置', path: `${ROOT}/zhxt/docsSetting`}
+            {title: '文件类型设置', path: `${ROOT}/zhxt/docsSetting`},
+            {title: '工会文件统计', path: `${ROOT}/zhxt/docsCount`}
           ]
         },
       ]
