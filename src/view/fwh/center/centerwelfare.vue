@@ -1,5 +1,4 @@
 <style lang="less" scoped>
-    @import "../../../../static/normal.less";
     @import "./centerwelfare.less";
 </style>
 <template>
