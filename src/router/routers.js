@@ -1,19 +1,19 @@
 const ROOT = "/view"
 export default [
   // 管理平台
-    {
-        path: `/`,
-        redirect:`${ROOT}/wzzy/home`,
-    },
-
+  {
+    path: `/`,
+    redirect: `${ROOT}/wzzy/home`,
+  },
+  {
+    path: `${ROOT}/zhxt/login`,
+    component: require('../view/zhxt/login/Login.vue'),
+    name: 'login'
+  },
   {
     path: `${ROOT}/zhxt`,
     component: require('../view/zhxt/Home/home.vue'),
-    children: [  {
-        path: `${ROOT}/zhxt/login`,
-        component: require('../view/zhxt/login/Login.vue'),
-        name: 'login'
-    },
+    children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计
       /*文章 -- 公示公告*/
       {path: `${ROOT}/zhxt/article/tips`, component: require('../view/zhxt/article/tips/tips.vue'), name: 'tips', meta: {title: '公示公告列表'}}, // 公示公告列表
@@ -120,7 +120,7 @@ export default [
     path: `${ROOT}/wzzy`,
     component: require('../view/wzzy/wzzy.vue'),
     children: [
-        {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
+      {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
     ]
   },
   // 企业号
