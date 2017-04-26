@@ -5,7 +5,7 @@
     <div class="centeractivity" style="background-color: #F0F0F0;padding-top:50px;height: 100%;overflow: scroll">
         <appHead title="我的活动"></appHead>
 
-        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50" v-if="list.length==0">
+        <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50" v-if="list.length>0">
             <div class="scrollerBox">
                 <ul class="centerMessList">
                     <li @click="go(['centeractivitydetail',item.id])" v-for="(item,index) in list">
@@ -73,7 +73,7 @@
         computed: {...mapGetters(['list', 'page']),
         },
         methods:{
-            ...mapActions(['go','getMineActivity','clear','changePage'],'delMethod'),
+            ...mapActions(['go','getMineActivity','clear','changePage','delMethod']),
             ...filters,
             del(index){
                 this.showDel = true;

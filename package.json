@@ -12,6 +12,7 @@
     "animate.css": "^3.5.2",
     "axios": "^0.16.1",
     "china-area-data": "^3.0.0",
+    "css-loader": "^0.28.0",
     "element-ui": "^1.2.3",
     "md5": "^2.2.1",
     "moment": "^2.17.1",
