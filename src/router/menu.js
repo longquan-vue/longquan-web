@@ -125,7 +125,13 @@ export default {
       ]
     },
     {
-      title: '系统设置',
+      title: '互动交流管理',
+      children: [
+        {title: '回音壁列表', path: `${ROOT}/zhxt/echo`},
+      ]
+    },
+    {
+      title: '站点管理',
       children: [
         {
           title: '友情链接管理',

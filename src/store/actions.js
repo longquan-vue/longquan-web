@@ -34,6 +34,7 @@ import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from 
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
+import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi,pauseEchoApi} from '../api/echoApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -319,6 +320,25 @@ const getArticle = async({commit, state}) => {
 const delArticle = ({commit, state}, [id, idx]) => delArticleApi(id).then(() => commit(DEL_DATA, idx))
 //切换文章状态
 const pauseArticle = ({commit, state}, [id, key, val]) => pauseArticleApi(id).then(() => commit(CHANGE_LIST, [key, val]))
+// 获取回音壁列表
+const findEcho = async({commit, state}) => commit(GET_DATA_LIST, await findEchoApi(state.page));
+// 创建回音壁
+const createEcho = ({commit, state}) => createEchoApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改回音壁
+const updateEcho = ({commit, state}) => updateEchoApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 获取回音壁详情
+const getEcho = async({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {edit: true, ...defData.echo});
+  } else {
+    commit(SET_DATA, {...await getEchoApi(id), edit: false});
+  }
+};
+//删除回音壁
+const delEcho = ({commit, state}, [id, idx]) => delEchoApi(id).then(() => commit(DEL_DATA, idx))
+// 显示或关闭回音壁
+const pauseEcho = ({commit, state}, [id, key, val]) => pauseEchoApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 export default {
   getMineWelfare,
   getUser,
@@ -405,4 +425,10 @@ export default {
   createLink,// 创建友情链接
   updateLink,// 修改友情链接
   delLink,// 删除友情链接
+  findEcho,//获取回音壁列表
+  createEcho,//创建回音壁
+  updateEcho,//修改回音壁
+  getEcho,//获取回音壁详情
+  delEcho,//删除回音壁
+  pauseEcho, //关闭或显示回音壁
 }
