@@ -24,13 +24,13 @@
           <el-form-item label="配图" prop="pics">
             <MyUpload :files="data.pics" filed="pics" :edit="data.edit"/>
           </el-form-item>
-          <el-form-item label="同步显示" prop="sync">
-            <el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
-              <el-checkbox :label="0">网站</el-checkbox>
-              <el-checkbox :label="1">服务号</el-checkbox>
-              <el-checkbox :label="2">企业号</el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
+          <!--<el-form-item label="同步显示" prop="sync">-->
+            <!--<el-checkbox-group :value="JSON.parse(data.sync)" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
+              <!--<el-checkbox :label="0">网站</el-checkbox>-->
+              <!--<el-checkbox :label="1">服务号</el-checkbox>-->
+              <!--<el-checkbox :label="2">企业号</el-checkbox>-->
+            <!--</el-checkbox-group>-->
+          <!--</el-form-item>-->
           <el-form-item label="内容" prop="content">
             <quill-editor ref="myTextEditor" :content="decode(data.content)" @input="(v)=>setData({content:encode(v)})" :config="{}"/>
           </el-form-item>
@@ -65,7 +65,7 @@
         rules: {
           files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
-          sync: required('请选择同步服务...'),
+//          sync: required('请选择同步服务...'),
         },
       }
     },
@@ -86,7 +86,7 @@
       },
     },
     created () {
-      this.setData({type: 7});
+      this.setData({type: 7,sync:'[0,1,2]'});
       this.getArticle()
     },
     destroyed () {

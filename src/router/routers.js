@@ -1,19 +1,19 @@
 const ROOT = "/view"
 export default [
   // 管理平台
-    {
-        path: `/`,
-        redirect:`${ROOT}/wzzy/home`,
-    },
-
+  {
+    path: `/`,
+    redirect: `${ROOT}/wzzy/home`,
+  },
+  {
+    path: `${ROOT}/zhxt/login`,
+    component: require('../view/zhxt/login/Login.vue'),
+    name: 'login'
+  },
   {
     path: `${ROOT}/zhxt`,
     component: require('../view/zhxt/Home/home.vue'),
-    children: [  {
-        path: `${ROOT}/zhxt/login`,
-        component: require('../view/zhxt/login/Login.vue'),
-        name: 'login'
-    },
+    children: [
       {path: `${ROOT}/zhxt/readme`, component: require('../view/zhxt/count/count.vue'), name: 'readme'}, // 统计
       /*文章 -- 公示公告*/
       {path: `${ROOT}/zhxt/article/tips`, component: require('../view/zhxt/article/tips/tips.vue'), name: 'tips', meta: {title: '公示公告列表'}}, // 公示公告列表
@@ -102,6 +102,9 @@ export default [
       {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList', meta: {title: '问卷调查列表'}},
       {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit', meta: {title: '修改问卷调查'}},
       {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}},
+      /*回音壁*/
+      {path: `${ROOT}/zhxt/echo`, component: require('../view/zhxt/echo/echo.vue'), name: 'echo', meta: {title: '回音壁列表'}},
+      {path: `${ROOT}/zhxt/echo/:id`, component: require('../view/zhxt/echo/echoEdit.vue'), name: 'echoEdit', meta: {title: '编辑回音壁'}},
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},
       {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},
@@ -117,7 +120,7 @@ export default [
     path: `${ROOT}/wzzy`,
     component: require('../view/wzzy/wzzy.vue'),
     children: [
-        {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
+      {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
     ]
   },
   // 企业号

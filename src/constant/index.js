@@ -21,7 +21,8 @@ export const defData = {
   recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
   poll: {title: '', description: '', start: '', end: '', score: 0, time: 0, repetition: 0, days: 0, sync: '[0,1]', rule: '', admin: {}, created: '', questions: []},
   welfare: {admin: {}, endTime: '', entry: 0, files: [], name: '', provider: '', rule: '', score: 0, startTime: '', time: 0, total: 0, website: '', wishing: ''},
-  article: {title: '', subType: '', content: '', sync: '[0,1,2]', created: '', status: '', files: [], pics: [], admins: [], admin: {}, dep: {}}
+  article: {title: '', subType: '', content: '', sync: '[]', created: '', status: '', files: [], pics: [], admins: [], admin: {}, dep: {}},
+  echo: {title: '', question: '', questioner: '', quesTime: '', answer: '', replier: '', repTime: '', created: '', deleted: 0, status: 0, files: []}
 }
 export const fwhMenu = {
   "button": [{

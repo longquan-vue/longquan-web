@@ -25,7 +25,7 @@
           <!--<MyUpload :files="data.pics" filed="pics" :edit="data.edit"/>-->
           <!--</el-form-item>-->
           <el-form-item label="同步显示" prop="sync">
-            <el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
+            <el-checkbox-group :value="JSON.parse(data.sync)" @input="(v)=>setData({sync:JSON.stringify(v)})">
               <el-checkbox :label="0">网站</el-checkbox>
               <!--<el-checkbox :label="1">服务号</el-checkbox>-->
               <el-checkbox :label="2">企业号</el-checkbox>
@@ -86,7 +86,7 @@
       },
     },
     created () {
-      this.setData({type: 4});
+      this.setData({type: 4,sync:'[0,2]'});
       this.getArticle()
     },
     destroyed () {
