@@ -35,6 +35,9 @@ export const stateType = ({status}) => ['未开始', '进行中', '暂停', '已
 export const typeFilter = (type, idx) => type ? type[idx] : '无'
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
+//限制字数
+export const limitFilter = (str = '',l = 0)=> str.length>l?str.substr(0,l)+'...':str;
+
 
 
 // 认证状态过滤器   0->未认证,1->已认证
@@ -122,6 +125,7 @@ export default {
   syncFilter,
   groupMap,
   words,
-  typeFilter
+  typeFilter,
+  limitFilter
 }
 
