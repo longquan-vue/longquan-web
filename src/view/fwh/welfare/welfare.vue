@@ -36,7 +36,7 @@
                                 <a @click="openRule(item)">规则详情</a>
                             </h3>
                             <div>
-                               剩余 ： <span>20</span>  / <span>{{item.total}}</span>
+                               剩余 ： <span>{{item.current}}</span>  / <span>{{item.total}}</span>
                             </div>
                             <div>
                                 福利提供 ： <span>{{item.provider}}</span>
@@ -93,7 +93,7 @@
                             </li>
                             <li flex>
                                 <span box="1">规则:</span>
-                                <div box="5" v-html="data.rule"></div>
+                                <div box="5" v-html="decode(data.rule)"></div>
                             </li>
                         </ul>
                         <!--<div class="rules" flex>-->
@@ -197,12 +197,18 @@
                 }else {
                     await convertApi(id).then(()=>{
                         this.isShow(2);
+                        this.getWelfare();
                     }).catch((data)=>{
-                        Message({
-                            message: data.msg,
-                            type: 'error',
-                            duration:1000
-                        });
+                        // Message({
+                        //     message: data.msg,
+                        //     type: 'error',
+                        //     duration:1000
+                        // });
+                        this.def=true;
+                        this.bgImg='../../../../static/wx/pop-error.png';
+                        this.content=data.msg;
+                        this.btns={btn:'确定'};
+                        this.isshow=true;
                     });
                 }
             }
