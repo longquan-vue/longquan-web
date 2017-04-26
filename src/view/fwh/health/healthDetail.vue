@@ -206,8 +206,12 @@
             entry(data, date){
                 if (this.$store.state.login.audit == 2) {
                     entryHealthApi({...data, dates: [moment(date).format('x') * 1]}).then(() => {
-                        this.getHealthEnter()
+                        this.getHealthEnter();
                         this.isShow(1);
+                    }).catch((data)=>{
+                        this.content = data.msg;
+                        this.btns = {btn: '确定'};
+                        this.isshow = true;
                     });
                 } else {
                     this.isShow(3);
