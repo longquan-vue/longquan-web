@@ -127,6 +127,13 @@ export default {
     {
       title: '系统设置',
       children: [
+        {
+          title: '友情链接管理',
+          children: [
+            {title: '友情链接列表', path: `${ROOT}/zhxt/setting/link`},
+            {title: '友情链接设置', path: `${ROOT}/zhxt/setting/linkSetting`},
+          ]
+        },
         {title: '服务号设置', path: `${ROOT}/zhxt/setting/fwh`},
         {title: '二维码管理', path: `${ROOT}/zhxt/setting/ticket`},
         {title: '联系我们', path: `${ROOT}/zhxt/setting/relation`},

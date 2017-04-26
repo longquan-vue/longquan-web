@@ -95,21 +95,24 @@ export default [
       {path: `${ROOT}/zhxt/depAudit`, component: require('../view/zhxt/notice/notice.vue'), name: 'depAudit'}, // 审核列表
       {path: `${ROOT}/zhxt/depCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'depCount'}, // 工会统计
       /*招聘信息*/
-      {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}}, // 招聘信息列表
-      {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: {title: '修改招聘信息'}}, // 编辑招聘信息
-      {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter', meta: {title: '意向报名列表'}}, // 意向报名列表
-      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/recruit/recruitCount.vue'), name: 'recruitCount', meta: {title: '招聘信息统计'}}, // 招聘信息统计
+      {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}},
+      {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: {title: '修改招聘信息'}},
+      {path: `${ROOT}/zhxt/recruitEnter/:id`, component: require('../view/zhxt/recruit/recruitEnter.vue'), name: 'recruitEnter', meta: {title: '意向报名列表'}},
+      {path: `${ROOT}/zhxt/recruitCount`, component: require('../view/zhxt/recruit/recruitCount.vue'), name: 'recruitCount', meta: {title: '招聘信息统计'}},
       /*投票调查*/
-      {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList', meta: {title: '投票选举列表'}}, // 投票列表
-      {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit', meta: {title: '修改投票选举'}}, // 编辑投票
-      {path: `${ROOT}/zhxt/voteCount`, component: require('../view/zhxt/poll/voteCount.vue'), name: 'voteCount', meta: {title: '投票选举统计'}}, // 投票统计
-      {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList', meta: {title: '问卷调查列表'}}, // 调查列表
-      {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit', meta: {title: '修改问卷调查'}}, // 编辑调查
-      {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}}, // 调查统计
+      {path: `${ROOT}/zhxt/vote`, component: require('../view/zhxt/poll/vote.vue'), name: 'voteList', meta: {title: '投票选举列表'}},
+      {path: `${ROOT}/zhxt/vote/:id`, component: require('../view/zhxt/poll/voteEdit.vue'), name: 'voteEdit', meta: {title: '修改投票选举'}},
+      {path: `${ROOT}/zhxt/voteCount`, component: require('../view/zhxt/poll/voteCount.vue'), name: 'voteCount', meta: {title: '投票选举统计'}},
+      {path: `${ROOT}/zhxt/quest`, component: require('../view/zhxt/poll/quest.vue'), name: 'questList', meta: {title: '问卷调查列表'}},
+      {path: `${ROOT}/zhxt/quest/:id`, component: require('../view/zhxt/poll/questEdit.vue'), name: 'questEdit', meta: {title: '修改问卷调查'}},
+      {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}},
       /*系统设置*/
-      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},//系统设置
-      {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},//二维码管理
-      {path: `${ROOT}/zhxt/setting/relation`, component: require('../view/zhxt/setting/relation.vue'), name: 'relationSetting', meta: {title: '联系我们'}},//联系我们
+      {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},
+      {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},
+      {path: `${ROOT}/zhxt/setting/link`, component: require('../view/zhxt/setting/link/link.vue'), name: 'link', meta: {title: '友情链接列表'}},
+      {path: `${ROOT}/zhxt/setting/link/:id`, component: require('../view/zhxt/setting/link/linkEdit.vue'), name: 'linkEdit', meta: {title: '添加友情链接'}},
+      {path: `${ROOT}/zhxt/setting/linkSetting`, component: require('../view/zhxt/setting/link/linkSetting.vue'), name: 'linkSetting', meta: {title: '友情链接设置'}},
+      {path: `${ROOT}/zhxt/setting/relation`, component: require('../view/zhxt/setting/relation.vue'), name: 'relationSetting', meta: {title: '联系我们'}},
     ]
   },
 
