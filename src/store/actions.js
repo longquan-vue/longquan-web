@@ -32,8 +32,8 @@ import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, fi
 import {fileApi, delFileApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
-import {getSysApi, setSysApi, clearApi, initApi} from '../api/systemApi'
-import {findArticleApi, createArticleApi,updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
+import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
+import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -146,8 +146,8 @@ const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages &
 }).then(async() => commit(GET_DATA_LIST, await mineHealthApi(0, state.page)));
 //获取我的收藏的招聘信息
 const getMineRecruit = ({commit, state}) => state.page.page <= state.page.pages && getMine({
-    commit,
-    state
+  commit,
+  state
 }).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(0, state.page)));
 
 //公共删除方法
@@ -251,12 +251,21 @@ const setLogin = ({commit}, login) => commit(SET_LOGIN, login)
 const setList = ({commit, state}, {key, data}) => commit(SET_DATA, {[key]: [...state.data[key], data]})
 // 设置数组
 const setListVal = ({commit, state}, [key, value]) => commit(SET_LIST_VAL, [key, value])
+const changeList = ({commit, state}, [key, value]) => commit(CHANGE_LIST, [key, value])
 // 删除数组
 const delList = ({commit, state}, [key, idx]) => commit(DEL_LIST, [key, idx])
 // 修改系统设置
 const changeSys = ({commit, state}, data) => commit(SETTING, data)
 // 保存系统设置
 const saveSys = ({commit, state}) => setSysApi(state.setting).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 获取友情链接
+const findLink = async({commit, state}) => commit(GET_DATA_LIST, await findLinkApi(state.page));
+// 创建友情链接
+const createLink = ({commit, state}, links) => createLinkApi(links).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改友情链接
+const updateLink = ({commit, state}, data) => updateLinkApi(data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 删除友情链接
+const delLink = ({commit, state}, [id, idx]) => delLinkApi(id).then(() => commit(DEL_DATA, idx))
 // 获取投票调查详情
 const getPoll = async({commit, state}) => {
   const {params:{id}}=state.route;
@@ -323,6 +332,7 @@ export default {
   setList, // 设置数组
   delList, //删除数组
   setListVal,//设置数组值
+  changeList,
   go,
   goto,
   upload,
@@ -391,4 +401,8 @@ export default {
   delArticle,//删除文章
   pauseArticle,//切换文章状态
   updateArticle,//修改文章
+  findLink,//获取友情链接列表
+  createLink,// 创建友情链接
+  updateLink,// 修改友情链接
+  delLink,// 删除友情链接
 }

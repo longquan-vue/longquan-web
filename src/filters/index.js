@@ -32,7 +32,7 @@ export const itemFilter = (item) => ['多人项目', '单人项目', '双人项�
 export const spotType = ({type}) => ['多人项目', '单人项目', '双人项目', '多人项目'][type] || '多人项目';
 export const entryType = ({entry}) => ['所有用户可报名', '认证用户可报名'][entry] || '所有用户可报名';
 export const stateType = ({status}) => ['未开始', '进行中', '暂停', '已结束'][status] || '未开始';
-
+export const typeFilter = (type, idx) => type ? type[idx] : '无'
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
 
@@ -62,18 +62,18 @@ export const groupList = (list = [], {flagFn = () => false, field = 'start', key
   return g;
 };
 export const groupMap = (list = [], {flagFn = () => false, filed = 'start', keys = ['start', 'end'], group = []}) => {
-    const m = {};
-    group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
-    list.map((item) => {
-        m[moment(item[filed]).format('HH:mm')].list.push(item);
-        m[moment(item[filed]).format('HH:mm')].num += 1;
-        m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
-        keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
-    });
-    return m
+  const m = {};
+  group.forEach((g, idx) => m[moment(g).format('HH:mm')] = {idx, num: 1, flag: false, list: []});
+  list.map((item) => {
+    m[moment(item[filed]).format('HH:mm')].list.push(item);
+    m[moment(item[filed]).format('HH:mm')].num += 1;
+    m[moment(item[filed]).format('HH:mm')].flag = flagFn && flagFn(item);
+    keys.map((key) => m[moment(item[filed]).format('HH:mm')][key] = item[key]);
+  });
+  return m
 };
 //ABCDE过滤器
-export const words = (val) => ['A', 'B', 'C', 'D','E','F','G','H','I','J'][val] || 'A';
+export const words = (val) => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'][val] || 'A';
 
 export const numFilter = (num) => ['', '十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'][(num - num % 10) / 10] + ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'][num % 10]
 export const syncFilter = ({sync}) => sync ? JSON.parse(sync).map(s => ['网站', '服务号'][s]).join('，') : '无'
@@ -121,6 +121,7 @@ export default {
   numFilter,
   syncFilter,
   groupMap,
-  words
+  words,
+  typeFilter
 }
 
