@@ -37,7 +37,31 @@ export const typeFilter = (type, idx) => type ? type[idx] : '无'
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
 //限制字数
 export const limitFilter = (str = '',l = 0)=> str.length>l?str.substr(0,l)+'...':str;
+//路径过滤器
+export const pathFilter = (str)=>{
+  switch (str){
+      case 'laborUnion/1':
+        return '区总简介';
+        break;
+      case 'laborUnion/2':
+        return '区总领导';
+        break;
+      case 'laborUnion/3':
+          return '机构设置';
+          break;
+      case 'laborUnion/4':
+          return '机关党委';
+          break;
+  }
+};
+//路径过滤器2
+export const path2Filter = (str)=>{
 
+    if (str.includes('laborUnion')){
+        return '机构介绍';
+    }
+
+};
 
 
 // 认证状态过滤器   0->未认证,1->已认证
@@ -126,6 +150,8 @@ export default {
   groupMap,
   words,
   typeFilter,
-  limitFilter
+  limitFilter,
+  pathFilter,
+  path2Filter
 }
 

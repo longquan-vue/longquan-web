@@ -26,29 +26,15 @@
                 </div>
                 <div class="header-menu">
                     <el-row :gutter="20">
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a active" :class="">首页</router-link>
+                        <el-col :span="3" v-for="(item,index) in menu">
+                            <a @click="toUrl({path:item.children?item.url+item.children[0].url:item.url})" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
                         </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">机构介绍</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">新闻动态</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">办事指南</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">工会服务</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">互动交流</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">先进人物</router-link>
-                        </el-col>
-                        <el-col :span="3">
-                            <router-link to="" class="menu-a">文件·资料</router-link>
+                    </el-row>
+                </div>
+                <div class="header-menu-sub" v-show="child.show && child.children" @mouseover="child.show=true" @mouseout="child.show=false">
+                    <el-row :gutter="20">
+                        <el-col :span="3" v-for="(item,index) in child.children">
+                            <a @click="toUrl({path:child.url+item.url})" :class="['menu-a',{'active':path==child.url+item.url}]">{{item.name}}</a>
                         </el-col>
                     </el-row>
                 </div>
@@ -61,26 +47,38 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import moment from 'moment'
+    import menu from '../../../router/menu'
     export default{
         name:'wzzyHeader',
         data(){
             return{
                 input5: '',
-                select:''
+                select:'',
+                idx:1,
+                show:false,
+                menu:menu.wzzy,
+                child:{}
             }
         },
         components:{
             moment
         },
         computed: {
-            ...mapGetters([ 'page','list']),
+            ...mapGetters([ 'page','list','path']),
             today(){
                 return moment(new Date()).format('YYYY年MM月DD日')
-            }
+            },
+            active(){
+                return this.path.split('/')[3]
+            },
         },
         methods:{
-            ...mapActions(['go','clear','getMine','changePage']),
+            ...mapActions(['toUrl','clear','getMine','changePage']),
             ...filters,
+            showSub(index){
+                this.idx = index;
+                this.show = true;
+            }
         },
         created () {
             console.log(moment(new Date()).format())

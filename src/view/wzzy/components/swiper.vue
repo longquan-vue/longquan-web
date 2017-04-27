@@ -4,6 +4,7 @@
             <div class="wzzy-swiper-item" v-for="(item,index) in itemList" v-show="index==idx" :key="index">
                 <div class="wzzy-swiper-item-left">
                     <img :src="item.picUrl" >
+                    <div class="overlay"></div>
                 </div>
                 <div class="wzzy-swiper-item-right">
                     <h2>
@@ -26,7 +27,7 @@
             background-color: #FFF7F7;height: 100%;line-height: 100%;width: 100%;
             color: #ffffff;position: absolute;left: 0;top: 0;
             .wzzy-swiper-item-left{
-                width: 45%;height: 100%;float: left;
+                width: 45%;height: 100%;float: left;position: relative;
                 img{ width: 100%;height: 100%;}
             }
             .wzzy-swiper-item-right{
@@ -53,7 +54,7 @@
         .tab-a{
             position: absolute;left: 25%;bottom: 20px;
             a{ width: 18px;height: 18px;display: inline-block;border: 1px solid #fff;
-                vertical-align: middle;
+                vertical-align: middle;cursor: pointer;
                 color: rgba(255,255,255,0.8);text-align: center;line-height: 18px;margin: 0 5px;
                 &.active{ background-color: rgba(255,255,255,0.4);border: none;color: #ffffff;}
             }

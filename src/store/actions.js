@@ -64,6 +64,7 @@ const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) =
     params: id ? {id} : {},
     query
   })))
+const toUrl = ({commit},{path,params,query}) =>router.push({path,params,query})
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
 //清除page
@@ -434,4 +435,5 @@ export default {
   getEcho,//获取回音壁详情
   delEcho,//删除回音壁
   pauseEcho, //关闭或显示回音壁
+    toUrl,
 }

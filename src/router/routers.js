@@ -1,4 +1,4 @@
-const ROOT = "/view"
+export const ROOT = "/view"
 export default [
   // 管理平台
   {
@@ -121,6 +121,11 @@ export default [
     component: require('../view/wzzy/wzzy.vue'),
     children: [
       {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
+      /*机构介绍*/
+      {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
+      {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
+      {path: `${ROOT}/wzzy/laborUnion/3`, component: require('../view/wzzy/laborUnion/laborUnionSet.vue'), name: 'laborUnionSet'},
+      {path: `${ROOT}/wzzy/laborUnion/4`, component: require('../view/wzzy/laborUnion/laborUnionOffice.vue'), name: 'laborUnionOffice'},
     ]
   },
   // 企业号
