@@ -29,7 +29,7 @@ import {
   exportEntryApi
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
-import {fileApi, delFileApi} from '../api/fileApi'
+import {fileApi, delFileApi,delPicApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
@@ -52,6 +52,8 @@ const clear = ({commit}, key = 'user') => {
 };
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
+//删除配图
+const delPic = ({commit, state}, url) => delPicApi(url);
 // 删除文件
 const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]));
 // 获取系统配置
@@ -385,6 +387,7 @@ export default {
   loginOut,// 登出
   login,// 登录
   delFile,//删除文件
+  delPic,//删除文件
   getEnter,//获取报名表单
   deleteActivity,// 删除活动
   delUser,//删除用户

@@ -13,6 +13,9 @@
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
+          <el-form-item label="配图" prop="pics">
+            <Avatar :url="data.picUrl"/>
+          </el-form-item>
           <el-form-item label="标题" prop="title">
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
@@ -21,15 +24,12 @@
               <el-option v-for="(val,key) in articleType.info" :label="val" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
-          <el-form-item label="配图" prop="pics">
-            <MyUpload :files="data.pics" filed="pics" :edit="data.edit"/>
-          </el-form-item>
           <!--<el-form-item label="同步显示" prop="sync">-->
-            <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
-              <!--<el-checkbox :label="0">网站</el-checkbox>-->
-              <!--<el-checkbox :label="1">服务号</el-checkbox>-->
-              <!--<el-checkbox :label="2">企业号</el-checkbox>-->
-            <!--</el-checkbox-group>-->
+          <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
+          <!--<el-checkbox :label="0">网站</el-checkbox>-->
+          <!--<el-checkbox :label="1">服务号</el-checkbox>-->
+          <!--<el-checkbox :label="2">企业号</el-checkbox>-->
+          <!--</el-checkbox-group>-->
           <!--</el-form-item>-->
           <el-form-item label="内容" prop="content">
             <quill-editor ref="myTextEditor" :content="decode(data.content)" @input="(v)=>setData({content:encode(v)})" :config="{}"/>
@@ -57,6 +57,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../../filters'
   import MyUpload from '../../../../components/public/MyUpload.vue'
+  import Avatar from '../../../../components/public/Avatar.vue'
   import {alert} from '../../../../actions'
   import {number, required, array} from '../../../../constant/rules'
   export default {
@@ -65,11 +66,11 @@
         rules: {
           files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
-//          sync: required('请选择同步服务...'),
+          picUrl: required('请选择上传配图...'),
         },
       }
     },
-    components: {MyUpload},
+    components: {MyUpload, Avatar},
     computed: {...mapGetters(['data', 'articleType']),},
     methods: {
       ...filter,
@@ -86,7 +87,7 @@
       },
     },
     created () {
-      this.setData({type: 5,sync:'[0,1,2]'});
+      this.setData({type: 5, sync: '[0,1,2]'});
       this.getArticle()
     },
     destroyed () {

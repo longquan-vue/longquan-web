@@ -25,19 +25,8 @@
           <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
         </el-form-item>
         <el-form-item label="图片" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
-          <div class="avatar_box">
-            <el-upload
-              class="avatar-uploader"
-              :action="action"
-              :show-file-list="false"
-              :http-request="upload"
-              :on-success="success"
-              :before-upload="before">
-              <img v-if="sub.picurl" :src="sub.picurl" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"/>
-            </el-upload>
-            <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
-          </div>
+          <Avatar :success="()=>setSub({picurl: url})" width="360" height="200" :url="sub.picurl"/>
+          <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
         </el-form-item>
         <el-form-item label="描述" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
           <el-input type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>
@@ -84,6 +73,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import {getFwhMenuApi, delFwhMenuApi, createFwhMenuApi, syncfwhApi} from '../../../api/systemApi'
   import {alert, confirm} from '../../../actions'
+  import Avatar from '../../../components/public/Avatar.vue'
   export default{
     data(){
       return {
@@ -92,6 +82,7 @@
         sync: false
       }
     },
+    components: {Avatar},
     computed: {...mapGetters(['setting', 'sub', 'action']),},
     methods: {
       ...mapActions(['getSetting', 'saveSys', 'changeSys', 'upload']),
@@ -108,9 +99,6 @@
       },
       changeType(){
         this.$router.replace({name: 'fwhSetting', query: {tab: this.tab}})
-      },
-      success(file){
-        this.setSub({picurl: file.url})
       },
       setSub(sub){
         this.changeSys({sub: JSON.stringify({...this.sub, ...sub})})
