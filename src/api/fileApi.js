@@ -18,3 +18,8 @@ export const delFileApi = (id, del) => {
     url: `${BASE_PATH}/delete/${id}/${del}`,
   });
 }
+export const delPicApi = (id, del) => request({
+  method: 'delete',
+  url: `${BASE_PATH}/deleteUrl/${id}`,
+});
+

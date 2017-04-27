@@ -29,12 +29,12 @@ import {
   exportEntryApi
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
-import {fileApi, delFileApi} from '../api/fileApi'
+import {fileApi, delFileApi, delPicApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
-import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi,pauseEchoApi} from '../api/echoApi'
+import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from '../api/echoApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -52,6 +52,8 @@ const clear = ({commit}, key = 'user') => {
 };
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
+//删除配图
+const delPic = ({commit, state}, url) => url && delPicApi(url);
 // 删除文件
 const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]));
 // 获取系统配置
@@ -156,14 +158,14 @@ const delMethod = async({commit, state}, idx) => deleteApi(state.list[idx].id, 1
 //获取福利  兑换列表
 const getWelfare = async({commit, state}) => commit(GET_DATA_LIST, await welfareApi(state.page));
 //获取福利   福利详情
-const getWelfareDetail = async({commit, state}, data) => {
+const getWelfareDetail = async({commit, state}, data = {}) => {
   const {query:{id, ticket, welfareId, used}}=state.route;
   if (welfareId) {
-    commit(SET_DATA, {...await findWelfareByIdApi(welfareId), ticket, id, used});
+    findWelfareByIdApi(welfareId).then((data) => commit(SET_DATA, {...data, ticket, id, used})).catch(() => getWelfareDetail({commit, state}, data))
   } else if (state.route.params.id) {
-    commit(SET_DATA, state.route.params.id == CREATE ? {edit: true, ...defData.welfare} : {...await findWelfareByIdApi(state.route.params.id), edit: false});
+    state.route.params.id == CREATE ? commit(SET_DATA, {edit: true, ...defData.welfare}) : findWelfareByIdApi(state.route.params.id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getWelfareDetail({commit, state}, data))
   } else {
-    commit(SET_DATA, data || defData.welfare);
+    commit(SET_DATA, {...defData.welfare, ...data});
   }
 };
 //获取福利   创建福利
@@ -181,12 +183,12 @@ const getEnter = async({commit, state}) => commit(GET_DATA_LIST, await findEntry
 // 导出活动报名表单
 const exportEntry = ({commit, state}) => exportEntryApi(state.route.params.id, state.page);
 //获取活动相关数据   活动详情
-const getActivityDetail = async({commit, state}) => {
+const getActivityDetail = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.activity});
   } else {
-    commit(SET_DATA, {edit: false, ...await findActivityDetailApi(id)});
+    findActivityDetailApi(id).then((data) => commit(SET_DATA, {edit: false, ...data})).catch(() => getActivityDetail({commit, state}));
   }
 };
 //获取活动相关数据  报名
@@ -234,12 +236,12 @@ const exportRecruitEntry = ({commit, state}) => exportRecruitEntryApi(state.rout
 //删除招聘信息
 const delRecruit = ({commit, state}, [id, idx]) => delRecruitApi(id).then(() => commit(DEL_DATA, idx))
 //获取招聘信息相关数据   招聘详情
-const getRecruitDetail = async({commit, state}) => {
+const getRecruitDetail = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.recruit});
   } else {
-    commit(SET_DATA, {...await findRecruitDetailApi(id), edit: false});
+    findRecruitDetailApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getRecruitDetail({commit, state}));
   }
 };
 //获取招聘信息相关数据  报名
@@ -268,12 +270,12 @@ const updateLink = ({commit, state}, data) => updateLinkApi(data).then(() => suc
 // 删除友情链接
 const delLink = ({commit, state}, [id, idx]) => delLinkApi(id).then(() => commit(DEL_DATA, idx))
 // 获取投票调查详情
-const getPoll = async({commit, state}) => {
+const getPoll = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.poll});
   } else {
-    commit(SET_DATA, {...await getPollApi(id), edit: false});
+    getPollApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getPoll({commit, state}));
   }
 };
 // 获取投票调查列表
@@ -308,12 +310,12 @@ const createArticle = ({commit, state}) => createArticleApi(state.data).then(() 
 // 修改文章
 const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取文章详情
-const getArticle = async({commit, state}) => {
+const getArticle = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.article});
   } else {
-    commit(SET_DATA, {...await getArticleApi(id), edit: false});
+    getArticleApi(id).then((data) => commit(SET_DATA, {... data, edit: false})).catch(() => getArticle({commit, state}))
   }
 };
 //删除文章
@@ -327,12 +329,12 @@ const createEcho = ({commit, state}) => createEchoApi(state.data).then(() => suc
 // 修改回音壁
 const updateEcho = ({commit, state}) => updateEchoApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取回音壁详情
-const getEcho = async({commit, state}) => {
+const getEcho = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.echo});
   } else {
-    commit(SET_DATA, {...await getEchoApi(id), edit: false});
+    getEchoApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getEcho({commit, state}));
   }
 };
 //删除回音壁
@@ -385,6 +387,7 @@ export default {
   loginOut,// 登出
   login,// 登录
   delFile,//删除文件
+  delPic,//删除文件
   getEnter,//获取报名表单
   deleteActivity,// 删除活动
   delUser,//删除用户

@@ -1,9 +1,15 @@
 <style>
   @import "../../../main.less";
   @import "../../../color-dark.less";
+
+  .zhxt .ql-container .ql-editor {
+    min-height: 20em;
+    padding-bottom: 1em;
+    max-height: 25em;
+  }
 </style>
 <template>
-  <div class="wrapper">
+  <div class="wrapper zhxt">
     <vHead/>
     <vSidebar/>
     <div class="content">

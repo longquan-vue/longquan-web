@@ -14,13 +14,13 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <div v-show="step == 0">
-            <el-form-item label="问卷标题" prop="title">
+            <el-form-item label="问卷标题：" prop="title">
               <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
             </el-form-item>
-            <el-form-item label="问卷描述" prop="description">
+            <el-form-item label="问卷描述：" prop="description">
               <el-input :value="data.description" @input="(v)=>setData({description:v})"/>
             </el-form-item>
-            <el-form-item label="调查时间" required>
+            <el-form-item label="调查时间：" required>
               <el-col :span="11">
                 <el-form-item prop="start">
                   <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间..." :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
@@ -33,30 +33,30 @@
                 </el-form-item>
               </el-col>
             </el-form-item>
-            <el-form-item label="积分奖励" prop="score">
+            <el-form-item label="积分奖励：" prop="score">
               <el-input :value="data.score" @input="(v)=>setData({score:v})">
                 <template slot="append">积分</template>
               </el-input>
             </el-form-item>
-            <el-form-item label="答题次数" prop="time">
+            <el-form-item label="答题次数：" prop="time">
               <el-input :value="data.time" @input="(v)=>setData({time:v})">
                 <template slot="append">次</template>
               </el-input>
             </el-form-item>
-            <el-form-item label="同步显示" prop="sync">
+            <el-form-item label="同步显示：" prop="sync">
               <el-checkbox-group :value="JSON.parse(data.sync|| '[0,1]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
                 <el-checkbox :label="0">网站</el-checkbox>
                 <el-checkbox :label="1">服务号</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
-            <el-form-item label="答题规则" prop="rule">
-              <quill-editor :content="decode(data.rule)" @input="(v)=>setData({rule:encode(v)})" :config="{}"/>
+            <el-form-item label="答题规则：" prop="rule">
+              <quill-editor :content="decode(data.rule)" @input="setData({rule:encode($event)})" :config="editorOption"/>
             </el-form-item>
             <div v-if="!data.edit">
-              <el-form-item label="发布者" prop="admin">
+              <el-form-item label="发布者：" prop="admin">
                 <el-input v-model="data.admin.name" readonly/>
               </el-form-item>
-              <el-form-item label="发布时间" prop="created">
+              <el-form-item label="发布时间：" prop="created">
                 <el-input :value="date3Filter(data.created)" readonly/>
               </el-form-item>
             </div>
@@ -103,7 +103,6 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
-  import MyUpload from '../../../components/public/MyUpload.vue'
   import {alert} from '../../../actions'
   import {required, number} from '../../../constant/rules'
   export default {
@@ -128,8 +127,7 @@
         this.setQuestions();
       }
     },
-    components: {MyUpload},
-    computed: {...mapGetters(['action', 'data']),},
+    computed: {...mapGetters(['action', 'data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getPoll', 'createPoll', 'updatePoll', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),

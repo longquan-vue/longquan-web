@@ -10,29 +10,29 @@
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="招聘标题" prop="name">
+          <el-form-item label="招聘标题：" prop="name">
             <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
-          <el-form-item label="招聘岗位" prop="job">
+          <el-form-item label="招聘岗位：" prop="job">
             <el-input :value="data.job" @input="(v)=>setData({job:v})"/>
           </el-form-item>
-          <el-form-item label="招聘人数" prop="num">
+          <el-form-item label="招聘人数：" prop="num">
             <el-input :value="data.num" @input="(v)=>setData({num:v})">
               <template slot="append">人</template>
             </el-input>
           </el-form-item>
-          <el-form-item label="薪资待遇" prop="pay">
+          <el-form-item label="薪资待遇：" prop="pay">
             <el-input :value="data.pay" @input="(v)=>setData({pay:v})">
               <template slot="append">元/月</template>
             </el-input>
           </el-form-item>
-          <el-form-item label="招聘单位" prop="company">
+          <el-form-item label="招聘单位：" prop="company">
             <el-input :value="data.company" @input="(v)=>setData({company:v})"/>
           </el-form-item>
-          <el-form-item label="单位地址" prop="address">
+          <el-form-item label="单位地址：" prop="address">
             <el-input :value="data.address" @input="(v)=>setData({address:v})"/>
           </el-form-item>
-          <el-form-item label="招聘时间" prop="start">
+          <el-form-item label="招聘时间：" prop="start">
             <el-col :span="11">
               <el-form-item prop="start">
                 <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
@@ -46,27 +46,27 @@
             </el-col>
           </el-form-item>
           <el-row v-for="(item,idx) in linkmanList" :key="idx" style="margin-bottom: 0">
-            <el-form-item label="联系人" prop="linkman">
+            <el-form-item :label="'联系人 '+(idx+1)+'：'" prop="linkman">
               <el-input :value="item.linkman" @input="(v)=>setListVal(['linkmans.'+idx,v])"/>
             </el-form-item>
-            <el-form-item label="联系电话" prop="phone">
+            <el-form-item :label="'联系电话 '+(idx+1)+'：'" prop="phone">
               <el-input :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
             </el-form-item>
           </el-row>
           <el-form-item label="">
             <img src="/static/zhxt/add.png" alt="add" style="width: 36px;height: 36px;cursor: pointer" @click="addLinkman">
           </el-form-item>
-          <el-form-item label="招聘要求" prop="claim">
-            <quill-editor :content="decode(data.claim)" @input="(v)=>setData({claim:encode(v)})" :config="{}"/>
+          <el-form-item label="招聘要求：" prop="claim">
+            <quill-editor :content="decode(data.claim)" @input="setData({claim:encode($event)})" :config="editorOption"/>
           </el-form-item>
-          <el-form-item label="福利待遇" prop="treatment">
-            <quill-editor :content="decode(data.treatment)" @input="(v)=>setData({treatment:encode(v)})" :config="{}"/>
+          <el-form-item label="福利待遇：" prop="treatment">
+            <quill-editor :content="decode(data.treatment)" @input="setData({treatment:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
-            <el-form-item label="发布者" prop="admin">
+            <el-form-item label="发布者：" prop="admin">
               <el-input v-model="data.admin.name" readonly/>
             </el-form-item>
-            <el-form-item label="发布时间" prop="created">
+            <el-form-item label="发布时间：" prop="created">
               <el-input :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
@@ -81,12 +81,11 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
-  import MyUpload from '../../../components/public/MyUpload.vue'
   import {required, number, array} from '../../../constant/rules'
   export default {
     data() {
       return {
-        linkmanList: [],
+        linkmanList: [{linkman: '', phone: ''}],
         rules: {
           name: required('请输入招聘标题...', {max: 20}),
           company: required('请输入招聘单位...'),
@@ -96,8 +95,8 @@
         },
       }
     },
-    components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    components: {},
+    computed: {...mapGetters(['data', 'editorOption'])},
     watch: {
       data(){
         this.setLinkmanList()

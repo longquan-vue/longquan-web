@@ -1,36 +1,7 @@
 .fwh_setting {
-  .avatar_box {
-    height: 200px;
-    line-height: 200px;
-    .av_tip {
-      height: 200px;
-      line-height: 200px;
-      padding-left: 15px;
-      float: left;
-    }
-    .avatar-uploader {
-      width: 360px;
-      height: 200px;
-      float: left;
-      .el-upload {
-        .avatar {
-          width: 360px;
-          height: 200px;
-          border: 1px dashed #d9d9d9;
-          border-radius: 6px;
-          line-height: 0;
-          &:hover {
-            border-color: #20a0ff;
-          }
-        }
-      }
-      .avatar-uploader-icon {
-        color: #8c939d;
-        width: 360px;
-        height: 200px;
-        line-height: 200px;
-      }
-    }
+  .av_tip {
+    display: inline-block;
+    padding-left: 15px;
   }
 }
 
@@ -51,39 +22,11 @@
 }
 
 .ticket {
+  text-align: center;
+}
+
+.el-form {
   padding: 15px;
-  .avatar_box {
-    height: 240px;
-    line-height: 240px;
-    text-align: center;
-    .av_tip {
-      height: 24px;
-      line-height: 24px;
-    }
-    .avatar-uploader {
-      width: 242px;
-      height: 242px;
-      margin: 0 auto;
-      border: 1px dashed #d9d9d9;
-      border-radius: 6px;
-      line-height: 0;
-      &:hover {
-        border-color: #20a0ff;
-      }
-      .el-upload {
-        .avatar {
-          width: 240px;
-          height: 240px;
-          border-radius: 6px;
-        }
-      }
-      .avatar-uploader-icon {
-        width: 240px;
-        height: 240px;
-        line-height: 240px;
-      }
-    }
-  }
 }
 
 .close {

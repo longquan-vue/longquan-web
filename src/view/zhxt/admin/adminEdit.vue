@@ -59,7 +59,6 @@
   import {mapGetters, mapActions} from 'vuex'
   import Calendar from '../../../components/public/calender/Calender.vue'
   import filter from '../../../filters'
-  import MyUpload from '../../../components/public/MyUpload.vue'
   import moment from 'moment'
   import {healthIcon} from '../../../constant'
   export default {
@@ -88,7 +87,7 @@
       }
     },
     components: {
-      MyUpload, Calendar
+      Calendar
     },
     computed: {
       ...mapGetters(['data']),

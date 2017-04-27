@@ -13,66 +13,57 @@
       <el-tab-pane label="服务号菜单设置" name="3"/>
     </el-tabs>
     <div class="contentBoxCont" v-if="tab == '1'">
-      <el-form :model="setting" ref="setting" label-width="120px" class="demo-ruleForm">
-        <el-form-item label="关注送积分" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
+      <el-form :model="setting" ref="setting" label-width="120px">
+        <el-form-item label="关注送积分：" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
           <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
     <div class="contentBoxCont fwh_setting" v-if="tab == '2'">
-      <el-form :model="sub" ref="sub" label-width="120px" class="demo-ruleForm">
-        <el-form-item label="标题" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
+      <el-form :model="sub" ref="sub" label-width="130px">
+        <el-form-item label="标题：" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
           <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
         </el-form-item>
-        <el-form-item label="图片" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
-          <div class="avatar_box">
-            <el-upload
-              class="avatar-uploader"
-              :action="action"
-              :show-file-list="false"
-              :http-request="upload"
-              :on-success="success"
-              :before-upload="before">
-              <img v-if="sub.picurl" :src="sub.picurl" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"/>
-            </el-upload>
-            <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
-          </div>
+        <el-form-item label="图片：" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
+          <Avatar :success="()=>setSub({picurl: url})" width="360" height="200" :url="sub.picurl"/>
+          <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
         </el-form-item>
-        <el-form-item label="描述" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
+        <el-form-item label="描述：" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
           <el-input type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>
         </el-form-item>
-        <el-form-item label="URL链接地址" prop="url" :rules="[{required:true,message:'URL链接地址不能为空'}]">
+        <el-form-item label="URL链接地址：" prop="url" :rules="[{required:true,message:'URL链接地址不能为空'}]">
           <el-input :value="sub.url" auto-complete="off" @input="(v)=>setSub({url:v})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
-    <div v-for="(item,index) in menu.button" v-if="tab == '3'" class="fwh_menu">
-      <el-row>
-        <el-col :span="3" class="menu_title">一级菜单：</el-col>
-        <el-col :span="21">
-          <el-input v-model="item.name"/>
-        </el-col>
-      </el-row>
-      <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
-        <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
-        <el-col class="sub_button" :span="5">
-          <el-input v-model="button.name"/>
-        </el-col>
-        <el-col class="sub_button" :span="4">
-          <el-select v-model="button.type" @change="setButton(index,idx)">
-            <el-option label="页面" value="view"/>
-            <el-option label="事件" value="click" disabled/>
-          </el-select>
-        </el-col>
-        <el-col class="sub_button" :span="11">
-          <el-input v-model="button.url" v-if="button.type == 'view'"/>
-          <el-select v-model="button.key" v-if="button.type == 'click'">
-            <el-option label="页面" value="view" disabled/>
-            <el-option label="事件" value="click" disabled/>
-          </el-select>
-        </el-col>
-      </el-row>
+    <div class="contentBoxCont fwh_setting" v-if="tab == '3'">
+      <div v-for="(item,index) in menu.button" class="fwh_menu">
+        <el-row>
+          <el-col :span="3" class="menu_title">一级菜单：</el-col>
+          <el-col :span="21">
+            <el-input v-model="item.name"/>
+          </el-col>
+        </el-row>
+        <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
+          <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
+          <el-col class="sub_button" :span="5">
+            <el-input v-model="button.name"/>
+          </el-col>
+          <el-col class="sub_button" :span="4">
+            <el-select v-model="button.type" @change="setButton(index,idx)">
+              <el-option label="页面" value="view"/>
+              <el-option label="事件" value="click" disabled/>
+            </el-select>
+          </el-col>
+          <el-col class="sub_button" :span="11">
+            <el-input v-model="button.url" v-if="button.type == 'view'"/>
+            <el-select v-model="button.key" v-if="button.type == 'click'">
+              <el-option label="页面" value="view" disabled/>
+              <el-option label="事件" value="click" disabled/>
+            </el-select>
+          </el-col>
+        </el-row>
+      </div>
     </div>
     <div style="text-align: center">
       <el-button type="primary" @click="submitForm">提交</el-button>
@@ -84,6 +75,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import {getFwhMenuApi, delFwhMenuApi, createFwhMenuApi, syncfwhApi} from '../../../api/systemApi'
   import {alert, confirm} from '../../../actions'
+  import Avatar from '../../../components/public/Avatar.vue'
   export default{
     data(){
       return {
@@ -92,6 +84,7 @@
         sync: false
       }
     },
+    components: {Avatar},
     computed: {...mapGetters(['setting', 'sub', 'action']),},
     methods: {
       ...mapActions(['getSetting', 'saveSys', 'changeSys', 'upload']),
@@ -108,9 +101,6 @@
       },
       changeType(){
         this.$router.replace({name: 'fwhSetting', query: {tab: this.tab}})
-      },
-      success(file){
-        this.setSub({picurl: file.url})
       },
       setSub(sub){
         this.changeSys({sub: JSON.stringify({...this.sub, ...sub})})

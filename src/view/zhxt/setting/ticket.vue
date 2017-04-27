@@ -9,36 +9,18 @@
         <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
-    <el-form :model="setting" ref="setting" label-width="0" class="demo-ruleForm ticket">
+    <el-form :model="setting" ref="setting" label-width="0" class="ticket">
       <el-row>
         <el-col :span="12">
           <el-form-item prop="wechatTicket" :rules="[{required:true,message:'微信公众号二维码不能为空'}]">
-            <div class="avatar_box">
-              <el-upload
-                class="avatar-uploader"
-                :action="action"
-                :show-file-list="false"
-                :http-request="({file})=>upload('wechatTicket',file)">
-                <img v-if="setting.wechatTicket" :src="setting.wechatTicket" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"/>
-              </el-upload>
-              <div class="av_tip">微信公众号二维码，格式为JPG/PNG</div>
-            </div>
+            <Avatar :success="(wechatTicket)=>changeSys({wechatTicket})" :url="setting.wechatTicket"/>
+            <div class="av_tip">微信公众号二维码，格式为JPG/PNG</div>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item prop="blogTicket" :rules="[{required:true,message:'微博二维码不能为空'}]">
-            <div class="avatar_box">
-              <el-upload
-                class="avatar-uploader"
-                :action="action"
-                :show-file-list="false"
-                :http-request="({file})=>upload('blogTicket',file)">
-                <img v-if="setting.blogTicket" :src="setting.blogTicket" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"/>
-              </el-upload>
-              <div class="av_tip">新浪微博二维码，格式为JPG/PNG</div>
-            </div>
+            <Avatar :success="(blogTicket)=>changeSys({blogTicket})" :url="setting.blogTicket"/>
+            <div class="av_tip">新浪微博二维码，格式为JPG/PNG</div>
           </el-form-item>
         </el-col>
       </el-row>
@@ -52,22 +34,14 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import {alert} from '../../../actions'
+  import Avatar from '../../../components/public/Avatar.vue'
   export default{
-    computed: {...mapGetters(['setting', 'action'])},
+    components: {Avatar},
+    computed: {...mapGetters(['setting'])},
     methods: {
-      ...mapActions(['getSetting', 'saveSys', 'changeSys','go']),
+      ...mapActions(['getSetting', 'saveSys', 'changeSys', 'go']),
       submitForm() {
         this.$refs.setting.validate((valid) => valid ? this.saveSys() : false)
-      },
-      upload(key, file){
-        if (!/image\/\w+/.test(file.type)) {
-          alert("只能选择图片！", 'warning');
-          return false;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = ({target}) => this.changeSys({[key]: target.result})
-        return false;
       },
     },
     created () {
