@@ -9,7 +9,7 @@
         <el-button type="primary" icon="arrow-left"/>
       </a>
     </div>
-    <el-form :model="setting" ref="setting" label-width="0" class="demo-ruleForm ticket">
+    <el-form :model="setting" ref="setting" label-width="0" class="ticket">
       <el-row>
         <el-col :span="12">
           <el-form-item prop="wechatTicket" :rules="[{required:true,message:'微信公众号二维码不能为空'}]">

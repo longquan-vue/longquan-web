@@ -77,10 +77,10 @@
             <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
           <el-form-item label="活动内容" prop="detail">
-            <quill-editor ref="myTextEditor" :content="decode(data.detail)" @input="(v)=>setData({detail:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.detail)" @change="setData({detail:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="活动规则介绍" prop="rule">
-            <quill-editor ref="myTextEditor" :content="decode(data.rule)" @input="(v)=>setData({rule:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.rule)" @change="setData({rule:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="福利发布者" prop="admin">
@@ -123,7 +123,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getActivityDetail', 'createActivity', 'updateActivity', 'clear', 'setData', 'go']),

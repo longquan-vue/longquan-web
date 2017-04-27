@@ -13,14 +13,14 @@
       <el-tab-pane label="服务号菜单设置" name="3"/>
     </el-tabs>
     <div class="contentBoxCont" v-if="tab == '1'">
-      <el-form :model="setting" ref="setting" label-width="120px" class="demo-ruleForm">
+      <el-form :model="setting" ref="setting" label-width="120px">
         <el-form-item label="关注送积分" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
           <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
     <div class="contentBoxCont fwh_setting" v-if="tab == '2'">
-      <el-form :model="sub" ref="sub" label-width="120px" class="demo-ruleForm">
+      <el-form :model="sub" ref="sub" label-width="120px">
         <el-form-item label="标题" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
           <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
         </el-form-item>
@@ -36,32 +36,34 @@
         </el-form-item>
       </el-form>
     </div>
-    <div v-for="(item,index) in menu.button" v-if="tab == '3'" class="fwh_menu">
-      <el-row>
-        <el-col :span="3" class="menu_title">一级菜单：</el-col>
-        <el-col :span="21">
-          <el-input v-model="item.name"/>
-        </el-col>
-      </el-row>
-      <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
-        <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
-        <el-col class="sub_button" :span="5">
-          <el-input v-model="button.name"/>
-        </el-col>
-        <el-col class="sub_button" :span="4">
-          <el-select v-model="button.type" @change="setButton(index,idx)">
-            <el-option label="页面" value="view"/>
-            <el-option label="事件" value="click" disabled/>
-          </el-select>
-        </el-col>
-        <el-col class="sub_button" :span="11">
-          <el-input v-model="button.url" v-if="button.type == 'view'"/>
-          <el-select v-model="button.key" v-if="button.type == 'click'">
-            <el-option label="页面" value="view" disabled/>
-            <el-option label="事件" value="click" disabled/>
-          </el-select>
-        </el-col>
-      </el-row>
+    <div class="contentBoxCont fwh_setting" v-if="tab == '3'">
+      <div v-for="(item,index) in menu.button" class="fwh_menu">
+        <el-row>
+          <el-col :span="3" class="menu_title">一级菜单：</el-col>
+          <el-col :span="21">
+            <el-input v-model="item.name"/>
+          </el-col>
+        </el-row>
+        <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
+          <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
+          <el-col class="sub_button" :span="5">
+            <el-input v-model="button.name"/>
+          </el-col>
+          <el-col class="sub_button" :span="4">
+            <el-select v-model="button.type" @change="setButton(index,idx)">
+              <el-option label="页面" value="view"/>
+              <el-option label="事件" value="click" disabled/>
+            </el-select>
+          </el-col>
+          <el-col class="sub_button" :span="11">
+            <el-input v-model="button.url" v-if="button.type == 'view'"/>
+            <el-select v-model="button.key" v-if="button.type == 'click'">
+              <el-option label="页面" value="view" disabled/>
+              <el-option label="事件" value="click" disabled/>
+            </el-select>
+          </el-col>
+        </el-row>
+      </div>
     </div>
     <div style="text-align: center">
       <el-button type="primary" @click="submitForm">提交</el-button>

@@ -32,7 +32,7 @@
           <!--</el-checkbox-group>-->
           <!--</el-form-item>-->
           <el-form-item label="内容" prop="content">
-            <quill-editor ref="myTextEditor" :content="decode(data.content)" @input="(v)=>setData({content:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.content)" @change="setData({content:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="附件" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
@@ -67,11 +67,12 @@
           files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
           picUrl: required('请选择上传配图...'),
+
         },
       }
     },
     components: {MyUpload, Avatar},
-    computed: {...mapGetters(['data', 'articleType']),},
+    computed: {...mapGetters(['data', 'articleType', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getArticle', 'createArticle', 'updateArticle', 'clear', 'setData', 'go']),

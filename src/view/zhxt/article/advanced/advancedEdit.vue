@@ -25,14 +25,14 @@
             </el-select>
           </el-form-item>
           <!--<el-form-item label="同步显示" prop="sync">-->
-            <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
-              <!--<el-checkbox :label="0">网站</el-checkbox>-->
-              <!--<el-checkbox :label="1">服务号</el-checkbox>-->
-              <!--<el-checkbox :label="2">企业号</el-checkbox>-->
-            <!--</el-checkbox-group>-->
+          <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
+          <!--<el-checkbox :label="0">网站</el-checkbox>-->
+          <!--<el-checkbox :label="1">服务号</el-checkbox>-->
+          <!--<el-checkbox :label="2">企业号</el-checkbox>-->
+          <!--</el-checkbox-group>-->
           <!--</el-form-item>-->
           <el-form-item label="内容" prop="content">
-            <quill-editor ref="myTextEditor" :content="decode(data.content)" @input="(v)=>setData({content:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.content)" @change="setData({content:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="附件" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
@@ -70,8 +70,8 @@
         },
       }
     },
-    components: {MyUpload,Avatar},
-    computed: {...mapGetters(['data', 'articleType']),},
+    components: {MyUpload, Avatar},
+    computed: {...mapGetters(['data', 'articleType', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getArticle', 'createArticle', 'updateArticle', 'clear', 'setData', 'go']),
@@ -87,7 +87,7 @@
       },
     },
     created () {
-      this.setData({type: 1,sync:'[0,1,2]'});
+      this.setData({type: 1, sync: '[0,1,2]'});
       this.getArticle()
     },
     destroyed () {

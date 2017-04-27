@@ -17,10 +17,10 @@
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
           <el-form-item label="问题描述" prop="question">
-            <quill-editor ref="myTextEditor" :content="decode(data.question)" @input="(v)=>setData({question:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.question)" @change="setData({question:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <el-form-item label="答案" prop="answer">
-            <quill-editor ref="myTextEditor" :content="decode(data.answer)" @input="(v)=>setData({answer:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.answer)" @change="setData({answer:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <el-form-item label="附件" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
@@ -56,7 +56,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getEcho', 'createEcho', 'updateEcho', 'clear', 'setData', 'go']),

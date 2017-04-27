@@ -18,7 +18,7 @@ const action = (state) => {
   return url
 };
 const articleType = (state) => state.setting && JSON.parse(state.setting.articleType || '{}');
-
+const editorOption = (state) => ({})
 export default {
   login,
   page,
@@ -30,5 +30,6 @@ export default {
   sub,
   query,
   params,
-  articleType
+  articleType,
+  editorOption
 }

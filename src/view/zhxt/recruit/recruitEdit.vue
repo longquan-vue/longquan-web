@@ -57,10 +57,10 @@
             <img src="/static/zhxt/add.png" alt="add" style="width: 36px;height: 36px;cursor: pointer" @click="addLinkman">
           </el-form-item>
           <el-form-item label="招聘要求" prop="claim">
-            <quill-editor :content="decode(data.claim)" @input="(v)=>setData({claim:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.claim)" @change="setData({claim:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="福利待遇" prop="treatment">
-            <quill-editor :content="decode(data.treatment)" @input="(v)=>setData({treatment:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.treatment)" @change="setData({treatment:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="发布者" prop="admin">
@@ -97,7 +97,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'editorOption'])},
     watch: {
       data(){
         this.setLinkmanList()

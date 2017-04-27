@@ -27,7 +27,7 @@
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="内容" prop="content">
-            <quill-editor ref="myTextEditor" :content="decode(data.content)" @input="(v)=>setData({content:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.content)" @change="setData({content:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="附件" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
@@ -65,7 +65,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getArticle', 'createArticle', 'updateArticle', 'clear', 'setData', 'go']),
@@ -81,7 +81,7 @@
       },
     },
     created () {
-      this.setData({type: 0,sync:'[0,1,2]'});
+      this.setData({type: 0, sync: '[0,1,2]'});
       this.getArticle()
     },
     destroyed () {

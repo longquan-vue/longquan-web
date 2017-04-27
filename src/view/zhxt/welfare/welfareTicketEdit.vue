@@ -56,7 +56,7 @@
             <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
           <el-form-item label="兑换规则" prop="rule">
-            <quill-editor ref="myTextEditor" :content="decode(data.rule)" @input="(v)=>setData({rule:encode(v)})" :config="{}"/>
+            <quill-editor :content="decode(data.rule)" @change="setData({rule:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="福利发布者" prop="admin">
@@ -96,7 +96,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['data']),},
+    computed: {...mapGetters(['data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getWelfareDetail', 'createWelfare', 'updateWelfare', 'clear', 'setData', 'go']),

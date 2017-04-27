@@ -50,7 +50,7 @@
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="答题规则" prop="rule">
-              <quill-editor :content="decode(data.rule)" @input="(v)=>setData({rule:encode(v)})" :config="{}"/>
+              <quill-editor :content="decode(data.rule)" @change="setData({rule:encode($event)})" :config="editorOption"/>
             </el-form-item>
             <div v-if="!data.edit">
               <el-form-item label="发布者" prop="admin">
@@ -129,7 +129,7 @@
       }
     },
     components: {MyUpload},
-    computed: {...mapGetters(['action', 'data']),},
+    computed: {...mapGetters(['action', 'data', 'editorOption'])},
     methods: {
       ...filter,
       ...mapActions(['getPoll', 'createPoll', 'updatePoll', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),

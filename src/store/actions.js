@@ -29,12 +29,12 @@ import {
   exportEntryApi
 } from '../api/activityApi'
 import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
-import {fileApi, delFileApi,delPicApi} from '../api/fileApi'
+import {fileApi, delFileApi, delPicApi} from '../api/fileApi'
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
-import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi,pauseEchoApi} from '../api/echoApi'
+import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from '../api/echoApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -53,7 +53,7 @@ const clear = ({commit}, key = 'user') => {
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
 //删除配图
-const delPic = ({commit, state}, url) => delPicApi(url);
+const delPic = ({commit, state}, url) => url && delPicApi(url);
 // 删除文件
 const delFile = ({commit, state}, [key, idx]) => delFileApi(state.data[key][idx].id, 2).then(() => commit(DEL_LIST, [key, idx]));
 // 获取系统配置
@@ -310,12 +310,12 @@ const createArticle = ({commit, state}) => createArticleApi(state.data).then(() 
 // 修改文章
 const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取文章详情
-const getArticle = async({commit, state}) => {
+const getArticle = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.article});
   } else {
-    commit(SET_DATA, {...await getArticleApi(id), edit: false});
+    getArticleApi(id).then((data) => commit(SET_DATA, {... data, edit: false})).catch(() => getArticle({commit, state}))
   }
 };
 //删除文章
