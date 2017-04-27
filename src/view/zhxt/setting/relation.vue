@@ -10,7 +10,7 @@
       </a>
     </div>
     <el-form :model="setting" ref="relation" label-width="120px">
-      <el-form-item label="联系信息" required>
+      <el-form-item label="联系信息：" required>
         <el-row v-for="(val,idx) in relation" :key="idx">
           <el-col :span="22">
             <el-input :value="val" @input="(v)=>relation[idx] = v"/>

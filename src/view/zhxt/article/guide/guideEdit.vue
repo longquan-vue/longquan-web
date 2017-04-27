@@ -32,7 +32,7 @@
             <!--</el-checkbox-group>-->
           <!--</el-form-item>-->
           <el-form-item label="内容" prop="content">
-            <quill-editor :content="decode(data.content)" @change="setData({content:encode($event)})" :config="editorOption"/>
+            <quill-editor :content="decode(data.content)" @input="setData({content:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <el-form-item label="附件" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>

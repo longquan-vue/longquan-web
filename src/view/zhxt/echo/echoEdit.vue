@@ -13,23 +13,23 @@
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="标题" prop="title">
+          <el-form-item label="标题：" prop="title">
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
-          <el-form-item label="问题描述" prop="question">
-            <quill-editor :content="decode(data.question)" @change="setData({question:encode($event)})" :options="editorOption"/>
+          <el-form-item label="问题描述：" prop="question">
+            <quill-editor :content="decode(data.question)" @input="setData({question:encode($event)})" :options="editorOption"/>
           </el-form-item>
-          <el-form-item label="答案" prop="answer">
-            <quill-editor :content="decode(data.answer)" @change="setData({answer:encode($event)})" :options="editorOption"/>
+          <el-form-item label="答案：" prop="answer">
+            <quill-editor :content="decode(data.answer)" @input="setData({answer:encode($event)})" :options="editorOption"/>
           </el-form-item>
-          <el-form-item label="附件" prop="files">
+          <el-form-item label="附件：" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
           </el-form-item>
           <div v-if="!data.edit">
-            <el-form-item label="答题者" prop="replier">
+            <el-form-item label="答题者：" prop="replier">
               <el-input v-model="data.replier" readonly/>
             </el-form-item>
-            <el-form-item label="发布时间" prop="created">
+            <el-form-item label="发布时间：" prop="created">
               <el-input :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>

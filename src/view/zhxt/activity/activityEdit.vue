@@ -12,14 +12,14 @@
     </div>
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
-        <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="活动配图" prop="files">
+        <el-form :model="data" :rules="rules" ref="form" label-width="130px" class="demo-ruleForm">
+          <el-form-item label="活动配图：" prop="files">
             <MyUpload :files="data.files" :edit="data.edit"/>
           </el-form-item>
-          <el-form-item label="活动名称" prop="name">
+          <el-form-item label="活动名称：" prop="name">
             <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
-          <el-form-item label="活动时间" required>
+          <el-form-item label="活动时间：" required>
             <el-col :span="11">
               <el-form-item prop="start">
                 <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
@@ -32,7 +32,7 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-          <el-form-item label="报名时间" required>
+          <el-form-item label="报名时间：" required>
             <el-col :span="11">
               <el-form-item prop="entryStart">
                 <el-date-picker type="datetime" placeholder="选择开始时间" :value="data.entryStart" @input="(v)=>setData({entryStart:v&&v.getTime()})" style="width: 100%;"/>
@@ -45,48 +45,48 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-          <el-form-item label="报名人数" prop="total">
+          <el-form-item label="报名人数：" prop="total">
             <el-input :value="data.total" @input="(v)=>setData({total:v})">
               <template slot="append">人</template>
             </el-input>
           </el-form-item>
-          <el-form-item label="报名权限" prop="entry">
+          <el-form-item label="报名权限：" prop="entry">
             <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
               <el-radio :label="0">所有用户可报名</el-radio>
               <el-radio :label="1">认证用户可报名</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="报名所需积分" prop="score">
+          <el-form-item label="报名所需积分：" prop="score">
             <el-input :value="data.score" @input="(v)=>setData({score:v})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>
-          <el-form-item label="主办方" prop="sponsor">
+          <el-form-item label="主办方：" prop="sponsor">
             <el-input :value="data.sponsor" @input="(v)=>setData({sponsor:v})"/>
           </el-form-item>
-          <el-form-item label="协办方" prop="coSponsor">
+          <el-form-item label="协办方：" prop="coSponsor">
             <el-input :value="data.coSponsor" @input="(v)=>setData({coSponsor:v})"/>
           </el-form-item>
-          <el-form-item label="承办方" prop="organizer">
+          <el-form-item label="承办方：" prop="organizer">
             <el-input :value="data.organizer" @input="(v)=>setData({organizer:v})"/>
           </el-form-item>
-          <el-form-item label="活动地点" prop="place">
+          <el-form-item label="活动地点：" prop="place">
             <el-input :value="data.place" @input="(v)=>setData({place:v})"/>
           </el-form-item>
-          <el-form-item label="福利提供方链接" prop="website">
+          <el-form-item label="福利提供方链接：" prop="website">
             <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
-          <el-form-item label="活动内容" prop="detail">
-            <quill-editor :content="decode(data.detail)" @change="setData({detail:encode($event)})" :config="editorOption"/>
+          <el-form-item label="活动内容：" prop="detail">
+            <quill-editor :content="decode(data.detail)" @input="setData({detail:encode($event)})" :config="editorOption"/>
           </el-form-item>
-          <el-form-item label="活动规则介绍" prop="rule">
-            <quill-editor :content="decode(data.rule)" @change="setData({rule:encode($event)})" :config="editorOption"/>
+          <el-form-item label="活动规则介绍：" prop="rule">
+            <quill-editor :content="decode(data.rule)" @input="setData({rule:encode($event)})" :config="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
-            <el-form-item label="福利发布者" prop="admin">
+            <el-form-item label="福利发布者：" prop="admin">
               <el-input v-model="data.admin.name" readonly/>
             </el-form-item>
-            <el-form-item label="发布时间" prop="created">
+            <el-form-item label="发布时间：" prop="created">
               <el-input :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>

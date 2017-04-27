@@ -18,7 +18,7 @@ export const defData = {
     name: '', start: '', end: '', entryStart: '', entryEnd: '', entry: 0, score: 0, sponsor: '', coSponsor: '', organizer: '', place: '', website: '', detail: '', rule: '', created: '', total: 0, files: [], admin: {}
   },
   health: {dates: [], ends: [], name: '', picUrl: healthIcon[0], score: 0, starts: [], total: 1, type: 1},
-  recruit: {address: '', claim: '', company: '', job: '', linkmans: [], name: '', num: 0, pay: 0, phones: [], treatment: '', start: '', end: '',},
+  recruit: {address: '', claim: '', company: '', job: '', linkmans: [''], name: '', num: 0, pay: 0, phones: [''], treatment: '', start: '', end: '',},
   poll: {title: '', description: '', start: '', end: '', score: 0, time: 0, repetition: 0, days: 0, sync: '[0,1]', rule: '', admin: {}, created: '', questions: []},
   welfare: {admin: {}, endTime: '', entry: 0, files: [], name: '', provider: '', rule: '', score: 0, startTime: '', time: 0, total: 0, website: '', wishing: ''},
   article: {title: '', subType: '', content: '', sync: '[]', created: '', status: '', files: [], picUrl: '', admins: [], admin: {}, dep: {},summary:''},

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my_upload">
     <el-upload
       :action="action"
       :http-request="upload"
@@ -15,7 +15,17 @@
     </el-dialog>
   </div>
 </template>
-
+<style lang="less">
+  .my_upload .el-upload--text {
+    display: inline-block;
+    width: 36px;
+    border-radius: 3px;
+    border: 1px solid #d9d9d9;
+  }
+  .my_upload .el-upload--text:hover {
+    border-color: #20a0ff;
+  }
+</style>
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   export default {
