@@ -22,7 +22,8 @@ export const defData = {
   poll: {title: '', description: '', start: '', end: '', score: 0, time: 0, repetition: 0, days: 0, sync: '[0,1]', rule: '', admin: {}, created: '', questions: []},
   welfare: {admin: {}, endTime: '', entry: 0, files: [], name: '', provider: '', rule: '', score: 0, startTime: '', time: 0, total: 0, website: '', wishing: ''},
   article: {title: '', subType: '', content: '', sync: '[]', created: '', status: '', files: [], picUrl: '', admins: [], admin: {}, dep: {},summary:''},
-  echo: {title: '', question: '', questioner: '', quesTime: '', answer: '', replier: '', repTime: '', created: '', deleted: 0, status: 0, files: []}
+  echo: {title: '', question: '', questioner: '', quesTime: '', answer: '', replier: '', repTime: '', created: '', deleted: 0, status: 0, files: []},
+  dep:{}
 }
 export const fwhMenu = {
   "button": [{

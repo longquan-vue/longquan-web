@@ -35,6 +35,7 @@ import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntr
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
 import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from '../api/echoApi'
+import {findDepApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from '../api/departmentApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -341,6 +342,25 @@ const getEcho = ({commit, state}) => {
 const delEcho = ({commit, state}, [id, idx]) => delEchoApi(id).then(() => commit(DEL_DATA, idx))
 // 显示或关闭回音壁
 const pauseEcho = ({commit, state}, [id, key, val]) => pauseEchoApi(id).then(() => commit(CHANGE_LIST, [key, val]))
+// 获取工会列表
+const findDep = async({commit, state}) => commit(GET_DATA_LIST, await findDepApi(state.page));
+// 删除工会
+const delDep = ({commit, state}, [id, idx]) => delDepApi(id).then(() => commit(DEL_DATA, idx))
+// 获取工会详情
+const getDep = ({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == 'mine') {
+    getMine({commit, state}).then(() => getDepApi(state.login.department[0]).then((data) => commit(SET_DATA, {...data, mine: true})).catch(() => getDep({commit, state})));
+  } else {
+    getDepApi(id).then((data) => commit(SET_DATA, {...data, mine: false})).catch(() => getDep({commit, state}));
+  }
+};
+// 创建工会
+const createDep = ({commit, state}) => createDepApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改工会
+const updateDep = ({commit, state}) => updateDepApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 修改工会
+const auditDep = ({commit, state}) => auditDepApi(state.data).then(() => success('审核成功！')).catch(() => error('审核失败！'))
 export default {
   getMineWelfare,
   getUser,
@@ -434,4 +454,10 @@ export default {
   getEcho,//获取回音壁详情
   delEcho,//删除回音壁
   pauseEcho, //关闭或显示回音壁
+  findDep,//获取工会列表
+  delDep,//删除工会
+  getDep,//获取公会详情
+  createDep,//创建工会
+  updateDep,//修改工会
+  auditDep,//审核工会
 }

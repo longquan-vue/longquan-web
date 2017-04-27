@@ -79,17 +79,15 @@ export default [
       {path: `${ROOT}/zhxt/welfarePrev`, component: require('../view/zhxt/welfare/welfarePrev.vue'), name: 'welfarePrev', meta: {title: '福利预告列表'}},//福利预告
       {path: `${ROOT}/zhxt/welfarePrev/:id`, component: require('../view/zhxt/welfare/welfarePrevEdit.vue'), name: 'welfarePrevEdit', meta: {title: '修改福利预告'}},//编辑福利预告
       /*工会职工*/
-      {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/admin/admin.vue'), name: 'adminList'}, // 职工列表
-      {path: `${ROOT}/zhxt/admin/:id`, component: require('../view/zhxt/admin/adminEdit.vue'), name: 'adminEdit'}, // 编辑职工
-      {path: `${ROOT}/zhxt/adminAudit`, component: require('../view/zhxt/admin/adminAudit.vue'), name: 'adminAudit'}, // 审核列表
-      {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/admin/adminCount.vue'), name: 'adminCount'}, // 统计报表
-      {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, // 我的公会
+      // {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/admin/admin.vue'), name: 'adminList'}, // 职工列表
+      // {path: `${ROOT}/zhxt/admin/:id`, component: require('../view/zhxt/admin/adminEdit.vue'), name: 'adminEdit'}, // 编辑职工
+      // {path: `${ROOT}/zhxt/adminAudit`, component: require('../view/zhxt/admin/adminAudit.vue'), name: 'adminAudit'}, // 审核列表
+      // {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/admin/adminCount.vue'), name: 'adminCount'}, // 统计报表
+      // {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, // 我的公会
       /*工会组建*/
-      {path: `${ROOT}/zhxt/dep`, component: require('../view/zhxt/dep/dep.vue'), name: 'depList'}, // 工会列表
-      {path: `${ROOT}/zhxt/dep/:id`, component: require('../view/zhxt/notice/notice.vue'), name: 'depEdit'}, // 编辑公会
-      {path: `${ROOT}/zhxt/depEnter`, component: require('../view/zhxt/notice/notice.vue'), name: 'depEnter'}, // 申请列表
-      {path: `${ROOT}/zhxt/depAudit`, component: require('../view/zhxt/notice/notice.vue'), name: 'depAudit'}, // 审核列表
-      {path: `${ROOT}/zhxt/depCount`, component: require('../view/zhxt/notice/notice.vue'), name: 'depCount'}, // 工会统计
+      {path: `${ROOT}/zhxt/department`, component: require('../view/zhxt/department/unions.vue'), name: 'depList'}, // 工会列表
+      {path: `${ROOT}/zhxt/department/:id`, component: require('../view/zhxt/department/unionsEdit.vue'), name: 'depEdit'}, // 编辑公会
+      {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/department/admin.vue'), name: 'adminList'}, // 职工列表
       /*招聘信息*/
       {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}},
       {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: {title: '修改招聘信息'}},
