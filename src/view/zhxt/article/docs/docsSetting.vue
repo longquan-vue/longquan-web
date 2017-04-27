@@ -11,7 +11,7 @@
     </div>
     <div class="contentBoxCont">
       <el-form :model="type" ref="file" label-width="120px" class="demo-ruleForm">
-        <el-form-item label="类型配置" required>
+        <el-form-item label="类型配置：" required>
           <el-row v-for="(val,key) in type.file" :key="key">
             <el-col :span="22">
               <el-input :value="val" @input="(v)=>type.file[key] = v">

@@ -13,35 +13,35 @@
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="配图" prop="picUrl">
+          <el-form-item label="配图：" prop="picUrl">
             <Avatar :url="data.picUrl"/>
           </el-form-item>
-          <el-form-item label="标题" prop="title">
+          <el-form-item label="标题：" prop="title">
             <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
-          <el-form-item label="先进类型" prop="subType">
+          <el-form-item label="先进类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择先进类型..." @input="(v)=>setData({subType:v})">
               <el-option v-for="(val,key) in articleType.advanced" :label="val" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
-          <!--<el-form-item label="同步显示" prop="sync">-->
+          <!--<el-form-item label="同步显示：" prop="sync">-->
           <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
           <!--<el-checkbox :label="0">网站</el-checkbox>-->
           <!--<el-checkbox :label="1">服务号</el-checkbox>-->
           <!--<el-checkbox :label="2">企业号</el-checkbox>-->
           <!--</el-checkbox-group>-->
           <!--</el-form-item>-->
-          <el-form-item label="内容" prop="content">
+          <el-form-item label="内容：" prop="content">
             <quill-editor :content="decode(data.content)" @input="setData({content:encode($event)})" :config="editorOption"/>
           </el-form-item>
-          <el-form-item label="附件" prop="files">
+          <el-form-item label="附件：" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
           </el-form-item>
           <div v-if="!data.edit">
-            <el-form-item label="发布者" prop="admin">
+            <el-form-item label="发布者：" prop="admin">
               <el-input v-model="data.admin.name" readonly/>
             </el-form-item>
-            <el-form-item label="发布时间" prop="created">
+            <el-form-item label="发布时间：" prop="created">
               <el-input :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>

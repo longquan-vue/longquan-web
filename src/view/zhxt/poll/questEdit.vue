@@ -20,7 +20,7 @@
             <el-form-item label="问卷描述：" prop="description">
               <el-input :value="data.description" @input="(v)=>setData({description:v})"/>
             </el-form-item>
-            <el-form-item label="调查时间" required>
+            <el-form-item label="调查时间：" required>
               <el-col :span="11">
                 <el-form-item prop="start">
                   <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间..." :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
