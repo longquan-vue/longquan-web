@@ -3,7 +3,7 @@
         <transition-group enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="wzzy-swiper-item" v-for="(item,index) in itemList" v-show="index==idx" :key="index">
                 <div class="wzzy-swiper-item-left">
-                    <img :src="item.pics[0].url" :alt="item.pics[0].url.name">
+                    <img :src="item.picUrl" >
                 </div>
                 <div class="wzzy-swiper-item-right">
                     <h2>
