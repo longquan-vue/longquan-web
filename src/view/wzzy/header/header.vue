@@ -24,6 +24,34 @@
                         </el-input>
                     </div>
                 </div>
+                <div class="header-menu">
+                    <el-row :gutter="20">
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a active" :class="">首页</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">机构介绍</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">新闻动态</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">办事指南</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">工会服务</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">互动交流</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">先进人物</router-link>
+                        </el-col>
+                        <el-col :span="3">
+                            <router-link to="" class="menu-a">文件·资料</router-link>
+                        </el-col>
+                    </el-row>
+                </div>
             </div>
         </div>
     </div>
@@ -47,7 +75,7 @@
         computed: {
             ...mapGetters([ 'page','list']),
             today(){
-                return moment(new Date()).format()
+                return moment(new Date()).format('YYYY年MM月DD日')
             }
         },
         methods:{

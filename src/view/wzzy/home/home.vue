@@ -3,7 +3,26 @@
 </style>
 <template>
     <div class="wzzyHome">
-        <wzzyHeader></wzzyHeader>
+        <div class="pagewrap">
+            <div class="weather">
+                <span>天气预报 ：</span>
+            </div>
+            <div class="wzzy-content">
+                <el-row :gutter="30">
+                    <el-col :span="17">
+                        <div class="grid-left">
+                            <wzzySwiper></wzzySwiper>
+                            <newsDynamic></newsDynamic>
+                        </div>
+                    </el-col>
+                    <el-col :span="7">
+                        <div class="grid-right">
+
+                        </div>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -11,7 +30,8 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
-    import wzzyHeader from '../header/header.vue'
+    import wzzySwiper from '../components/swiper.vue'
+    import newsDynamic from '../components/newsDynamic.vue'
     export default{
         data(){
             return{
@@ -19,7 +39,7 @@
             }
         },
         components:{
-            wzzyHeader
+            wzzySwiper,newsDynamic
         },
         computed: {...mapGetters([ 'page','list']),
         },
