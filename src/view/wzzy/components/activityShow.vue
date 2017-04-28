@@ -22,7 +22,7 @@
                 </el-col>
                 <el-col :span="12" class="activityShowRight">
                     <el-row :gutter="10">
-                        <el-col :span="12" v-for="i in 4">
+                        <el-col :span="12" v-for="i in 4" :key="i">
                             <div class="little-link">
                                 <div class="link-div">
                                     <a class="block-link">
