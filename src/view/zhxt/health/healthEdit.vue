@@ -35,7 +35,7 @@
           <el-form-item label="预约报名所需积分：" prop="score">
             <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
               <template slot="append">积分</template>
-            </el-input placeholder="请输入..." >
+            </el-input>
           </el-form-item>
           <el-form-item label="开启日期：" prop="dates">
             <Calendar :value="data.dates" @on-change="(v)=>setData({dates:v})"/>

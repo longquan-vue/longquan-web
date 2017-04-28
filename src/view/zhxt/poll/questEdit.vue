@@ -36,12 +36,12 @@
             <el-form-item label="积分奖励：" prop="score">
               <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
                 <template slot="append">积分</template>
-              </el-input placeholder="请输入..." >
+              </el-input>
             </el-form-item>
             <el-form-item label="答题次数：" prop="time">
               <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
                 <template slot="append">次</template>
-              </el-input placeholder="请输入..." >
+              </el-input>
             </el-form-item>
             <el-form-item label="同步显示：" prop="sync">
               <el-checkbox-group :value="JSON.parse(data.sync|| '[0,1]')" @input="(v)=>setData({sync:JSON.stringify(v)})">
@@ -80,7 +80,7 @@
                     <el-input placeholder="请输入..."  v-model="opt.name" @change="(v)=>setQuestions('questions.'+idx+'.options',JSON.stringify(item.options))">
                       <template slot="prepend">{{words(index)}}：</template>
                       <el-button slot="append" icon="delete" @click="delOptions(idx,index)"/>
-                    </el-input placeholder="请输入..." >
+                    </el-input>
                   </div>
                   <el-button type="primary" @click="addOptions(idx,item.options.length)" icon="plus">添加选项</el-button>
                 </el-form-item>

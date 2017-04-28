@@ -36,12 +36,12 @@
             <el-form-item label="积分奖励：" prop="score">
               <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
                 <template slot="append">积分/天</template>
-              </el-input placeholder="请输入..." >
+              </el-input>
             </el-form-item>
             <el-form-item label="人均投票次数：" prop="time">
               <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
                 <template slot="append">次/天/人</template>
-              </el-input placeholder="请输入..." >
+              </el-input>
             </el-form-item>
             <el-form-item label="是否重复投票：" prop="repetition">
               <el-radio-group :value="data.repetition" @input="(v)=>setData({repetition:v})">
@@ -52,7 +52,7 @@
             <el-form-item label="连续投票天数：" prop="days">
               <el-input placeholder="请输入..."  :value="data.days" @input="(v)=>setData({days:v})">
                 <template slot="append">天</template>
-              </el-input placeholder="请输入..." >
+              </el-input>
             </el-form-item>
             <el-form-item label="同步显示：" prop="sync">
               <el-checkbox-group :value="JSON.parse(data.sync||'[0,1]')" @input="(v)=>setData({sync:JSON.stringify(v)})">

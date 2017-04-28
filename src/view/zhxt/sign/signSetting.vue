@@ -9,7 +9,7 @@
         <el-col :span="12">
           <el-form :model="setting" ref="setting" label-width="130px" class="demo-ruleForm">
             <el-form-item label="基础签到积分：" prop="sign" :rules="[{required:true,message:'积分不能为空',min:1},{type:'number',message:'积分必须为数字值'}]">
-              <el-input placeholder="请输入..."  type="age" :value.number="setting.sign" auto-complete="off" @input="(v)=>changeSys({sign:v*1})" style="width:90%;"></el-input placeholder="请输入..." >
+              <el-input placeholder="请输入..."  type="age" :value.number="setting.sign" auto-complete="off" @input="(v)=>changeSys({sign:v*1})" style="width:90%;"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm">提交</el-button>

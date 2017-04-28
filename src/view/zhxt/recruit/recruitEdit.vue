@@ -19,12 +19,12 @@
           <el-form-item label="招聘人数：" prop="num">
             <el-input placeholder="请输入..."  :value="data.num" @input="(v)=>setData({num:v})">
               <template slot="append">人</template>
-            </el-input placeholder="请输入..." >
+            </el-input>
           </el-form-item>
           <el-form-item label="薪资待遇：" prop="pay">
             <el-input placeholder="请输入..."  :value="data.pay" @input="(v)=>setData({pay:v})">
               <template slot="append">元/月</template>
-            </el-input placeholder="请输入..." >
+            </el-input>
           </el-form-item>
           <el-form-item label="招聘单位：" prop="company">
             <el-input placeholder="请输入..."  :value="data.company" @input="(v)=>setData({company:v})"/>
