@@ -34,7 +34,7 @@
       <el-dialog title="积分管理" v-model="show" size="tiny">
         <el-form :model="point">
           <el-form-item label="当前积分" label-width="80px">
-            <el-input v-model="point.score" auto-complete="on"/>
+            <el-input placeholder="请输入..."  v-model="point.score" auto-complete="on"/>
           </el-form-item>
           <el-form-item label="积分管理" label-width="80px">
             <el-row>
@@ -45,7 +45,7 @@
                 </el-select>
               </el-col>
               <el-col :span="16">
-                <el-input v-model="point.point" auto-complete="on"/>
+                <el-input placeholder="请输入..."  v-model="point.point" auto-complete="on"/>
               </el-col>
             </el-row>
           </el-form-item>

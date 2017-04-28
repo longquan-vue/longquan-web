@@ -14,9 +14,9 @@
         <el-form-item label="类型配置：" required>
           <el-row v-for="(val,key) in type.advanced" :key="key">
             <el-col :span="22">
-              <el-input :value="val" @input="(v)=>type.advanced[key] = v">
+              <el-input placeholder="请输入..."  :value="val" @input="(v)=>type.advanced[key] = v">
                 <template slot="prepend">名称：</template>
-              </el-input>
+              </el-input placeholder="请输入..." >
             </el-col>
             <el-col :span="2">
               <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">

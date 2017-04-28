@@ -14,7 +14,7 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" ref="data" label-width="120px" class="demo-data">
           <el-form-item label="内容" prop="content" :rules="{required: true, message: '请输入内容', trigger: 'blur', min: 1, max: 40}">
-            <el-input :value="data.content" @input="(v)=>setData({content:v})"/>
+            <el-input placeholder="请输入..."  :value="data.content" @input="(v)=>setData({content:v})"/>
           </el-form-item>
           <el-form-item style="text-align: center">
             <el-button type="primary" @click="submitForm">保存</el-button>

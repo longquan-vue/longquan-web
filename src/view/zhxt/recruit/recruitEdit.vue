@@ -11,46 +11,46 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <el-form-item label="招聘标题：" prop="name">
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
+            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="招聘岗位：" prop="job">
-            <el-input :value="data.job" @input="(v)=>setData({job:v})"/>
+            <el-input placeholder="请输入..."  :value="data.job" @input="(v)=>setData({job:v})"/>
           </el-form-item>
           <el-form-item label="招聘人数：" prop="num">
-            <el-input :value="data.num" @input="(v)=>setData({num:v})">
+            <el-input placeholder="请输入..."  :value="data.num" @input="(v)=>setData({num:v})">
               <template slot="append">人</template>
-            </el-input>
+            </el-input placeholder="请输入..." >
           </el-form-item>
           <el-form-item label="薪资待遇：" prop="pay">
-            <el-input :value="data.pay" @input="(v)=>setData({pay:v})">
+            <el-input placeholder="请输入..."  :value="data.pay" @input="(v)=>setData({pay:v})">
               <template slot="append">元/月</template>
-            </el-input>
+            </el-input placeholder="请输入..." >
           </el-form-item>
           <el-form-item label="招聘单位：" prop="company">
-            <el-input :value="data.company" @input="(v)=>setData({company:v})"/>
+            <el-input placeholder="请输入..."  :value="data.company" @input="(v)=>setData({company:v})"/>
           </el-form-item>
           <el-form-item label="单位地址：" prop="address">
-            <el-input :value="data.address" @input="(v)=>setData({address:v})"/>
+            <el-input placeholder="请输入..."  :value="data.address" @input="(v)=>setData({address:v})"/>
           </el-form-item>
           <el-form-item label="招聘时间：" prop="start">
             <el-col :span="11">
               <el-form-item prop="start">
-                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间" :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
+                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择开始时间..." :value="data.start" @input="(v)=>setData({start:v&&v.getTime()})" style="width: 100%;"/>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2" style="text-align:center;">至</el-col>
             <el-col :span="11">
               <el-form-item prop="end">
-                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择结束时间" :value="data.end" @input="(v)=>setData({end:v&&v.getTime()})" style="width: 100%;"/>
+                <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择结束时间..." :value="data.end" @input="(v)=>setData({end:v&&v.getTime()})" style="width: 100%;"/>
               </el-form-item>
             </el-col>
           </el-form-item>
           <el-row v-for="(item,idx) in linkmanList" :key="idx" style="margin-bottom: 0">
             <el-form-item :label="'联系人 '+(idx+1)+'：'" prop="linkman">
-              <el-input :value="item.linkman" @input="(v)=>setListVal(['linkmans.'+idx,v])"/>
+              <el-input placeholder="请输入..."  :value="item.linkman" @input="(v)=>setListVal(['linkmans.'+idx,v])"/>
             </el-form-item>
             <el-form-item :label="'联系电话 '+(idx+1)+'：'" prop="phone">
-              <el-input :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
+              <el-input placeholder="请输入..."  :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
             </el-form-item>
           </el-row>
           <el-form-item label="">
@@ -64,10 +64,10 @@
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="发布者：" prop="admin">
-              <el-input v-model="data.admin.name" readonly/>
+              <el-input placeholder="无"  v-model="data.admin.name" readonly/>
             </el-form-item>
             <el-form-item label="发布时间：" prop="created">
-              <el-input :value="date3Filter(data.created)" readonly/>
+              <el-input placeholder="无"  :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">

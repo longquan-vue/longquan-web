@@ -15,24 +15,24 @@
     <div class="contentBoxCont" v-if="tab == '1'">
       <el-form :model="setting" ref="setting" label-width="120px">
         <el-form-item label="关注送积分：" prop="score" :rules="[{required:true,message:'积分不能为空'},{type:'number',message:'积分必须为数字值'}]">
-          <el-input type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"/>
+          <el-input placeholder="请输入..."  type="age" :value.number="setting.score" auto-complete="off" @input="(v)=>changeSys({score:v*1})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
     <div class="contentBoxCont fwh_setting" v-if="tab == '2'">
       <el-form :model="sub" ref="sub" label-width="130px">
         <el-form-item label="标题：" prop="title" :rules="[{required:true,message:'标题不能为空'}]">
-          <el-input :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
+          <el-input placeholder="请输入..."  :value="sub.title" auto-complete="off" @input="(v)=>setSub({title:v})" style="width:90%;"/>
         </el-form-item>
         <el-form-item label="图片：" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
           <Avatar :success="()=>setSub({picurl: url})" width="360" height="200" :url="sub.picurl"/>
           <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
         </el-form-item>
         <el-form-item label="描述：" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
-          <el-input type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>
+          <el-input placeholder="请输入..."  type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>
         </el-form-item>
         <el-form-item label="URL链接地址：" prop="url" :rules="[{required:true,message:'URL链接地址不能为空'}]">
-          <el-input :value="sub.url" auto-complete="off" @input="(v)=>setSub({url:v})" style="width:90%;"/>
+          <el-input placeholder="请输入..."  :value="sub.url" auto-complete="off" @input="(v)=>setSub({url:v})" style="width:90%;"/>
         </el-form-item>
       </el-form>
     </div>
@@ -41,13 +41,13 @@
         <el-row>
           <el-col :span="3" class="menu_title">一级菜单：</el-col>
           <el-col :span="21">
-            <el-input v-model="item.name"/>
+            <el-input placeholder="请输入..."  v-model="item.name"/>
           </el-col>
         </el-row>
         <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
           <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
           <el-col class="sub_button" :span="5">
-            <el-input v-model="button.name"/>
+            <el-input placeholder="请输入..."  v-model="button.name"/>
           </el-col>
           <el-col class="sub_button" :span="4">
             <el-select v-model="button.type" @change="setButton(index,idx)">
@@ -56,7 +56,7 @@
             </el-select>
           </el-col>
           <el-col class="sub_button" :span="11">
-            <el-input v-model="button.url" v-if="button.type == 'view'"/>
+            <el-input placeholder="请输入..."  v-model="button.url" v-if="button.type == 'view'"/>
             <el-select v-model="button.key" v-if="button.type == 'click'">
               <el-option label="页面" value="view" disabled/>
               <el-option label="事件" value="click" disabled/>

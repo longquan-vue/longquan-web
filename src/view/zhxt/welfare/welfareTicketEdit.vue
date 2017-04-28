@@ -17,12 +17,12 @@
             <MyUpload :files="data.files" :edit="data.edit"/>
           </el-form-item>
           <el-form-item label="福利名称：" prop="name">
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
+            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="福利数量：" prop="total">
-            <el-input :value="data.total" @input="(v)=>setData({total:v})">
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})">
               <template slot="append">份</template>
-            </el-input>
+            </el-input placeholder="请输入..." >
           </el-form-item>
           <el-form-item label="福利类型：" prop="name">
             <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
@@ -40,30 +40,30 @@
             </el-col>
           </el-form-item>
           <el-form-item label="所需积分：" prop="score">
-            <el-input :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
               <template slot="append">积分</template>
-            </el-input>
+            </el-input placeholder="请输入..." >
           </el-form-item>
           <el-form-item label="人均兑换次数：" prop="time">
-            <el-input :value="data.time" @input="(v)=>setData({time:v})">
+            <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
               <template slot="append">次/人</template>
-            </el-input>
+            </el-input placeholder="请输入..." >
           </el-form-item>
           <el-form-item label="福利提供方：" prop="provider">
-            <el-input :value="data.provider" @input="(v)=>setData({provider:v})"/>
+            <el-input placeholder="请输入..."  :value="data.provider" @input="(v)=>setData({provider:v})"/>
           </el-form-item>
           <el-form-item label="福利提供方链接：" prop="website">
-            <el-input :value="data.website" @input="(v)=>setData({website:v})"/>
+            <el-input placeholder="请输入..."  :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
           <el-form-item label="兑换规则：" prop="rule">
             <quill-editor :content="decode(data.rule)" @input="setData({rule:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="福利发布者：" prop="admin">
-              <el-input :value="data.admin.name" readonly/>
+              <el-input placeholder="无"  :value="data.admin.name" readonly/>
             </el-form-item>
             <el-form-item label="发布时间：" prop="created">
-              <el-input :value="date3Filter(data.created)" readonly/>
+              <el-input placeholder="无"  :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">

@@ -14,7 +14,7 @@
         <el-row v-for="(link,idx) in data.links" :key="idx">
           <el-col :span="6">
             <el-form-item label="名称：" :prop="'links.'+idx+'.name'" :rules="[{required:true,message:'名称不能为空！'}]">
-              <el-input :value="link.name" @input="(v)=>link.name=v"/>
+              <el-input placeholder="请输入..."  :value="link.name" @input="(v)=>link.name=v"/>
             </el-form-item>
           </el-col>
           <el-col :span="5">
@@ -26,7 +26,7 @@
           </el-col>
           <el-col :span="11">
             <el-form-item label="URL：" :prop="'links.'+idx+'.url'" :rules="[{required:true,message:'URL不能为空！'}]">
-              <el-input :value="link.url" @input="(v)=>link.url=v"/>
+              <el-input placeholder="请输入..."  :value="link.url" @input="(v)=>link.url=v"/>
             </el-form-item>
           </el-col>
           <el-col :span="2"><img src="/static/zhxt/error.png" alt="close" class="close" @click="del(idx)"></el-col>
