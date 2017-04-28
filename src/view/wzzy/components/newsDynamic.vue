@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <el-row :gutter="20" class="wzzy-tab-cont-list">
-                    <el-col :span="12" v-for="i in 12">
+                    <el-col :span="12" v-for="i in 12" :key="i">
                         <a><span>第二届世界互联网大会发布《乌镇倡议》</span> <i>2016-04-15</i></a>
                     </el-col>
                 </el-row>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <el-row :gutter="20" class="wzzy-tab-cont-list">
-                    <el-col :span="12" v-for="i in 12">
+                    <el-col :span="12" v-for="i in 12" :key="i">
                         <a><span>第二届世界互联网大会发布《乌镇倡议》</span> <i>2016-04-15</i></a>
                     </el-col>
                 </el-row>

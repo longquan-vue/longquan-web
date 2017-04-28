@@ -28,9 +28,18 @@
         }
         .header-menu{ height: 56px;background-color: #BC0000;position: absolute;width: 100%;padding: 0 20px;
             bottom: 0;left: 0;border-top-left-radius: 6px;border-top-right-radius: 6px;padding-top: 10px;
+            z-index: 2;
             .menu-a{ height: 46px;font-size: 18px;color: #ffffff;width: 100%;line-height: 50px;text-align: center;
-                display: block;border-top-left-radius: 4px;border-top-right-radius: 4px;
-                &.active{ background-color: #ffffff;color: #BC0000;}
+                display: block;border-top-left-radius: 4px;border-top-right-radius: 4px;cursor: pointer;
+                &.active,&:hover{ background-color: #ffffff;color: #BC0000;}
+            }
+        }
+        .header-menu-sub{ height: 60px;line-height: 60px;background-color: #ffffff;position: absolute;bottom: -60px;
+            width: 100%;z-index: 1;text-align: center;
+            box-shadow: 0 0 10px 2px rgba(0,0,0,.03);
+            padding: 0 20px;
+            a{ display: block;font-size: 16px;color: #666666;cursor: pointer;
+                &:hover,&.active{ color: #BC0000;}
             }
         }
     }

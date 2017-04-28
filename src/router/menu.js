@@ -1,4 +1,4 @@
-const ROOT = "/view"
+import {ROOT} from './routers'
 export default {
   zhxt: [
     {title: '任务首页', path: `${ROOT}/zhxt/readme`, icon: 'date'},
@@ -143,5 +143,66 @@ export default {
         {title: '联系我们', path: `${ROOT}/zhxt/setting/relation`},
       ]
     },
+  ],
+  wzzy:[
+      { title:'首页',url:`${ROOT}/wzzy/home`,name:'home'},
+      {
+        title:'机构介绍',name:'laborUnion',url:`${ROOT}/wzzy/laborUnion`,
+        children:[
+          {name:'区总介绍',url:`/1`},
+          {name:'区总领导',url:`/2`},
+          {name:'机构设置',url:`/3`},
+          {name:'机关党委',url:`/4`},
+        ]
+      },
+      {
+          title:'新闻动态',name:'news',url:`${ROOT}/wzzy/news`,
+          children:[
+              {name:'公示公告', url:`/1`},
+              {name:'工会新闻', url:`/2`},
+              {name: '基层动态', url:`/3`},
+              {name: '区总活动', url:`/4`},
+              {name:'基层活动', url:`/5`},
+          ]
+      },
+      {
+          title:'办事指南',name:'guide',url:`${ROOT}/wzzy/guide`,
+          children:[
+              {name:'职工维权',url:'/1'},
+              {name:'职工服务',url:'/2'},
+              {name:'工会组建',url:'/3'},
+              {name:'劳模服务',url:'/4'},
+          ]
+      },
+      {
+          title:'工会服务',name:'service',url:`${ROOT}/wzzy/service`,
+          children:[
+              {name:'困难帮扶',url:'/1'},
+              {name:'招聘信息',url:'/2'},
+              {name:'职工培训',url:'/3'},
+              {name:'市民服务',url:'/4'},
+          ]
+      },
+      {
+          title:'互动交流',name:'chat',url:`${ROOT}/wzzy/chat`,
+          children:[
+              {name:'投票选举',url:'/1'},
+              {name:'问卷调查',url:'/2'},
+              {name:'回音壁',url:'/3'},
+              {name:'兴趣联盟',url:'/4'},
+              {name:'政务微博',url:'/5'},
+              {name:'微信公众号',url:'/6'},
+          ]
+      },
+      {
+          title:'先进人物',name:'advanced',url:`${ROOT}/wzzy/advanced`,
+          children:[
+              {name:'优秀职工',url:'/1'},
+              {name:'劳模风采',url:'/2'},
+          ]
+      },
+      {
+          title:'文件·资料',name:'files',url:`${ROOT}/wzzy/files`,
+      },
   ]
 }

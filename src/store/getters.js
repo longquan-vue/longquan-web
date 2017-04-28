@@ -6,6 +6,7 @@ const loading = (state) => state.loading;
 const setting = (state) => state.setting;
 const query = (state) => state.route.query;
 const params = (state) => state.route.params;
+const path = (state) => state.route.path;
 const sub = (state) => state.setting && state.setting.sub ? JSON.parse(state.setting.sub) : {};
 
 const action = (state) => {
@@ -31,5 +32,6 @@ export default {
   query,
   params,
   articleType,
-  editorOption
+  editorOption,
+    path
 }

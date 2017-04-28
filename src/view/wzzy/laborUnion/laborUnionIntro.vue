@@ -1,24 +1,20 @@
 <style lang="less" scoped>
-    @import "./home.less";
+    @import "./introduce.less";
 </style>
 <template>
-    <div class="wzzyHome">
+    <div class="wzzyLaborUnion" style="padding-top:20px;">
         <div class="pagewrap">
-            <div class="weather">
-                <span>天气预报 ：</span>
-            </div>
             <div class="wzzy-content">
                 <el-row :gutter="30">
                     <el-col :span="17">
                         <div class="grid-left">
-                            <wzzySwiper></wzzySwiper>
-                            <newsDynamic></newsDynamic>
-                            <assessMent></assessMent>
-                            <service></service>
-                            <activityShow></activityShow>
-                            <files></files>
-                            <modelWorker></modelWorker>
-                            <aboutLink></aboutLink>
+                            <div class="the-place">
+                                <el-breadcrumb separator="/">
+                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                                    <el-breadcrumb-item>机构介绍</el-breadcrumb-item>
+                                    <el-breadcrumb-item>区总介绍</el-breadcrumb-item>
+                                </el-breadcrumb>
+                            </div>
                         </div>
                     </el-col>
                     <el-col :span="7">
@@ -40,14 +36,6 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
-    import wzzySwiper from '../components/swiper.vue'
-    import newsDynamic from '../components/newsDynamic.vue'
-    import assessMent from '../components/assessment.vue'
-    import service from '../components/service.vue'
-    import activityShow from '../components/activityShow.vue'
-    import files from '../components/files.vue'
-    import modelWorker from '../components/modelWorker.vue'
-    import aboutLink from '../components/about.vue'
     import tip from '../components/tips.vue'
     import someIcon from '../components/someIcon.vue'
     import poll from '../components/poll.vue'
@@ -60,9 +48,14 @@
             }
         },
         components:{
-            wzzySwiper,newsDynamic,assessMent,service,activityShow,files,modelWorker,aboutLink,tip,someIcon,poll,adver,echo
+            tip,someIcon,poll,adver,echo
         },
-        computed: {...mapGetters([ 'page','list']),
+        computed: {
+            ...mapGetters([ 'page','list']),
+            active(){
+                console.log(this.$route.path.replace('/view/wzzy/',''));
+                return this.$route.path.replace('/view/wzzy/','');
+            }
         },
         methods:{
             ...mapActions(['go','clear','getMine','changePage']),
