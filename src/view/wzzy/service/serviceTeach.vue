@@ -18,7 +18,7 @@
                             <div class="wzzy-sub-title" style="margin-bottom:0"><a><i class="iconfont icon-kunnanbangfu"></i>职工培训</a></div>
                             <div class="wzzy-sub-content">
                                 <ul class="newTips" v-for="i in 20">
-                                    <li><a><span>{{i}}、这是职工培训哦。</span> <i>2017-04-15  10:30</i></a></li>
+                                    <li @click="go(['messageDetail',i])"><a><span>{{i}}、这是职工培训哦。</span> <i>2017-04-15  10:30</i></a></li>
                                 </ul>
                             </div>
                         </div>

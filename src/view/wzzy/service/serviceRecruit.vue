@@ -39,7 +39,7 @@
                                                 </el-col>
                                             </el-row>
                                         </li>
-                                        <li v-for="i in 10" :key="i">
+                                        <li v-for="i in 10" :key="i" @click="go(['recruitDetail',i])">
                                             <el-row>
                                                 <el-col :span="8">招聘汽车车间电焊工</el-col>
                                                 <el-col :span="8" style="text-align: center;">成都爱创业科技有限公司</el-col>
