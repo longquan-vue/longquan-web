@@ -57,10 +57,10 @@
             <img src="/static/zhxt/add.png" alt="add" style="width: 36px;height: 36px;cursor: pointer" @click="addLinkman">
           </el-form-item>
           <el-form-item label="招聘要求：" prop="claim">
-            <quill-editor :content="decode(data.claim)" @input="setData({claim:encode($event)})" :config="editorOption"/>
+            <quill-editor :content="decode(data.claim)" @input="setData({claim:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <el-form-item label="福利待遇：" prop="treatment">
-            <quill-editor :content="decode(data.treatment)" @input="setData({treatment:encode($event)})" :config="editorOption"/>
+            <quill-editor :content="decode(data.treatment)" @input="setData({treatment:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="发布者：" prop="admin">

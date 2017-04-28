@@ -61,7 +61,7 @@
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="投票规则：" prop="rule">
-              <quill-editor :content="decode(data.rule)" @input="setData({rule:encode($event)})" :config="editorOption"/>
+              <quill-editor :content="decode(data.rule)" @input="setData({rule:encode($event)})" :options="editorOption"/>
             </el-form-item>
             <div v-if="!data.edit">
               <el-form-item label="福利发布者：" prop="admin">

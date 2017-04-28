@@ -19,7 +19,8 @@ const action = (state) => {
   return url
 };
 const articleType = (state) => state.setting && JSON.parse(state.setting.articleType || '{}');
-const editorOption = (state) => ({})
+const editorOption = (state) => ({placeholder: '请输入...'})
+const editorOption2 = (state) => ({theme: 'bubble', placeholder: '请输入...', modules: {toolbar: [['bold', 'italic', 'underline', 'strike'], [{'list': 'ordered'}, {'list': 'bullet'}],]}})
 export default {
   login,
   page,
@@ -33,5 +34,6 @@ export default {
   params,
   articleType,
   editorOption,
-    path
+  editorOption2,
+  path
 }
