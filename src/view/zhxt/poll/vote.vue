@@ -23,7 +23,7 @@
           <MyColumn prop="repetition" label="是否可以重复投票" min-width="120"/>
           <MyColumn prop="sync" label="同步显示" :formatter="syncFilter" min-width="160"/>
           <MyColumn prop="status" label="操作" :formatter="stateType" min-width="120"/>
-          <MyColumn label="操作" fixed="right" width="300px">
+          <MyColumn label="操作" fixed="right" width="200">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['voteEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="go(['activityEnter',scope.row.id])">导出统计结果</el-button>
