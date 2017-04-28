@@ -125,7 +125,21 @@ export default [
       {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
       {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
       {path: `${ROOT}/wzzy/laborUnion/3`, component: require('../view/wzzy/laborUnion/laborUnionSet.vue'), name: 'laborUnionSet'},
-      {path: `${ROOT}/wzzy/laborUnion/4`, component: require('../view/wzzy/laborUnion/laborUnionOffice.vue'), name: 'laborUnionOffice'},
+      //新闻动态
+      {path: `${ROOT}/wzzy/news/1`, component: require('../view/wzzy/news/newsTips.vue'), name: 'newsTips'},
+      {path: `${ROOT}/wzzy/news/2`, component: require('../view/wzzy/news/newsMess.vue'), name: 'newsMess'},
+      {path: `${ROOT}/wzzy/news/3`, component: require('../view/wzzy/news/newsDynamic.vue'), name: 'newsDynamic'},
+      {path: `${ROOT}/wzzy/news/4`, component: require('../view/wzzy/news/newsAct.vue'), name: 'newsAct'},
+      {path: `${ROOT}/wzzy/news/5`, component: require('../view/wzzy/news/newsAct2.vue'), name: 'newsAct2'},
+      //办事指南
+      {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
+      {path: `${ROOT}/wzzy/guide/2`, component: require('../view/wzzy/guide/guideService.vue'), name: 'guideService'},
+      {path: `${ROOT}/wzzy/guide/3`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
+      {path: `${ROOT}/wzzy/guide/4`, component: require('../view/wzzy/guide/guideModel.vue'), name: 'guideModel'},
+      //工会服务
+      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceHelp.vue'), name: 'serviceHelp'},
+      {path: `${ROOT}/wzzy/service/2`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
+      {path: `${ROOT}/wzzy/service/3`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
     ]
   },
   // 企业号

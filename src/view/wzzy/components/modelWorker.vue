@@ -8,7 +8,7 @@
         </div>
         <div class="modelWorker">
             <el-row :gutter="10" class="wzzy-tab-cont-list">
-                <el-col :span="6" v-for="i in 4">
+                <el-col :span="6" v-for="i in 4" :key="i">
                     <div class="img-card">
                         <img src="../../../../static/wx/test/test5.jpg">
                         <div class="card-bg">

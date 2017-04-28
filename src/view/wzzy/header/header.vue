@@ -26,15 +26,17 @@
                 </div>
                 <div class="header-menu">
                     <el-row :gutter="20">
-                        <el-col :span="3" v-for="(item,index) in menu">
+                        <el-col :span="3" v-for="(item,index) in menu" :key="index">
                             <a @click="toUrl({path:item.children?item.url+item.children[0].url:item.url})" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
                         </el-col>
                     </el-row>
                 </div>
                 <div class="header-menu-sub" v-show="child.show && child.children" @mouseover="child.show=true" @mouseout="child.show=false">
                     <el-row :gutter="20">
-                        <el-col :span="3" v-for="(item,index) in child.children">
-                            <a @click="toUrl({path:child.url+item.url})" :class="['menu-a',{'active':path==child.url+item.url}]">{{item.name}}</a>
+                        <el-col :span="3" v-for="(item,index) in child.children" :key="index">
+                            <!--<a @click="toUrl({path:child.url+item.url})" :class="['menu-a',{'active':path==child.url+item.url}]">{{item.name}}</a>-->
+                            <router-link :to="child.url+item.url" :class="['menu-a',{'active':path==child.url+item.url}]" v-if="item.name!='市民服务'">{{item.name}}</router-link>
+                            <a href="http://www.ichuangye.cn" target="_blank" class="" v-if="item.name=='市民服务'">市民服务</a>
                         </el-col>
                     </el-row>
                 </div>
