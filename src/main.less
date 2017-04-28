@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  outline: none
+  outline: none;
 }
 
 a {
@@ -23,17 +23,26 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px;
 }
 
-.pagewrap{
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
+.pagewrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 }
-.block-link{
-    width: 100%;;height: 100%;position: absolute;;left: 0;top: 0;
-    cursor: pointer;
-    img{ width: 100%;height: 100%;}
+
+.block-link {
+  width: 100%;;
+  height: 100%;
+  position: absolute;;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
-.overlay{
+
+.overlay {
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -41,10 +50,11 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  background-image: -webkit-linear-gradient(180deg, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.7) 100%);
-  background-image: -moz-linear-gradient(180deg, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.7) 100%);
-  background-image: linear-gradient(180deg, rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.7) 100%);
+  background-image: -webkit-linear-gradient(180deg, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.7) 100%);
+  background-image: -moz-linear-gradient(180deg, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.7) 100%);
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.7) 100%);
 }
+
 #app {
   font-family: "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -188,4 +198,8 @@ textarea {
   -ms-transform: translateY(20px);
   -o-transform: translateY(20px);
   transform: translateY(20px);
+}
+
+.quill-editor {
+  line-height: normal;
 }

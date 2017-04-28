@@ -29,7 +29,7 @@
           <!--<el-button type="primary" size="small" @click="pause(scope.$index,scope.row)">{{scope.row.status==1?'暂停':'开启'}}</el-button>-->
           <!--</template>-->
           <!--</MyColumn>-->
-          <MyColumn label="操作" fixed="right" width="150px">
+          <MyColumn label="操作" fixed="right" width="200">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['welfareTicketEdit',scope.row.id])">编辑</el-button>
               <el-button type="text" size="small" @click="go('welfareTicketEdit', scope.row.id)">二维码</el-button>

@@ -13,7 +13,7 @@
       <el-form-item label="联系信息：" required>
         <el-row v-for="(val,idx) in relation" :key="idx">
           <el-col :span="22">
-            <el-input :value="val" @input="(v)=>relation[idx] = v"/>
+            <el-input placeholder="请输入..."  :value="val" @input="(v)=>relation[idx] = v"/>
           </el-col>
           <el-col :span="2">
             <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(idx)">

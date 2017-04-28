@@ -29,7 +29,7 @@
       <el-dialog :title="'编辑友情链接--'+dialog.data.name" v-model="dialog.show">
         <el-form :model="dialog.data" label-width="90px">
           <el-form-item label="名称">
-            <el-input v-model="dialog.data.name"/>
+            <el-input placeholder="请输入..."  v-model="dialog.data.name"/>
           </el-form-item>
           <el-form-item label="所属类型" :rules="[{required:true,message:'所属类型不能为空！'}]">
             <el-select v-model="dialog.data.type" placeholder="请选择类型...">
@@ -37,7 +37,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="URL">
-            <el-input v-model="dialog.data.url"/>
+            <el-input placeholder="请输入..."  v-model="dialog.data.url"/>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">

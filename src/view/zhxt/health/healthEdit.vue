@@ -20,7 +20,7 @@
             </div>
           </el-form-item>
           <el-form-item label="项目名称：" prop="name">
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
+            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="项目类型：" prop="type">
             <el-radio-group :value="data.type" @input="(v)=>setData({type:v,total:data.total>3?data.total:v})">
@@ -30,10 +30,10 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="多人项目人数上限：" prop="total" v-if="data.type == 3">
-            <el-input :value="data.total" @input="(v)=>setData({total:v})"/>
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})"/>
           </el-form-item>
           <el-form-item label="预约报名所需积分：" prop="score">
-            <el-input :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>

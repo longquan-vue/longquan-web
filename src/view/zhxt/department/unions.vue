@@ -22,7 +22,7 @@
           <MyColumn prop="applyEmail" label="邮箱地址" min-width="150"/>
           <MyColumn prop="created" label="申请时间" :formatter="({created})=>date3Filter(created)" min-width="150"/>
           <MyColumn prop="audit" label="状态" :formatter="({audit})=>audit2Filter(audit)" min-width="150"/>
-          <MyColumn label="操作" width="200px">
+          <MyColumn label="操作" width="150" fixed="right">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['depEdit',scope.row.id])">编辑审核</el-button>
               <el-button size="small" type="text" @click="del(scope.$index,scope.row)">删除</el-button>

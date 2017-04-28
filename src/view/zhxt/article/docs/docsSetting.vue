@@ -14,7 +14,7 @@
         <el-form-item label="类型配置：" required>
           <el-row v-for="(val,key) in type.file" :key="key">
             <el-col :span="22">
-              <el-input :value="val" @input="(v)=>type.file[key] = v">
+              <el-input placeholder="请输入..."  :value="val" @input="(v)=>type.file[key] = v">
                 <template slot="prepend">名称：</template>
               </el-input>
             </el-col>

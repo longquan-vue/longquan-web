@@ -13,10 +13,10 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" ref="data" :rules="rules" label-width="100px" class="demo-ruleForm">
           <el-form-item label="昵称：" prop="nickname">
-            <el-input :value="data.nickname" @input="(v)=>setData({nickname:v})"/>
+            <el-input placeholder="请输入..."  :value="data.nickname" @input="(v)=>setData({nickname:v})"/>
           </el-form-item>
           <el-form-item label="用户积分：" prop="score">
-            <el-input :value="data.score" @input="(v)=>setData({score:v})"/>
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})"/>
           </el-form-item>
           <el-form-item label="性别：" prop="sex">
             <el-radio-group :value="data.sex" @input="(v)=>setData({sex:v})">
@@ -35,16 +35,16 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="联系电话：" prop="phone">
-            <el-input :value="data.phone" @input="(v)=>setData({phone:v})"/>
+            <el-input placeholder="请输入..."  :value="data.phone" @input="(v)=>setData({phone:v})"/>
           </el-form-item>
           <el-form-item label="邮箱地址：" prop="email">
-            <el-input :value="data.email" @input="(v)=>setData({email:v})"/>
+            <el-input placeholder="请输入..."  :value="data.email" @input="(v)=>setData({email:v})"/>
           </el-form-item>
           <el-form-item label="邮寄地址：" prop="address">
-            <el-input :value="data.address" @input="(v)=>setData({address:v})"/>
+            <el-input placeholder="请输入..."  :value="data.address" @input="(v)=>setData({address:v})"/>
           </el-form-item>
           <el-form-item label="注册时间：">
-            <el-input :value="data.created" readonly/>
+            <el-input placeholder="请选择注册时间..."  :value="data.created" readonly/>
           </el-form-item>
           <el-form-item label="职工认证：" prop="audit">
             <el-radio-group :value="isAudit" @input="(v)=>setData({audit:v})">
@@ -53,16 +53,16 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="姓名：" prop="name">
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"/>
+            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="身份证号：" prop="idCard">
-            <el-input :value="data.idCard" @input="(v)=>setData({idCard:v})"/>
+            <el-input placeholder="请输入..."  :value="data.idCard" @input="(v)=>setData({idCard:v})"/>
           </el-form-item>
           <el-form-item label="所属单位：" prop="depName">
-            <el-input :value="data.depName" @input="(v)=>setData({depName:v})"/>
+            <el-input placeholder="请输入..."  :value="data.depName" @input="(v)=>setData({depName:v})"/>
           </el-form-item>
           <el-form-item label="职位名称：" prop="position">
-            <el-input :value="data.position" @input="(v)=>setData({position:v})"/>
+            <el-input placeholder="请输入..."  :value="data.position" @input="(v)=>setData({position:v})"/>
           </el-form-item>
           <el-form-item label="冻结用户：" prop="deleted">
             <el-radio-group :value="data.deleted" @input="(v)=>setData({deleted:v})">

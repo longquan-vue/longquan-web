@@ -6,7 +6,7 @@
     <div class="contentBoxtitle"><span>福利预告列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <el-date-picker v-model="dateValue" type="daterange" placeholder="选择发布时间"/>
+        <el-date-picker v-model="dateValue" type="daterange" placeholder="选择发布时间..."/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
         <MySelectInput :options="{'content':'内容','adminName':'发布者'}" def-key="content" :change="change"/>
         <span style="float:right;">

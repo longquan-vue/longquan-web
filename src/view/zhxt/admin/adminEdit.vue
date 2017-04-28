@@ -20,7 +20,7 @@
             </div>
           </el-form-item>
           <el-form-item label="项目名称：" prop="name" required>
-            <el-input :value="data.name" @input="(v)=>setData({name:v})"></el-input>
+            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"></el-input>
           </el-form-item>
           <el-form-item label="项目类型：" prop="type" required>
             <el-radio-group :value="data.type" @input="(v)=>setData({type:v})">
@@ -30,19 +30,19 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="多人项目人数上限：" prop="total" required>
-            <el-input :value="data.total" @input="(v)=>setData({total:v})"></el-input>
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})"></el-input>
           </el-form-item>
           <el-form-item label="预约报名所需积分：" prop="score" required>
-            <el-input :value="data.score" @input="(v)=>setData({score:v})"></el-input>
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})"></el-input>
           </el-form-item>
           <el-form-item label="开启日期：" prop="dates" required>
             <Calendar :value="data.dates" @on-change="(v)=>setData({dates:v})"/>
           </el-form-item>
           <el-form-item label="时间区间：" required>
             <el-row v-for="(time,idx) in times" :key="idx">
-              <el-time-select placeholder="起始时间" @input="(v)=>changeTime('starts.'+idx,v)" :value="time.start" :picker-options="{start:'08:30',step:'00:15',end:'22:30'}"/>
+              <el-time-select placeholder="请选择起始时间..." @input="(v)=>changeTime('starts.'+idx,v)" :value="time.start" :picker-options="{start:'08:30',step:'00:15',end:'22:30'}"/>
               至
-              <el-time-select placeholder="结束时间" @input="(v)=>changeTime('ends.'+idx,v)" :value="time.end" :picker-options="{start:'08:30',step:'00:15',end:'22:30',minTime:time.start}"/>
+              <el-time-select placeholder="请选择结束时间..." @input="(v)=>changeTime('ends.'+idx,v)" :value="time.end" :picker-options="{start:'08:30',step:'00:15',end:'22:30',minTime:time.start}"/>
               <img src="/static/zhxt/error.png" class="error" alt="close" @click="delTime(idx)">
             </el-row>
             <img src="/static/zhxt/add.png" alt="add" @click="addTime">

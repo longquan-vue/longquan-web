@@ -16,10 +16,10 @@
       <div class="passBox" v-if="!show">
         <el-form :model="admin" :rules="rules" ref="admin" label-width="0px" class="demo-ruleForm">
           <el-form-item prop="userid">
-            <el-input v-model="admin.userid" placeholder="请输入用户名、电话号码或邮箱..."></el-input>
+            <el-input v-model="admin.userid" placeholder="请输入用户名、电话号码或邮箱..."/>
           </el-form-item>
           <el-form-item prop="pwd">
-            <el-input type="password" placeholder="请输入密码..." v-model="admin.pwd" @keyup.enter.native="submitForm()"></el-input>
+            <el-input type="password" placeholder="请输入密码..." v-model="admin.pwd" @keyup.enter.native="submitForm()"/>
           </el-form-item>
           <div class="login-btn">
             <el-button type="primary" @click="submitForm()">登录</el-button>
@@ -72,7 +72,7 @@
         this.show = true;
         const {accessToken, qrcode, sessionId, ts} = await codeApi();
         this.$cookie.set('access_token', accessToken, 7);
-        this.$cookie.set('session_id', sessionId, 7);
+        this.$cookie.set('session_zhxy', sessionId, 7);
         this.$socket.open(sessionId).on('login', ({user}) => this.login(user));
         this.qrcode = qrcode;
         setTimeout(() => {

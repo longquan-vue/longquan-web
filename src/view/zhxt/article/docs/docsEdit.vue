@@ -14,7 +14,7 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
           <el-form-item label="标题：" prop="title">
-            <el-input :value="data.title" @input="(v)=>setData({title:v})"/>
+            <el-input placeholder="请输入..."  :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
           <el-form-item label="文件类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择文件类型..." @input="(v)=>setData({subType:v})">
@@ -32,17 +32,17 @@
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="内容：" prop="content">
-            <quill-editor :content="decode(data.content)" @input="setData({content:encode($event)})" :config="editorOption"/>
+            <quill-editor :content="decode(data.content)" @input="setData({content:encode($event)})" :options="editorOption"/>
           </el-form-item>
           <el-form-item label="附件：" prop="files">
             <MyUpload :files="data.files" type="text" :edit="data.edit"/>
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="发布者：" prop="admin">
-              <el-input v-model="data.admin.name" readonly/>
+              <el-input placeholder="无"  v-model="data.admin.name" readonly/>
             </el-form-item>
             <el-form-item label="发布时间：" prop="created">
-              <el-input :value="date3Filter(data.created)" readonly/>
+              <el-input placeholder="无"  :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">
