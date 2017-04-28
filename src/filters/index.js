@@ -36,7 +36,7 @@ export const typeFilter = (type, idx) => type ? type[idx] : '无'
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
 //限制字数
-export const limitFilter = (str = '',l = 0)=> str.length>l?str.substr(0,l)+'...':str;
+export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l) + '...' : str;
 //路径过滤器
 export const pathFilter = (str)=>{
   switch (str){
@@ -63,9 +63,9 @@ export const path2Filter = (str)=>{
 
 };
 
-
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
+export const audit2Filter = (audit) => ['未审核', '审核中', '审核成功', '审核失败'][audit] || '未审核'
 export const userFilter = ({audit}) => ['普通用户', '普通用户', '职工认证用户'][audit] || '普通用户'
 export const group = (list, field = 'recording', filter = date7Filter) => {
   const g = {};
@@ -152,6 +152,8 @@ export default {
   typeFilter,
   limitFilter,
   pathFilter,
-  path2Filter
+  path2Filter,
+  audit2Filter
+
 }
 

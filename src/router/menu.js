@@ -109,12 +109,10 @@ export default {
       ]
     },
     {
-      title: '工会职工管理',
+      title: '工会管理',
       children: [
-        {title: '工会职工列表', path: `${ROOT}/zhxt/admin`},
-        {title: '工会职工审核列表', path: `${ROOT}/zhxt/adminAudit`},
-        {title: '工会职工统计报表', path: `${ROOT}/zhxt/adminCount`},
-        {title: '我的公会', path: `${ROOT}/zhxt/myDep`},
+        {title: '工会管理列表', path: `${ROOT}/zhxt/department`},
+        {title: '我的公会', path: `${ROOT}/zhxt/department/mine`},
       ]
     },
     {
