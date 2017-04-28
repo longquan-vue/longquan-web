@@ -3,16 +3,14 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>公示公告 </span>
+                <span><i class="iconfont icon-xinwendongtai"></i> 最新动态 </span>
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>
         <div class="wzzy-tab-cont">
-            <div class="border-content" style="border-top: none;height: 220px;">
+            <div class="border-content" style="height: 280px;border:none;">
                 <div class="wzzy-tab-cont-list">
-                    <transition-group name="flip-tip" tag="p">
-                        <a v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item}}</span> <i>2016-04-15</i></a>
-                    </transition-group>
+                    <a v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item}}</span> <i>2016-04-15</i></a>
                 </div>
             </div>
         </div>
@@ -26,9 +24,6 @@
     }
     .flip-tip-move {
         transition: transform 0.8s;
-    }
-    .grid-right-sub{
-        .border-content{ border: none;background-color: #FAFAFA;}
     }
 </style>
 <script type="es6">
@@ -67,9 +62,7 @@
 
         },
         created () {
-            setInterval(()=>{
-                this.tipsList = _.shuffle(this.tipsList)
-            },3000)
+
         },
         destroyed(){
 

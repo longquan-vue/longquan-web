@@ -151,8 +151,7 @@ export default {
         children:[
           {name:'区总介绍',url:`/1`},
           {name:'区总领导',url:`/2`},
-          {name:'机构设置',url:`/3`},
-          {name:'机关党委',url:`/4`},
+          {name:'组织机构',url:`/3`},
         ]
       },
       {
