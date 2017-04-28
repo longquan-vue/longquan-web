@@ -41,15 +41,16 @@ export const delHealthApi = (id, del = 1) => request({
 });
 //暂停或开启健身活动
 export const pauseHealthApi = (id) => request({
+  method: 'put',
   url: `${BASE_PATH}/pause/${id}`
 });
 //报名
 export const entryHealthApi = (data) => request({
-    url: `${BASE_PATH}/entry`,
-    data
+  url: `${BASE_PATH}/entry`,
+  data
 });
 //取消报名
 export const cancelEntryHealthApi = (data) => request({
-    url: `${BASE_PATH}/cancelEntry`,
-    data
+  url: `${BASE_PATH}/cancelEntry`,
+  data
 });
