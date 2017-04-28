@@ -119,6 +119,9 @@ export default [
     component: require('../view/wzzy/wzzy.vue'),
     children: [
       {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
+      //详情
+      {path: `${ROOT}/wzzy/messageDetail/:id`, component: require('../view/wzzy/messageDetail/messageDetail.vue'), name: 'messageDetail'},
+      {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail'},
       /*机构介绍*/
       {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
       {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
