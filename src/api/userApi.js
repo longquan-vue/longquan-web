@@ -1,5 +1,10 @@
 import {request} from './ajax'
 const BASE_PATH = '/user';
+// 获取登录二维码
+export const userLoginApi = () => request({
+  method: "get",
+  url: `${BASE_PATH}/login2`,
+});
 // 获取我的资料
 export const mineApi = () => request({
   method: "get",

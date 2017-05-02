@@ -65,7 +65,7 @@ const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) =
     params: id ? {id} : {},
     query
   })))
-const toUrl = ({commit},{path,params,query}) =>router.push({path,params,query})
+const toUrl = ({commit}, {path, params, query}) => router.push({path, params, query})
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
 //清除page
@@ -83,9 +83,12 @@ const updateUser = ({commit, state}) => updateUserApi(state.data).then(() => suc
 //删除用户
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
-const getMine = ({commit, state}) => {
+const getMine = ({commit, state}, mine) => {
   if (!!state.login.id) {
     return new Promise((resolve) => resolve());
+  }
+  if (mine) {
+    return commit(GET_MINE, mine);
   }
   if (state.route.path.split('/')[2] == 'fwh') {
     return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
@@ -455,7 +458,7 @@ export default {
   getEcho,//获取回音壁详情
   delEcho,//删除回音壁
   pauseEcho, //关闭或显示回音壁
-    toUrl,
+  toUrl,
   findDep,//获取工会列表
   delDep,//删除工会
   getDep,//获取公会详情

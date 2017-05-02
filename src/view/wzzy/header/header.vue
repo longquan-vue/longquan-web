@@ -7,7 +7,7 @@
             <span>
                 欢迎访问成都市龙泉驿区总工会网站！今天是:{{today}}
             </span>
-            <a>登录</a>
+            <a @click="changeSys({qrcode:true})">登录</a>
         </div>
         <div class="header-nav">
             <div class="pagewrap">
@@ -76,7 +76,7 @@
             },
         },
         methods:{
-            ...mapActions(['toUrl','clear','getMine','changePage']),
+            ...mapActions(['toUrl','clear','getMine','changePage','changeSys']),
             ...filters,
             showSub(index){
                 this.idx = index;
