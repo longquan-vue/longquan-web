@@ -124,6 +124,7 @@ export default [
       {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail'},
       {path: `${ROOT}/wzzy/chatPoll/:id`, component: require('../view/wzzy/chat/pollDetail.vue'), name: 'chatPollDetail'},
       {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail'},
+      {path: `${ROOT}/wzzy/workerDetail/:id`, component: require('../view/wzzy/advanced/workerDetail.vue'), name: 'workerDetail'},
       /*机构介绍*/
       {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
       {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
@@ -148,6 +149,11 @@ export default [
       {path: `${ROOT}/wzzy/chat/2`, component: require('../view/wzzy/chat/question.vue'), name: 'chatQuestion'},
       {path: `${ROOT}/wzzy/chat/3`, component: require('../view/wzzy/chat/echo.vue'), name: 'chatEcho'},
       {path: `${ROOT}/wzzy/chat/6`, component: require('../view/wzzy/chat/weixin.vue'), name: 'chatCode'},
+      //先进人物
+      {path: `${ROOT}/wzzy/advanced/1`, component: require('../view/wzzy/advanced/worker.vue'), name: 'advancedWorker'},
+      {path: `${ROOT}/wzzy/advanced/2`, component: require('../view/wzzy/advanced/model.vue'), name: 'advancedModel'},
+      //文件资料
+      {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
     ]
   },
   // 企业号

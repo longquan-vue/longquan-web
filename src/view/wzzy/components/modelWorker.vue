@@ -24,7 +24,8 @@
 </template>
 <style lang="less">
     .modelWorker{
-        .img-card{ height: 252px;position: relative;overflow: hidden;margin: 20px 0 40px 0;cursor: pointer;
+        margin-bottom: 40px;margin-top: 20px;;
+        .img-card{ height: 252px;position: relative;overflow: hidden;margin-bottom:20px;cursor: pointer;
             &:hover{
                 .card-bg{   top: 0;
                     h2{ top: 50px;}
