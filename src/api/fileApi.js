@@ -1,7 +1,7 @@
 /**
  * Created by zhongcheng on 2017/4/5 0005.
  */
-import {request} from './ajax'
+import {request} from "./ajax";
 const BASE_PATH = '/file';
 
 export const fileApi = (file) => {
@@ -18,8 +18,8 @@ export const delFileApi = (id, del) => {
     url: `${BASE_PATH}/delete/${id}/${del}`,
   });
 }
-export const delPicApi = (id, del) => request({
+export const delPicApi = (url) => request({
   method: 'delete',
-  url: `${BASE_PATH}/deleteUrl/${id}`,
+  url: `${BASE_PATH}/deleteUrl/${encodeURIComponent(url)}`,
 });
 
