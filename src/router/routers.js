@@ -122,6 +122,8 @@ export default [
       //详情
       {path: `${ROOT}/wzzy/messageDetail/:id`, component: require('../view/wzzy/messageDetail/messageDetail.vue'), name: 'messageDetail'},
       {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail'},
+      {path: `${ROOT}/wzzy/chatPoll/:id`, component: require('../view/wzzy/chat/pollDetail.vue'), name: 'chatPollDetail'},
+      {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail'},
       /*机构介绍*/
       {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
       {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
@@ -141,6 +143,11 @@ export default [
       {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceHelp.vue'), name: 'serviceHelp'},
       {path: `${ROOT}/wzzy/service/2`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
       {path: `${ROOT}/wzzy/service/3`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
+      //互动交流
+      {path: `${ROOT}/wzzy/chat/1`, component: require('../view/wzzy/chat/poll.vue'), name: 'chatPoll'},
+      {path: `${ROOT}/wzzy/chat/2`, component: require('../view/wzzy/chat/question.vue'), name: 'chatQuestion'},
+      {path: `${ROOT}/wzzy/chat/3`, component: require('../view/wzzy/chat/echo.vue'), name: 'chatEcho'},
+      {path: `${ROOT}/wzzy/chat/6`, component: require('../view/wzzy/chat/weixin.vue'), name: 'chatCode'},
     ]
   },
   // 企业号

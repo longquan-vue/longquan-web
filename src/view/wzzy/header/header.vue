@@ -35,8 +35,9 @@
                     <el-row :gutter="20">
                         <el-col :span="3" v-for="(item,index) in child.children" :key="index">
                             <!--<a @click="toUrl({path:child.url+item.url})" :class="['menu-a',{'active':path==child.url+item.url}]">{{item.name}}</a>-->
-                            <router-link :to="child.url+item.url" :class="['menu-a',{'active':path==child.url+item.url}]" v-if="item.name!='市民服务'">{{item.name}}</router-link>
+                            <router-link :to="child.url+item.url" :class="['menu-a',{'active':path==child.url+item.url}]" v-if="item.name!='市民服务' && item.name!='政务微博'">{{item.name}}</router-link>
                             <a href="http://www.ichuangye.cn" target="_blank" class="" v-if="item.name=='市民服务'">市民服务</a>
+                            <a href="http://weibo.com/u/2178811917?refer_flag=1001030101_&is_all=1" target="_blank" class="" v-if="item.name=='政务微博'">政务微博</a>
                         </el-col>
                     </el-row>
                 </div>
