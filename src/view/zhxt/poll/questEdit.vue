@@ -34,12 +34,12 @@
               </el-col>
             </el-form-item>
             <el-form-item label="积分奖励：" prop="score">
-              <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+              <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
                 <template slot="append">积分</template>
               </el-input>
             </el-form-item>
             <el-form-item label="答题次数：" prop="time">
-              <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
+              <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v*1})">
                 <template slot="append">次</template>
               </el-input>
             </el-form-item>

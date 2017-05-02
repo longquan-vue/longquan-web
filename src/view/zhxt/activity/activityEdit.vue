@@ -46,7 +46,7 @@
             </el-col>
           </el-form-item>
           <el-form-item label="报名人数：" prop="total">
-            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})">
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v*1})">
               <template slot="append">人</template>
             </el-input>
           </el-form-item>
@@ -57,7 +57,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="报名所需积分：" prop="score">
-            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>
