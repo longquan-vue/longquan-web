@@ -55,12 +55,12 @@
           <el-col class="sub_button" :span="4">
             <el-select v-model="button.type" @change="setButton(index,idx)">
               <el-option label="页面" value="view"/>
-              <el-option label="事件" value="click"/>
+              <el-option label="事件" value="click" disabled/>
             </el-select>
           </el-col>
           <el-col class="sub_button" :span="11">
             <el-input placeholder="请输入..." v-model="button.url" v-if="button.type == 'view'"/>
-            <el-select v-model="button.key" style="width: 100%" v-if="button.type == 'click'">
+            <el-select v-model="button.key" disabled style="width: 100%" v-if="button.type == 'click'">
               <el-option label="最新资讯" value="LAST_NEWS"/>
             </el-select>
           </el-col>
