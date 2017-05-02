@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+  <title>登陆失败</title>
+  <style type="text/css">
+    .login-wrap {position: fixed;top:0;bottom: 0;left: 0;right: 0}
+    .login-wrap .ms-login{position: absolute;top:50%;text-align: center;width: 100%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);}
+    .login-wrap .ms-login p img{vertical-align: middle;margin-right: 15px;}
+  </style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="ms-login">
+    <p><img src="/static/wx/error.png">登录失败！请稍后再试...</p>
+    <input type="button" onclick="closeFn()" value="关闭"/>
+  </div>
+</div>
+<script src="/static/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+  function closeFn() {
+    wx.closeWindow();
+  }
+</script>m
+</body>
+</html>
