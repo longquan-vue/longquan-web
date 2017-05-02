@@ -40,13 +40,16 @@
       <div v-for="(item,index) in menu.button" class="fwh_menu">
         <el-row>
           <el-col :span="3" class="menu_title">一级菜单：</el-col>
-          <el-col :span="21">
+          <el-col :span="20">
             <el-input placeholder="请输入..."  v-model="item.name"/>
+          </el-col>
+          <el-col :span="1" style="line-height: 36px">
+            <img src="/static/zhxt/add.png" class="add" style="width: 26px;height: 26px;margin-left: 14px;" alt="add" @click="add(index)">
           </el-col>
         </el-row>
         <el-row v-for="(button,idx) in item.sub_button" :key="'button'+idx">
           <el-col :span="3" :offset="1" class="menu_title">二级菜单：</el-col>
-          <el-col class="sub_button" :span="5">
+          <el-col class="sub_button" :span="4">
             <el-input placeholder="请输入..."  v-model="button.name"/>
           </el-col>
           <el-col class="sub_button" :span="4">
@@ -61,6 +64,9 @@
               <el-option label="页面" value="view" disabled/>
               <el-option label="事件" value="click" disabled/>
             </el-select>
+          </el-col>
+          <el-col :span="1" style="line-height: 36px">
+            <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(index,idx)">
           </el-col>
         </el-row>
       </div>
@@ -96,7 +102,7 @@
         if (this.tab == 3) {
           confirm('是否需要设置服务号菜单?', 'warning').then(() => delFwhMenuApi().then(() => createFwhMenuApi(this.menu).then(() => alert('设置成功！')).catch(() => alert('设置失败！', 'error'))))
         } else {
-          this.$refs.setting.validate((valid) => valid ? this.saveSys() : false)
+          this.$refs[['setting','sub'][this.tab-1]].validate((valid) => valid ? this.saveSys() : false)
         }
       },
       changeType(){
@@ -120,6 +126,15 @@
         }
         return isJPG && isLt2M;
       },
+      del(index,idx){
+          this.$delete(this.menu.button[index].sub_button,idx)
+      },
+      add(index){
+          if(this.menu.button[index].sub_button.length >=5){
+              return alert('子菜单最多为5个！','error')
+          }
+          this.$set(this.menu.button[index].sub_button,this.menu.button[index].sub_button.length,{name:'',type:'view',url:''})
+      }
     },
     created () {
       this.tab = this.$route.query.tab || '1'
