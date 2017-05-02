@@ -68,17 +68,19 @@
           }
         });
       },
-      async getCode(){
+      getCode(){
         this.show = true;
-        const {accessToken, qrcode, sessionId, ts} = await codeApi();
-        this.$cookie.set('access_token', accessToken, 7);
-        this.$cookie.set('session_zhxy', sessionId, 7);
-        this.$socket.open(sessionId).on('login', ({user}) => this.login(user));
-        this.qrcode = qrcode;
-        setTimeout(() => {
-          this.timeout = true;
-          this.$socket.close();
-        }, ts - new Date().getTime() + 120000)
+        codeApi().then(({accessToken, qrcode, sessionId, ts}) => {
+          this.$cookie.set('access_token', accessToken, 7);
+          this.$cookie.set('session_zhxy', sessionId, 7);
+          this.$socket.open(sessionId).on('login', ({user}) => this.login(user));
+          this.qrcode = qrcode;
+          setTimeout(() => {
+            this.timeout = true;
+            this.$socket.close();
+//          }, ts - new Date().getTime() + 120000)
+          }, 120000)
+        })
       },
       reGetCode(){
         this.timeout = false;
