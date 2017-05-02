@@ -13,14 +13,14 @@
     <div class="contentBoxCont">
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="data" label-width="140px" class="demo-data">
-          <el-form-item label="福利配图：" prop="files">
-            <MyUpload :files="data.files" :edit="data.edit"/>
+          <el-form-item label="福利配图：" prop="picUrl">
+            <Avatar width="200" height="200" :url="data.picUrl"/>
           </el-form-item>
           <el-form-item label="福利名称：" prop="name">
             <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="福利数量：" prop="total">
-            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})">
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v*1})">
               <template slot="append">份</template>
             </el-input>
           </el-form-item>
@@ -40,12 +40,12 @@
             </el-col>
           </el-form-item>
           <el-form-item label="所需积分：" prop="score">
-            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
               <template slot="append">积分</template>
             </el-input >
           </el-form-item>
           <el-form-item label="人均兑换次数：" prop="time">
-            <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
+            <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v*1})">
               <template slot="append">次/人</template>
             </el-input>
           </el-form-item>
@@ -77,13 +77,12 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filter from '../../../filters'
-  import MyUpload from '../../../components/public/MyUpload.vue'
+  import Avatar from '../../../components/public/Avatar.vue'
   import {number, required, array} from '../../../constant/rules'
   export default {
     data() {
       return {
         rules: {
-          files: array(),
           name: required('请输入福利名称...', {max: 15}),
           total: number('请输入福利数量...'),
           entry: number('请选择福利类型...'),
@@ -95,7 +94,7 @@
         },
       }
     },
-    components: {MyUpload},
+    components: {Avatar},
     computed: {...mapGetters(['data', 'editorOption'])},
     methods: {
       ...filter,

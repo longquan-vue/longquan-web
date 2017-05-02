@@ -34,12 +34,12 @@
               </el-col>
             </el-form-item>
             <el-form-item label="积分奖励：" prop="score">
-              <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+              <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
                 <template slot="append">积分/天</template>
               </el-input>
             </el-form-item>
             <el-form-item label="人均投票次数：" prop="time">
-              <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
+              <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v*1})">
                 <template slot="append">次/天/人</template>
               </el-input>
             </el-form-item>
@@ -50,7 +50,7 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="连续投票天数：" prop="days">
-              <el-input placeholder="请输入..."  :value="data.days" @input="(v)=>setData({days:v})">
+              <el-input placeholder="请输入..."  :value="data.days" @input="(v)=>setData({days:v*1})">
                 <template slot="append">天</template>
               </el-input>
             </el-form-item>

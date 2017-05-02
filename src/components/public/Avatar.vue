@@ -5,12 +5,14 @@
 
   .avatar_box {
     display: inline-block;
+    line-height: normal;
   }
 
   .avatar-uploader {
     display: inline-block;
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
+    height: 100%;
   }
 
   .avatar-uploader:hover {
@@ -18,7 +20,7 @@
   }
 </style>
 <template>
-  <div class="avatar_box">
+  <div class="avatar_box" :style="{width:width*1+2+'px',height:height*1+2+'px'}">
     <el-upload
       class="avatar-uploader"
       :action="action"

@@ -17,7 +17,7 @@
             <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="福利数量：" prop="total">
-            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})">
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v*1})">
               <template slot="append">份</template>
             </el-input>
           </el-form-item>
@@ -37,12 +37,12 @@
             </el-col>
           </el-form-item>
           <el-form-item label="所需积分：" prop="score">
-            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>
           <el-form-item label="人均兑换次数：" prop="time">
-            <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v})">
+            <el-input placeholder="请输入..."  :value="data.time" @input="(v)=>setData({time:v*1})">
               <template slot="append">次/人</template>
             </el-input>
           </el-form-item>

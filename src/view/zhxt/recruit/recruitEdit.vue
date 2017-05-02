@@ -46,10 +46,10 @@
             </el-col>
           </el-form-item>
           <el-row v-for="(item,idx) in linkmanList" :key="idx" style="margin-bottom: 0">
-            <el-form-item :label="'联系人 '+(idx+1)+'：'" prop="linkman">
+            <el-form-item :label="'联系人 '+(idx+1)+'：'" :prop="'linkmans.'+idx" :rules="{required: true, message:'请输入联系人姓名...', min: 1}">
               <el-input placeholder="请输入..."  :value="item.linkman" @input="(v)=>setListVal(['linkmans.'+idx,v])"/>
             </el-form-item>
-            <el-form-item :label="'联系电话 '+(idx+1)+'：'" prop="phone">
+            <el-form-item :label="'联系电话 '+(idx+1)+'：'" :prop="'phones.'+idx" :rules="{required: true, message:'请输入联系电话...', min: 1}">
               <el-input placeholder="请输入..."  :value="item.phone" @input="(v)=>setListVal(['phones.'+idx,v])"/>
             </el-form-item>
           </el-row>
@@ -90,8 +90,6 @@
           name: required('请输入招聘标题...', {max: 20}),
           company: required('请输入招聘单位...'),
           address: required('请输入单位地址...'),
-          linkman: required('请输入联系人姓名...'),
-          phone: required('请输入联系电话...'),
         },
       }
     },

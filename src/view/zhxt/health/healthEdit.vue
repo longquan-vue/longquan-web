@@ -30,10 +30,10 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="多人项目人数上限：" prop="total" v-if="data.type == 3">
-            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})"/>
+            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v*1})"/>
           </el-form-item>
           <el-form-item label="预约报名所需积分：" prop="score">
-            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v*1})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>

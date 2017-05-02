@@ -17,7 +17,7 @@
             <MyUpload :files="data.files" :edit="data.edit"/>
           </el-form-item>
           <el-form-item label="活动名称：" prop="name">
-            <el-input placeholder="请输入..."  :value="data.name" @input="(v)=>setData({name:v})"/>
+            <el-input placeholder="请输入..." :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="活动时间：" required>
             <el-col :span="11">
@@ -46,7 +46,7 @@
             </el-col>
           </el-form-item>
           <el-form-item label="报名人数：" prop="total">
-            <el-input placeholder="请输入..."  :value="data.total" @input="(v)=>setData({total:v})">
+            <el-input placeholder="请输入..." :value="data.total" @input="(v)=>setData({total:v*1})">
               <template slot="append">人</template>
             </el-input>
           </el-form-item>
@@ -57,24 +57,24 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="报名所需积分：" prop="score">
-            <el-input placeholder="请输入..."  :value="data.score" @input="(v)=>setData({score:v})">
+            <el-input placeholder="请输入..." :value="data.score" @input="(v)=>setData({score:v*1})">
               <template slot="append">积分</template>
             </el-input>
           </el-form-item>
           <el-form-item label="主办方：" prop="sponsor">
-            <el-input placeholder="请输入..."  :value="data.sponsor" @input="(v)=>setData({sponsor:v})"/>
+            <el-input placeholder="请输入..." :value="data.sponsor" @input="(v)=>setData({sponsor:v})"/>
           </el-form-item>
           <el-form-item label="协办方：" prop="coSponsor">
-            <el-input placeholder="请输入..."  :value="data.coSponsor" @input="(v)=>setData({coSponsor:v})"/>
+            <el-input placeholder="请输入..." :value="data.coSponsor" @input="(v)=>setData({coSponsor:v})"/>
           </el-form-item>
           <el-form-item label="承办方：" prop="organizer">
-            <el-input placeholder="请输入..."  :value="data.organizer" @input="(v)=>setData({organizer:v})"/>
+            <el-input placeholder="请输入..." :value="data.organizer" @input="(v)=>setData({organizer:v})"/>
           </el-form-item>
           <el-form-item label="活动地点：" prop="place">
-            <el-input placeholder="请输入..."  :value="data.place" @input="(v)=>setData({place:v})"/>
+            <el-input placeholder="请输入..." :value="data.place" @input="(v)=>setData({place:v})"/>
           </el-form-item>
           <el-form-item label="福利提供方链接：" prop="website">
-            <el-input placeholder="请输入..."  :value="data.website" @input="(v)=>setData({website:v})"/>
+            <el-input placeholder="请输入..." :value="data.website" @input="(v)=>setData({website:v})"/>
           </el-form-item>
           <el-form-item label="活动内容：" prop="detail">
             <quill-editor :content="decode(data.detail)" @input="setData({detail:encode($event)})" :options="editorOption"/>
@@ -84,10 +84,10 @@
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="福利发布者：" prop="admin">
-              <el-input placeholder="无"  v-model="data.admin.name" readonly/>
+              <el-input placeholder="无" v-model="data.admin.name" readonly/>
             </el-form-item>
             <el-form-item label="发布时间：" prop="created">
-              <el-input placeholder="无"  :value="date3Filter(data.created)" readonly/>
+              <el-input placeholder="无" :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">
@@ -116,7 +116,7 @@
           entryEnd: number('请选择结束时间...'),
           total: number('请填写报名人数...'),
           entry: required('请选择报名权限...'),
-          score: number('请填写所需积分...', {required: false}),
+          score: number('请填写所需积分...', {required: false, min: 0}),
           place: required('请填写活动地点...'),
           sponsor: required('请填写活动主办方...', {min: 1, max: 30}),
         },

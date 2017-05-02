@@ -7,11 +7,14 @@ import router from './router'
 import store from './store'
 import {localStorage} from './store/localstorage'
 import animate from 'animate.css'
-import VueQuillEditor from 'vue-quill-editor'
 import Vuelidate from 'vuelidate'
 import Socket from './socket/index'
 import VueCookie from 'vue-cookie'
 import {AlertPlugin} from 'vux'
+import VueQuillEditor from 'vue-quill-editor'
+import Quill from 'quill'
+import {ImageResize} from './components/public/QuillModules/ImageResize'
+Quill.register('modules/imageResize', ImageResize)
 
 sync(store, router)
 
