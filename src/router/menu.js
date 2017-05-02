@@ -188,7 +188,7 @@ export default {
               {name:'投票选举',url:'/1'},
               {name:'问卷调查',url:'/2'},
               {name:'回音壁',url:'/3'},
-              {name:'兴趣联盟',url:'/4'},
+              // {name:'兴趣联盟',url:'/4'},
               {name:'政务微博',url:'/5'},
               {name:'微信公众号',url:'/6'},
           ]

@@ -14,7 +14,29 @@
                 .labelCont{ color: #333;float: left;width: 85%;}
             }
         }
-
+    }
+    .formSubmit{ width: 200px;height: 40px;display: block;margin:20px auto;background-color: #E00404;text-align: center;line-height: 40px;
+        color: #ffffff;font-size: 16px;border-radius: 4px;cursor: pointer;
+    }
+    .wzzy-dialog{
+        .el-dialog__header{ padding:0;}
+        .el-dialog--tiny{ width: 700px;}
+        .wzzy-dialog-header{ text-align: center;display: block;font-size: 22px;color: #ff7e00;
+            background-color: #FFE8D2;height: 70px;line-height: 70px;position: relative;
+            img{ position: absolute;right: 20px;top: 26px;cursor: pointer;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                -ms-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                transition: all 0.3s;
+                &:hover{
+                    -webkit-transform: rotateZ(360deg);
+                    -moz-transform: rotateZ(360deg);
+                    -ms-transform: rotateZ(360deg);
+                    -o-transform: rotateZ(360deg);
+                    transform: rotateZ(360deg);}
+            }
+        }
     }
 </style>
 <template>
@@ -113,12 +135,49 @@
                 </el-row>
             </div>
         </div>
-        <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-            <span>这是一段信息</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
+            <span slot="title" class="wzzy-dialog-header" >
+                招聘报名表
+                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
             </span>
+
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="ruleForm.name"></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="sex">
+                    <el-radio-group v-model="ruleForm.sex">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="2">女</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="年龄" prop="age">
+                    <el-input v-model.number="ruleForm.age"></el-input>
+                </el-form-item>
+                <el-form-item label="婚姻" prop="marriage">
+                    <el-radio-group :value="ruleForm.marriage">
+                        <el-radio :label="1">已婚</el-radio>
+                        <el-radio :label="2">未婚</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="籍贯" prop="address">
+                    <el-input v-model="ruleForm.address"></el-input>
+                </el-form-item>
+                <el-form-item label="工作经验" prop="job">
+                    <el-radio-group :value="ruleForm.job">
+                        <el-radio :label="1">有</el-radio>
+                        <el-radio :label="2">无</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="联系电话" prop="phone">
+                    <el-input v-model.number="ruleForm.phone" placeholder="请输入联系电话"></el-input>
+                </el-form-item>
+            </el-form>
+            <a class="formSubmit" @click="submitForm('ruleForm')">提交</a>
+            <!--<span slot="footer" class="dialog-footer">-->
+                <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
+                <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+            <!--</span>-->
         </el-dialog>
     </div>
 </template>
@@ -133,7 +192,30 @@
     export default{
         data(){
             return{
-                dialogVisible: false
+                dialogVisible: false,
+                ruleForm: {
+                    name: '',
+                    sex: 0,
+                    age: '',
+                    marriage: 1,
+                    address: '',
+                    job: 1,
+                    phone:''
+                },
+                rules: {
+                    name: [
+                        { required: true, message: '请输入您的姓名' },
+                        { min: 2, max: 8, message: '长度在 2 到 8 个字符' }
+                    ],
+                    age:[
+                        { required: true, message: '年龄不能为空'},
+                        { type: 'number', message: '年龄必须为数字值'}
+                    ],
+                    phone:[
+                        { required: true, message: '联系电话不能为空'},
+                        { type: 'number', message: '联系电话必须为数字值'}
+                    ],
+                }
             }
         },
         components:{
@@ -151,6 +233,16 @@
             ...filters,
             openSign(){
                 this.dialogVisible = true;
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
         },
         created () {
