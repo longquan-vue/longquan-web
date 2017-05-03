@@ -4,8 +4,8 @@
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">发布工会资讯</span>
-      <span v-if="!data.edit">修改工会资讯</span>
+      <span v-if="data.edit">发布新闻资讯</span>
+      <span v-if="!data.edit">修改新闻资讯</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -19,8 +19,8 @@
           <el-form-item label="标题：" prop="title">
             <el-input placeholder="请输入..."  :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
-          <el-form-item label="资讯类型：" prop="subType">
-            <el-select :value="data.subType" placeholder="请选择资讯类型..." @input="(v)=>setData({subType:v})">
+          <el-form-item label="新闻类型：" prop="subType">
+            <el-select :value="data.subType" placeholder="请选择新闻类型..." @input="(v)=>setData({subType:v})">
               <el-option v-for="(val,key) in articleType.info" :label="val" :key="key" :value="key"/>
             </el-select>
           </el-form-item>

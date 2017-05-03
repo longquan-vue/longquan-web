@@ -88,7 +88,8 @@ const getMine = ({commit, state}, mine) => {
     return new Promise((resolve) => resolve());
   }
   if (mine) {
-    return commit(GET_MINE, mine);
+    commit(GET_MINE, mine);
+    return new Promise((resolve) => resolve());
   }
   if (state.route.path.split('/')[2] == 'fwh') {
     return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
@@ -314,6 +315,8 @@ const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_D
 const createArticle = ({commit, state}) => createArticleApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改文章
 const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 设置头条
+const topArticle = ({commit, state}, {id, top, idx}) => updateArticleApi({id, top}).then(() => success('设置成功！').then(() => commit(CHANGE_LIST, [`${idx}.top`, top]))).catch(() => error('设置失败！'))
 // 获取文章详情
 const getArticle = ({commit, state}) => {
   const {params:{id}}=state.route;
@@ -465,4 +468,5 @@ export default {
   createDep,//创建工会
   updateDep,//修改工会
   auditDep,//审核工会
+  topArticle,//设置头条
 }

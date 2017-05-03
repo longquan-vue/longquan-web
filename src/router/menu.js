@@ -10,11 +10,11 @@ export default {
           children: [{title: '公示公告列表', path: `${ROOT}/zhxt/article/tips`}]
         },
         {
-          title: '工会文件管理',
+          title: '文件资料管理',
           children: [
-            {title: '工会文件列表', path: `${ROOT}/zhxt/article/docs`},
-            {title: '文件类型设置', path: `${ROOT}/zhxt/article/docsSetting`},
-            {title: '工会文件统计', path: `${ROOT}/zhxt/article/docsCount`}
+            {title: '文件资料列表', path: `${ROOT}/zhxt/article/docs`},
+            {title: '资料类型设置', path: `${ROOT}/zhxt/article/docsSetting`},
+            {title: '文件资料统计', path: `${ROOT}/zhxt/article/docsCount`}
           ]
         },
         {
@@ -26,11 +26,11 @@ export default {
           ]
         },
         {
-          title: '工会资讯管理',
+          title: '新闻资讯管理',
           children: [
-            {title: '工会资讯列表', path: `${ROOT}/zhxt/article/info`},
-            {title: '资讯类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
-            {title: '工会资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
+            {title: '新闻资讯列表', path: `${ROOT}/zhxt/article/info`},
+            {title: '新闻类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
+            {title: '新闻资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
           ]
         },
         {

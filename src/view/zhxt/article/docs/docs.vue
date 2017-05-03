@@ -3,24 +3,24 @@
 </style>
 <template>
   <div class="contentBox">
-    <div class="contentBoxtitle"><span>工会文件列表</span></div>
+    <div class="contentBoxtitle"><span>文件资料列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="文件类型" field="subType" :options="articleType.file || {}" :change="change"/>
+        <MySelect title="资料类型" field="subType" :options="articleType.file || {}" :change="change"/>
         <MySelectInput :options="{'title':'标题'}" def-key="title" :change="change"/>
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
-        <el-button style="float: right" type="primary" @click="go(['docsEdit','create'])" icon="plus">发布工会文件</el-button>
+        <el-button style="float: right" type="primary" @click="go(['docsEdit','create'])" icon="plus">发布文件资料</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" fixed="left"/>
           <MyColumn prop="title" label="标题" min-width="120"/>
           <MyColumn prop="files" label="附件" :formatter="({files})=>filesFilter(files)" min-width="110"/>
-          <MyColumn prop="files" label="文件类型" :formatter="({subType})=>typeFilter(articleType.file,subType)" min-width="110"/>
+          <MyColumn prop="files" label="资料类型" :formatter="({subType})=>typeFilter(articleType.file,subType)" min-width="110"/>
           <MyColumn prop="files" label="附件下载次数" :formatter="({files})=>filesNumFilter(files)" min-width="110"/>
           <MyColumn prop="num" label="浏览次数" min-width="110"/>
-          <MyColumn prop="adminName" label="文章发布者" min-width="140"/>
+          <MyColumn prop="adminName" label="发布者" min-width="140"/>
           <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="170"/>
           <MyColumn label="操作" width="120px">
             <template scope="scope">
@@ -57,7 +57,7 @@
       ...mapActions(['clear', 'findArticle', 'changeSelect', 'changePage', 'delArticle', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        confirm(`确定删除工会文件[${name}]吗?`, 'warning').then(() => this.delArticle([id, idx]))
+        confirm(`确定删除文件资料[${name}]吗?`, 'warning').then(() => this.delArticle([id, idx]))
       },
       change(key, value){
         this.changeSelect({key, value});

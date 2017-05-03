@@ -4,7 +4,7 @@
 <template>
   <div class="contentBox article_docs">
     <div class="contentBoxtitle">
-      <span>文件类型设置</span>
+      <span>资料类型设置</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -18,6 +18,12 @@
                 <template slot="prepend">名称：</template>
               </el-input>
             </el-col>
+            <!--<el-col :span="5">-->
+              <!--<el-radio-group :value="data.repetition" @input="(v)=>setData({repetition:v})">-->
+                <!--<el-radio :label="0">单日可以重复投票给同一对象</el-radio>-->
+                <!--<el-radio :label="1">单日不能重复投票给同一对象</el-radio>-->
+              <!--</el-radio-group>-->
+            <!--</el-col>-->
             <el-col :span="2">
               <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
             </el-col>
