@@ -4,8 +4,8 @@
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">发布工会文件</span>
-      <span v-if="!data.edit">修改工会文件</span>
+      <span v-if="data.edit">发布文件资料</span>
+      <span v-if="!data.edit">修改文件资料</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -16,8 +16,8 @@
           <el-form-item label="标题：" prop="title">
             <el-input placeholder="请输入..."  :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
-          <el-form-item label="文件类型：" prop="subType">
-            <el-select :value="data.subType" placeholder="请选择文件类型..." @input="(v)=>setData({subType:v})">
+          <el-form-item label="资料类型：" prop="subType">
+            <el-select :value="data.subType" placeholder="请选择资料类型..." @input="(v)=>setData({subType:v})">
               <el-option v-for="(val,key) in articleType.file" :label="val" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
@@ -27,7 +27,7 @@
           <el-form-item label="同步显示：" prop="sync">
             <el-checkbox-group :value="JSON.parse(data.sync)" @input="(v)=>setData({sync:JSON.stringify(v)})">
               <el-checkbox :label="0">网站</el-checkbox>
-              <!--<el-checkbox :label="1">服务号</el-checkbox>-->
+              <el-checkbox :label="1">服务号</el-checkbox>
               <el-checkbox :label="2">企业号</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
@@ -86,7 +86,7 @@
       },
     },
     created () {
-      this.setData({type: 4, sync: '[0,2]'});
+      this.setData({type: 4, sync: '[0,1,2]'});
       this.getArticle()
     },
     destroyed () {
