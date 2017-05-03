@@ -39,7 +39,7 @@
                             <a :href="item.href" target="_blank" v-if="item.href">{{item.name}}</a>
                           </el-col>
                           <el-col :span="3" v-for="(val,key) in articleType[item.type]" :key="index+key" v-if="item.type">
-                            <router-link :to="item.path+key" :class="['menu-a',{'active':path==item.path+key}]">{{val}}</router-link>
+                            <router-link :to="item.path+key" :class="['menu-a',{'active':path==item.path+key}]">{{val.name?val.name:val}}</router-link>
                           </el-col>
                           </span>
                     </el-row>

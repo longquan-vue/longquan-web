@@ -129,10 +129,8 @@ export default [
       {path: `${ROOT}/wzzy/news/5/:type`, component: require('../view/wzzy/news/newsMess.vue'), name: 'newsMess'},
       {path: `${ROOT}/wzzy/news/7/:type`, component: require('../view/wzzy/news/newsAct.vue'), name: 'newsAct'},
       //办事指南
-      {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
-      {path: `${ROOT}/wzzy/guide/2`, component: require('../view/wzzy/guide/guideService.vue'), name: 'guideService'},
-      {path: `${ROOT}/wzzy/guide/3`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
-      {path: `${ROOT}/wzzy/guide/4`, component: require('../view/wzzy/guide/guideModel.vue'), name: 'guideModel'},
+      {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
+      {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
       //工会服务
       {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceHelp.vue'), name: 'serviceHelp'},
       {path: `${ROOT}/wzzy/service/2`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},

@@ -157,10 +157,8 @@ export default {
     {
       title: '办事指南', name: 'guide', url: `${ROOT}/wzzy/guide/1`,
       children: [
-        {name: '职工维权', url: `${ROOT}/wzzy/guide/1`},
-        {name: '职工服务', url: `${ROOT}/wzzy/guide/2`},
-        {name: '工会组建', url: `${ROOT}/wzzy/guide/3`},
-        {name: '劳模服务', url: `${ROOT}/wzzy/guide/4`},
+        {type: 'guide', path: `${ROOT}/wzzy/guide/8/`},
+        {name: '工会组建', url: `${ROOT}/wzzy/guide/1`},
       ]
     },
     {
