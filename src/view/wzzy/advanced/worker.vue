@@ -18,14 +18,14 @@
                             <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>优秀职工</a></div>
                             <div class="wzzy-sub-content">
                                 <div class="modelWorker">
-                                    <el-row :gutter="10" class="wzzy-tab-cont-list">
-                                        <el-col :span="6" v-for="i in 12" :key="i">
+                                    <el-row :gutter="10">
+                                        <el-col :span="6" v-for="(item,index) in newsList" :key="index">
                                             <div class="img-card">
-                                                <img :src="'../../../../static/wx/img/'+i+'.jpg'">
+                                                <img :src="item.picUrl">
                                                 <div class="card-bg">
-                                                    <h2>成龙</h2>
-                                                    <p>维修工决赛第一名</p>
-                                                    <a @click="go(['workerDetail','xzdqwr1231a'])">查看详情</a>
+                                                    <h2>{{item.title}}</h2>
+                                                    <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
+                                                    <router-link :to="'/view/wzzy/workerDetail/'+item.id">查看详情</router-link>
                                                 </div>
                                             </div>
                                         </el-col>
@@ -54,16 +54,18 @@
     import tip from '../components/tips.vue'
     import someIcon from '../components/someIcon.vue'
     import lastDynamic from '../components/lastDynamic.vue'
+    import {findArticleApi} from '../../../api/articleApi'
     export default{
         data(){
             return{
+                newsList: [],
             }
         },
         components:{
             tip,someIcon,lastDynamic
         },
         computed: {
-            ...mapGetters([ 'page','list']),
+            ...mapGetters([ 'page','list','articleType']),
             active(){
                 console.log(this.$route.path.replace('/view/wzzy/',''));
                 return this.$route.path.replace('/view/wzzy/','');
@@ -72,9 +74,21 @@
         methods:{
             ...mapActions(['go','clear','getMine','changePage']),
             ...filters,
+            getNews(){
+                findArticleApi({
+                    page: 1,
+                    pageSize: 4,
+                    filed: ['subType'],
+                    keyWord: ['1493121726821']
+                }, 0, 1).then((data) => {
+                    console.log('data.list',data.list);
+                    this.newsList = data.list;
+                });
+
+            }
         },
         created () {
-
+            this.getNews();
         },
         destroyed(){
 
