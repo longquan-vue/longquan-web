@@ -59,7 +59,7 @@
             findArticleApi({
                 page: 1,
                 pageSize: 10,
-            }, 0, 0).then(async (data) => this.tipsList = data.list);
+            }, 0, 0).then((data) => this.tipsList = data.list);
             setInterval(()=>{
                 this.tipsList = [...this.tipsList.filter((item,index)=>index>0),this.tipsList[0]];
             },3000)
