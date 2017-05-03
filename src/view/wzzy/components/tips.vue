@@ -11,7 +11,7 @@
             <div class="border-content" style="border-top: none;height: 220px;">
                 <div class="wzzy-tab-cont-list">
                     <transition-group name="flip-tip" tag="p">
-                        <a v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item}}</span> <i>2016-04-15</i></a>
+                        <a v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a>
                     </transition-group>
                 </div>
             </div>
@@ -39,18 +39,7 @@
     export default{
         data(){
             return{
-                tipsList:[
-                    '龙泉驿区总工会2015年度部门决算填报说明',
-                    '关于举办2016年龙泉驿区羽毛球团体比赛的通知',
-                    '关于举办2017年成都百万职工技能大赛茶艺选拔',
-                    '关于开展“同心缘”单身情感联谊活动的通知',
-                    '关于举办2017年成都市龙泉驿区第二届气排球比',
-                    '关于开展第一期企业班组长能力素质提升培训',
-                    '龙工发[2017] 23号龙泉驿区总工会走基层慰问演出活动的通知',
-                    '龙泉驿区总工会召开“三室一制”工作部署及经验分享会',
-                    '成都经开区汽车行业工会联合会召开一届三次全会'
-                ],
-                activeIndex: 0
+                tipsList:[],
             }
         },
         components:{
@@ -67,8 +56,12 @@
 
         },
         created () {
+            findArticleApi({
+                page: 1,
+                pageSize: 10,
+            }, 0, 0).then(async (data) => this.tipsList = data.list);
             setInterval(()=>{
-                this.tipsList = _.shuffle(this.tipsList)
+                this.tipsList = [...this.tipsList.filter((item,index)=>index>0),this.tipsList[0]];
             },3000)
         },
         destroyed(){
