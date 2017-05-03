@@ -37,6 +37,8 @@ export const typeFilter = (type, idx) => type ? type[idx] : '无'
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
 //限制字数
 export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l) + '...' : str;
+//过滤文字
+export const strFilter = (str = '') =>str.replace(/<[^>]+>/g,'');
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
@@ -87,6 +89,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 
 export default {
   filesNumFilter,
+    strFilter,
   filesFilter,
   encode,
   decode,

@@ -13,19 +13,7 @@
         </div>
         <transition-group enter-active-class="animated fadeIn">
             <div class="wzzy-tab-cont" v-show="activeName=='first'" :key="1">
-                <div class="wzzy-tab-cont-head">
-                    <a><img src="../../../../static/wx/test/test1.jpg"></a>
-                    <div class="wzzy-tab-cont-head-mess">
-                        <h2>中央第五环境保护督察组向重庆市反馈督察情况</h2>
-                        <p>2016-04-15 10:30</p>
-                        <div>3月9日下午，由市委宣传部、市卫计委、市总工会、市商务委、市工商联等部门组成的成都市创建厂务公开民主管理示范单位复查验收组一行在区总工会、区卫计局等部门的参与下到我区2家成都市厂务公开民主管理示范创建申报单位（四川省远大专用凭...</div>
-                    </div>
-                </div>
-                <el-row :gutter="20" class="wzzy-tab-cont-list">
-                    <el-col :span="12" v-for="i in 12" :key="i">
-                        <a><span>第二届世界互联网大会发布《乌镇倡议》</span> <i>2016-04-15</i></a>
-                    </el-col>
-                </el-row>
+                <tabCont :newsList="newsList"></tabCont>
             </div>
             <div class="wzzy-tab-cont" v-show="activeName=='second'" :key="2">
                 <div class="wzzy-tab-cont-head">
@@ -65,14 +53,18 @@
         }
         .wzzy-tab-cont{
             .wzzy-tab-cont-head{
-                padding: 20px 0;border-bottom: 1px solid #E7E7E7;
+                padding: 20px 0;border-bottom: 1px solid #E7E7E7;min-height: 174px;
                 > a{ float: left;width: 240px;height: 134px;margin-right: 20px;
                     img{ width: 100%;height: 100%;}
                 }
                 .wzzy-tab-cont-head-mess{
-                    h2{ font-size: 18px;color: #333;margin-bottom: 10px;}
+                    h2{ font-size: 18px;color: #333;margin-bottom: 10px;
+                        a{ color: #333;
+                            &:hover{ color: #BC0000;}
+                        }
+                    }
                     p{ font-size: 14px; color: #818181;margin-bottom: 16px;}
-                    div{ font-size: 14px;color: #8a8a8a;line-height: 24px;}
+                    div{ font-size: 14px;color: #8a8a8a;line-height: 24px;text-align: justify;}
                 }
             }
             .wzzy-tab-cont-list{
@@ -97,14 +89,16 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import {findArticleApi} from '../../../api/articleApi'
+    import tabCont from '../components/tabCont.vue'
     export default{
         data(){
             return{
-                activeName: 'first'
+                activeName: 'first',
+                newsList:[]
             }
         },
         components:{
-
+            tabCont
         },
         computed: {...mapGetters([ 'page','list']),
         },
@@ -115,8 +109,11 @@
                 console.log(tab, event);
             }
         },
-        created () {
-
+        async created () {
+            await findArticleApi({page:1,pageSize:13},0,5).then((data)=>{
+                this.newsList = data.list;
+                console.log(this.newsList);
+            });
         },
         destroyed(){
 

@@ -1,5 +1,5 @@
 <style lang="less">
-    .codeBox{
+    #codeBox{
         text-align: center;padding: 100px 0;
         p{ color: #666666;font-size: 16px;}
         img{ }
@@ -19,7 +19,7 @@
                                     <el-breadcrumb-item>微信公众号</el-breadcrumb-item>
                                 </el-breadcrumb>
                             </div>
-                            <div class="codeBox">
+                            <div class="codeBox" id="codeBox">
                                 <p>扫码关注微信公众号</p>
                                 <img src="../../../../static/wzzy/code.jpg">
                             </div>

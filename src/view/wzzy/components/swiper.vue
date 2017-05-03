@@ -8,10 +8,10 @@
                 </div>
                 <div class="wzzy-swiper-item-right">
                     <h2>
-                        <span>头条新闻</span>{{item.title}}
+                        <span>头条新闻</span><router-link :to="'messageDetail/'+item.id">{{item.title}}</router-link>
                     </h2>
                     <p>{{date3Filter(item.created)}}</p>
-                    <div>{{limitFilter(item.summary,80)}}</div>
+                    <div v-html="limitFilter(strFilter(decode(item.content)),80)"></div>
                 </div>
             </div>
         </transition-group>
@@ -46,9 +46,12 @@
                             border-bottom: 5px solid transparent;
                         }
                     }
+                    a{ color: #333;
+                        &:hover{ color: #BC0000;}
+                    }
                 }
                 p{ margin-bottom: 10px;color: #818181;font-size: 14px;}
-                div{ color: #818181;font-size: 14px;line-height: 25px;}
+                div{ color: #818181;font-size: 14px;line-height: 25px; text-align: justify;}
             }
         }
         .tab-a{
