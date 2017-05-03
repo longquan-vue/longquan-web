@@ -18,6 +18,12 @@
                 <template slot="prepend">名称：</template>
               </el-input>
             </el-col>
+            <!--<el-col :span="5">-->
+              <!--<el-radio-group :value="data.repetition" @input="(v)=>setData({repetition:v})">-->
+                <!--<el-radio :label="0">单日可以重复投票给同一对象</el-radio>-->
+                <!--<el-radio :label="1">单日不能重复投票给同一对象</el-radio>-->
+              <!--</el-radio-group>-->
+            <!--</el-col>-->
             <el-col :span="2">
               <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
             </el-col>

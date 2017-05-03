@@ -316,7 +316,7 @@ const createArticle = ({commit, state}) => createArticleApi(state.data).then(() 
 // 修改文章
 const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 设置头条
-const topArticle = ({commit, state},data) => updateArticleApi(data).then(() => success('设置成功！')).catch(() => error('设置失败！'))
+const topArticle = ({commit, state}, {id, top, idx}) => updateArticleApi({id, top}).then(() => success('设置成功！').then(() => commit(CHANGE_LIST, [`${idx}.top`, top]))).catch(() => error('设置失败！'))
 // 获取文章详情
 const getArticle = ({commit, state}) => {
   const {params:{id}}=state.route;

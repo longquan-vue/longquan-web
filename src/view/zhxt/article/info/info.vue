@@ -22,10 +22,10 @@
           <MyColumn prop="num" label="浏览次数" min-width="110"/>
           <MyColumn prop="adminName" label="文章发布者" min-width="140"/>
           <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="170"/>
-          <MyColumn label="操作" width="120px">
+          <MyColumn label="操作" width="150">
             <template scope="scope">
               <el-button type="text" size="small" @click="go(['infoEdit',scope.row.id])">编辑</el-button>
-              <el-button type="text" size="small" @click="topArticle({id:scope.row.id,top:1})">设置头条</el-button>
+              <el-button type="text" size="small" @click="topArticle({id:scope.row.id,top:scope.row.top==1?0:1,idx:scope.$index})">{{scope.row.top==1?'取消头条':'设置头条'}}</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>
