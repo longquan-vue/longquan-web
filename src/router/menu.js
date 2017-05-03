@@ -49,14 +49,6 @@ export default {
             {title: '先进人物统计', path: `${ROOT}/zhxt/article/advancedCount`}
           ]
         },
-        {
-          title: '资料中心管理',
-          children: [
-            {title: '资料中心列表', path: `${ROOT}/zhxt/article/resource`},
-            {title: '资料类型设置', path: `${ROOT}/zhxt/article/resourceSetting`},
-            {title: '资料中心统计', path: `${ROOT}/zhxt/article/resourceCount`}
-          ]
-        },
       ]
     },
     {
