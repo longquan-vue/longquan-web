@@ -8,7 +8,7 @@
         </div>
         <div class="fastEnter">
             <el-row :gutter="10">
-                <el-col :span="6" v-for="type in articleType.guide">
+                <el-col :span="6" v-for="(type,idx) in articleType.guide" :key="idx">
                     <a><img :src="type.url"></a>
                 </el-col>
                 <el-col :span="6">

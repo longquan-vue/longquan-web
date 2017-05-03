@@ -1,4 +1,4 @@
-import {request} from './ajax'
+import {request} from "./ajax";
 const BASE_PATH = '/article';
 
 //创建文章
@@ -12,10 +12,17 @@ export const updateArticleApi = (data) => request({
   data
 });
 //搜索文章列表
-export const findArticleApi = (data, del = 0, type = -1) => request({
-  url: `${BASE_PATH}/find/${del}/${type}`,
-  data
-});
+export const findArticleApi = (data = {}, del = 0, type = -1) => {
+  const sync = ['wzzy', 'fwh', 'qyh'].findIndex((type) => type == window.location.pathname.split('/')[2])
+  if (sync != -1) {
+    data.filed = [...data.filed || [], 'sync']
+    data.keyWord = [...data.keyWord || [], '' + sync]
+  }
+  return request({
+    url: `${BASE_PATH}/find/${del}/${type}`,
+    data
+  });
+}
 //获取文章详情
 export const getArticleApi = (id) => request({
   url: `${BASE_PATH}/get/${id}`
