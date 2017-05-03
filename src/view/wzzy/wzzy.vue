@@ -16,16 +16,11 @@
   import wzzyHeader from './header/header.vue'
   import wzzyFooter from './footer/footer.vue'
   import Qrcode from './components/Qrcode.vue'
-  import {mapActions} from 'vuex'
   export default {
     components: {
       wzzyHeader,
       wzzyFooter,
       Qrcode
-    },
-    methods: {...mapActions(['getSetting'])},
-    created () {
-      this.getSetting();
     },
   }
 </script>

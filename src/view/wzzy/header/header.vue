@@ -27,18 +27,21 @@
                 <div class="header-menu">
                     <el-row :gutter="20">
                         <el-col :span="3" v-for="(item,index) in menu" :key="index">
-                            <a @click="toUrl({path:item.children?item.url+item.children[0].url:item.url})" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
+                            <a @click="toUrl({path:item.url})" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
                         </el-col>
                     </el-row>
                 </div>
                 <div class="header-menu-sub" v-show="child.show && child.children" @mouseover="child.show=true" @mouseout="child.show=false">
                     <el-row :gutter="20">
-                        <el-col :span="3" v-for="(item,index) in child.children" :key="index">
-                            <!--<a @click="toUrl({path:child.url+item.url})" :class="['menu-a',{'active':path==child.url+item.url}]">{{item.name}}</a>-->
-                            <router-link :to="child.url+item.url" :class="['menu-a',{'active':path==child.url+item.url}]" v-if="item.name!='市民服务' && item.name!='政务微博'">{{item.name}}</router-link>
-                            <a href="http://www.ichuangye.cn" target="_blank" class="" v-if="item.name=='市民服务'">市民服务</a>
-                            <a href="http://weibo.com/u/2178811917?refer_flag=1001030101_&is_all=1" target="_blank" class="" v-if="item.name=='政务微博'">政务微博</a>
-                        </el-col>
+                        <span v-for="(item,index) in child.children" :key="index">
+                          <el-col :span="3" v-if="!item.type">
+                            <router-link :to="item.url" :class="['menu-a',{'active':path==item.url}]" v-if="item.url">{{item.name}}</router-link>
+                            <a :href="item.href" target="_blank" v-if="item.href">{{item.name}}</a>
+                          </el-col>
+                          <el-col :span="3" v-for="(val,key) in articleType[item.type]" :key="index+key" v-if="item.type">
+                            <router-link :to="item.path+key" :class="['menu-a',{'active':path==item.path+key}]">{{val}}</router-link>
+                          </el-col>
+                          </span>
                     </el-row>
                 </div>
             </div>
@@ -46,8 +49,7 @@
     </div>
 </template>
 <script type="es6">
-    import { mapGetters } from 'vuex'
-    import { mapActions } from 'vuex'
+    import { mapGetters ,mapActions} from 'vuex'
     import filters from '../../../filters'
     import moment from 'moment'
     import menu from '../../../router/menu'
@@ -67,7 +69,7 @@
             moment
         },
         computed: {
-            ...mapGetters([ 'page','list','path']),
+            ...mapGetters([ 'page','list','path','articleType']),
             today(){
                 return moment(new Date()).format('YYYY年MM月DD日')
             },
@@ -76,7 +78,7 @@
             },
         },
         methods:{
-            ...mapActions(['toUrl','clear','getMine','changePage','changeSys']),
+            ...mapActions(['toUrl','clear','getMine','changePage','changeSys','getSetting']),
             ...filters,
             showSub(index){
                 this.idx = index;
@@ -84,7 +86,7 @@
             }
         },
         created () {
-            console.log(moment(new Date()).format())
+           this.getSetting()
         },
         destroyed(){
 
