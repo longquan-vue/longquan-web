@@ -315,6 +315,8 @@ const findArticle = async({commit, state}, [type = -1, del = 0]) => commit(GET_D
 const createArticle = ({commit, state}) => createArticleApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改文章
 const updateArticle = ({commit, state}) => updateArticleApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+// 设置头条
+const topArticle = ({commit, state},data) => updateArticleApi(data).then(() => success('设置成功！')).catch(() => error('设置失败！'))
 // 获取文章详情
 const getArticle = ({commit, state}) => {
   const {params:{id}}=state.route;
@@ -466,4 +468,5 @@ export default {
   createDep,//创建工会
   updateDep,//修改工会
   auditDep,//审核工会
+  topArticle,//设置头条
 }

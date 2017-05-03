@@ -24,7 +24,8 @@
           <MyColumn prop="created" label="发布时间" :formatter="({created})=>date3Filter(created)" min-width="170"/>
           <MyColumn label="操作" width="120px">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go(['infoEdit',scope.row.id])"> 编辑</el-button>
+              <el-button type="text" size="small" @click="go(['infoEdit',scope.row.id])">编辑</el-button>
+              <el-button type="text" size="small" @click="topArticle({id:scope.row.id,top:1})">设置头条</el-button>
               <el-button size="small" type="text" @click="del(scope.$index, scope.row)">删除</el-button>
             </template>
           </MyColumn>
@@ -54,7 +55,7 @@
     components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list', 'articleType'])},
     methods: {
-      ...mapActions(['clear', 'findArticle', 'changeSelect', 'changePage', 'delArticle', 'go']),
+      ...mapActions(['clear', 'findArticle', 'changeSelect', 'changePage', 'delArticle', 'go', 'topArticle']),
       ...filter,
       del(idx, {id, name}) {
         confirm(`确定删除新闻资讯[${name}]吗?`, 'warning').then(() => this.delArticle([id, idx]))

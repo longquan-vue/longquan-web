@@ -26,11 +26,11 @@ export default {
           ]
         },
         {
-          title: '工会资讯管理',
+          title: '新闻资讯管理',
           children: [
-            {title: '工会资讯列表', path: `${ROOT}/zhxt/article/info`},
-            {title: '资讯类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
-            {title: '工会资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
+            {title: '新闻资讯列表', path: `${ROOT}/zhxt/article/info`},
+            {title: '新闻类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
+            {title: '新闻资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
           ]
         },
         {

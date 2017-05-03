@@ -28,11 +28,11 @@ export default [
       {path: `${ROOT}/zhxt/article/activity/:id`, component: require('../view/zhxt/article/activity/activityEdit.vue'), name: 'actEdit', meta: {title: '修改工会文件'}}, // 修改工会文件
       {path: `${ROOT}/zhxt/article/activitySetting`, component: require('../view/zhxt/article/activity/activitySetting.vue'), name: 'actSetting', meta: {title: '文件类型设置'}}, // 工会文件类型设置
       {path: `${ROOT}/zhxt/article/activityCount`, component: require('../view/zhxt/article/activity/activityCount.vue'), name: 'actCount', meta: {title: '工会文件统计'}}, // 工会文件类型设置
-      /*文章 -- 工会资讯管理*/
-      {path: `${ROOT}/zhxt/article/info`, component: require('../view/zhxt/article/info/info.vue'), name: 'info', meta: {title: '工会资讯列表'}}, // 工会文件列表
-      {path: `${ROOT}/zhxt/article/info/:id`, component: require('../view/zhxt/article/info/infoEdit.vue'), name: 'infoEdit', meta: {title: '修改工会资讯'}}, // 修改工会文件
-      {path: `${ROOT}/zhxt/article/infoSetting`, component: require('../view/zhxt/article/info/infoSetting.vue'), name: 'infoSetting', meta: {title: '资讯类型设置'}}, // 工会文件类型设置
-      {path: `${ROOT}/zhxt/article/infoCount`, component: require('../view/zhxt/article/info/infoCount.vue'), name: 'infoCount', meta: {title: '工会资讯统计'}}, // 工会文件类型设置
+      /*文章 -- 新闻资讯管理*/
+      {path: `${ROOT}/zhxt/article/info`, component: require('../view/zhxt/article/info/info.vue'), name: 'info', meta: {title: '新闻资讯列表'}}, // 工会文件列表
+      {path: `${ROOT}/zhxt/article/info/:id`, component: require('../view/zhxt/article/info/infoEdit.vue'), name: 'infoEdit', meta: {title: '修改新闻资讯'}}, // 修改工会文件
+      {path: `${ROOT}/zhxt/article/infoSetting`, component: require('../view/zhxt/article/info/infoSetting.vue'), name: 'infoSetting', meta: {title: '新闻类型设置'}}, // 工会文件类型设置
+      {path: `${ROOT}/zhxt/article/infoCount`, component: require('../view/zhxt/article/info/infoCount.vue'), name: 'infoCount', meta: {title: '新闻资讯统计'}}, // 工会文件类型设置
       /*文章 -- 办事指南管理*/
       {path: `${ROOT}/zhxt/article/guide`, component: require('../view/zhxt/article/guide/guide.vue'), name: 'guide', meta: {title: '办事指南列表'}}, // 工会文件列表
       {path: `${ROOT}/zhxt/article/guide/:id`, component: require('../view/zhxt/article/guide/guideEdit.vue'), name: 'guideEdit', meta: {title: '修改办事指南'}}, // 修改工会文件
