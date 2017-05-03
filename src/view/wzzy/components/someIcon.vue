@@ -3,16 +3,16 @@
         <div class="border-content">
             <el-row :gutter="10">
                 <el-col :span="12">
-                    <a class="someIcon">微信公众号</a>
+                    <router-link to="chat/6" class="someIcon">微信公众号</router-link>
                 </el-col>
                 <el-col :span="12">
-                    <a class="someIcon">微信公众号</a>
+                    <a href="http://weibo.com/u/2178811917?refer_flag=1001030101_&is_all=1&sudaref=localhost&retcode=6102" class="someIcon">政务微博</a>
                 </el-col>
                 <el-col :span="12">
-                    <a class="someIcon">政务微博</a>
+                    <router-link to="" class="someIcon">在线咨询</router-link>
                 </el-col>
                 <el-col :span="12">
-                    <a class="someIcon">资料下载</a>
+                    <router-link to="files" class="someIcon">资料下载</router-link>
                 </el-col>
             </el-row>
         </div>

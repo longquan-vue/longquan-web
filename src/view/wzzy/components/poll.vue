@@ -1,28 +1,19 @@
 <template>
     <div class="wzzy-tab">
-        <div class="wzzy-tab-head">
-            <div class="tab-head-title">
-                <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>投票·调查</span>
-            </div>
-            <a class="tab-head-more">更多 > </a>
-        </div>
 
+        <div class="poll-head-tab">
+            <span :class="{'active':activeIndex==1}" @click="change(1)">投票选举</span>
+            <span :class="{'active':activeIndex==2}" @click="change(2)">问卷调查</span>
+            <a>更多 > </a>
+        </div>
         <div class="border-content" style="border-top: none;">
             <ul class="wzzy-poll-ul">
-                <li class="wzzy-poll-li" v-for="i in 2">
-                    <div class="wzzy-poll-head" v-if="i==1">
-                        <img src="../../../../static/wzzy/toupiao.png" >
-                        <a>参与投票 ></a>
-                    </div>
-                    <div class="wzzy-poll-head" v-if="i==2">
-                        <img src="../../../../static/wzzy/wenjuan.png" >
-                        <a>参与调查 ></a>
-                    </div>
+                <li class="wzzy-poll-li" v-for="(item,index) in tipsList">
                     <div class="wzzy-poll-title">
-                       <router-link to="">孙政才主持召开市委常委会会议，听取扶贫开发工作成效考核情况的汇报。</router-link>
+                       <router-link to="">{{item.title}}</router-link>
                     </div>
-                    <div class="wzzy-poll-content">区总工会、区卫计局等部门的参与下到我区2家成都市厂务公开民主管理示范创建申报单位（四川省远大专用凭证印务有限公司、...</div>
+                    <div class="wzzy-poll-content" v-html="limitFilter(item.description,60)"></div>
+                    <a class="wzzy-poll-a">参与投票 > </a>
                 </li>
             </ul>
         </div>
@@ -34,6 +25,15 @@
         .wzzy-poll-li:not(:last-child){ padding-bottom: 20px;border-bottom: 1px solid #E7E7E7;margin-bottom: 20px;}
     }
 
+    .poll-head-tab{
+        line-height: 38px;border-bottom: 1px solid #BC0000;overflow: hidden;
+        span{ font-size: 16px;width: 90px;float: left;height: 38px;text-align: center;cursor: pointer;
+            &.active{ background-color: #BC0000;color: #ffffff;border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+        }
+        a{ float: right;color: #999;font-size: 14px;}
+    }
     .wzzy-poll-head{ margin-bottom: 10px;overflow: hidden;
         img{ float: left;}
         a{ float: right;color: #bc0000;font-size: 14px;  }
@@ -43,20 +43,19 @@
         &:hover a{ color: #bc0000;}
     }
     .wzzy-poll-content{ font-size: 14px;color: #999;line-height: 20px;}
+    .wzzy-poll-a{ color: #BC0000;display: block;text-align: right;font-size: 14px;padding-top: 10px;}
 
 </style>
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
-    import {findArticleApi} from '../../../api/articleApi'
+    import {pollListApi} from '../../../api/pollApi'
     export default{
         data(){
             return{
-                tipsList:[
-
-                ],
-                activeIndex: 0
+                tipsList:[],
+                activeIndex: 1
             }
         },
         components:{
@@ -66,14 +65,34 @@
             ...mapGetters([ 'page','list']),
         },
         methods:{
-            ...mapActions(['go','clear']),
+            ...mapActions(['go','clear','getPollList', 'changeSelect']),
             ...filters,
+            change(index){
+                this.clear();
+                this.activeIndex = index;
+                if (this.activeIndex == 1){
+                    this.getList('type',0)
+                }else {
+                    this.getList('type',1)
+                }
+            },
+            getList(filed,keyWord){
+                pollListApi({
+                    page: 1,
+                    pageSize: 3,
+                    filed: [filed],
+                    keyWord: [keyWord]
+                }).then((data)=>{
+                    console.log(data.list);
+                    this.tipsList = data.list
+                });
+            }
         },
-        created () {
-
+        async created () {
+            await this.getList('type',0);
         },
         destroyed(){
-
+            this.clear()
         }
     }
 </script>

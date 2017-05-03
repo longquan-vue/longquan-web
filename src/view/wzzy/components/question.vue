@@ -1,8 +1,8 @@
 <template>
     <div class="wzzy-tab">
-        <div class="border-content">
-            <a class="ask-ques" @click="dialogVisible=true">我要咨询</a>
-        </div>
+
+        <a class="ask-ques" @click="dialogVisible=true">我要咨询</a>
+
         <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 我要咨询
@@ -27,6 +27,7 @@
 </template>
 <style lang="less">
     .ask-ques{ display: block;width: 100%;height: 40px;border-radius: 4px;cursor: pointer;
+        margin-bottom: 20px;
         color: #BC0000;font-size: 16px;;line-height: 40px;text-align: center;
         border: 1px solid #BC0000;
         -webkit-transition: all 0.3s;
