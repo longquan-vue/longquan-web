@@ -28,6 +28,7 @@
               <poll></poll>
               <adver></adver>
               <echo></echo>
+              <question></question>
             </div>
           </el-col>
         </el-row>
@@ -58,7 +59,7 @@
       return {}
     },
     components: {
-      wzzySwiper, newsDynamic, assessMent, service, activityShow, files, modelWorker, aboutLink, tip, someIcon, poll, adver, echo
+      wzzySwiper, newsDynamic, assessMent, service, activityShow, files, modelWorker, aboutLink, tip, someIcon, poll, adver, echo,
     },
     computed: {
       ...mapGetters(['page', 'list']),

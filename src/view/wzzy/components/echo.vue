@@ -10,16 +10,15 @@
 
         <div class="border-content" style="border-top: none;">
             <ul class="echo-ul">
-                <li v-for="i in 3">
+                <li v-for="(item,index) in list">
                     <div class="echo-title">
-                       {{i}} 问：你喜欢什么样的颜色呢？
+                       问：{{item.title}}
                     </div>
-                    <div class="echo-cont">
-                        我大概什么颜色都喜欢哦，不过最喜欢的颜色当然是蓝色啦！
-                    </div>
+                    <div class="echo-cont" v-html="limitFilter(strFilter(decode(item.answer)),100)"></div>
                 </li>
             </ul>
-            <a class="askQuestion">我要咨询</a>
+            <!--<a class="askQuestion">我要咨询</a>-->
+            <question></question>
         </div>
 
     </div>
@@ -37,3 +36,40 @@
     }
 </style>
 
+<script type="es6">
+    import { mapGetters } from 'vuex'
+    import { mapActions } from 'vuex'
+    import filters from '../../../filters'
+    import {findEchoApi} from '../../../api/echoApi'
+    import question from '../components/question.vue'
+    export default{
+        data(){
+            return{
+                list:[],
+                activeIndex: 0
+            }
+        },
+        components:{
+            question
+        },
+        computed: {
+            ...mapGetters([ 'page']),
+        },
+        methods:{
+            ...mapActions(['go','clear']),
+            ...filters,
+        },
+        created () {
+            findEchoApi({
+                page: 1,
+                pageSize: 3,
+            }).then((data)=>{
+                console.log("echo",data.list);
+                this.list = data.list;
+            })
+        },
+        destroyed(){
+
+        }
+    }
+</script>
