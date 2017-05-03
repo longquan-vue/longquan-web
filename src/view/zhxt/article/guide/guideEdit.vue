@@ -18,7 +18,7 @@
           </el-form-item>
           <el-form-item label="类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择类型..." @input="(v)=>setData({subType:v})">
-              <el-option v-for="(val,key) in articleType.guide" :label="val" :key="key" :value="key"/>
+              <el-option v-for="(item,key) in articleType.guide" :label="item.name" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
           <!--<el-form-item label="配图：" prop="pics">-->

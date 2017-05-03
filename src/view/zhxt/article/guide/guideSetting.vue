@@ -10,21 +10,16 @@
       </a>
     </div>
     <div class="contentBoxCont">
-      <el-form :model="type" ref="guide" label-width="120px" class="demo-ruleForm">
+      <el-form :model="type" ref="guide" label-width="120px">
         <el-form-item label="类型配置：" required>
-          <el-row v-for="(val,key) in type.guide" :key="key">
-            <el-col :span="22">
-              <el-input placeholder="请输入..."  :value="val" @input="(v)=>type.guide[key] = v">
-                <template slot="prepend">名称：</template>
-              </el-input>
-            </el-col>
-            <el-col :span="2">
-              <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
-            </el-col>
-          </el-row>
-          <el-row>
-            <img src="/static/zhxt/add.png" class="add" alt="add" @click="$set(type.guide,new Date().getTime(),'')">
-          </el-row>
+          <div v-for="(item,key) in type.guide" class="article_guide" :key="key">
+            <Avatar :success="(v)=>item.url = v" width="200" height="200" :url="item.url"/>
+            <el-input placeholder="请输入..." :value="item.name" @input="(v)=>item.name = v">
+              <template slot="prepend">名称：</template>
+            </el-input>
+            <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
+          </div>
+          <div class="article_guide"><img src="/static/zhxt/add.png" class="add" alt="add" @click="$set(type.guide,new Date().getTime(),{name:'',url:''})"></div>
         </el-form-item>
         <el-form-item style="text-align: center">
           <el-button type="primary" @click="submitForm">保存</el-button>
@@ -36,12 +31,14 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
+  import Avatar from '../../../../components/public/Avatar.vue'
   export default{
     data(){
       return {
         type: {guide: {}}
       }
     },
+    components: {Avatar},
     computed: {...mapGetters(['articleType'])},
     methods: {
       ...mapActions(['getSetting', 'saveSys', 'changeSys', 'go']),

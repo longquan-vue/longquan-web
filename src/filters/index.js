@@ -33,6 +33,7 @@ export const spotType = ({type}) => ['多人项目', '单人项目', '双人项�
 export const entryType = ({entry}) => ['所有用户可报名', '认证用户可报名'][entry] || '所有用户可报名';
 export const stateType = ({status}) => ['未开始', '进行中', '暂停', '已结束'][status] || '未开始';
 export const typeFilter = (type, idx) => type ? type[idx] : '无'
+export const type2Filter = (type, idx) => type && type[idx] && type[idx].name ? type[idx].name : '无'
 //筛选过滤器
 export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : null
 //限制字数
@@ -90,6 +91,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 export default {
   filesNumFilter,
     strFilter,
+  type2Filter,
   filesFilter,
   encode,
   decode,
