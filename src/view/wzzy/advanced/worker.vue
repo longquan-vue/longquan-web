@@ -2,48 +2,19 @@
 
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="17">
-                        <div class="grid-left">
-                            <div class="the-place">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>先进人物</el-breadcrumb-item>
-                                    <el-breadcrumb-item>优秀职工</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>优秀职工</a></div>
-                            <div class="wzzy-sub-content">
-                                <div class="modelWorker">
-                                    <el-row :gutter="10">
-                                        <el-col :span="6" v-for="(item,index) in newsList" :key="index">
-                                            <div class="img-card">
-                                                <img :src="item.picUrl">
-                                                <div class="card-bg">
-                                                    <h2>{{item.title}}</h2>
-                                                    <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
-                                                    <router-link :to="'/view/wzzy/workerDetail/'+item.id">查看详情</router-link>
-                                                </div>
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                </div>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="7">
-                        <div class="grid-right grid-right-sub">
-                            <tip></tip>
-                            <lastDynamic></lastDynamic>
-                            <someIcon></someIcon>
-                        </div>
-                    </el-col>
-                </el-row>
-            </div>
-        </div>
+    <div class="modelWorker">
+        <el-row :gutter="10">
+            <el-col :span="6" v-for="(item,index) in newsList" :key="index">
+                <div class="img-card">
+                    <img :src="item.picUrl">
+                    <div class="card-bg">
+                        <h2>{{item.title}}</h2>
+                        <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
+                        <router-link :to="'/view/wzzy/workerDetail/'+item.id">查看详情</router-link>
+                    </div>
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
