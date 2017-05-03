@@ -49,6 +49,14 @@ export default {
             {title: '先进人物统计', path: `${ROOT}/zhxt/article/advancedCount`}
           ]
         },
+        {
+          title: '工会服务管理',
+          children: [
+            {title: '工会服务列表', path: `${ROOT}/zhxt/article/service`},
+            {title: '服务类型设置', path: `${ROOT}/zhxt/article/serviceSetting`},
+            {title: '工会服务统计', path: `${ROOT}/zhxt/article/serviceCount`}
+          ]
+        },
       ]
     },
     {
@@ -167,7 +175,7 @@ export default {
         {name: '困难帮扶', url: `${ROOT}/wzzy/service/1`},
         {name: '招聘信息', url: `${ROOT}/wzzy/service/2`},
         {name: '职工培训', url: `${ROOT}/wzzy/service/3`},
-        {name: '市民服务', href: `http://www.ichuangye.cn`},
+        {name: '市民服务', href: `http://www.longquanyi.gov.cn/index.php?cid=2265`},
       ]
     },
     {
@@ -182,7 +190,7 @@ export default {
       ]
     },
     {
-      title: '先进人物', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
+      title: '工会服务', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
       children: [
         {name: '优秀职工', url: `${ROOT}/wzzy/advanced/1`},
         {name: '劳模风采', url: `${ROOT}/wzzy/advanced/2`},

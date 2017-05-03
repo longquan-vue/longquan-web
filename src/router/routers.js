@@ -43,6 +43,11 @@ export default [
       {path: `${ROOT}/zhxt/article/advanced/:id`, component: require('../view/zhxt/article/advanced/advancedEdit.vue'), name: 'advancedEdit', meta: {title: '修改先进人物'}}, // 修改文件资料
       {path: `${ROOT}/zhxt/article/advancedSetting`, component: require('../view/zhxt/article/advanced/advancedSetting.vue'), name: 'advancedSetting', meta: {title: '先进类型设置'}}, // 文件资料类型设置
       {path: `${ROOT}/zhxt/article/advancedCount`, component: require('../view/zhxt/article/advanced/advancedCount.vue'), name: 'advancedCount', meta: {title: '先进人物统计'}}, // 文件资料类型设置
+      /*文章 -- 工会服务管理*/
+      {path: `${ROOT}/zhxt/article/service`, component: require('../view/zhxt/article/service/service.vue'), name: 'service', meta: {title: '工会服务列表'}}, // 文件资料列表
+      {path: `${ROOT}/zhxt/article/service/:id`, component: require('../view/zhxt/article/service/serviceEdit.vue'), name: 'serviceEdit', meta: {title: '修改工会服务'}}, // 修改文件资料
+      {path: `${ROOT}/zhxt/article/serviceSetting`, component: require('../view/zhxt/article/service/serviceSetting.vue'), name: 'serviceSetting', meta: {title: '服务类型设置'}}, // 文件资料类型设置
+      {path: `${ROOT}/zhxt/article/serviceCount`, component: require('../view/zhxt/article/service/serviceCount.vue'), name: 'serviceCount', meta: {title: '工会服务统计'}}, // 文件资料类型设置
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动
