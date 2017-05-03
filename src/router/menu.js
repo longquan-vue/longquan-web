@@ -165,17 +165,16 @@ export default {
     {
       title: '办事指南', name: 'guide', url: `${ROOT}/wzzy/guide/1`,
       children: [
-        {type: 'guide', path: `${ROOT}/wzzy/guide/8/`},
         {name: '工会组建', url: `${ROOT}/wzzy/guide/1`},
+        {type: 'guide', path: `${ROOT}/wzzy/guide/8/`},
       ]
     },
     {
       title: '工会服务', name: 'service', url: `${ROOT}/wzzy/service/1`,
       children: [
-        {name: '困难帮扶', url: `${ROOT}/wzzy/service/1`},
-        {name: '招聘信息', url: `${ROOT}/wzzy/service/2`},
-        {name: '职工培训', url: `${ROOT}/wzzy/service/3`},
         {name: '市民服务', href: `http://www.longquanyi.gov.cn/index.php?cid=2265`},
+        {name: '招聘信息', url: `${ROOT}/wzzy/service/1`},
+        {type: 'service', path: `${ROOT}/wzzy/service/2/`},
       ]
     },
     {

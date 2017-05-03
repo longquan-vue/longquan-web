@@ -137,9 +137,8 @@ export default [
       {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
       {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
       //工会服务
-      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceHelp.vue'), name: 'serviceHelp'},
-      {path: `${ROOT}/wzzy/service/2`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
-      {path: `${ROOT}/wzzy/service/3`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
+      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
+      {path: `${ROOT}/wzzy/service/2/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
       //互动交流
       {path: `${ROOT}/wzzy/chat/1`, component: require('../view/wzzy/chat/poll.vue'), name: 'chatPoll'},
       {path: `${ROOT}/wzzy/chat/2`, component: require('../view/wzzy/chat/question.vue'), name: 'chatQuestion'},
