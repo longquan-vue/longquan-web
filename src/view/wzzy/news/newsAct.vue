@@ -118,12 +118,13 @@
       ...mapActions(['go', 'clear', 'getMine', 'changePage']),
       ...filters,
       getNews(){
+        const type = this.params.type
         findArticleApi({
           page: 1,
           pageSize: 10,
           filed: ['subType'],
-          keyWord: [this.params.type]
-        }, 0, 7).then((data) => this.$set(this.newsList,this.params.type,data.list));
+          keyWord: [type]
+        }, 0, 7).then((data) => this.$set(this.newsList,type,data.list));
       }
     },
     beforeRouteUpdate (to, from, next) {
