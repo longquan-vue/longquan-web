@@ -88,7 +88,8 @@ const getMine = ({commit, state}, mine) => {
     return new Promise((resolve) => resolve());
   }
   if (mine) {
-    return commit(GET_MINE, mine);
+    commit(GET_MINE, mine);
+    return new Promise((resolve) => resolve());
   }
   if (state.route.path.split('/')[2] == 'fwh') {
     return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {

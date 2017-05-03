@@ -3,21 +3,21 @@
 </style>
 <template>
   <div class="contentBox">
-    <div class="contentBoxtitle"><span>工会资讯列表</span></div>
+    <div class="contentBoxtitle"><span>新闻资讯列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="活动类型" field="subType" :options="articleType.info || {}" :change="change"/>
+        <MySelect title="新闻类型" field="subType" :options="articleType.info || {}" :change="change"/>
         <MySelectInput :options="{'title':'标题'}" def-key="title" :change="change"/>
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
-        <el-button style="float: right" type="primary" @click="go(['infoEdit','create'])" icon="plus">发布工会资讯</el-button>
+        <el-button style="float: right" type="primary" @click="go(['infoEdit','create'])" icon="plus">发布新闻资讯</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" fixed="left"/>
           <MyColumn prop="title" label="标题" min-width="120"/>
           <MyColumn prop="files" label="附件" :formatter="({files})=>filesFilter(files)" min-width="110"/>
-          <MyColumn prop="files" label="资讯类型" :formatter="({subType})=>typeFilter(articleType.info,subType)" min-width="110"/>
+          <MyColumn prop="files" label="新闻类型" :formatter="({subType})=>typeFilter(articleType.info,subType)" min-width="110"/>
           <MyColumn prop="files" label="附件下载次数" :formatter="({files})=>filesNumFilter(files)" min-width="110"/>
           <MyColumn prop="num" label="浏览次数" min-width="110"/>
           <MyColumn prop="adminName" label="文章发布者" min-width="140"/>
@@ -57,7 +57,7 @@
       ...mapActions(['clear', 'findArticle', 'changeSelect', 'changePage', 'delArticle', 'go']),
       ...filter,
       del(idx, {id, name}) {
-        confirm(`确定删除工会资讯[${name}]吗?`, 'warning').then(() => this.delArticle([id, idx]))
+        confirm(`确定删除新闻资讯[${name}]吗?`, 'warning').then(() => this.delArticle([id, idx]))
       },
       change(key, value){
         this.changeSelect({key, value});

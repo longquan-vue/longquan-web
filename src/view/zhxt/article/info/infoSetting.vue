@@ -4,7 +4,7 @@
 <template>
   <div class="contentBox article_docs">
     <div class="contentBoxtitle">
-      <span>资讯类型设置</span>
+      <span>新闻类型设置</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
