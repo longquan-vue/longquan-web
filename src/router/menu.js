@@ -136,64 +136,62 @@ export default {
       ]
     },
   ],
-  wzzy:[
-      { title:'首页',url:`${ROOT}/wzzy/home`,name:'home'},
-      {
-        title:'机构介绍',name:'laborUnion',url:`${ROOT}/wzzy/laborUnion`,
-        children:[
-          {name:'区总介绍',url:`/1`},
-          {name:'区总领导',url:`/2`},
-          {name:'组织机构',url:`/3`},
-        ]
-      },
-      {
-          title:'新闻动态',name:'news',url:`${ROOT}/wzzy/news`,
-          children:[
-              {name:'公示公告', url:`/1`},
-              {name:'工会新闻', url:`/2`},
-              {name: '基层动态', url:`/3`},
-              {name: '区总活动', url:`/4`},
-              {name:'基层活动', url:`/5`},
-          ]
-      },
-      {
-          title:'办事指南',name:'guide',url:`${ROOT}/wzzy/guide`,
-          children:[
-              {name:'职工维权',url:'/1'},
-              {name:'职工服务',url:'/2'},
-              {name:'工会组建',url:'/3'},
-              {name:'劳模服务',url:'/4'},
-          ]
-      },
-      {
-          title:'工会服务',name:'service',url:`${ROOT}/wzzy/service`,
-          children:[
-              {name:'困难帮扶',url:'/1'},
-              {name:'招聘信息',url:'/2'},
-              {name:'职工培训',url:'/3'},
-              {name:'市民服务',url:'/4'},
-          ]
-      },
-      {
-          title:'互动交流',name:'chat',url:`${ROOT}/wzzy/chat`,
-          children:[
-              {name:'投票选举',url:'/1'},
-              {name:'问卷调查',url:'/2'},
-              {name:'回音壁',url:'/3'},
-              // {name:'兴趣联盟',url:'/4'},
-              {name:'政务微博',url:'/5'},
-              {name:'微信公众号',url:'/6'},
-          ]
-      },
-      {
-          title:'先进人物',name:'advanced',url:`${ROOT}/wzzy/advanced`,
-          children:[
-              {name:'优秀职工',url:'/1'},
-              {name:'劳模风采',url:'/2'},
-          ]
-      },
-      {
-          title:'文件·资料',name:'files',url:`${ROOT}/wzzy/files`,
-      },
+  wzzy: [
+    {title: '首页', url: `${ROOT}/wzzy/home`, name: 'home'},
+    {
+      title: '机构介绍', name: 'laborUnion', url: `${ROOT}/wzzy/laborUnion`,
+      children: [
+        {name: '区总介绍', url: `${ROOT}/wzzy/laborUnion/1`},
+        {name: '区总领导', url: `${ROOT}/wzzy/laborUnion/2`},
+        {name: '组织机构', url: `${ROOT}/wzzy/laborUnion/3`},
+      ]
+    },
+    {
+      title: '新闻动态', name: 'news', url: `${ROOT}/wzzy/news/1`,
+      children: [
+        {name: '公示公告', url: `${ROOT}/wzzy/news/1`},
+        {type: 'info', path: `${ROOT}/wzzy/news/5/`},
+        {type: 'activity', path: `${ROOT}/wzzy/news/7/`},
+      ]
+    },
+    {
+      title: '办事指南', name: 'guide', url: `${ROOT}/wzzy/guide/1`,
+      children: [
+        {name: '职工维权', url: `${ROOT}/wzzy/guide/1`},
+        {name: '职工服务', url: `${ROOT}/wzzy/guide/2`},
+        {name: '工会组建', url: `${ROOT}/wzzy/guide/3`},
+        {name: '劳模服务', url: `${ROOT}/wzzy/guide/4`},
+      ]
+    },
+    {
+      title: '工会服务', name: 'service', url: `${ROOT}/wzzy/service/1`,
+      children: [
+        {name: '困难帮扶', url: `${ROOT}/wzzy/service/1`},
+        {name: '招聘信息', url: `${ROOT}/wzzy/service/2`},
+        {name: '职工培训', url: `${ROOT}/wzzy/service/3`},
+        {name: '市民服务', href: `http://www.ichuangye.cn`},
+      ]
+    },
+    {
+      title: '互动交流', name: 'chat', url: `${ROOT}/wzzy/chat/1`,
+      children: [
+        {name: '投票选举', url: `${ROOT}/wzzy/chat/1`},
+        {name: '问卷调查', url: `${ROOT}/wzzy/chat/2`},
+        {name: '回音壁', url: `${ROOT}/wzzy/chat/3`},
+        // {name:'兴趣联盟',url:`${ROOT}/wzzy/chat/4`},
+        {name: '政务微博', href: `http://weibo.com/u/2178811917?refer_flag=1001030101_&is_all=1`},
+        {name: '微信公众号', url: `${ROOT}/wzzy/chat/6`},
+      ]
+    },
+    {
+      title: '先进人物', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
+      children: [
+        {name: '优秀职工', url: `${ROOT}/wzzy/advanced/1`},
+        {name: '劳模风采', url: `${ROOT}/wzzy/advanced/2`},
+      ]
+    },
+    {
+      title: '文件·资料', name: 'files', url: `${ROOT}/wzzy/files`,
+    },
   ]
 }
