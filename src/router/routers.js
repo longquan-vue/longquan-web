@@ -43,6 +43,11 @@ export default [
       {path: `${ROOT}/zhxt/article/advanced/:id`, component: require('../view/zhxt/article/advanced/advancedEdit.vue'), name: 'advancedEdit', meta: {title: '修改先进人物'}}, // 修改文件资料
       {path: `${ROOT}/zhxt/article/advancedSetting`, component: require('../view/zhxt/article/advanced/advancedSetting.vue'), name: 'advancedSetting', meta: {title: '先进类型设置'}}, // 文件资料类型设置
       {path: `${ROOT}/zhxt/article/advancedCount`, component: require('../view/zhxt/article/advanced/advancedCount.vue'), name: 'advancedCount', meta: {title: '先进人物统计'}}, // 文件资料类型设置
+      /*文章 -- 工会服务管理*/
+      {path: `${ROOT}/zhxt/article/service`, component: require('../view/zhxt/article/service/service.vue'), name: 'service', meta: {title: '工会服务列表'}}, // 文件资料列表
+      {path: `${ROOT}/zhxt/article/service/:id`, component: require('../view/zhxt/article/service/serviceEdit.vue'), name: 'serviceEdit', meta: {title: '修改工会服务'}}, // 修改文件资料
+      {path: `${ROOT}/zhxt/article/serviceSetting`, component: require('../view/zhxt/article/service/serviceSetting.vue'), name: 'serviceSetting', meta: {title: '服务类型设置'}}, // 文件资料类型设置
+      {path: `${ROOT}/zhxt/article/serviceCount`, component: require('../view/zhxt/article/service/serviceCount.vue'), name: 'serviceCount', meta: {title: '工会服务统计'}}, // 文件资料类型设置
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},//活动列表
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},//编辑活动
@@ -129,14 +134,11 @@ export default [
       {path: `${ROOT}/wzzy/news/5/:type`, component: require('../view/wzzy/news/newsMess.vue'), name: 'newsMess'},
       {path: `${ROOT}/wzzy/news/7/:type`, component: require('../view/wzzy/news/newsAct.vue'), name: 'newsAct'},
       //办事指南
-      {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
-      {path: `${ROOT}/wzzy/guide/2`, component: require('../view/wzzy/guide/guideService.vue'), name: 'guideService'},
-      {path: `${ROOT}/wzzy/guide/3`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
-      {path: `${ROOT}/wzzy/guide/4`, component: require('../view/wzzy/guide/guideModel.vue'), name: 'guideModel'},
+      {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
+      {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
       //工会服务
-      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceHelp.vue'), name: 'serviceHelp'},
-      {path: `${ROOT}/wzzy/service/2`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
-      {path: `${ROOT}/wzzy/service/3`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
+      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
+      {path: `${ROOT}/wzzy/service/2/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
       //互动交流
       {path: `${ROOT}/wzzy/chat/1`, component: require('../view/wzzy/chat/poll.vue'), name: 'chatPoll'},
       {path: `${ROOT}/wzzy/chat/2`, component: require('../view/wzzy/chat/question.vue'), name: 'chatQuestion'},

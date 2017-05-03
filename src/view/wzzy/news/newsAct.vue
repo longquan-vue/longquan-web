@@ -59,10 +59,10 @@
                 <el-breadcrumb separator="/">
                   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                   <el-breadcrumb-item>新闻动态</el-breadcrumb-item>
-                  <el-breadcrumb-item>{{articleType.activity[params.type]}}</el-breadcrumb-item>
+                  <el-breadcrumb-item>{{articleType.activity && articleType.activity[params.type]}}</el-breadcrumb-item>
                 </el-breadcrumb>
               </div>
-              <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>{{articleType.activity[params.type]}}</a></div>
+              <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>{{articleType.activity && articleType.activity[params.type]}}</a></div>
               <div class="wzzy-sub-content">
                 <div class="newsAct">
                   <el-row :gutter="15">
