@@ -11,7 +11,7 @@
                             <div class="the-place">
                                 <el-breadcrumb separator="/">
                                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>先进人物</el-breadcrumb-item>
+                                    <el-breadcrumb-item :to="{ path: '1' }">先进人物</el-breadcrumb-item>
                                     <el-breadcrumb-item>劳模风采</el-breadcrumb-item>
                                 </el-breadcrumb>
                             </div>
@@ -19,14 +19,14 @@
                             <div class="wzzy-sub-content">
                                 <div class="newsAct">
                                     <el-row :gutter="15">
-                                        <el-col :span="8" v-for="i in 9" :key="i">
+                                        <el-col :span="8" v-for="(item,index) in newsList" :key="index">
                                             <div class="newsAct-card">
-                                                <img :src="'../../../../static/wx/img/'+i+'.jpg'">
+                                                <img :src="item.picUrl">
                                                 <div class="newsAct-card-box">
-                                                    <h2>表面恭维内心瞧不起的毒舌担当，维持着宅邸的机能...</h2>
-                                                    <p>2016-12-08 10:40</p>
+                                                    <h2>{{item.title}}</h2>
+                                                    <p>{{date3Filter(item.created)}}</p>
                                                 </div>
-                                                <router-link to="" class="block-link"></router-link>
+                                                <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="block-link"></router-link>
                                             </div>
                                         </el-col>
                                     </el-row>
@@ -54,16 +54,18 @@
     import tip from '../components/tips.vue'
     import someIcon from '../components/someIcon.vue'
     import lastDynamic from '../components/lastDynamic.vue'
+    import {findArticleApi} from '../../../api/articleApi'
     export default{
         data(){
             return{
+                newsList: [],
             }
         },
         components:{
             tip,someIcon,lastDynamic
         },
         computed: {
-            ...mapGetters([ 'page','list']),
+            ...mapGetters([ 'page','list','articleType']),
             active(){
                 console.log(this.$route.path.replace('/view/wzzy/',''));
                 return this.$route.path.replace('/view/wzzy/','');
@@ -72,9 +74,21 @@
         methods:{
             ...mapActions(['go','clear','getMine','changePage']),
             ...filters,
+            getNews(){
+                findArticleApi({
+                    page: 1,
+                    pageSize: 4,
+                    filed: ['subType'],
+                    keyWord: ['1493121733116']
+                }, 0, 1).then((data) => {
+                    console.log('data.list',data.list);
+                    this.newsList = data.list;
+                });
+
+            }
         },
         created () {
-
+            this.getNews();
         },
         destroyed(){
 

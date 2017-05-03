@@ -107,6 +107,7 @@
                 const keys = Object.keys(this.articleType.advanced);
                 this.activeName = keys[0];
                 keys.map((key) => {
+                    console.log("key",key);
                     findArticleApi({
                         page: 1,
                         pageSize: 4,
