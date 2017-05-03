@@ -29,7 +29,7 @@
                             <div class="wzzy-sub-title" style="margin-bottom:0"><a><i class="iconfont icon-xinwendongtai"></i>{{articleType.info && articleType.info[params.type]}}</a></div>
                             <div class="wzzy-sub-content">
                                 <ul class="newsMess">
-                                    <li v-for="(item,index) in newsList" :key="index">
+                                    <li v-for="(item,index) in newsList[params.type]" :key="index">
                                         <div class="newsMessImg">
                                             <router-link to="" class="block-link" >
                                                 <img :src="item.picUrl">
@@ -68,7 +68,7 @@
     export default{
         data(){
             return{
-              newsList: []
+              newsList: {}
             }
         },
         components:{
@@ -86,7 +86,7 @@
               pageSize: 10,
               filed: ['subType'],
               keyWord: [this.params.type]
-            }, 0, 5).then((data) => this.newsList = data.list);
+            }, 0, 5).then((data) => this.$set(this.newsList,this.params.type,data.list));
           }
         },
       beforeRouteUpdate (to, from, next) {

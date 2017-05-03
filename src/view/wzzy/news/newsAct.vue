@@ -66,7 +66,7 @@
               <div class="wzzy-sub-content">
                 <div class="newsAct">
                   <el-row :gutter="15">
-                    <el-col :span="8" :key="index" v-for="(item,index) in newsList">
+                    <el-col :span="8" :key="index" v-for="(item,index) in newsList[params.type]">
                       <div class="newsAct-card">
                         <img :src="item.picUrl">
                         <div class="newsAct-card-box">
@@ -105,7 +105,7 @@
   export default{
     data(){
       return {
-        newsList: []
+        newsList: {}
       }
     },
     components: {
@@ -123,7 +123,7 @@
           pageSize: 10,
           filed: ['subType'],
           keyWord: [this.params.type]
-        }, 0, 7).then((data) => this.newsList = data.list);
+        }, 0, 7).then((data) => this.$set(this.newsList,this.params.type,data.list));
       }
     },
     beforeRouteUpdate (to, from, next) {
