@@ -5,21 +5,29 @@
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
                 <span>先进人物</span>
             </div>
+            <div class="tab-head-btn">
+                <a v-for="(val,key) in articleType.advanced" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
+            </div>
+            <a class="tab-head-more">更多 > </a>
         </div>
-        <div class="modelWorker">
-            <el-row :gutter="10" class="wzzy-tab-cont-list">
-                <el-col :span="6" v-for="i in 4" :key="i">
-                    <div class="img-card">
-                        <img src="../../../../static/wx/test/test5.jpg">
-                        <div class="card-bg">
-                            <h2>成龙</h2>
-                            <p>维修工决赛第一名</p>
-                            <a>查看详情</a>
-                        </div>
-                    </div>
-                </el-col>
-            </el-row>
-        </div>
+        <transition-group enter-active-class="animated fadeIn">
+            <div class="wzzy-tab-cont" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
+                <div class="modelWorker">
+                    <el-row :gutter="10">
+                        <el-col :span="6" v-for="(item,index) in list" :key="index">
+                            <div class="img-card">
+                                <img :src="item.picUrl">
+                                <div class="card-bg">
+                                    <h2>{{item.title}}</h2>
+                                    <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
+                                    <router-link to="">查看详情</router-link>
+                                </div>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </div>
+            </div>
+        </transition-group>
     </div>
 </template>
 <style lang="less">
@@ -50,6 +58,7 @@
                 }
                 p{
                     position: absolute;width: 100%;top: 32px;left: 0;font-size: 14px;color: #999;
+                    overflow: hidden;  text-overflow:ellipsis;  white-space: nowrap;padding: 0 20px;;
                     -webkit-transition: all 0.4s;
                     -moz-transition: all 0.4s;
                     -ms-transition: all 0.4s;
@@ -70,23 +79,47 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
+    import {findArticleApi} from '../../../api/articleApi'
     export default{
         data(){
             return{
-
+                activeName: '',
+                newsList: {},
             }
         },
         components:{
 
         },
-        computed: {...mapGetters([ 'page','list']),
+        watch: {
+            articleType(){
+                this.getNews()
+            }
+        },
+        computed: {...mapGetters([ 'page','list','articleType']),
         },
         methods:{
             ...mapActions(['go','clear']),
             ...filters,
+            getNews(){
+                if(!this.articleType.advanced){
+                    return
+                }
+                const keys = Object.keys(this.articleType.advanced);
+                this.activeName = keys[0];
+                keys.map((key) => {
+                    findArticleApi({
+                        page: 1,
+                        pageSize: 4,
+                        filed: ['subType'],
+                        keyWord: [key]
+                    }, 0, 1).then(async (data) => {
+                        await this.$set(this.newsList,key,data.list);
+                    });
+                });
+            }
         },
         created () {
-
+            this.getNews();
         },
         destroyed(){
 

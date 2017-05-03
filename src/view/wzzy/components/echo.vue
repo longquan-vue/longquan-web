@@ -19,7 +19,7 @@
                     </div>
                 </li>
             </ul>
-            <a class="askQuestion">我要资讯</a>
+            <a class="askQuestion">我要咨询</a>
         </div>
 
     </div>

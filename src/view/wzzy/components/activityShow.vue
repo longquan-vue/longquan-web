@@ -5,50 +5,29 @@
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
                 <span>活动展示</span>
             </div>
+            <div class="tab-head-btn">
+                <a v-for="(val,key) in articleType.activity" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
+            </div>
+            <a class="tab-head-more">更多 > </a>
         </div>
-        <div class="activityShow">
-            <el-row :gutter="10">
-                <el-col :span="12" class="activityShowLeft">
-                    <div class="link-div">
-                        <a class="block-link">
-                            <img src="../../../../static/wx/test/test5.jpg">
-                            <div class="link-div-mess">
-                                <h2>孙政才主持召开市委常委会会议取市委常扶贫开....</h2>
-                                <p>3月9日下午，由市委宣传部、市卫计委、市总工会、市商、
-                                    市工商联等部门组成的成都市创建厂务公开民主管理....</p>
-                            </div>
-                        </a>
-                    </div>
-                </el-col>
-                <el-col :span="12" class="activityShowRight">
-                    <el-row :gutter="10">
-                        <el-col :span="12" v-for="i in 4" :key="i">
-                            <div class="little-link">
-                                <div class="link-div">
-                                    <a class="block-link">
-                                        <img src="../../../../static/wx/test/test2.jpg">
-                                        <div class="link-div-mess">
-                                            <h2>孙政才主持召开市委常委会会议取市委常扶贫开....</h2>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </el-col>
-                    </el-row>
-                </el-col>
-            </el-row>
+
+        <div class="wzzy-tab-cont">
+            <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
+                <activityComponents :newsList="list" v-for="(list,key) in newsList" v-show="activeName==key" :key="key"></activityComponents>
+            </transition-group>
         </div>
+
     </div>
 </template>
 <style lang="less">
     .wzzy-tab{
         .activityShow{
-            margin: 20px 0 40px 0;
+            padding: 20px 0 40px 0;
             .activityShowLeft{ height: 237px;}
             .link-div{ position: relative;width: 100%;height: 100%;
                 .link-div-mess{ height: 92px;position: absolute;left: 0;bottom: 0;width: 100%;
                     padding: 15px 20px;background-color: rgba(0,0,0,.8);
-                    h2{ font-size: 16px;color: #ffffff;margin-bottom: 5px;}
+                    h2{ font-size: 16px;color: #ffffff;margin-bottom: 5px;overflow: hidden;  text-overflow:ellipsis;  white-space: nowrap;}
                     p{ font-size: 14px;color: #999999;}
                 }
             }
@@ -67,23 +46,49 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
+    import activityComponents from '../components/activityComponents.vue'
+    import {findArticleApi} from '../../../api/articleApi'
     export default{
         data(){
             return{
-
+                activeName: '',
+                newsList: {},
             }
         },
         components:{
-
+            activityComponents
         },
-        computed: {...mapGetters([ 'page','list']),
+        watch: {
+            articleType(){
+                this.getNews()
+            }
+        },
+        computed: {...mapGetters([ 'page','list','articleType']),
         },
         methods:{
-            ...mapActions(['go','clear','getMine','changePage']),
+            ...mapActions(['go','clear','getMine']),
             ...filters,
+            getNews(){
+                if(!this.articleType.activity){
+                    return
+                }
+                const keys = Object.keys(this.articleType.activity);
+                this.activeName = keys[0];
+                keys.map((key) => {
+                    findArticleApi({
+                        page: 1,
+                        pageSize: 5,
+                        filed: ['subType'],
+                        keyWord: [key]
+                    }, 0, 7).then((data) => {
+                        this.$set(this.newsList,key,data.list);
+                        console.log("this.newsList",this.newsList)
+                    });
+                });
+            }
         },
         created () {
-
+            this.getNews()
         },
         destroyed(){
 

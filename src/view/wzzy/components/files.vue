@@ -6,31 +6,21 @@
                 <span>文件·资料</span>
             </div>
             <div class="tab-head-btn">
-                <a :class="{'active':activeName==1}" @click="activeName=1">公会文件</a>
-                <a :class="{'active':activeName==2}" @click="activeName=2">领导讲话</a>
-                <a :class="{'active':activeName==3}" @click="activeName=3">上级文件</a>
-                <a :class="{'active':activeName==4}" @click="activeName=4">公会相关</a>
-                <a :class="{'active':activeName==5}" @click="activeName=5">政策法规</a>
+                <a v-for="(val,key) in articleType.file" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>
-        <transition-group enter-active-class="animated fadeIn">
-            <div class="wzzy-tab-cont" v-show="activeName==i" :key="i" v-for="i in 5">
-                <div class="wzzy-tab-cont-head">
-                    <a><img src="../../../../static/wx/test/test1.jpg"></a>
-                    <div class="wzzy-tab-cont-head-mess">
-                        <h2>{{i}}这是标题哦哦哦哦哦哦哦哦哦</h2>
-                        <p>2016-04-15 10:30</p>
-                        <div>3月9日下午，由市委宣传部、市卫计委、市总工会、市商务委、市工商联等部门组成的成都市创建厂务公开民主管理示范单位复查验收组一行在区总工会、区卫计局等部门的参与下到我区2家成都市厂务公开民主管理示范创建申报单位（四川省远大专用凭...</div>
-                    </div>
-                </div>
-                <el-row :gutter="20" class="wzzy-tab-cont-list">
-                    <el-col :span="12" v-for="i in 12" :key="i">
-                        <a><span>第二届世界互联网大会发布《乌镇倡议》</span> <i>2016-04-15</i></a>
+
+        <div class="wzzy-tab-cont">
+            <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
+                <el-row style="margin-bottom:0" :gutter="20" class="wzzy-tab-cont-list" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
+                    <el-col :span="12" v-for="(item,index) in list" :key="index">
+                        <a><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a>
                     </el-col>
                 </el-row>
-            </div>
-        </transition-group>
+            </transition-group>
+        </div>
+
     </div>
 </template>
 <script type="es6">
@@ -41,23 +31,43 @@
     export default{
         data(){
             return{
-                activeName: 1
+                activeName: '',
+                newsList: {},
             }
         },
         components:{
 
         },
-        computed: {...mapGetters([ 'page','list']),
+        watch: {
+            articleType(){
+                this.getNews()
+            }
+        },
+        computed: {...mapGetters([ 'page','list','articleType']),
         },
         methods:{
             ...mapActions(['go','clear']),
             ...filters,
-            handleClick(tab, event) {
-                console.log(tab, event);
+            getNews(){
+                if(!this.articleType.file){
+                    return
+                }
+                const keys = Object.keys(this.articleType.file);
+                this.activeName = keys[0];
+                keys.map((key) => {
+                    findArticleApi({
+                        page: 1,
+                        pageSize: 10,
+                        filed: ['subType'],
+                        keyWord: [key]
+                    }, 0, 4).then(async (data) => {
+                        await this.$set(this.newsList,key,data.list);
+                    });
+                });
             }
         },
         created () {
-
+            this.getNews();
         },
         destroyed(){
 

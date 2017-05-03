@@ -8,14 +8,8 @@
         </div>
         <div class="fastEnter">
             <el-row :gutter="10">
-                <el-col :span="6">
-                    <a><img src="../../../../static/wzzy/zgwq.png"></a>
-                </el-col>
-                <el-col :span="6">
-                    <a><img src="../../../../static/wzzy/zgbf.png"></a>
-                </el-col>
-                <el-col :span="6">
-                    <a><img src="../../../../static/wzzy/lmfw.png"></a>
+                <el-col :span="6" v-for="type in articleType.guide">
+                    <a><img :src="type.url"></a>
                 </el-col>
                 <el-col :span="6">
                     <a><img src="../../../../static/wzzy/ghzj.png"></a>
@@ -36,4 +30,11 @@
     }
 </style>
 
+<script type="es6">
+    import { mapGetters } from 'vuex'
+    export default{
+        computed: {...mapGetters([ 'articleType']),
+        },
+    }
+</script>
 

@@ -21,7 +21,7 @@
 <style lang="less">
     .border-content{ border: 1px solid #E7E7E7;padding: 20px;margin-bottom: 20px;
         .wzzy-tab-cont-list{
-            margin:0 !important;width:100%;height:100%;overflow: hidden;position: relative;
+            padding:0 !important;width:100%;height:100%;overflow: hidden;position: relative;
         }
     }
     .flip-tip-move {

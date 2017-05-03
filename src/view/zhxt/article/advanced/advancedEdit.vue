@@ -16,7 +16,7 @@
           <el-form-item label="配图：" prop="picUrl">
             <Avatar :url="data.picUrl"/>
           </el-form-item>
-          <el-form-item label="标题：" prop="title">
+          <el-form-item label="姓名：" prop="title">
             <el-input placeholder="请输入..."  :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
           <el-form-item label="先进类型：" prop="subType">
