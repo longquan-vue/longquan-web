@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="url" class="pub-list-a"><span>{{title}}</span> <i>{{time}}</i></router-link>
+    <router-link :to="url" class="pub-list-a"><span>{{title}}</span> <i>{{date3Filter(time)}}</i></router-link>
 </template>
 <style lang="less">
     .pub-list-a{  position: relative;  display: block;  color: #333;  font-size: 14px;
@@ -18,6 +18,7 @@
     }
 </style>
 <script type="es6">
+  import filters from '../../../filters'
     export default{
         name: 'pubListA',
         data(){
@@ -28,10 +29,10 @@
         props: {
             title: String,
             url:String,
-            time:String
+            time:Number
         },
         methods: {
-
+            ...filters,
         }
     }
 

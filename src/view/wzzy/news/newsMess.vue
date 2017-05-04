@@ -60,11 +60,11 @@
 
 <script type="es6">
     import { mapGetters, mapActions } from 'vuex'
+    import {findArticleApi} from '../../../api/articleApi'
     import filters from '../../../filters'
     import tip from '../components/tips.vue'
     import someIcon from '../components/someIcon.vue'
     import lastDynamic from '../components/lastDynamic.vue'
-    import {findArticleApi} from '../../../api/articleApi'
     export default{
         data(){
             return{
