@@ -17,7 +17,7 @@
           <MyColumn type="index" fixed="left"/>
           <MyColumn prop="title" label="姓名" min-width="120"/>
           <MyColumn prop="files" label="附件" :formatter="({files})=>filesFilter(files)" min-width="110"/>
-          <MyColumn prop="files" label="先进类型" :formatter="({subType})=>typeFilter(articleType.advanced,subType)" min-width="110"/>
+          <MyColumn prop="files" label="先进类型" :formatter="({subType})=>type2Filter(articleType.advanced,subType)" min-width="110"/>
           <MyColumn prop="files" label="附件下载次数" :formatter="({files})=>filesNumFilter(files)" min-width="110"/>
           <MyColumn prop="num" label="浏览次数" min-width="110"/>
           <MyColumn prop="adminName" label="文章发布者" min-width="140"/>

@@ -191,8 +191,7 @@ export default {
     {
       title: '先进人物', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
       children: [
-        {name: '优秀职工', url: `${ROOT}/wzzy/advanced/1`},
-        {name: '劳模风采', url: `${ROOT}/wzzy/advanced/2`},
+        {type: 'advanced', path: `${ROOT}/wzzy/advanced/1/`},
       ]
     },
     {

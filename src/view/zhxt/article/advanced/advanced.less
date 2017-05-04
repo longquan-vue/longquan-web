@@ -1,13 +1,42 @@
-.article_docs {
+.article_advanced {
+  position: relative;
+  padding-bottom: 15px;
+  &>span{
+    display: inline-block;
+    vertical-align: top;
+    color: #97a8be;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+  .advanced_img {
+    display: inline-block;
+    position: relative;
+    padding-right: 15px;
+    cursor: pointer;
+    .img {
+      border: 1px dashed #a2a2a2;
+      border-radius: 5px;
+      &:hover{
+        border-color: #1c8de0;
+      }
+    }
+    .ok {
+      position: absolute;
+      top:5px;
+      right: 20px;
+    }
+  }
   .close {
-    vertical-align: middle;
-    width: 26px;
-    height: 26px;
-    margin-left: 15px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
   }
   .add {
-    vertical-align: middle;
     width: 34px;
     height: 34px;
+    cursor: pointer;
   }
 }
