@@ -21,14 +21,14 @@
               </div>
             </el-col>
             <el-col :span="7">
-              <div class="grid-right">
+              <div class="grid-right" :class="{'grid-right-sub':$route.path != '/view/wzzy/home'}">
+                <question v-if="$route.path == '/view/wzzy/chat/3'"></question>
                 <tip></tip>
                 <lastDynamic v-if="$route.path != '/view/wzzy/home'"></lastDynamic>
                 <someIcon></someIcon>
                 <poll v-if="$route.path == '/view/wzzy/home'"></poll>
                 <adver v-if="$route.path == '/view/wzzy/home'"></adver>
                 <echo v-if="$route.path == '/view/wzzy/home'"></echo>
-                <question v-if="$route.path == '/view/wzzy/home'"></question>
               </div>
             </el-col>
           </el-row>

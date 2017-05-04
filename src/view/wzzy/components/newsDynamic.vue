@@ -189,7 +189,7 @@
                 keys.map((key) => {
                     findArticleApi({
                         page: 1,
-                        pageSize: 13,
+                        pageSize: 10,
                         filed: ['subType'],
                         keyWord: [key]
                     }, 0, 5).then(async (data) => {

@@ -47,7 +47,7 @@
                 <div class="messageDetailCont">
                     <div class="messageDetailCont-mess" v-html="decode(data.content)"></div>
                     <div class="messageDetailCont-down" v-if="data.files">
-                        <span>附件：{{data.files[0].name}}.{{data.files[0].suffix}}</span>
+                        <span>附件：{{data.files[0] && data.files[0].name}}.{{data.files[0] && data.files[0].suffix}}</span>
                         <a href="http://java.ichuangye.cn/userfiles/2017/05/03/7f2c9c005b3b499cb77238bb295663a6.jpg" target="_blank">下载 ↓</a>
                     </div>
                 </div>
