@@ -17,7 +17,6 @@
                     <div class="echo-cont" v-html="limitFilter(strFilter(decode(item.answer)),100)"></div>
                 </li>
             </ul>
-            <!--<a class="askQuestion">我要咨询</a>-->
             <question></question>
         </div>
 

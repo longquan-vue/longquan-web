@@ -160,7 +160,7 @@
         });
       },
       setQuestions(key, val){
-        if (key && val) {
+        if (key) {
           this.setListVal([key, val]);
         }
         this.questions = this.data && this.data.questions ? this.data.questions.map((q) => ({...q})) : []

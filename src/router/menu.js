@@ -111,8 +111,9 @@ export default {
     {
       title: '工会管理',
       children: [
-        {title: '工会管理列表', path: `${ROOT}/zhxt/department`},
-        {title: '我的公会', path: `${ROOT}/zhxt/department/mine`},
+        {title: '工会管理列表', path: `${ROOT}/zhxt/unions`},
+        {title: '组织架构列表', path: `${ROOT}/zhxt/department`},
+        {title: '我的公会', path: `${ROOT}/zhxt/unions/mine`},
       ]
     },
     {

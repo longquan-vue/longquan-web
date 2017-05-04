@@ -102,7 +102,8 @@
             }
         },
         created () {
-           this.getSetting()
+           this.getSetting();
+          this.getMine();
         },
         destroyed(){
 

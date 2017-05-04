@@ -85,8 +85,10 @@ export default [
       // {path: `${ROOT}/zhxt/adminCount`, component: require('../view/zhxt/admin/adminCount.vue'), name: 'adminCount'}, // 统计报表
       // {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, // 我的公会
       /*工会组建*/
-      {path: `${ROOT}/zhxt/department`, component: require('../view/zhxt/department/unions.vue'), name: 'depList'}, // 工会列表
-      {path: `${ROOT}/zhxt/department/:id`, component: require('../view/zhxt/department/unionsEdit.vue'), name: 'depEdit'}, // 编辑公会
+      {path: `${ROOT}/zhxt/unions`, component: require('../view/zhxt/department/unions.vue'), name: 'unions'}, // 工会列表
+      {path: `${ROOT}/zhxt/unions/:id`, component: require('../view/zhxt/department/unionsEdit.vue'), name: 'unionsEdit'}, // 编辑公会
+      {path: `${ROOT}/zhxt/department`, component: require('../view/zhxt/department/dep.vue'), name: 'dep'}, // 工会列表
+      {path: `${ROOT}/zhxt/department/:id`, component: require('../view/zhxt/department/depEdit.vue'), name: 'depEdit'}, // 编辑公会
       {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/department/admin.vue'), name: 'adminList'}, // 职工列表
       /*招聘信息*/
       {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}},
