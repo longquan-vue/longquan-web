@@ -189,7 +189,7 @@ export default {
       ]
     },
     {
-      title: '先进人物', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
+      title: '先进人物', name: 'advanced',
       children: [
         {type: 'advanced', path: `${ROOT}/wzzy/advanced/1/`},
       ]

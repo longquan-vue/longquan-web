@@ -145,7 +145,7 @@ export default [
       {path: `${ROOT}/wzzy/chat/3`, component: require('../view/wzzy/chat/echo.vue'), name: 'chatEcho'},
       {path: `${ROOT}/wzzy/chat/6`, component: require('../view/wzzy/chat/weixin.vue'), name: 'chatCode'},
       //先进人物
-      {path: `${ROOT}/wzzy/advanced/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
+      {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
       //文件资料
       {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
     ]
