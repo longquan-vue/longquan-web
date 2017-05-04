@@ -140,10 +140,7 @@ export default [
       {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
       {path: `${ROOT}/wzzy/service/2/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
       //互动交流
-      {path: `${ROOT}/wzzy/chat/1`, component: require('../view/wzzy/chat/poll.vue'), name: 'chatPoll'},
-      {path: `${ROOT}/wzzy/chat/2`, component: require('../view/wzzy/chat/question.vue'), name: 'chatQuestion'},
-      {path: `${ROOT}/wzzy/chat/3`, component: require('../view/wzzy/chat/echo.vue'), name: 'chatEcho'},
-      {path: `${ROOT}/wzzy/chat/6`, component: require('../view/wzzy/chat/weixin.vue'), name: 'chatCode'},
+      {path: `${ROOT}/wzzy/chat/:type`, component: require('../view/wzzy/chat/chat.vue'), name: 'chat-wzzy'},
       //先进人物
       {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
       //文件资料
