@@ -92,9 +92,7 @@ const getMine = ({commit, state}, mine) => {
     return new Promise((resolve) => resolve());
   }
   if (state.route.path.split('/')[2] == 'fwh' || state.route.path.split('/')[2] == 'wzzy') {
-    return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
-      // TODO 处理未登录情况
-    });
+    return mineApi().then((mine) => commit(GET_MINE, mine));
   } else {
     return adminApi().then((mine) => commit(GET_MINE, mine)).catch(() => go({commit}, ['login']));
   }
@@ -167,9 +165,9 @@ const getWelfare = async({commit, state}) => commit(GET_DATA_LIST, await welfare
 const getWelfareDetail = async({commit, state}, data = {}) => {
   const {query:{id, ticket, welfareId, used}}=state.route;
   if (welfareId) {
-    findWelfareByIdApi(welfareId).then((data) => commit(SET_DATA, {...data, ticket, id, used})).catch(() => getWelfareDetail({commit, state}, data))
+    findWelfareByIdApi(welfareId).then((data) => commit(SET_DATA, {...data, ticket, id, used}))
   } else if (state.route.params.id) {
-    state.route.params.id == CREATE ? commit(SET_DATA, {edit: true, ...defData.welfare}) : findWelfareByIdApi(state.route.params.id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getWelfareDetail({commit, state}, data))
+    state.route.params.id == CREATE ? commit(SET_DATA, {edit: true, ...defData.welfare}) : findWelfareByIdApi(state.route.params.id).then((data) => commit(SET_DATA, {...data, edit: false}))
   } else {
     commit(SET_DATA, {...defData.welfare, ...data});
   }
@@ -194,7 +192,7 @@ const getActivityDetail = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.activity});
   } else {
-    findActivityDetailApi(id).then((data) => commit(SET_DATA, {edit: false, ...data})).catch(() => getActivityDetail({commit, state}));
+    findActivityDetailApi(id).then((data) => commit(SET_DATA, {edit: false, ...data}))
   }
 };
 //获取活动相关数据  报名
@@ -247,7 +245,7 @@ const getRecruitDetail = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.recruit});
   } else {
-    findRecruitDetailApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getRecruitDetail({commit, state}));
+    findRecruitDetailApi(id).then((data) => commit(SET_DATA, {...data, edit: false}))
   }
 };
 //获取招聘信息相关数据  报名
@@ -281,7 +279,7 @@ const getPoll = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.poll});
   } else {
-    getPollApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getPoll({commit, state}));
+    getPollApi(id).then((data) => commit(SET_DATA, {...data, edit: false}))
   }
 };
 // 获取投票调查列表
@@ -323,7 +321,7 @@ const getArticle = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.article});
   } else {
-    getArticleApi(id).then((data) => commit(SET_DATA, {... data, edit: false})).catch(() => getArticle({commit, state}))
+    getArticleApi(id).then((data) => commit(SET_DATA, {... data, edit: false}))
   }
 };
 //删除文章
@@ -342,7 +340,7 @@ const getEcho = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.echo});
   } else {
-    getEchoApi(id).then((data) => commit(SET_DATA, {...data, edit: false})).catch(() => getEcho({commit, state}));
+    getEchoApi(id).then((data) => commit(SET_DATA, {...data, edit: false}))
   }
 };
 //删除回音壁
@@ -357,9 +355,9 @@ const delDep = ({commit, state}, [id, idx]) => delDepApi(id).then(() => commit(D
 const getDep = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == 'mine') {
-    getMine({commit, state}).then(() => getDepApi(state.login.department[0]).then((data) => commit(SET_DATA, {...data, mine: true})).catch(() => getDep({commit, state})));
+    getMine({commit, state}).then(() => getDepApi(state.login.department[0]).then((data) => commit(SET_DATA, {...data, mine: true})));
   } else {
-    getDepApi(id).then((data) => commit(SET_DATA, {...data, mine: false})).catch(() => getDep({commit, state}));
+    getDepApi(id).then((data) => commit(SET_DATA, {...data, mine: false}))
   }
 };
 // 创建工会
