@@ -7,7 +7,8 @@
             <span>
                 欢迎访问成都市龙泉驿区总工会网站！今天是:{{today}}
             </span>
-            <a @click="changeSys({qrcode:true})">登录</a>
+            <a @click="changeSys({qrcode:true})" v-if="!login.id">登录</a>
+            <a v-if="login.id">{{login.name}}</a>
         </div>
         <div class="header-nav">
             <div class="pagewrap">
@@ -69,7 +70,7 @@
             moment
         },
         computed: {
-            ...mapGetters([ 'page','list','path','articleType']),
+            ...mapGetters(['path','articleType','login']),
             today(){
                 return moment(new Date()).format('YYYY年MM月DD日')
             },

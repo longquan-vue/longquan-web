@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="二维码登录" v-model="show" @close="changeSys({qrcode:false})">
+  <el-dialog title="微信二维码登录" v-model="show" @close="changeSys({qrcode:false})" size="tiny">
     <div class="codeBox">
       <img :src="qrcode">
       <div v-if="timeout">
@@ -9,7 +9,11 @@
     </div>
   </el-dialog>
 </template>
-<style lang="less">
+<style lang="less" scoped>
+  .codeBox{
+      text-align: center;
+      img{ width: 200px;}
+  }
 </style>
 <script type="es6">
   import {userLoginApi} from '../../../api/userApi'
