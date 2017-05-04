@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>公示公告 </span>
+                <span><i class="iconfont icon-gongshigonggao"></i> 公示公告 </span>
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>

@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>回音壁</span>
+                <span><i class="iconfont icon-huiyinbi"></i> 回音壁</span>
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>

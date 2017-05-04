@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>友情链接</span>
+                <span><i class="iconfont icon-youqinglianjie"></i> 友情链接</span>
             </div>
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.link" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>

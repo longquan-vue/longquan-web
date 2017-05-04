@@ -1,5 +1,6 @@
 <style lang="less">
   @import "../../main.less";
+  .weather{ line-height: 50px;}
 </style>
 <template>
   <div class="wzzy" style="overflow-y:scroll;height:100%;">

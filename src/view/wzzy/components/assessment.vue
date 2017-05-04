@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>办事指南</span>
+                <span><i class="iconfont icon-banshizhinan"></i> 办事指南</span>
             </div>
         </div>
         <div class="fastEnter">
