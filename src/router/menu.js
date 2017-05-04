@@ -145,9 +145,9 @@ export default {
     },
   ],
   wzzy: [
-    {title: '首页', url: `${ROOT}/wzzy/home`, name: 'home'},
+    {title: '首页', url: `${ROOT}/wzzy/home`},
     {
-      title: '机构介绍', name: 'laborUnion', url: `${ROOT}/wzzy/laborUnion`,
+      title: '机构介绍', name: 'laborUnion',
       children: [
         {name: '区总介绍', url: `${ROOT}/wzzy/laborUnion/1`},
         {name: '区总领导', url: `${ROOT}/wzzy/laborUnion/2`},

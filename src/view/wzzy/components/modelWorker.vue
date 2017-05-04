@@ -6,7 +6,7 @@
                 <span>先进人物</span>
             </div>
             <div class="tab-head-btn">
-                <a v-for="(val,key) in articleType.advanced" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
+                <a v-for="(val,key) in articleType.advanced" :class="{'active':activeName==key}" @click="activeName = key">{{val.name}}</a>
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>
@@ -107,7 +107,6 @@
                 const keys = Object.keys(this.articleType.advanced);
                 this.activeName = keys[0];
                 keys.map((key) => {
-                    console.log("key",key);
                     findArticleApi({
                         page: 1,
                         pageSize: 4,
