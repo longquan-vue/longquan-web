@@ -170,7 +170,7 @@ export default {
       ]
     },
     {
-      title: '工会服务', name: 'service', url: `${ROOT}/wzzy/service/1`,
+      title: '工会服务', name: 'service', url: `${ROOT}/wzzy/service/1/0`,
       children: [
         {name: '市民服务', href: `http://www.longquanyi.gov.cn/index.php?cid=2265`},
         {name: '招聘信息', url: `${ROOT}/wzzy/service/1/0`},
