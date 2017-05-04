@@ -46,7 +46,6 @@
         data(){
             return{
                 list:[],
-                activeIndex: 0
             }
         },
         components:{

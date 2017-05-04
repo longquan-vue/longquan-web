@@ -30,6 +30,7 @@
                 <question></question>
               </div>
               <div class="grid-right grid-right-sub" v-if="active!='home'">
+                <question v-if="active=='chat/3'"></question>
                 <tip></tip>
                 <lastDynamic></lastDynamic>
                 <someIcon></someIcon>
@@ -53,12 +54,13 @@
   import adver from './components/adver.vue'
   import echo from './components/echo.vue'
   import lastDynamic from './components/lastDynamic.vue'
+  import question from './components/question.vue'
   export default {
     components: {
       wzzyHeader,
       wzzyFooter,
       Qrcode,
-      tip, someIcon, poll, adver, echo,lastDynamic
+      tip, someIcon, poll, adver, echo,lastDynamic,question
     },
     computed: {
       active(){

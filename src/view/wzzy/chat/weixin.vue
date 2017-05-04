@@ -6,28 +6,9 @@
     }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="24">
-                        <div class="grid-left">
-                            <div class="the-place" style="">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>互动交流</el-breadcrumb-item>
-                                    <el-breadcrumb-item>微信公众号</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="codeBox" id="codeBox">
-                                <p>扫码关注微信公众号</p>
-                                <img src="../../../../static/wzzy/code.jpg">
-                            </div>
-                        </div>
-                    </el-col>
-                </el-row>
-            </div>
-        </div>
+    <div class="codeBox" id="codeBox">
+        <p>扫码关注微信公众号</p>
+        <img src="../../../../static/wzzy/code.jpg">
     </div>
 </template>
 
