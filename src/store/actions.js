@@ -333,7 +333,7 @@ const pauseArticle = ({commit, state}, [id, key, val]) => pauseArticleApi(id).th
 // 获取回音壁列表
 const findEcho = async({commit, state}) => commit(GET_DATA_LIST, await findEchoApi(state.page));
 // 创建回音壁
-const createEcho = ({commit, state}) => createEchoApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+const createEcho = ({commit, state},data) => createEchoApi(data || state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改回音壁
 const updateEcho = ({commit, state}) => updateEchoApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取回音壁详情
