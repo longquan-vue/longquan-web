@@ -1,27 +1,12 @@
 <style lang="less">
   .wzzy-recruitDetail {
-
   .wzzy-recruitDetail-head {
-    overflow: hidden;
-    padding: 20px 0px;
-    border-bottom: 1px solid #E7E7E7;
-    line-height: 40px;;
-
-  span {
-    font-size: 22px;
-    color: #333;
-  }
+    overflow: hidden;    padding: 20px 0;    border-bottom: 1px solid #E7E7E7;    line-height: 40px;
+  span {    font-size: 22px;    color: #333;  }
 
   a {
-    float: right;
-    width: 150px;
-    height: 40px;
-    background-color: #FF7E00;
-    color: #ffffff;
-    font-size: 16px;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
+    float: right;    width: 150px;    height: 40px;    background-color: #FF7E00;    color: #ffffff;
+    font-size: 16px;    border-radius: 4px;    text-align: center;    cursor: pointer;
   }
 
   }
@@ -93,8 +78,7 @@
     -o-transition: all 0.3s;
     transition: all 0.3s;
 
-  &
-  :hover {
+  &:hover {
     -webkit-transform: rotateZ(360deg);
     -moz-transform: rotateZ(360deg);
     -ms-transform: rotateZ(360deg);
@@ -157,7 +141,7 @@
                   <div class="labelMsg">福利待遇：</div>
                   <div class="labelCont" v-html="decode(data.treatment)"></div>
                 </li>
-                <div v-for="(link,index) in linkmans">
+                <div v-for="(link,index) in data.linkmans">
                   <li>
                     <div class="labelMsg">联系人：</div>
                     <div class="labelCont">{{link}}</div>
@@ -174,48 +158,48 @@
       </div>
     </div>
     <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
-            <span slot="title" class="wzzy-dialog-header">
-                招聘报名表
-                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
-            </span>
-
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <span slot="title" class="wzzy-dialog-header">
+            招聘报名表
+            <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
+        </span>
+      <el-form :model="login" :rules="rules" ref="ruleForm" label-width="100px">
+        <el-form-item label="姓名：" prop="name">
+          <el-input :value="login.name" @input="(v)=>getMine({name:v})"></el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-radio-group v-model="ruleForm.sex">
+        <el-form-item label="性别：" prop="sex">
+          <el-radio-group :value="login.sex" @input="(v)=>getMine({sex:v})">
             <el-radio :label="1">男</el-radio>
             <el-radio :label="2">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="年龄" prop="age">
-          <el-input v-model.number="ruleForm.age"></el-input>
+        <el-form-item label="出生年月：" prop="birthday">
+          <el-date-picker type="date" format="yyyy-MM-dd" placeholder="选择出生日期..." :value="login.birthday" @input="(v)=>getMine({birthday:v&&v.getTime()})" style="width: 100%;"/>
         </el-form-item>
-        <el-form-item label="婚姻" prop="marriage">
-          <el-radio-group :value="ruleForm.marriage">
+        <el-form-item label="婚姻：" prop="marriage">
+          <el-radio-group :value="login.marriage" @input="(v)=>getMine({marriage:v})">
             <el-radio :label="1">已婚</el-radio>
             <el-radio :label="2">未婚</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="籍贯" prop="address">
-          <el-input v-model="ruleForm.address"></el-input>
+        <el-form-item label="籍贯：" prop="province">
+          <el-input :value="login.province" style="width: 49%" @input="(v)=>getMine({province:v})">
+            <template slot="append">省</template>
+          </el-input>
+          <el-input :value="login.city" style="width: 49%" @input="(v)=>getMine({city:v})">
+            <template slot="append">市</template>
+          </el-input>
         </el-form-item>
-        <el-form-item label="工作经验" prop="job">
-          <el-radio-group :value="ruleForm.job">
+        <el-form-item label="工作经验：" prop="exp">
+          <el-radio-group :value="login.exp" @input="(v)=>getMine({exp:v})">
             <el-radio :label="1">有</el-radio>
-            <el-radio :label="2">无</el-radio>
+            <el-radio :label="0">无</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="联系电话" prop="phone">
-          <el-input v-model.number="ruleForm.phone" placeholder="请输入联系电话"></el-input>
+        <el-form-item label="联系电话：" prop="phone">
+          <el-input :value="login.phone" placeholder="请输入联系电话..." @input="(v)=>getMine({phone:v})"></el-input>
         </el-form-item>
       </el-form>
-      <a class="formSubmit" @click="submitForm('ruleForm')">提交</a>
-      <!--<span slot="footer" class="dialog-footer">-->
-      <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
-      <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
-      <!--</span>-->
+      <a class="formSubmit" @click="submitForm()">提交</a>
     </el-dialog>
   </div>
 </template>
@@ -223,51 +207,41 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filters from '../../../filters'
+  import {confirm} from '../../../actions'
   export default{
     data(){
       return {
         dialogVisible: false,
-        ruleForm: {
-          name: '',
-          sex: 0,
-          age: '',
-          marriage: 1,
-          address: '',
-          job: 1,
-          phone: ''
-        },
         rules: {
           name: [
             {required: true, message: '请输入您的姓名'},
             {min: 2, max: 8, message: '长度在 2 到 8 个字符'}
           ],
-          age: [
-            {required: true, message: '年龄不能为空'},
-            {type: 'number', message: '年龄必须为数字值'}
-          ],
           phone: [
             {required: true, message: '联系电话不能为空'},
-            {type: 'number', message: '联系电话必须为数字值'}
           ],
         }
       }
     },
     components: {},
     computed: {
-      ...mapGetters(['data']),
+      ...mapGetters(['data', 'login', 'params']),
     },
     methods: {
-      ...mapActions(['go', 'clear', 'getRecruitDetail']),
+      ...mapActions(['go', 'clear', 'getRecruitDetail', 'entryRecruit', 'changeSys', 'getMine']),
       ...filters,
       openSign(){
-        this.dialogVisible = true;
+        if (this.login && this.login.id) {
+          this.dialogVisible = true;
+        } else {
+          confirm('您还未登陆，无法报名。请先登录...', 'warning').then(() => this.changeSys({qrcode: true}))
+        }
       },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+      submitForm() {
+        this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.entryRecruit([this.params.id, this.login])
           } else {
-            console.log('error submit!!');
             return false;
           }
         });

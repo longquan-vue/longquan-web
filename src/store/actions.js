@@ -84,14 +84,14 @@ const updateUser = ({commit, state}) => updateUserApi(state.data).then(() => suc
 const delUser = ({commit}, [id, idx]) => delUserApi(id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取我的信息
 const getMine = ({commit, state}, mine) => {
-  if (!!state.login.id) {
-    return new Promise((resolve) => resolve());
-  }
   if (mine) {
     commit(GET_MINE, mine);
     return new Promise((resolve) => resolve());
   }
-  if (state.route.path.split('/')[2] == 'fwh') {
+  if (!!state.login.id) {
+    return new Promise((resolve) => resolve());
+  }
+  if (state.route.path.split('/')[2] == 'fwh' || state.route.path.split('/')[2] == 'wzzy') {
     return mineApi().then((mine) => commit(GET_MINE, mine)).catch(() => {
       // TODO 处理未登录情况
     });
@@ -251,7 +251,7 @@ const getRecruitDetail = ({commit, state}) => {
   }
 };
 //获取招聘信息相关数据  报名
-// const entryRecruit = ({commit, state}, data) => entryRecruitApi(state.route.query.id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
+const entryRecruit = ({commit, state}, [id, data]) => entryRecruitApi(id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
 // 设置值
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置LOGIN
@@ -406,7 +406,7 @@ export default {
   getRecruitSigin,  ////获取招聘报名列表
   exportRecruitEntry,  ////导出招聘报名列表
   getRecruitDetail,  // 获取招聘信息详情
-  // entryRecruit,  //报名招聘
+  entryRecruit,  //报名招聘
   getHealth,   //获取健身中心列表
   getHealthEnter,   //获取健身中心报名列表
   gethealthDetail, //获取健身项目详情
