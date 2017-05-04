@@ -34,7 +34,7 @@
                         <p><i>{{item.id}}</i> <span>{{item.title}}</span></p>
                         <p>{{item.files[0] && item.files[0].description}}</p>
                         <p>
-                            <a @click="isShow(1)">投票</a>
+                            <a @click="doVote(item)">投票</a>
                         </p>
                     </div>
                 </li>
@@ -107,7 +107,7 @@
             </x-dialog>
         </div>
 
-        <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
+        <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :def="def" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
     </div>
 </template>
@@ -118,6 +118,8 @@
     import filters from '../../../filters'
     import { XImg , TransferDom, Popup ,Swiper ,SwiperItem ,Scroller,XDialog} from 'vux'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
+    import {doVoteApi} from '../../../api/pollApi'
+    import {alert} from '../../../actions'
     export default{
         data(){
             return{
@@ -140,6 +142,7 @@
                 title:'提示',   //控制弹窗标题
                 content:'恭喜您！报名成功',  //控制弹窗内容
                 btns: {btn:'确定'},
+                def:''
             }
         },
         directives: {
@@ -184,6 +187,14 @@
                 }
                 this.isshow=true;
             },
+            doVote({id,pollId,type}){  //投票
+                doVoteApi({pollId,questionId:id,pollType:type,result:1}).then((data)=>this.isShow(1)).catch((data)=>{
+                    this.img='../../../../static/wx/default.png';
+                    this.content=data.msg;
+                    this.btns={btn:'确定'};
+                    this.isshow=true;
+                });
+            }
         },
         mounted () {
 

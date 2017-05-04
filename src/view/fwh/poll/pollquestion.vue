@@ -166,7 +166,7 @@
             ...mapGetters(['data']),
         },
         methods:{
-            ...mapActions(['getPoll','clear','getHealth','clearPage','setListVal']),
+            ...mapActions(['getPoll','clear','clearPage','setListVal']),
             ...filters,
             setQuestions(key, val){
                 if (key && val) {
