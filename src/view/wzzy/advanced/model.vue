@@ -20,12 +20,17 @@
 
 <script type="es6">
   import filters from '../../../filters'
+  import {mapActions} from 'vuex'
   export default{
     props: {
       list: Array
     },
-    methods:{
+    methods: {
+      ...mapActions(['clear']),
       ...filters,
     },
+    destroyed(){
+      this.clear()
+    }
   }
 </script>
