@@ -133,8 +133,7 @@ export default [
       {path: `${ROOT}/wzzy/guide/:idx/:type`, component: require('../view/wzzy/guide/guide.vue'), name: 'guide-wzzy'},
       // {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
       //工会服务
-      {path: `${ROOT}/wzzy/service/1`, component: require('../view/wzzy/service/serviceRecruit.vue'), name: 'serviceRecruit'},
-      {path: `${ROOT}/wzzy/service/2/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
+      {path: `${ROOT}/wzzy/service/:idx/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
       //互动交流
       {path: `${ROOT}/wzzy/chat/:type`, component: require('../view/wzzy/chat/chat.vue'), name: 'chat-wzzy'},
       //先进人物
