@@ -102,7 +102,7 @@
         keys.map((key) => {
           findArticleApi({
             page: 1,
-            pageSize: 10,
+            pageSize: 5,
             filed: ['subType'],
             keyWord: [key]
           }, 0, 4).then((data) => this.$set(this.newsList, key, data.list));

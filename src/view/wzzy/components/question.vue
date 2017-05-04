@@ -35,7 +35,7 @@
   }
   .formSubmit {width: 250px;height: 40px;display: block;margin: 20px auto;background-color: #E00404;text-align: center;line-height: 40px;color: #ffffff;font-size: 16px;border-radius: 4px;cursor: pointer;}
   .echo_question {
-    .ql-container {height: 3rem;  }
+    .ql-container {height: 3rem;}
   }
 </style>
 
