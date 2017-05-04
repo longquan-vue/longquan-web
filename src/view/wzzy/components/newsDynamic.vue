@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>新闻动态</span>
+                <span><i class="iconfont icon-xinwendongtai"></i> 新闻动态</span>
             </div>
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.info" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
@@ -30,7 +30,7 @@
                 width: 130px;
                 height: 32px;
                 line-height: 32px;;
-                text-align: center;
+                padding-left: 15px;;
                 .tab-head-title-img {
                     position: absolute;
                     left: 0;

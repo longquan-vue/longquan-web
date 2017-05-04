@@ -3,7 +3,7 @@
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
                 <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
-                <span>文件·资料</span>
+                <span><i class="iconfont icon-wenjianheziliao"></i> 文件·资料</span>
             </div>
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.file" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
