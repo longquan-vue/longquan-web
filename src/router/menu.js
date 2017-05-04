@@ -155,9 +155,9 @@ export default {
       ]
     },
     {
-      title: '新闻动态', name: 'news', url: `${ROOT}/wzzy/news/1`,
+      title: '新闻动态', name: 'news', url: `${ROOT}/wzzy/news/0`,
       children: [
-        {name: '公示公告', url: `${ROOT}/wzzy/news/1`},
+        {name: '公示公告', url: `${ROOT}/wzzy/news/0`},
         {type: 'info', path: `${ROOT}/wzzy/news/5/`},
         {type: 'activity', path: `${ROOT}/wzzy/news/7/`},
       ]

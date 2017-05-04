@@ -13,49 +13,63 @@
     }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="17">
-                        <div class="grid-left">
-                            <div class="the-place">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>新闻动态</el-breadcrumb-item>
-                                    <el-breadcrumb-item>{{articleType.info && articleType.info[params.type]}}</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="wzzy-sub-title" style="margin-bottom:0"><a><i class="iconfont icon-xinwendongtai"></i>{{articleType.info && articleType.info[params.type]}}</a></div>
-                            <div class="wzzy-sub-content">
-                                <ul class="newsMess">
-                                    <li v-for="(item,index) in newsList[params.type]" :key="index">
-                                        <div class="newsMessImg">
-                                            <router-link to="" class="block-link" >
-                                                <img :src="item.picUrl">
-                                            </router-link>
-                                        </div>
-                                        <div class="newsMessCont">
-                                            <h2><router-link to="">{{item.title}}</router-link></h2>
-                                            <p>{{date3Filter(item.created)}}</p>
-                                            <div v-html="limitFilter(strFilter(decode(item.content)),100)"></div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="7">
-                        <div class="grid-right grid-right-sub">
-                            <tip></tip>
-                            <lastDynamic></lastDynamic>
-                            <someIcon></someIcon>
-                        </div>
-                    </el-col>
-                </el-row>
+    <!--<div class="wzzyLaborUnion" style="padding-top:20px;">-->
+        <!--<div class="pagewrap">-->
+            <!--<div class="wzzy-content">-->
+                <!--<el-row :gutter="30">-->
+                    <!--<el-col :span="17">-->
+                        <!--<div class="grid-left">-->
+                            <!--<div class="the-place">-->
+                                <!--<el-breadcrumb separator="/">-->
+                                    <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
+                                    <!--<el-breadcrumb-item>新闻动态</el-breadcrumb-item>-->
+                                    <!--<el-breadcrumb-item>{{articleType.info && articleType.info[params.type]}}</el-breadcrumb-item>-->
+                                <!--</el-breadcrumb>-->
+                            <!--</div>-->
+                            <!--<div class="wzzy-sub-title" style="margin-bottom:0"><a><i class="iconfont icon-xinwendongtai"></i>{{articleType.info && articleType.info[params.type]}}</a></div>-->
+                            <!--<div class="wzzy-sub-content">-->
+                                <!--<ul class="newsMess">-->
+                                    <!--<li v-for="(item,index) in newsList[params.type]" :key="index">-->
+                                        <!--<div class="newsMessImg">-->
+                                            <!--<router-link to="" class="block-link" >-->
+                                                <!--<img :src="item.picUrl">-->
+                                            <!--</router-link>-->
+                                        <!--</div>-->
+                                        <!--<div class="newsMessCont">-->
+                                            <!--<h2><router-link to="">{{item.title}}</router-link></h2>-->
+                                            <!--<p>{{date3Filter(item.created)}}</p>-->
+                                            <!--<div v-html="limitFilter(strFilter(decode(item.content)),100)"></div>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="7">-->
+                        <!--<div class="grid-right grid-right-sub">-->
+                            <!--<tip></tip>-->
+                            <!--<lastDynamic></lastDynamic>-->
+                            <!--<someIcon></someIcon>-->
+                        <!--</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <ul class="newsMess">
+        <li v-for="(item,index) in newsList[params.type]" :key="index">
+            <div class="newsMessImg">
+                <router-link to="" class="block-link" >
+                    <img :src="item.picUrl">
+                </router-link>
             </div>
-        </div>
-    </div>
+            <div class="newsMessCont">
+                <h2><router-link to="">{{item.title}}</router-link></h2>
+                <p>{{date3Filter(item.created)}}</p>
+                <div v-html="limitFilter(strFilter(decode(item.content)),100)"></div>
+            </div>
+        </li>
+    </ul>
 </template>
 
 <script type="es6">

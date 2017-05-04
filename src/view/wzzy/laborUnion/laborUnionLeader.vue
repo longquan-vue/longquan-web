@@ -28,49 +28,22 @@
     }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="17">
-                        <div class="grid-left">
-                            <div class="the-place">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>机构介绍</el-breadcrumb-item>
-                                    <el-breadcrumb-item>区总领导</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>区总领导</a></div>
-                            <div class="wzzy-sub-content">
-                                <div class="union-leader">
-                                    <ul>
-                                        <li v-for="i in 5" :key="i">
-                                            <div class="union-leader-img">
-                                                <img :src="'../../../../static/wx/img/'+i+'.jpg'">
-                                            </div>
-                                            <div class="union-leader-intro">
-                                                <h2>蕾姆</h2>
-                                                <p>区委常委、区总工会主席</p>
-                                                <p>主持区总工会全面工作</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <el-pagination layout="prev, pager, next" :total="50" style="margin:20px auto;text-align:center"></el-pagination>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="7">
-                        <div class="grid-right grid-right-sub">
-                            <tip></tip>
-                            <lastDynamic></lastDynamic>
-                            <someIcon></someIcon>
-                        </div>
-                    </el-col>
-                </el-row>
-            </div>
+    <div class="laborUnionLeader">
+        <div class="union-leader">
+            <ul>
+                <li v-for="i in 5" :key="i">
+                    <div class="union-leader-img">
+                        <img :src="'../../../../static/wx/img/'+i+'.jpg'">
+                    </div>
+                    <div class="union-leader-intro">
+                        <h2>蕾姆</h2>
+                        <p>区委常委、区总工会主席</p>
+                        <p>主持区总工会全面工作</p>
+                    </div>
+                </li>
+            </ul>
         </div>
+        <el-pagination layout="prev, pager, next" :total="50" style="margin:20px auto;text-align:center"></el-pagination>
     </div>
 </template>
 

@@ -27,51 +27,34 @@
     }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="17">
-                        <div class="grid-left">
-                            <div class="the-place" style="">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>新闻动态</el-breadcrumb-item>
-                                    <el-breadcrumb-item>详情</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="wzzy-sub-content">
-                                <div class="messageDetail">
-                                    <div class="messageDetailTitle">
-                                        <h2>{{data.title}}</h2>
-                                        <p>
-                                            <span>文章来源：发布者所属机关部门  &nbsp;&nbsp;&nbsp; {{date3Filter(data.created)}}  </span>
-                                            <i>点击次数：<em style="color:#333;">387</em></i>
-                                        </p>
-                                    </div>
-                                    <div class="messageDetailCont">
-                                        <div class="messageDetailCont-mess" v-html="decode(data.content)"></div>
-                                        <div class="messageDetailCont-down" v-if="data.files">
-                                            <span>附件：{{data.files[0].name}}.{{data.files[0].suffix}}</span>
-                                            <a href="http://java.ichuangye.cn/userfiles/2017/05/03/7f2c9c005b3b499cb77238bb295663a6.jpg" target="_blank">下载 ↓</a>
-                                        </div>
-                                    </div>
-                                    <div class="messageDetailContPage">
-                                        <a>上一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
-                                        <a>下一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="7">
-                        <div class="grid-right grid-right-sub">
-                            <tip></tip>
-                            <lastDynamic></lastDynamic>
-                            <someIcon></someIcon>
-                        </div>
-                    </el-col>
-                </el-row>
+    <div class="newsDetail" style="padding-top:20px;">
+        <div class="the-place" style="">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>新闻动态</el-breadcrumb-item>
+                <el-breadcrumb-item>详情</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="wzzy-sub-content">
+            <div class="messageDetail">
+                <div class="messageDetailTitle">
+                    <h2>{{data.title}}</h2>
+                    <p>
+                        <span>文章来源：发布者所属机关部门  &nbsp;&nbsp;&nbsp; {{date3Filter(data.created)}}  </span>
+                        <i>点击次数：<em style="color:#333;">387</em></i>
+                    </p>
+                </div>
+                <div class="messageDetailCont">
+                    <div class="messageDetailCont-mess" v-html="decode(data.content)"></div>
+                    <div class="messageDetailCont-down" v-if="data.files">
+                        <span>附件：{{data.files[0].name}}.{{data.files[0].suffix}}</span>
+                        <a href="http://java.ichuangye.cn/userfiles/2017/05/03/7f2c9c005b3b499cb77238bb295663a6.jpg" target="_blank">下载 ↓</a>
+                    </div>
+                </div>
+                <div class="messageDetailContPage">
+                    <a>上一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
+                    <a>下一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
+                </div>
             </div>
         </div>
     </div>
@@ -81,16 +64,12 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
-    import tip from '../components/tips.vue'
-    import someIcon from '../components/someIcon.vue'
-    import lastDynamic from '../components/lastDynamic.vue'
     export default{
         data(){
             return{
             }
         },
         components:{
-            tip,someIcon,lastDynamic
         },
         computed: {
             ...mapGetters([ 'data','list']),

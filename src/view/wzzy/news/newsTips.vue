@@ -15,38 +15,9 @@
    }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
-        <div class="pagewrap">
-            <div class="wzzy-content">
-                <el-row :gutter="30">
-                    <el-col :span="17">
-                        <div class="grid-left">
-                            <div class="the-place" style="">
-                                <el-breadcrumb separator="/">
-                                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item>新闻动态</el-breadcrumb-item>
-                                    <el-breadcrumb-item>公示公告</el-breadcrumb-item>
-                                </el-breadcrumb>
-                            </div>
-                            <div class="wzzy-sub-title" style="margin-bottom:0"><a><i class="iconfont icon-xinwendongtai"></i>公示公告</a></div>
-                            <div class="wzzy-sub-content">
-                                <ul class="newTips" v-for="(item,index) in newsList" :key="index">
-                                    <li><a><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="7">
-                        <div class="grid-right grid-right-sub">
-                            <tip></tip>
-                            <lastDynamic></lastDynamic>
-                            <someIcon></someIcon>
-                        </div>
-                    </el-col>
-                </el-row>
-            </div>
-        </div>
-    </div>
+    <ul class="newTips">
+        <li v-for="(item,index) in newsList" :key="index"><a><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a></li>
+    </ul>
 </template>
 
 <script type="es6">
@@ -57,10 +28,8 @@
     import lastDynamic from '../components/lastDynamic.vue'
     import {findArticleApi} from '../../../api/articleApi'
     export default{
-        data(){
-            return{
-              newsList:[]
-            }
+        props:{
+            newsList:Array
         },
         components:{
             tip,someIcon,lastDynamic

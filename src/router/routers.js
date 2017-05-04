@@ -126,11 +126,9 @@ export default [
       {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail'},
       {path: `${ROOT}/wzzy/workerDetail/:id`, component: require('../view/wzzy/advanced/workerDetail.vue'), name: 'workerDetail'},
       /*机构介绍*/
-      {path: `${ROOT}/wzzy/laborUnion/1`, component: require('../view/wzzy/laborUnion/laborUnionIntro.vue'), name: 'laborUnionIntro'},
-      {path: `${ROOT}/wzzy/laborUnion/2`, component: require('../view/wzzy/laborUnion/laborUnionLeader.vue'), name: 'laborUnionLeader'},
-      {path: `${ROOT}/wzzy/laborUnion/3`, component: require('../view/wzzy/laborUnion/laborUnionSet.vue'), name: 'laborUnionSet'},
+      {path: `${ROOT}/wzzy/laborUnion/:type`, component: require('../view/wzzy/laborUnion/laborUnion.vue'), name: 'laborUnion-wzzy'},
       //新闻动态
-      {path: `${ROOT}/wzzy/news/1`, component: require('../view/wzzy/news/newsTips.vue'), name: 'newsTips'},
+      {path: `${ROOT}/wzzy/news/0`, component: require('../view/wzzy/news/news.vue'), name: 'news-wzzy'},
       {path: `${ROOT}/wzzy/news/5/:type`, component: require('../view/wzzy/news/newsMess.vue'), name: 'newsMess'},
       {path: `${ROOT}/wzzy/news/7/:type`, component: require('../view/wzzy/news/newsAct.vue'), name: 'newsAct'},
       //办事指南
