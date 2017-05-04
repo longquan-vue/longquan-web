@@ -4,8 +4,10 @@
 
   .zhxt .ql-container .ql-editor {
     min-height: 20em;
-    padding-bottom: 1em;
-    max-height: 25em;
+  }
+
+  .dep_desc .ql-container .ql-editor {
+    height: 10rem;
   }
 </style>
 <template>

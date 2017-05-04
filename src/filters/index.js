@@ -39,15 +39,15 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 //限制字数
 export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l) + '...' : str;
 //过滤文字
-export const strFilter = (str = '') =>str.replace(/<[^>]+>/g,'');
+export const strFilter = (str = '') => str.replace(/<[^>]+>/g, '');
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
 export const audit2Filter = (audit) => ['未审核', '审核中', '审核成功', '审核失败'][audit] || '未审核'
 export const userFilter = ({audit}) => ['普通用户', '普通用户', '职工认证用户'][audit] || '普通用户'
-export const group = (list, field = 'recording', filter = date7Filter) => {
+export const group = (list, field = 'recording', formate = date7Filter, filter = (v) => v) => {
   const g = {};
-  list.map((item) => g[filter(item[field])] ? g[filter(item[field])].push(item) : g[filter(item[field])] = [item]);
+  list.map((item) => filter(item) ? g[formate(item[field])] ? g[formate(item[field])].push(item) : g[formate(item[field])] = [item] : '');
   return g;
 };
 
@@ -90,7 +90,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 
 export default {
   filesNumFilter,
-    strFilter,
+  strFilter,
   type2Filter,
   filesFilter,
   encode,

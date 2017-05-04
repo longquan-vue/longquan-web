@@ -114,6 +114,7 @@ export default {
         {title: '工会管理列表', path: `${ROOT}/zhxt/unions`},
         {title: '组织架构列表', path: `${ROOT}/zhxt/department`},
         {title: '我的公会', path: `${ROOT}/zhxt/unions/mine`},
+        {title: '区总介绍', path: `${ROOT}/zhxt/desc`},
       ]
     },
     {
