@@ -5,7 +5,13 @@ export const debug = (...msg) => {
     console.debug(...msg)
   }
 }
-export const advancedType = [require('../../static/zhxt/advanced01.png'),require('../../static/zhxt/advanced02.png')]
+export const advancedType = [require('../../static/zhxt/advanced01.png'), require('../../static/zhxt/advanced02.png')]
+export const molds = ['国有企业', '集体企业', '事业企业', '机关企业', '非公有制内资企业', '外资企业']
+export const industrys = ['农、林、牧、渔业', '采矿业', '制造业', '电力、燃气及水的生产和供应业', '建筑业', '交通运输、仓储及邮政业',
+  '信息传输、计算机服务和软件业', '批发和零售业', '住宿和餐饮业', '金融业', '房地产业', '租赁和商业服务业',
+  '科学研究、技术服务和地址勘查业', '水利、环境和公共设施管理业', '居民服务和其他服务业', '教育', '卫生、社会保障和社会福利业',
+  '文化、体育和娱乐业', '公共管理和社会组织', '国际组织'
+]
 export const healthIcon = [
   require('../../static/wx/button.png'),
   require('../../static/wx/default.png'),

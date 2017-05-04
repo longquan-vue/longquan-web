@@ -22,10 +22,15 @@
               <el-option v-for="item in opts" :label="item.name" :key="item.id" :value="item.id"/>
             </el-select>
           </el-form-item>
-          <el-form-item label="单位类型：" prop="type">
-            <el-input placeholder="请输入..." :value="data.type" @input="(v)=>setData({type:v})"/>
+          <el-form-item label="单位类型：" prop="mold">
+            <el-select :value="data.mold" @input="(v)=>setData({mold:v})" placeholder="请选择单位类型..." style="width:100%">
+              <el-option v-for="mold in molds" :key="mold" :label="mold" :value="mold"/>
+            </el-select>
           </el-form-item>
           <el-form-item label="所属行业：" prop="industry">
+            <el-select placeholder="请选择所属行业..." :value="data.industry" @input="(v)=>setData({industry:v})" style="width:100%">
+              <el-option v-for="industry in industrys" :key="industry" :label="industry" :value="industry"/>
+            </el-select>
             <el-input placeholder="请输入..." :value="data.industry" @input="(v)=>setData({industry:v})"/>
           </el-form-item>
           <el-form-item label="成立时间：" prop="register">
@@ -200,12 +205,14 @@
   import filter from '../../../filters'
   import {alert} from '../../../actions'
   import {number, required, array} from '../../../constant/rules'
+  import {molds, industrys} from '../../../constant'
   import {findDepApi} from '../../../api/departmentApi'
   export default {
     data() {
       return {
         rules: {},
         opts: [],
+        molds, industrys
       }
     },
     computed: {...mapGetters(['data']),},

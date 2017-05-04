@@ -6,7 +6,7 @@
     <div class="contentBoxtitle"><span>组织架构列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelectInput title="搜索条件" :options="{'name':'名称'}" def-key="name" :change="change"/>
+        <MySelectInput title="搜索条件" :options="{'name':'名称','parent':'上级单位','adminName':'负责人'}" def-key="name" :change="change"/>
         <el-button style="float:right;" type="primary" @click="go(['depEdit','create'])" icon="plus">添加单位</el-button>
       </div>
       <div class="tableList mgb20">
