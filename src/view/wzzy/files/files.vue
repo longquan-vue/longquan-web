@@ -28,7 +28,7 @@
 
   }
   .fileListCont {
-    padding: 20px;
+    padding: 20px;height: 196px;;
     border: 1px solid #E7E7E7;
     border-top: none;
   }

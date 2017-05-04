@@ -13,14 +13,14 @@
         </div>
         <div class="wzzy-content">
           <el-row :gutter="30">
-            <el-col :span="17">
+            <el-col :span="$route.path == '/view/wzzy/files'?24:17">
               <div class="grid-left">
                   <transition name="move" mode="out-in">
                     <router-view/>
                   </transition>
               </div>
             </el-col>
-            <el-col :span="7">
+            <el-col :span="7" v-if="$route.path != '/view/wzzy/files'">
               <div class="grid-right" :class="{'grid-right-sub':$route.path != '/view/wzzy/home'}">
                 <question v-if="$route.path == '/view/wzzy/chat/3'"></question>
                 <tip></tip>
