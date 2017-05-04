@@ -128,9 +128,7 @@ export default [
       /*机构介绍*/
       {path: `${ROOT}/wzzy/laborUnion/:type`, component: require('../view/wzzy/laborUnion/laborUnion.vue'), name: 'laborUnion-wzzy'},
       //新闻动态
-      {path: `${ROOT}/wzzy/news/0`, component: require('../view/wzzy/news/news.vue'), name: 'news-wzzy'},
-      {path: `${ROOT}/wzzy/news/5/:type`, component: require('../view/wzzy/news/newsMess.vue'), name: 'newsMess'},
-      {path: `${ROOT}/wzzy/news/7/:type`, component: require('../view/wzzy/news/newsAct.vue'), name: 'newsAct'},
+      {path: `${ROOT}/wzzy/news/:idx/:type`, component: require('../view/wzzy/news/news.vue'), name: 'news-wzzy'},
       //办事指南
       {path: `${ROOT}/wzzy/guide/1`, component: require('../view/wzzy/guide/guideBulid.vue'), name: 'guideBulid'},
       {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},

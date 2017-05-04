@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="url" class="pub-list-a"><span>{{title}}</span> <i>{{date3Filter(time)}}</i></router-link>
+    <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="pub-list-a"><span>{{item.title}}</span> <i>{{date3Filter(item.time)}}</i></router-link>
 </template>
 <style lang="less">
     .pub-list-a{  position: relative;  display: block;  color: #333;  font-size: 14px;
@@ -20,16 +20,8 @@
 <script type="es6">
   import filters from '../../../filters'
     export default{
-        name: 'pubListA',
-        data(){
-            return {
-                show: false,
-            }
-        },
         props: {
-            title: String,
-            url:String,
-            time:Number
+            item: Object,
         },
         methods: {
             ...filters,

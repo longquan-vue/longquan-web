@@ -7,52 +7,74 @@
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item :to="{ path: '1' }">新闻动态</el-breadcrumb-item>
-                <el-breadcrumb-item>工会新闻</el-breadcrumb-item>
+                <el-breadcrumb-item>{{name}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>工会新闻</a></div>
+        <div class="wzzy-sub-title"><a><i class="iconfont icon-xinwendongtai"></i>{{name}}</a></div>
         <div class="wzzy-sub-content">
             <transition-group name="move" mode="out-in">
-                <newsTips :key="1"/>
-                <newsMess :key="2"/>
+                <newsTips v-if="type == '0'" key="0" :newsList="newsList[params.type]"/>
+                <newsMess v-for="(v,k) in articleType.info" :key="k" v-if="type == '5' && k == params.type" :newsList="newsList[params.type]"/>
+                <newsAct v-for="(v,k) in articleType.activity" :key="k" v-if="type == '7' && k == params.type" :newsList="newsList[params.type]"/>
             </transition-group>
         </div>
+        <MyPagination :method="getNews"/>
     </div>
 </template>
 
 <script type="es6">
     import {mapGetters, mapActions} from 'vuex'
+    import {findArticleApi} from '../../../api/articleApi'
     import newsAct from './newsAct.vue'
     import newsTips from './newsTips.vue'
     import newsMess from './newsMess.vue'
+    import MyPagination from '../../../components/public/page/MyPagination.vue'
     export default{
+        data(){
+          return {
+              newsList:{}
+          }
+        },
         components:{
-            newsAct,newsTips,newsMess
+            newsAct,newsTips,newsMess,MyPagination
         },
         computed: {
-            ...mapGetters(['page', 'list', 'articleType', 'params']),
-            active(){
-                console.log(this.$route.path.replace('/view/wzzy/news/',''));
-                return this.$route.path.replace('/view/wzzy/news/','');
+            ...mapGetters(['page', 'articleType', 'params','path']),
+            type(){
+                return this.params.idx
             },
-            pathName(){
-                let path = '';
-                switch (this.active){
-                    case '1':
-                        path='区总介绍';
-                        break;
-                    case '2':
-                        path='区总领导';
-                        break;
-                    case '3':
-                        path='组织机构';
-                        break;
+            name(){
+                if(this.type == '5'){
+                    return this.articleType.info && this.articleType.info[this.params.type]
                 }
-                return path;
+                if(this.type == '7'){
+                    return this.articleType.activity && this.articleType.activity[this.params.type]
+                }
+                return '公示公告'
             }
         },
+        methods: {
+            ...mapActions(['go','changePage']),
+            getNews(){
+                const type = this.params.type;
+                const param = {...this.page};
+                if(this.type != '0'){
+                    param.filed = ['subType'];
+                    param.keyWord = [type]
+                }
+                findArticleApi(param, 0, this.type).then((data) => {
+                    this.$set(this.newsList,type,data.list);
+                    delete data.list;
+                    this.changePage(data);
+                });
+            }
+        },
+        beforeRouteUpdate (to, from, next) {
+            next();
+            this.getNews()
+        },
         created () {
-            console.log('this.$store.state.articleType',this.$store.state.articleType)
+            this.getNews();
         },
     }
 </script>

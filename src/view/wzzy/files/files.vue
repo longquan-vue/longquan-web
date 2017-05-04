@@ -55,7 +55,7 @@
                         <a>更多 ></a>
                       </div>
                       <div class="fileListCont">
-                        <pubListA v-for="(item,index) in newsList[key]" :key="index" :title="item.title" :url="item.id" :time="item.created"></pubListA>
+                        <pubListA v-for="(item,index) in newsList[key]" :key="index" :item="item"></pubListA>
                       </div>
                     </div>
                   </el-col>
@@ -95,6 +95,9 @@
       ...mapActions(['go', 'clear', 'getMine', 'changePage']),
       ...filters,
       getNews(){
+          if(!this.articleType.file){
+              return;
+          }
         const keys = Object.keys(this.articleType.file);
         keys.map((key) => {
           findArticleApi({
@@ -107,6 +110,7 @@
       }
     },
     created () {
+      this.getNews()
     },
     destroyed(){
 

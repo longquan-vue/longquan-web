@@ -11,7 +11,7 @@
             <h2>{{item.title}}</h2>
             <p>{{date3Filter(item.created)}}</p>
           </div>
-          <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="block-link"></router-link>
+          <router-link :to="'/view/wzzy/workerDetail/'+item.id" class="block-link"></router-link>
         </div>
       </el-col>
     </el-row>

@@ -43,7 +43,7 @@
       ...mapActions(['go','clear','getMine','changePage']),
       ...filters,
       getNews(){
-        const type = this.params.type
+        const type = this.params.type;
         findArticleApi({
           page: 1,
           pageSize: 10,

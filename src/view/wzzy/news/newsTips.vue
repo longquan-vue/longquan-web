@@ -16,42 +16,23 @@
 </style>
 <template>
     <ul class="newTips">
-        <li v-for="(item,index) in newsList" :key="index"><a><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a></li>
+        <li v-for="(item,index) in newsList" :key="index"><router-link :to="'/view/wzzy/messageDetail/'+item.id"><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></router-link></li>
     </ul>
 </template>
 
 <script type="es6">
-    import { mapGetters,mapActions } from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     import filters from '../../../filters'
-    import tip from '../components/tips.vue'
-    import someIcon from '../components/someIcon.vue'
-    import lastDynamic from '../components/lastDynamic.vue'
-    import {findArticleApi} from '../../../api/articleApi'
     export default{
         props:{
-            newsList:Array
+            newsList:Array,
         },
-        components:{
-            tip,someIcon,lastDynamic
-        },
-        computed: {
-            ...mapGetters([ 'page','list']),
-        },
-        methods:{
-            ...mapActions(['go','clear','getMine','changePage']),
+        methods: {
+            ...mapActions(['clear']),
             ...filters,
-          getNews(){
-            findArticleApi({
-              page: 1,
-              pageSize: 10,
-            }, 0, 0).then((data) => this.newsList = data.list);
-          }
-        },
-        created () {
-          this.getNews();
         },
         destroyed(){
-
+            this.clear()
         }
     }
 </script>
