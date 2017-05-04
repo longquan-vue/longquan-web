@@ -31,7 +31,6 @@
             <el-select placeholder="请选择所属行业..." :value="data.industry" @input="(v)=>setData({industry:v})" style="width:100%">
               <el-option v-for="industry in industrys" :key="industry" :label="industry" :value="industry"/>
             </el-select>
-            <el-input placeholder="请输入..." :value="data.industry" @input="(v)=>setData({industry:v})"/>
           </el-form-item>
           <el-form-item label="成立时间：" prop="register">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择成立时间..." :value="data.register" @input="(v)=>setData({register:v&&v.getTime()})" style="width: 100%;"/>
