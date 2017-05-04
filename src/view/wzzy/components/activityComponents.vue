@@ -3,7 +3,7 @@
         <el-row :gutter="10">
             <el-col :span="12" class="activityShowLeft">
                 <div class="link-div">
-                    <router-link to="" class="block-link">
+                    <router-link :to="'/view/wzzy/messageDetail/'+(newsList[0] && newsList[0].id)" class="block-link">
                         <img :src="newsList[0] && newsList[0].picUrl">
                         <div class="link-div-mess">
                             <h2>{{newsList[0] && newsList[0].title}}</h2>
@@ -17,12 +17,12 @@
                     <el-col :span="12" v-for="(item,index) in newsList" :key="index" v-if="index > 0">
                         <div class="little-link">
                             <div class="link-div">
-                                <a class="block-link">
+                                <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="block-link">
                                     <img :src="item.picUrl">
                                     <div class="link-div-mess">
                                         <h2>{{item.title}}</h2>
                                     </div>
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </el-col>

@@ -10,9 +10,9 @@
             </div>
             <a class="tab-head-more">更多 > </a>
         </div>
-        <transition-group enter-active-class="animated fadeIn">
-            <div class="wzzy-tab-cont" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
-                <div class="modelWorker">
+        <div class="wzzy-tab-cont" >
+            <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
+                <div class="modelWorker" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
                     <el-row :gutter="10">
                         <el-col :span="6" v-for="(item,index) in list" :key="index">
                             <div class="img-card">
@@ -20,19 +20,19 @@
                                 <div class="card-bg">
                                     <h2>{{item.title}}</h2>
                                     <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
-                                    <router-link to="">查看详情</router-link>
+                                    <router-link :to="'/view/wzzy/workerDetail/'+item.id">查看详情</router-link>
                                 </div>
                             </div>
                         </el-col>
                     </el-row>
                 </div>
-            </div>
-        </transition-group>
+            </transition-group>
+        </div>
     </div>
 </template>
 <style lang="less">
     .modelWorker{
-        margin-bottom: 40px;margin-top: 20px;;
+        padding-bottom: 40px;padding-top: 20px;
         .img-card{ height: 252px;position: relative;overflow: hidden;margin-bottom:20px;cursor: pointer;
             &:hover{
                 .card-bg{   top: 0;

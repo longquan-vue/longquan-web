@@ -15,7 +15,7 @@
             <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
                 <el-row style="margin-bottom:0" :gutter="20" class="wzzy-tab-cont-list" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
                     <el-col :span="12" v-for="(item,index) in list" :key="index">
-                        <a><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></a>
+                        <router-link :to="'/view/wzzy/messageDetail/'+item.id"><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></router-link>
                     </el-col>
                 </el-row>
             </transition-group>

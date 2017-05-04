@@ -27,7 +27,7 @@
                 <div class="header-menu">
                     <el-row :gutter="20">
                         <el-col :span="3" v-for="(item,index) in menu" :key="index">
-                            <a @click="go(item)" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
+                            <a @click="go(item)" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="setTimeout(()=>{child.show=false},300)">{{item.title}}</a>
                         </el-col>
                     </el-row>
                 </div>
