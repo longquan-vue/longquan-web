@@ -10,7 +10,7 @@
         <div class="wzzy-tab-cont">
             <div class="border-content" style="height: 280px;border:none;">
                 <div class="wzzy-tab-cont-list">
-                    <a v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item}}</span> <i>2016-04-15</i></a>
+                    <router-link :to="'/view/wzzy/messageDetail/'+item.id" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item}}</span> <i>2016-04-15</i></router-link>
                 </div>
             </div>
         </div>

@@ -163,9 +163,9 @@ export default {
       ]
     },
     {
-      title: '办事指南', name: 'guide', url: `${ROOT}/wzzy/guide/1`,
+      title: '办事指南', name: 'guide',
       children: [
-        {name: '工会组建', url: `${ROOT}/wzzy/guide/1`},
+        {name: '工会组建', url: `${ROOT}/wzzy/guide/0/0`},
         {type: 'guide', path: `${ROOT}/wzzy/guide/8/`},
       ]
     },
