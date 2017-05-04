@@ -95,7 +95,7 @@
                 <div class="wzzy-poll-detail-intro" v-html="data.description"></div>
                 <div class="wzzy-poll-detail-cont">
                     <p>
-                        你当前已投 <span>2</span> 票，投完剩于 <span>3</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
+                        你当前已投 <span>{{num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
                         <a>按号数 <img src="../../../../static/wzzy/updown.png"></a>
                     </p>
                     <el-row :gutter="13">
@@ -112,7 +112,7 @@
                                 <div class="poll-card-cont">
                                     <h2>{{item.title}}</h2>
                                     <p>{{item.files[0] && item.files[0].description}}</p>
-                                    <a>投票</a>
+                                    <a @click="doVote(item)">投票</a>
                                 </div>
                             </div>
                         </el-col>
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <MyPagination :method="getPoll"/>
+        <!--<MyPagination style="margin:30px 0;" :method="getPoll"/>-->
 
         <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
@@ -187,6 +187,8 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import MyPagination from '../../../components/public/page/MyPagination.vue'
+    import {alert} from '../../../actions'
+    import {doVoteApi} from '../../../api/pollApi'
     export default{
         data(){
             return{
@@ -202,9 +204,15 @@
         },
         computed: {
             ...mapGetters([ 'page','data']),
-            active(){
-                console.log(this.$route.path.replace('/view/wzzy/',''));
-                return this.$route.path.replace('/view/wzzy/','');
+            num(){
+                let num =0;
+                this.data.questions.map((item,index)=>{
+                    console.log("item.num",item.num);
+                    if (item.num){
+                        num+=item.num;
+                    }
+                });
+                return num;
             }
         },
         methods:{
@@ -217,6 +225,14 @@
             changeSlide(index){
                 console.log(index);
                 this.imgIndex = index+1;
+            },
+            doVote({id,pollId}){  //投票
+                doVoteApi({pollId,questionId:id}).then((data)=>{
+                    alert('恭喜您！投票成功');
+                    this.getPoll();
+                }).catch((data)=>{
+                    alert(data.msg,'error');
+                });
             }
         },
         async created () {
