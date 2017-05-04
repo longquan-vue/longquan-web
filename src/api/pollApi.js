@@ -26,8 +26,13 @@ export const delPollApi = (id, del = 1) => request({
   method: 'delete',
   url: `${BASE_PATH}/delete/${id}/${del}`,
 });
-//提交投票结果
+//提交答卷结果
 export const doTopicApi = (data) => request({
     url: `${BASE_PATH}/doTopic`,
+    data
+});
+//投票
+export const doVoteApi = (data) => request({
+    url: `${BASE_PATH}/vote`,
     data
 });

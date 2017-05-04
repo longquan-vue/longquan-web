@@ -18,7 +18,7 @@
         </div>
         <div class="imgList">
             <p class="imgListHead" flex justify="between">
-                <span>你当前已投1/5票,投完5票即可获得积分奖励</span>
+                <span>你当前已投{{num}}/{{data.time}}票,投完{{data.time}}票即可获得积分奖励</span>
                 <a><em>按号数</em> ↑↓</a>
             </p>
             <ul flex justify="between" wrap="wrap">
@@ -34,7 +34,7 @@
                         <p><i>{{item.id}}</i> <span>{{item.title}}</span></p>
                         <p>{{item.files[0] && item.files[0].description}}</p>
                         <p>
-                            <a @click="isShow(1)">投票</a>
+                            <a @click="doVote(item)">投票</a>
                         </p>
                     </div>
                 </li>
@@ -45,7 +45,7 @@
             <div class="popupImgDetail">
                 <a @click="showImgDetail=false" class="closePopup">X</a>
                 <swiper :show-dots="false" height="100%" :index="index" @on-index-change="demo_onIndexChange">
-                    <swiper-item class="swiper-demo-img" v-for="(item, index) in data.questions[idx].files" :key="index" style="background:#333">
+                    <swiper-item class="swiper-demo-img" v-for="(item, index) in (data.questions && data.questions[idx].files)" :key="index" style="background:#333">
                         <img :src="item.url" class="swiperImg">
                         <div class="swiperMess">
                             <h2>{{data.questions[idx].title}}</h2>
@@ -107,7 +107,7 @@
             </x-dialog>
         </div>
 
-        <myImgDialog @on-result-change="onResultChange" :img="img" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
+        <myImgDialog @on-result-change="onResultChange" :bgImg="bgImg" :img="img" :title="title" :def="def" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
     </div>
 </template>
@@ -118,6 +118,7 @@
     import filters from '../../../filters'
     import { XImg , TransferDom, Popup ,Swiper ,SwiperItem ,Scroller,XDialog} from 'vux'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
+    import {doVoteApi} from '../../../api/pollApi'
     export default{
         data(){
             return{
@@ -140,6 +141,8 @@
                 title:'提示',   //控制弹窗标题
                 content:'恭喜您！报名成功',  //控制弹窗内容
                 btns: {btn:'确定'},
+                def:'',
+                bgImg:''
             }
         },
         directives: {
@@ -148,7 +151,18 @@
         components:{
             XImg , Popup ,Swiper ,SwiperItem ,Scroller,XDialog,myImgDialog
         },
-        computed: {...mapGetters([ 'page','data']),
+        computed: {
+            ...mapGetters([ 'page','data']),
+            num(){
+                let num =0;
+                this.data.questions.map((item,index)=>{
+                    console.log("item.num",item.num);
+                    if (item.num){
+                        num+=item.num;
+                    }
+                });
+                return num;
+            }
         },
         methods:{
             ...mapActions(['go','clear','getPoll','clearPage']),
@@ -184,6 +198,17 @@
                 }
                 this.isshow=true;
             },
+            doVote({id,pollId}){  //投票
+                doVoteApi({pollId,questionId:id}).then((data)=>{
+                    this.isShow(1);
+                    this.getPoll();
+                }).catch((data)=>{
+                    this.img='../../../../static/wx/default.png';
+                    this.content=data.msg;
+                    this.btns={btn:'确定'};
+                    this.isshow=true;
+                });
+            }
         },
         mounted () {
 

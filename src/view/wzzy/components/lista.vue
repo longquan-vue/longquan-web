@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="pub-list-a"><span>{{item.title}}</span> <i>{{date3Filter(item.time)}}</i></router-link>
+    <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="pub-list-a"><span>{{item.title}}</span> <i>{{dateFilter(item.created)}}</i></router-link>
 </template>
 <style lang="less">
     .pub-list-a{  position: relative;  display: block;  color: #333;  font-size: 14px;
