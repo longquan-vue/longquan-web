@@ -1,37 +1,13 @@
 <style lang="less">
   .modelWorkerDetail {
-    overflow: hidden;
-    padding: 40px 0;
-
-  .modelWorkerDetailLeft {
-    width: 160px;
-    float: left;
-
-  img {
-    width: 100%;
-    height: 200px;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-size: 22px;
-    color: #333333;
-  }
-
-  p {
-    color: #999999;
-    font-size: 14px;
-  }
-
-  }
-  .modelWorkerDetailRight {
-    line-height: 30px;
-    font-size: 16px;
-    color: #333;
-    margin-left: 180px;
-  }
-
+    overflow: hidden;padding: 40px 0;
+    .modelWorkerDetailLeft {
+      width: 160px;float: left;
+      img {width: 100%;height: 200px;display: block;margin-bottom: 10px;}
+      h2 {font-size: 22px;color: #333333;}
+      p {color: #999999;font-size: 14px;}
+    }
+    .modelWorkerDetailRight {line-height: 30px;font-size: 16px;color: #333;margin-left: 180px;}
   }
 </style>
 <template>
@@ -63,35 +39,21 @@
 </template>
 
 <script type="es6">
-  import {mapGetters} from 'vuex'
-  import {mapActions} from 'vuex'
+  import {mapGetters,mapActions} from 'vuex'
   import filters from '../../../filters'
-  import tip from '../components/tips.vue'
-  import someIcon from '../components/someIcon.vue'
-  import lastDynamic from '../components/lastDynamic.vue'
   export default{
-    data(){
-      return {}
-    },
-    components: {
-      tip, someIcon, lastDynamic
-    },
     computed: {
-      ...mapGetters(['page', 'data']),
-      active(){
-        console.log(this.$route.path.replace('/view/wzzy/', ''));
-        return this.$route.path.replace('/view/wzzy/', '');
-      }
+      ...mapGetters(['data']),
     },
     methods: {
-      ...mapActions(['go', 'clear', 'getMine', 'changePage', 'getArticle']),
+      ...mapActions(['clear','getArticle']),
       ...filters,
     },
     created () {
       this.getArticle();
     },
     destroyed(){
-
+      this.clear()
     }
   }
 </script>

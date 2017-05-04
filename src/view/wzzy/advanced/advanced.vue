@@ -6,7 +6,7 @@
     <div class="the-place">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '1' }">先进人物</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: (articleType.advanced && Object.keys(articleType.advanced)[0]) }">先进人物</el-breadcrumb-item>
         <el-breadcrumb-item>{{articleType.advanced && articleType.advanced[params.type].name}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
