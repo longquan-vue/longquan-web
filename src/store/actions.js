@@ -35,7 +35,7 @@ import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntr
 import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
 import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from '../api/echoApi'
-import {findDepApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from '../api/departmentApi'
+import {findDepApi,findDepListApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from '../api/departmentApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
 // defData
@@ -300,7 +300,7 @@ const getAdmin = async({commit, state}) => {
   }
 };
 // 获取投票调查列表
-const getAdminList = async({commit, state}) => commit(GET_DATA_LIST, await adminListApi(state.page));
+const getAdminList = async({commit, state}, data) => commit(GET_DATA_LIST, await adminListApi(data || state.page));
 // 创建投票调查
 const createAdmin = ({commit, state}) => createAdminApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改投票调查
@@ -331,7 +331,7 @@ const pauseArticle = ({commit, state}, [id, key, val]) => pauseArticleApi(id).th
 // 获取回音壁列表
 const findEcho = async({commit, state}) => commit(GET_DATA_LIST, await findEchoApi(state.page));
 // 创建回音壁
-const createEcho = ({commit, state},data) => createEchoApi(data || state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+const createEcho = ({commit, state}, data) => createEchoApi(data || state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改回音壁
 const updateEcho = ({commit, state}) => updateEchoApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 获取回音壁详情
@@ -349,6 +349,8 @@ const delEcho = ({commit, state}, [id, idx]) => delEchoApi(id).then(() => commit
 const pauseEcho = ({commit, state}, [id, key, val]) => pauseEchoApi(id).then(() => commit(CHANGE_LIST, [key, val]))
 // 获取工会列表
 const findDep = async({commit, state}) => commit(GET_DATA_LIST, await findDepApi(state.page));
+// 获取工会列表
+const findDepList = async({commit, state}) => commit(GET_DATA_LIST, await findDepListApi(state.page));
 // 删除工会
 const delDep = ({commit, state}, [id, idx]) => delDepApi(id).then(() => commit(DEL_DATA, idx))
 // 获取工会详情
@@ -356,8 +358,10 @@ const getDep = ({commit, state}) => {
   const {params:{id}}=state.route;
   if (id == 'mine') {
     getMine({commit, state}).then(() => getDepApi(state.login.department[0]).then((data) => commit(SET_DATA, {...data, mine: true})));
+  } else if (id == CREATE) {
+    commit(SET_DATA, {...defData.dep, edit: false})
   } else {
-    getDepApi(id).then((data) => commit(SET_DATA, {...data, mine: false}))
+    getDepApi(id).then((data) => commit(SET_DATA, {...data, mine: false, edit: true}))
   }
 };
 // 创建工会
@@ -461,6 +465,7 @@ export default {
   pauseEcho, //关闭或显示回音壁
   toUrl,
   findDep,//获取工会列表
+  findDepList,//获取工会列表
   delDep,//删除工会
   getDep,//获取公会详情
   createDep,//创建工会

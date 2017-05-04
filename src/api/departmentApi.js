@@ -21,6 +21,11 @@ export const findDepApi = (data, parentid = 0) => request({
   url: `${BASE_PATH}/find/${parentid}`,
   data
 });
+//搜索列表
+export const findDepListApi = (data, parentid = 0) => request({
+  url: `${BASE_PATH}/findDep/${parentid}`,
+  data
+});
 //获取详情
 export const getDepApi = (id) => request({
   method: 'get',
