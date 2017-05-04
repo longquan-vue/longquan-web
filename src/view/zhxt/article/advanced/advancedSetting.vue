@@ -2,7 +2,7 @@
   @import "advanced.less";
 </style>
 <template>
-  <div class="contentBox article_docs">
+  <div class="contentBox">
     <div class="contentBoxtitle">
       <span>先进人物类型设置</span>
       <a @click="go()" style="float:right;">
@@ -12,18 +12,19 @@
     <div class="contentBoxCont">
       <el-form :model="type" ref="advanced" label-width="120px" class="demo-ruleForm">
         <el-form-item label="类型配置：" required>
-          <el-row v-for="(val,key) in type.advanced" :key="key">
-            <el-col :span="22">
-              <el-input placeholder="请输入..."  :value="val" @input="(v)=>type.advanced[key] = v">
-                <template slot="prepend">名称：</template>
-              </el-input>
-            </el-col>
-            <el-col :span="2">
-              <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
-            </el-col>
-          </el-row>
+          <div v-for="(item,key) in type.advanced" :key="key" class="article_advanced">
+            <span>样式：</span>
+            <div class="advanced_img" v-for="(img,index) in advancedType" @click="item.type = index">
+              <img :src="img" class="img">
+              <img src="/static/zhxt/ok.png" class="ok" v-if="index == item.type">
+            </div>
+            <el-input placeholder="请输入..." :value="item.name" @input="(v)=>item.name = v">
+              <template slot="prepend">名称：</template>
+            </el-input>
+            <img src="/static/zhxt/error.png" class="close" alt="close" @click="del(key)">
+          </div>
           <el-row>
-            <img src="/static/zhxt/add.png" class="add" alt="add" @click="$set(type.advanced,new Date().getTime(),'')">
+            <img src="/static/zhxt/add.png" class="add" alt="add" @click="$set(type.advanced,new Date().getTime(),{name:'',type:0})">
           </el-row>
         </el-form-item>
         <el-form-item style="text-align: center">
@@ -36,10 +37,12 @@
 
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
+  import {advancedType} from '../../../../constant'
   export default{
     data(){
       return {
-        type: {advanced: {}}
+        type: {advanced: {}},
+        advancedType
       }
     },
     computed: {...mapGetters(['articleType'])},

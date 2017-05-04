@@ -21,19 +21,14 @@
               </div>
             </el-col>
             <el-col :span="7">
-              <div class="grid-right" v-if="active=='home'">
+              <div class="grid-right">
                 <tip></tip>
+                <lastDynamic v-if="$route.path != '/view/wzzy/home'"></lastDynamic>
                 <someIcon></someIcon>
-                <poll></poll>
-                <adver></adver>
-                <echo></echo>
-                <question></question>
-              </div>
-              <div class="grid-right grid-right-sub" v-if="active!='home'">
-                <question v-if="active=='chat/3'"></question>
-                <tip></tip>
-                <lastDynamic></lastDynamic>
-                <someIcon></someIcon>
+                <poll v-if="$route.path == '/view/wzzy/home'"></poll>
+                <adver v-if="$route.path == '/view/wzzy/home'"></adver>
+                <echo v-if="$route.path == '/view/wzzy/home'"></echo>
+                <question v-if="$route.path == '/view/wzzy/home'"></question>
               </div>
             </el-col>
           </el-row>
@@ -61,12 +56,6 @@
       wzzyFooter,
       Qrcode,
       tip, someIcon, poll, adver, echo,lastDynamic,question
-    },
-    computed: {
-      active(){
-        console.log(this.$route.path.replace('/view/wzzy/',''));
-        return this.$route.path.replace('/view/wzzy/','');
-      }
     },
   }
 </script>

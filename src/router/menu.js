@@ -145,9 +145,9 @@ export default {
     },
   ],
   wzzy: [
-    {title: '首页', url: `${ROOT}/wzzy/home`, name: 'home'},
+    {title: '首页', url: `${ROOT}/wzzy/home`},
     {
-      title: '机构介绍', name: 'laborUnion', url: `${ROOT}/wzzy/laborUnion`,
+      title: '机构介绍', name: 'laborUnion',
       children: [
         {name: '区总介绍', url: `${ROOT}/wzzy/laborUnion/1`},
         {name: '区总领导', url: `${ROOT}/wzzy/laborUnion/2`},
@@ -189,10 +189,9 @@ export default {
       ]
     },
     {
-      title: '先进人物', name: 'advanced', url: `${ROOT}/wzzy/advanced/1`,
+      title: '先进人物', name: 'advanced',
       children: [
-        {name: '优秀职工', url: `${ROOT}/wzzy/advanced/1`},
-        {name: '劳模风采', url: `${ROOT}/wzzy/advanced/2`},
+        {type: 'advanced', path: `${ROOT}/wzzy/advanced/1/`},
       ]
     },
     {

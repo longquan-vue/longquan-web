@@ -5,6 +5,7 @@ export const debug = (...msg) => {
     console.debug(...msg)
   }
 }
+export const advancedType = [require('../../static/zhxt/advanced01.png'),require('../../static/zhxt/advanced02.png')]
 export const healthIcon = [
   require('../../static/wx/button.png'),
   require('../../static/wx/default.png'),

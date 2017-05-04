@@ -21,7 +21,7 @@
           </el-form-item>
           <el-form-item label="先进类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择先进类型..." @input="(v)=>setData({subType:v})">
-              <el-option v-for="(val,key) in articleType.advanced" :label="val" :key="key" :value="key"/>
+              <el-option v-for="(val,key) in articleType.advanced" :label="val.name" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
           <!--<el-form-item label="同步显示：" prop="sync">-->
@@ -64,7 +64,7 @@
     data() {
       return {
         rules: {
-          files: array(),
+//          files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
           picUrl: required('请选择上传配图...'),
         },

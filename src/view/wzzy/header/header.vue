@@ -27,7 +27,7 @@
                 <div class="header-menu">
                     <el-row :gutter="20">
                         <el-col :span="3" v-for="(item,index) in menu" :key="index">
-                            <a @click="toUrl({path:item.url})" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
+                            <a @click="go(item)" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
                         </el-col>
                     </el-row>
                 </div>
@@ -83,6 +83,22 @@
             showSub(index){
                 this.idx = index;
                 this.show = true;
+            },
+            go(item){
+                let url ;
+                if(item.url){
+                   url = item.url;
+                }else{
+                  const it = item.children[0]
+                  if(it.type){
+                   url = it.path + Object.keys(this.articleType[it.type])[0]
+                  }else if(it.href){
+                      url = it.href;
+                  }else{
+                      url = it.url
+                  }
+                }
+                this.toUrl({path:url})
             }
         },
         created () {

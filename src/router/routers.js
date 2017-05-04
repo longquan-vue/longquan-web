@@ -140,7 +140,7 @@ export default [
       //互动交流
       {path: `${ROOT}/wzzy/chat/:type`, component: require('../view/wzzy/chat/chat.vue'), name: 'chat-wzzy'},
       //先进人物
-      {path: `${ROOT}/wzzy/advanced/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
+      {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
       //文件资料
       {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
     ]
