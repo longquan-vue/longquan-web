@@ -110,10 +110,10 @@ const login = async({commit, state}, admin) => {
   }
 }
 // 退出
-const loginOut = ({commit, state}) => loginOutApi().then(() => go({
-  commit,
-  state
-}, ['login']).then(() => commit(GET_MINE, {})));
+const loginOut = ({commit, state},flag=false) => loginOutApi().then(() => {
+  flag||go({  commit,  state}, ['login']);
+  commit(GET_MINE);
+});
 //签到
 const singin = ({commit, state}, vux) => state.login.isSign ? appAlert(vux, '您已签到') : signApi().then((res) => {
     appAlert(vux, '签到成功');

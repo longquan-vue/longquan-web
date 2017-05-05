@@ -31,8 +31,8 @@ export default {
     [SETTING] (state, setting) {
       state.setting = setting ? {...state.setting, ...setting} : {};
     },
-    [GET_MINE] (state, login = {}) {
-      state.login = {...state.login, ...login};
+    [GET_MINE] (state, login) {
+      state.login = login?{...state.login, ...login}:{};
     },
     [SET_DATA] (state, data) { // 修改值
       state.data = data ? {...state.data, ...data} : {};

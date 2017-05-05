@@ -24,7 +24,8 @@
       return {
         qrcode: '',
         timeout: false,
-        show: false
+        show: false,
+        timer:null
       }
     },
     watch: {
@@ -49,7 +50,7 @@
             this.$emit('success', user);
           });
           this.qrcode = `https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qrcode}`;
-          setTimeout(() => {
+          this.timer = setTimeout(() => {
             this.timeout = true;
             this.$socket.close();
           }, 120000)
@@ -64,6 +65,7 @@
         this.timeout = false;
         this.$socket.close();
         this.show = false;
+        clearTimeout(this.timer);
       }
     },
   }
