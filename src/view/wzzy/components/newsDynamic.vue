@@ -8,7 +8,7 @@
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.info" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
             </div>
-            <a class="tab-head-more">更多 > </a>
+            <a class="tab-head-more" @click="toUrl({path:'/view/wzzy/news/5/'+activeName})">更多 > </a>
         </div>
         <myLoading v-if="showLoading"></myLoading>
         <div class="wzzy-tab-cont">
@@ -21,8 +21,7 @@
 <style lang="less">
 </style>
 <script type="es6">
-    import {mapGetters} from 'vuex'
-    import {mapActions} from 'vuex'
+    import {mapGetters,mapActions} from 'vuex'
     import filters from '../../../filters'
     import {findArticleApi} from '../../../api/articleApi'
     import tabCont from '../components/tabCont.vue'
@@ -39,7 +38,7 @@
             tabCont,myLoading
         },
         computed: {
-            ...mapGetters(['page', 'list', 'articleType']),
+            ...mapGetters(['articleType']),
         },
         watch: {
             articleType(){
@@ -47,7 +46,7 @@
             }
         },
         methods: {
-            ...mapActions(['go', 'clear']),
+            ...mapActions(['toUrl']),
             ...filters,
             getNews(){
                 if(!this.articleType.info){

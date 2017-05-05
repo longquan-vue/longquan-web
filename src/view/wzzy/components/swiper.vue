@@ -8,7 +8,7 @@
                 </div>
                 <div class="wzzy-swiper-item-right">
                     <h2>
-                        <span>头条新闻</span><router-link :to="'messageDetail/'+item.id">{{item.title}}</router-link>
+                        <span>头条新闻</span><router-link :to="'/view/wzzy/messageDetail/'+item.id">{{item.title}}</router-link>
                     </h2>
                     <p>{{date3Filter(item.created)}}</p>
                     <div v-html="limitFilter(strFilter(decode(item.content)),80)"></div>
@@ -65,8 +65,6 @@
     }
 </style>
 <script type="es6">
-    import { mapGetters } from 'vuex'
-    import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import {findArticleApi} from '../../../api/articleApi'
     export default{
@@ -77,13 +75,7 @@
                 timer:null
             }
         },
-        components:{
-
-        },
-        computed: {...mapGetters([ 'page','list']),
-        },
         methods:{
-            ...mapActions(['go','clear']),
             ...filters,
             createTimer(){
                 this.timer =  setInterval(()=>{
@@ -96,8 +88,8 @@
                 this.createTimer();
             }
         },
-        async created () {
-            await findArticleApi({page:1,pageSize:5,filed:['top'],keyWord:[1]},0,5).then((data)=>{
+        created () {
+            findArticleApi({page:1,pageSize:5,filed:['top'],keyWord:[1]},0,5).then((data)=>{
                 this.itemList = data.list;
                 this.createTimer();
             });

@@ -21,7 +21,7 @@
           </el-form-item>
           <el-form-item label="服务类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择服务类型..." @input="(v)=>setData({subType:v})">
-              <el-option v-for="(val,key) in articleType.service" :label="val" :key="key" :value="key"/>
+              <el-option v-for="(val,key) in articleType.service" :label="val.name" :key="key" :value="key"/>
             </el-select>
           </el-form-item>
           <!--<el-form-item label="同步显示：" prop="sync">-->

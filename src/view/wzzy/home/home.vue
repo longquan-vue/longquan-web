@@ -23,14 +23,9 @@
   import files from '../components/files.vue'
   import modelWorker from '../components/modelWorker.vue'
   import aboutLink from '../components/about.vue'
-  import tip from '../components/tips.vue'
-  import someIcon from '../components/someIcon.vue'
-  import poll from '../components/poll.vue'
-  import adver from '../components/adver.vue'
-  import echo from '../components/echo.vue'
   export default{
     components: {
-      wzzySwiper, newsDynamic, assessMent, service, activityShow, files, modelWorker, aboutLink, tip, someIcon, poll, adver, echo,
+      wzzySwiper, newsDynamic, assessMent, service, activityShow, files, modelWorker, aboutLink,
     },
   }
 </script>
