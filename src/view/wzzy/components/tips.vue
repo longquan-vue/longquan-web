@@ -11,7 +11,7 @@
       <div class="border-content" style="border-top: none;height: 220px;">
         <div class="wzzy-tab-cont-list">
           <transition-group name="flip-tip" tag="p">
-            <router-link :to="'/view/wzzy/messageDetail/'+item.id" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></router-link>
+            <a @click="toUrl({path:'/view/wzzy/messageDetail/'+item.id})" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></a>
           </transition-group>
         </div>
       </div>
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script type="es6">
-  import {mapGetters, mapActions} from 'vuex'
+  import {mapActions} from 'vuex'
   import filters from '../../../filters'
   import {findArticleApi} from '../../../api/articleApi'
   export default{
@@ -28,12 +28,8 @@
         tipsList: [],
       }
     },
-    components: {},
-    computed: {
-      ...mapGetters(['page', 'list']),
-    },
     methods: {
-      ...mapActions(['go', 'clear', 'toUrl']),
+      ...mapActions(['toUrl']),
       ...filters,
     },
     mounted(){
