@@ -18,7 +18,7 @@
                 <newsAct v-for="(v,k) in articleType.activity" :key="k" v-if="type == '7' && k == params.type" :newsList="newsList[params.type]"/>
             </transition-group>
         </div>
-        <MyPagination :method="getNews"/>
+        <MyPagination :method="getNews" style="margin:30px 0;"/>
     </div>
 </template>
 

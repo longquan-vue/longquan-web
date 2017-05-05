@@ -13,12 +13,15 @@
     }
 </style>
 <template>
-    <ul class="wzzy-echo">
+    <div class="wzzy-echo-box">
+      <ul class="wzzy-echo">
         <li v-for="(item,index) in list">
-            <h2><a @click="go(['chatEchoDetail',item.id])">问： {{item.title}}</a><span>{{date3Filter(item.created)}}</span></h2>
-            <p v-html="limitFilter(strFilter(decode(item.answer)),100)"></p>
+          <h2><a @click="go(['chatEchoDetail',item.id])">问： {{item.title}}</a><span>{{date3Filter(item.created)}}</span></h2>
+          <p v-html="limitFilter(strFilter(decode(item.answer)),100)"></p>
         </li>
-    </ul>
+      </ul>
+      <MyPagination :method="getNews" style="margin:30px 0;"/>
+    </div>
 </template>
 
 <script type="es6">
@@ -26,6 +29,7 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import {findEchoApi} from '../../../api/echoApi'
+    import MyPagination from '../../../components/public/page/MyPagination.vue'
     export default{
         data(){
             return{
@@ -33,6 +37,7 @@
             }
         },
         components:{
+          MyPagination
         },
         computed: {
             ...mapGetters([ 'page']),
@@ -43,14 +48,17 @@
         methods:{
             ...mapActions(['go','clear','getMine','changePage']),
             ...filters,
+            getNews(){
+              const param = {...this.page};
+              findEchoApi(param).then((data)=>{
+                this.list = data.list;
+                delete data.list;
+                this.changePage(data);
+              })
+            }
         },
         created () {
-            findEchoApi({
-                page: 1,
-                pageSize: 3,
-            }).then((data)=>{
-                this.list = data.list;
-            })
+          this.getNews();
         },
         destroyed(){
 

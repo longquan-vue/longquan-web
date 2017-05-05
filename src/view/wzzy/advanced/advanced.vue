@@ -19,7 +19,7 @@
         </div>
       </transition>
     </div>
-    <MyPagination :method="getNews"/>
+    <MyPagination :method="getNews" style="margin:30px 0"/>
   </div>
 </template>
 

@@ -12,7 +12,8 @@
                      <a @click="toUrl({path:'/view/wzzy/'+(activeIndex==2?'chatPoll/':'chatQuestion/')+item.id})">{{item.title}}</a>
                   </div>
                   <div class="wzzy-poll-content" v-html="limitFilter(item.description,60)"></div>
-                  <a class="wzzy-poll-a" @click="toUrl({path:'/view/wzzy/chatPoll/'+item.id})">参与{{activeIndex==2?'投票':'调查'}} > </a>
+                  <a class="wzzy-poll-a" v-if="activeIndex==2" @click="toUrl({path:'/view/wzzy/chatPoll/'+item.id})">参与投票 </a>
+                  <a class="wzzy-poll-a" v-if="activeIndex==1" @click="toUrl({path:'/view/wzzy/chatQuestion/'+item.id})">参与调查 </a>
                 </li>
             </ul>
         </div>
