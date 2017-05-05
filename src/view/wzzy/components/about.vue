@@ -8,7 +8,6 @@
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.link" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
             </div>
-            <a class="tab-head-more">更多 > </a>
         </div>
 
         <div class="wzzy-tab-cont" style="position:relative;">
