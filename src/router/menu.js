@@ -148,7 +148,7 @@ export default {
     },
   ],
   wzzy: [
-    {title: '首页', url: `${ROOT}/wzzy/home`},
+    {title: '首页', url: `${ROOT}/wzzy/home`, name: 'home'},
     {
       title: '机构介绍', name: 'laborUnion',
       children: [
