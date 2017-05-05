@@ -18,7 +18,7 @@
         </div>
         <div class="imgList">
             <p class="imgListHead" flex justify="between">
-                <span>你当前已投{{num}}/{{data.time}}票,投完{{data.time}}票即可获得积分奖励</span>
+                <span>你当前已投{{data.time - num}}/{{data.time}}票,投完{{data.time}}票即可获得积分奖励</span>
                 <a><em>按号数</em> ↑↓</a>
             </p>
             <ul flex justify="between" wrap="wrap">
@@ -118,7 +118,7 @@
     import filters from '../../../filters'
     import { XImg , TransferDom, Popup ,Swiper ,SwiperItem ,Scroller,XDialog} from 'vux'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
-    import {doVoteApi} from '../../../api/pollApi'
+    import {doVoteApi,surplusVoteApi} from '../../../api/pollApi'
     export default{
         data(){
             return{
@@ -132,6 +132,7 @@
                     '../../../../static/wx/test/test7.jpg',
                     '../../../../static/wx/test/test8.jpg',
                 ],
+                num:0,
                 showImgDetail:false,
                 index:0,
                 idx:0,
@@ -153,15 +154,6 @@
         },
         computed: {
             ...mapGetters([ 'page','data']),
-            num(){
-                let num =0;
-                this.data.questions.map((item,index)=>{
-                    if (item.num){
-                        num+=item.num;
-                    }
-                });
-                return num;
-            }
         },
         methods:{
             ...mapActions(['go','clear','getPoll','clearPage']),
@@ -201,6 +193,7 @@
                 doVoteApi({pollId,questionId:id}).then((data)=>{
                     this.isShow(1);
                     this.getPoll();
+                    this.num ++;
                 }).catch((data)=>{
                     this.img='../../../../static/wx/default.png';
                     this.content=data.msg;
@@ -212,11 +205,10 @@
         mounted () {
 
         },
-       async created () {
-            await this.getPoll();
-            // this.$nextTick(() => {
-            //     this.$refs.scrollerEvent.reset({top: 0});
-            // })
+        created () {
+         this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>{
+           this.num = data;
+         }));
         },
         destroyed(){
             this.clear()

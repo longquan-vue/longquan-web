@@ -198,7 +198,7 @@
     import someIcon from '../components/someIcon.vue'
     import lastDynamic from '../components/lastDynamic.vue'
     import {doTopicApi,doVoteApi} from '../../../api/pollApi'
-    import {alert} from '../../../actions'
+    import {alert,confirm} from '../../../actions'
     export default{
         data(){
             return{
@@ -224,7 +224,7 @@
             }
         },
         methods:{
-            ...mapActions(['go','clear','getPoll','setListVal']),
+            ...mapActions(['go','clear','getPoll','setListVal','changeSys']),
             ...filters,
             setQuestions(key, val){
                 if (key) {
@@ -243,8 +243,11 @@
                     }
                 }
                 if (this.submit){
+                  if (this.$store.state.login.id){
                     doTopicApi(this.questions).then(()=>alert('提交成功,您将获得积分奖励')).catch((data)=>alert(data.msg));
-
+                  }else {
+                    confirm('您还未登陆，无法报名。请先登录...', 'warning').then(() => this.changeSys({qrcode: true}))
+                  }
                 }
             }
         },

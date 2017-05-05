@@ -95,13 +95,13 @@
                 <div class="wzzy-poll-detail-intro" v-html="data.description"></div>
                 <div class="wzzy-poll-detail-cont">
                     <p>
-                        你当前已投 <span>{{num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
+                        你当前已投 <span>{{data.time - num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
                         <a>按号数 <img src="../../../../static/wzzy/updown.png"></a>
                     </p>
                     <el-row :gutter="13">
                         <el-col :span="6" v-for="(item,index) in data.questions" :key="index">
                             <div class="poll-card">
-                                <div class="poll-card-head" @click="showImg(index)">
+                                <div class="poll-card-head" @click="showImg(item)">
                                     <span>{{item.id}}</span>
                                     <img :src="item.files[0] && item.files[0].url">
                                     <p>
@@ -160,22 +160,22 @@
                 </li>
             </ul>
         </el-dialog>
-        <el-dialog v-model="dialogImg" size="tiny" class="wzzy-dialog" :show-close="false">
+        <el-dialog v-model="dialogImg.show" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 人物详情
-                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogImg=false">
+                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogImg.show=false">
             </span>
             <div class="person-slide">
                 <el-carousel :interval="4000" height="600px" trigger="click" arrow="always" indicator-position="none" @change="changeSlide">
-                    <el-carousel-item v-for="(item, index) in data.questions[idx].files" :key="index">
+                    <el-carousel-item v-for="(item, index) in dialogImg.item.files" :key="index">
                         <img :src="item.url" class="person-slide-img">
                         <div class="person-slide-cont">
-                            <h2>{{data.questions[idx].title}}</h2>
+                            <h2>{{item.title}}</h2>
                             <p>{{item.description}}</p>
                         </div>
                     </el-carousel-item>
                 </el-carousel>
-                <div class="showCount">图 {{imgIndex}} / {{data.questions[idx].files.length}}</div>
+                <div class="showCount">图 {{imgIndex}} / {{dialogImg.item.files.length}}</div>
             </div>
 
         </el-dialog>
@@ -187,55 +187,53 @@
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
     import MyPagination from '../../../components/public/page/MyPagination.vue'
-    import {alert} from '../../../actions'
-    import {doVoteApi} from '../../../api/pollApi'
+    import {alert,confirm} from '../../../actions'
+    import {doVoteApi,surplusVoteApi} from '../../../api/pollApi'
     export default{
         data(){
             return{
                 dialogVisible: false,
-                dialogImg:false,
+                dialogImg:{item:{files:[]},show:false},
                 imgIndex:1,
-                idx:0,
-                personList:[]
+                num:0
             }
         },
         components:{
             MyPagination
         },
         computed: {
-            ...mapGetters([ 'page','data']),
-            num(){
-                let num =0;
-                this.data.questions.map((item,index)=>{
-                    if (item.num){
-                        num+=item.num;
-                    }
-                });
-                return num;
-            }
+            ...mapGetters(['login', 'page','data']),
         },
         methods:{
-            ...mapActions(['go','clear','getPoll','changePage']),
+            ...mapActions(['go','clear','getPoll','changePage','changeSys']),
             ...filters,
-            showImg(idx){
-                this.idx = idx;
-                this.dialogImg = true;
+            showImg(item){
+                this.dialogImg = {
+                  item,show:true
+                }
             },
             changeSlide(index){
                 this.imgIndex = index+1;
             },
             doVote({id,pollId}){  //投票
-                doVoteApi({pollId,questionId:id}).then((data)=>{
+                if (this.login.id){
+                  doVoteApi({pollId,questionId:id}).then(()=>{
                     alert('恭喜您！投票成功');
                     this.getPoll();
-                }).catch((data)=>{
+                    this.num ++;
+                  }).catch((data)=>{
                     alert(data.msg,'error');
-                });
-            }
+                  });
+                }else {
+                  confirm('您还未登陆，无法报名。请先登录...', 'warning').then(() => this.changeSys({qrcode: true}))
+                }
+
+            },
         },
-        async created () {
-            await this.getPoll();
-            this.personList = this.$store.state.data.questions;
+        created () {
+          this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>{
+              this.num = data;
+          }));
         },
         destroyed(){
 
