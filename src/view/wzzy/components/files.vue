@@ -8,7 +8,7 @@
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.file" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
             </div>
-            <a class="tab-head-more">更多 > </a>
+            <a class="tab-head-more" @click="toUrl({path:'/view/wzzy/filesList/'+activeName})">更多 > </a>
         </div>
 
         <div class="wzzy-tab-cont">
@@ -24,8 +24,7 @@
     </div>
 </template>
 <script type="es6">
-    import { mapGetters } from 'vuex'
-    import { mapActions } from 'vuex'
+    import { mapGetters,mapActions } from 'vuex'
     import filters from '../../../filters'
     import {findArticleApi} from '../../../api/articleApi'
     export default{
@@ -43,10 +42,10 @@
                 this.getNews()
             }
         },
-        computed: {...mapGetters([ 'page','list','articleType']),
+        computed: {...mapGetters(['articleType']),
         },
         methods:{
-            ...mapActions(['go','clear']),
+            ...mapActions(['toUrl']),
             ...filters,
             getNews(){
                 if(!this.articleType.file){
@@ -60,9 +59,7 @@
                         pageSize: 10,
                         filed: ['subType'],
                         keyWord: [key]
-                    }, 0, 4).then(async (data) => {
-                        await this.$set(this.newsList,key,data.list);
-                    });
+                    }, 0, 4).then((data) => this.$set(this.newsList,key,data.list));
                 });
             }
         },
