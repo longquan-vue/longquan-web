@@ -11,7 +11,7 @@
     <div class="border-content" style="border-top: none;">
       <ul class="echo-ul">
         <li v-for="(item,index) in list">
-          <div class="echo-title" @click="toUrl({path:'/view/wzzy/chat/3'})">
+          <div class="echo-title" @click="toUrl({path:'/view/wzzy/chatEcho/'+item.id})">
             问：{{item.title}}
           </div>
           <div class="echo-cont" v-html="limitFilter(strFilter(decode(item.answer)),100)"></div>
