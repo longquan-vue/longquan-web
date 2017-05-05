@@ -9,11 +9,7 @@
     <wzzyHeader/>
     <div class="wzzyHome">
       <div class="pagewrap">
-        <div class="weather">
-          <span>天气预报：</span>
-          <iframe style="vertical-align: middle;" allowtransparency="true" frameborder="0" width="190" height="36" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=2&t=1&v=0&d=1&bd=0&k=000000&f=000000&q=1&e=0&a=1&c=56294&w=180&h=36&align=left"></iframe>
-        </div>
-        <div class="wzzy-content">
+        <div class="wzzy-content" style="padding-top:20px;">
           <el-row :gutter="30">
             <el-col :span="$route.path == '/view/wzzy/files'?24:17">
               <div class="grid-left">
