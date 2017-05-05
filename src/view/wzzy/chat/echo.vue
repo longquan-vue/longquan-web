@@ -15,7 +15,7 @@
 <template>
     <ul class="wzzy-echo">
         <li v-for="(item,index) in list">
-            <h2><a>问： {{item.title}}</a><span>{{date3Filter(item.created)}}</span></h2>
+            <h2><a @click="go(['chatEchoDetail',item.id])">问： {{item.title}}</a><span>{{date3Filter(item.created)}}</span></h2>
             <p v-html="limitFilter(strFilter(decode(item.answer)),100)"></p>
         </li>
     </ul>

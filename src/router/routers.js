@@ -128,6 +128,7 @@ export default [
       {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail'},
       {path: `${ROOT}/wzzy/chatPoll/:id`, component: require('../view/wzzy/chat/pollDetail.vue'), name: 'chatPollDetail'},
       {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail'},
+      {path: `${ROOT}/wzzy/chatEcho/:id`, component: require('../view/wzzy/chat/echoDetail.vue'), name: 'chatEchoDetail'},
       {path: `${ROOT}/wzzy/workerDetail/:id`, component: require('../view/wzzy/advanced/workerDetail.vue'), name: 'workerDetail'},
       /*机构介绍*/
       {path: `${ROOT}/wzzy/laborUnion/:type`, component: require('../view/wzzy/laborUnion/laborUnion.vue'), name: 'laborUnion-wzzy'},

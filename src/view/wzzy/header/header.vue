@@ -6,6 +6,7 @@
     <div class="header-date pagewrap">
       <span>
           欢迎访问成都市龙泉驿区总工会网站！今天是:{{today}}
+        <iframe style="vertical-align: middle;" allowtransparency="true" frameborder="0" width="190" height="40" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=2&t=1&v=0&d=1&bd=0&k=000000&f=000000&q=1&e=0&a=1&c=56294&w=180&h=36&align=left"></iframe>
       </span>
       <a @click="changeSys({qrcode:true})" v-if="!login.id">登录</a>
       <div v-if="login.id" class="my-login" @mouseenter="showLogin" @mouseleave="closeLogin(false)">
