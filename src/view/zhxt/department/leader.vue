@@ -6,27 +6,25 @@
     <div class="contentBoxtitle"><span>区总领导列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelectInput title="搜索条件" :options="{'name':'名称','parent':'上级单位','adminName':'负责人'}" def-key="name" :change="change"/>
-        <el-button style="float:right;" type="primary" @click="go(['depEdit','create'])" icon="plus">添加单位</el-button>
+        <MySelectInput title="搜索条件" :options="{'name':'名称','position':'职位'}" def-key="name" :change="change"/>
+        <el-button style="float:right;" type="primary" @click="go(['leaderEdit','create'])" icon="plus">添加领导</el-button>
       </div>
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" fixed="left"/>
-          <MyColumn prop="name" label="单位名称" min-width="100"/>
-          <MyColumn prop="parent" label="上级单位" :formatter="({parent})=>parent||'无'" min-width="100"/>
-          <MyColumn prop="adminName" label="负责人" :formatter="({adminName})=>adminName||'无'" min-width="150"/>
-          <MyColumn prop="position" label="职位" :formatter="({position})=>position||'无'" min-width="150"/>
-          <MyColumn prop="mobile" label="联系电话" :formatter="({mobile})=>mobile||'无'" min-width="150"/>
+          <MyColumn prop="name" label="姓名" min-width="100"/>
+          <MyColumn prop="position" label="职位" min-width="150"/>
+          <MyColumn prop="descript" label="简介" min-width="100"/>
           <MyColumn label="操作" width="150" fixed="right">
             <template scope="scope">
-              <el-button type="text" size="small" @click="go(['depEdit',scope.row.id])">编辑</el-button>
+              <el-button type="text" size="small" @click="go(['leaderEdit',scope.row.id])">编辑</el-button>
               <el-button size="small" type="text" @click="del(scope.$index,scope.row)">删除</el-button>
             </template>
           </MyColumn>
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="findDepList"/>
+        <MyPagination :method="findLeader"/>
       </div>
     </div>
   </div>
@@ -43,21 +41,21 @@
     components: {MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['findDepList', 'delDep', 'clear', 'changeSelect', 'go']),
+      ...mapActions(['findLeader', 'delLeader', 'clear', 'changeSelect', 'go']),
       ...filter,
       change(key, value){
         this.changeSelect({key, value});
-        this.findDepList();
+        this.findLeader();
       },
       del(idx, {id, name}) {
-        confirm(`确定删单位[${name}]吗?`, 'warning').then(() => this.delDep([id, idx]))
+        confirm(`确定删领导[${name}]吗?`, 'warning').then(() => this.delLeader([id, idx]))
       },
     },
     created () {
-      this.findDepList();
+      this.findLeader();
     },
     destroyed () {
-      this.clear('dep')
+      this.clear('leader')
     }
   }
 </script>

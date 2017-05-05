@@ -31,54 +31,40 @@
     <div class="laborUnionLeader">
         <div class="union-leader">
             <ul>
-                <li v-for="i in 5" :key="i">
+                <li v-for="(item,i) in list" :key="i">
                     <div class="union-leader-img">
-                        <img :src="'../../../../static/wx/img/'+i+'.jpg'">
+                        <img :src="item.picUrl">
                     </div>
                     <div class="union-leader-intro">
-                        <h2>蕾姆</h2>
-                        <p>区委常委、区总工会主席</p>
-                        <p>主持区总工会全面工作</p>
+                        <h2>{{item.name}}</h2>
+                        <p>{{item.position}}</p>
+                        <p>{{item.descript}}</p>
                     </div>
                 </li>
             </ul>
         </div>
-        <el-pagination layout="prev, pager, next" :total="50" style="margin:20px auto;text-align:center"></el-pagination>
+      <MyPagination :method="findLeader"/>
     </div>
 </template>
 
 <script type="es6">
-    import { mapGetters } from 'vuex'
-    import { mapActions } from 'vuex'
-    import filters from '../../../filters'
-    import tip from '../components/tips.vue'
-    import someIcon from '../components/someIcon.vue'
-    import lastDynamic from '../components/lastDynamic.vue'
+    import { mapGetters,mapActions } from 'vuex'
+    import MyPagination from '../../../components/public/page/MyPagination.vue'
     export default{
-        data(){
-            return{
-
-            }
-        },
         components:{
-            tip,someIcon,lastDynamic
+          MyPagination
         },
         computed: {
-            ...mapGetters([ 'page','list']),
-            active(){
-                console.log(this.$route.path.replace('/view/wzzy/',''));
-                return this.$route.path.replace('/view/wzzy/','');
-            }
+            ...mapGetters([ 'list']),
         },
         methods:{
-            ...mapActions(['go','clear','getMine','changePage']),
-            ...filters,
+            ...mapActions(['clear','findLeader']),
         },
         created () {
-
+          this.findLeader()
         },
         destroyed(){
-
+          this.clear()
         }
     }
 </script>

@@ -1,51 +1,24 @@
 // api
-import {
-  mineApi,
-  findApi,
-  getByIdApi,
-  mineWelfareApi,
-  mineScoreApi,
-  mineMsgApi,
-  signApi,
-  mineActivityApi,
-  mineHealthApi,
-  deleteApi,
-  delUserApi,
-  updateUserApi,
-  getSignApi,
-  getWeekSignApi,
-  mineRecruitApi
-} from '../api/userApi'
-import {welfareApi, findWelfareByIdApi, convertApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from '../api/welfareApi'
-import {adminApi, loginOutApi, loginApi, adminListApi, auditAdminApi, createAdminApi, delAdminApi, exportAdminApi, getAdminApi, updateAdminApi} from '../api/adminApi'
-import {
-  findActivityApi,
-  findEntryListByIdApi,
-  findActivityDetailApi,
-  createActivityApi,
-  updateActivityApi,
-  deleteActivityApi,
-  entryActivityApi,
-  exportEntryApi
-} from '../api/activityApi'
-import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from '../api/recruitApi'
-import {fileApi, delFileApi, delPicApi} from '../api/fileApi'
-import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from '../api/pollApi'
-import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from '../api/healthApi'
-import {getSysApi, setSysApi, clearApi, initApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from '../api/systemApi'
-import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from '../api/articleApi'
-import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from '../api/echoApi'
-import {findDepApi,findDepListApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from '../api/departmentApi'
+import {mineApi, findApi, getByIdApi, mineWelfareApi, mineScoreApi, mineMsgApi, signApi, mineActivityApi, mineHealthApi, deleteApi, delUserApi, updateUserApi, getSignApi, getWeekSignApi, mineRecruitApi} from "../api/userApi";
+import {welfareApi, findWelfareByIdApi, delWelfareApi, pauseWelfareApi, updateWelfareApi, createWelfareApi} from "../api/welfareApi";
+import {adminApi, loginOutApi, loginApi, adminListApi, createAdminApi, delAdminApi, updateAdminApi} from "../api/adminApi";
+import {findActivityApi, findEntryListByIdApi, findActivityDetailApi, createActivityApi, updateActivityApi, deleteActivityApi, exportEntryApi} from "../api/activityApi";
+import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, findRecruitEntryListByIdApi, createRecruitApi, updateRecruitApi, exportRecruitEntryApi} from "../api/recruitApi";
+import {fileApi, delFileApi, delPicApi} from "../api/fileApi";
+import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from "../api/pollApi";
+import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from "../api/healthApi";
+import {getSysApi, setSysApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from "../api/systemApi";
+import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from "../api/articleApi";
+import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from "../api/echoApi";
+import {findDepApi, findDepListApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from "../api/departmentApi";
+import {createLeaderApi, updateLeaderApi, delLeaderApi, findLeaderApi, getLeaderApi} from "../api/leaderApi";
 // type
-import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from './mutation-types'
+import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from "./mutation-types";
 // defData
-import {defData, CREATE} from '../constant'
-import router from '../router'
+import {defData, CREATE} from "../constant";
+import router from "../router";
 // action
-import {
-  msg, alert, confirm, prompt, success, error, info, warning,
-  appAlert
-} from '../actions'
+import {alert, success, error, appAlert} from "../actions";
 const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
   commit(GET_DATA_LIST, null);
@@ -370,7 +343,29 @@ const createDep = ({commit, state}) => createDepApi(state.data).then(() => succe
 const updateDep = ({commit, state}) => updateDepApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 // 修改工会
 const auditDep = ({commit, state}) => auditDepApi(state.data).then(() => success('审核成功！')).catch(() => error('审核失败！'))
+// 获取领导列表
+const findLeader = async({commit, state}) => commit(GET_DATA_LIST, await findLeaderApi(state.page));
+// 删除领导
+const delLeader = ({commit, state}, [id, idx]) => delLeaderApi(id).then(() => commit(DEL_DATA, idx))
+// 获取领导详情
+const getLeader = ({commit, state}) => {
+  const {params:{id}}=state.route;
+  if (id == CREATE) {
+    commit(SET_DATA, {...defData.leader, edit: false})
+  } else {
+    getLeaderApi(id).then((data) => commit(SET_DATA, {...data, edit: true}))
+  }
+};
+// 创建领导
+const createLeader = ({commit, state}) => createLeaderApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
+// 修改领导
+const updateLeader = ({commit, state}) => updateLeaderApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
 export default {
+  findLeader,// 获取领导列表
+  delLeader,// 删除领导
+  getLeader,// 获取领导详情
+  createLeader,// 创建领导
+  updateLeader,// 修改领导
   getMineWelfare,
   getUser,
   findUserList,
