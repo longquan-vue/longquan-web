@@ -41,6 +41,8 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l) + '...' : str;
 //过滤文字
 export const strFilter = (str = '') => str.replace(/<[^>]+>/g, '');
+//url补充矫正
+export const urlFilter = (url = '') => url.startsWith('http://')?url:'http://'+url;
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
@@ -90,6 +92,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 
 
 export default {
+  urlFilter,
   filesNumFilter,
   strFilter,
   type2Filter,
