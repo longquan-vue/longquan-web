@@ -13,7 +13,7 @@
     <div class="wzzy-tab-cont" style="position:relative;">
       <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
         <div class="aboutsLink" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
-          <a :herf="urlFilter(item.url)" target="_blank" v-for="(item,index) in list">{{item.name}}</a>
+          <a @click="to(urlFilter(item.url))" target="_blank" v-for="(item,index) in list">{{item.name}}</a>
         </div>
       </transition-group>
     </div>
@@ -58,6 +58,9 @@
         keys.map((key) => {
           findLinkApi({page: 1, filed: ['type'], keyWord: [key]}).then((data) => this.$set(this.newsList, key, data.list));
         });
+      },
+      to(url){
+          window.open(url)
       }
     },
     created () {
