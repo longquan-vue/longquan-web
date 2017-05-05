@@ -36,3 +36,8 @@ export const doVoteApi = (data) => request({
     url: `${BASE_PATH}/vote`,
     data
 });
+//获取当前登录人针对某个投票项目当日剩余投票次数
+export const surplusVoteApi = (pollId) => request({
+  method:'get',
+  url: `${BASE_PATH}/getNum/${pollId}`,
+});
