@@ -18,7 +18,7 @@
             <serviceRecruit v-if="'1' == params.idx" :newsList="newsList[params.type]" key="0"></serviceRecruit>
             <service v-for="(v,k) in articleType.service" :key="k" v-if="k == params.type" :newsList="newsList[k]"/>
           </transition-group>
-          <MyPagination :method="getNews"/>
+          <MyPagination :method="getNews" style="margin:30px 0;"/>
         </div>
       </div>
     </div>

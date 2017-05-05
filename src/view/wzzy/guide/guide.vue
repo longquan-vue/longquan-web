@@ -17,7 +17,7 @@
                 <guideInfo v-for="(v,k) in articleType.guide" :key="k" v-if="type == '8' && k == params.type" :newsList="newsList[params.type]"/>
             </transition-group>
         </div>
-        <MyPagination :method="getNews" v-if="type != '0'"/>
+        <MyPagination :method="getNews" style="margin:30px 0;" v-if="type != '0'"/>
     </div>
 </template>
 
