@@ -145,6 +145,7 @@ export default [
       {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
       //文件资料
       {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
+      {path: `${ROOT}/wzzy/filesList/:type`, component: require('../view/wzzy/files/filesList.vue'), name: 'filesList'},
     ]
   },
   // 企业号

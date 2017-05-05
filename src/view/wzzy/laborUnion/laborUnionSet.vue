@@ -14,7 +14,6 @@
         <el-table-column prop="adminName" label="负责人"/>
         <el-table-column prop="position" label="职位"/>
         <el-table-column prop="mobile" label="联系方式"/>
-        </el-table-column>
       </el-table>
     </div>
   </div>

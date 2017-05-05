@@ -52,7 +52,7 @@
                     <div class="fileList">
                       <div class="fileListHead">
                         <span><i class="iconfont icon-xinwendongtai"></i> {{val}}</span>
-                        <a>更多 ></a>
+                        <a @click="toUrl({path:'/view/wzzy/filesList/'+key})">更多 ></a>
                       </div>
                       <div class="fileListCont">
                         <pubListA v-for="(item,index) in newsList[key]" :key="index" :item="item"></pubListA>
@@ -92,7 +92,7 @@
       }
     },
     methods: {
-      ...mapActions(['go', 'clear', 'getMine', 'changePage']),
+      ...mapActions(['toUrl', 'clear', 'getMine', 'changePage']),
       ...filters,
       getNews(){
           if(!this.articleType.file){

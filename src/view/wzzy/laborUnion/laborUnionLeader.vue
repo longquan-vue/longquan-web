@@ -43,7 +43,7 @@
                 </li>
             </ul>
         </div>
-      <MyPagination :method="findLeader"/>
+      <MyPagination :method="findLeader" style="margin:30px 0;"/>
     </div>
 </template>
 
