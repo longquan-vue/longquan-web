@@ -83,7 +83,6 @@
                     filed: [filed],
                     keyWord: [keyWord]
                 }).then((data)=>{
-                    console.log(data.list);
                     this.tipsList = data.list
                 });
             }

@@ -230,7 +230,6 @@
                             this.isShow(2);
                         })
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });
@@ -239,7 +238,6 @@
                 window.history.go(-1);
             },
             changeStart (value) {
-                console.log('change', value);
                 this.setLogin({birthday:new Date(value).getTime()})
             },
             openDepart(){

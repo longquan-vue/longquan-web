@@ -142,7 +142,6 @@ export default {
           ]
         },
         {title: '服务号设置', path: `${ROOT}/zhxt/setting/fwh`},
-        {title: '二维码管理', path: `${ROOT}/zhxt/setting/ticket`},
         {title: '联系我们', path: `${ROOT}/zhxt/setting/relation`},
       ]
     },

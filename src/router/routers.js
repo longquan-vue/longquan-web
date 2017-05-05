@@ -110,7 +110,6 @@ export default [
       {path: `${ROOT}/zhxt/echo/:id`, component: require('../view/zhxt/echo/echoEdit.vue'), name: 'echoEdit', meta: {title: '修改回音壁'}},
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},
-      {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},
       {path: `${ROOT}/zhxt/setting/link`, component: require('../view/zhxt/setting/link/link.vue'), name: 'link', meta: {title: '友情链接列表'}},
       {path: `${ROOT}/zhxt/setting/link/:id`, component: require('../view/zhxt/setting/link/linkEdit.vue'), name: 'linkEdit', meta: {title: '添加友情链接'}},
       {path: `${ROOT}/zhxt/setting/linkSetting`, component: require('../view/zhxt/setting/link/linkSetting.vue'), name: 'linkSetting', meta: {title: '友情链接设置'}},

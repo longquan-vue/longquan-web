@@ -100,7 +100,6 @@
             await findArticleApi({page:1,pageSize:5,filed:['top'],keyWord:[1]},0,5).then((data)=>{
                 this.itemList = data.list;
                 this.createTimer();
-                console.log(this.itemList);
             });
         },
         destroyed(){
