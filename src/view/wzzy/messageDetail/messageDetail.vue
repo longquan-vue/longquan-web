@@ -28,7 +28,12 @@
     line-height: 25px;
     font-size: 14px;
     color: #666;
-
+  .messageDetailContImg{
+    padding:15px;
+    img{
+      width: 480px;
+    }
+  }
   .messageDetailCont-mess {
 
   p {
@@ -98,6 +103,7 @@
           </p>
         </div>
         <div class="messageDetailCont">
+          <div v-if="data.picUrl" class="messageDetailContImg"><img :src="data.picUrl"></div>
           <div class="messageDetailCont-mess" v-html="decode(data.content)"></div>
           <div class="messageDetailCont-down" v-for="(file,index) in data.files" :key="index">
             <span>附件：{{file.name}}.{{file.suffix}}</span>
@@ -123,6 +129,10 @@
     methods: {
       ...mapActions(['go', 'clear', 'getArticle']),
       ...filters,
+    },
+    beforeRouteUpdate (to, from, next) {
+      next();
+      this.getArticle()
     },
     created () {
       this.getArticle();
