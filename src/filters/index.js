@@ -19,6 +19,7 @@ export const date4Filter2 = ({start, end}) => dateFilter(start, 'HH:mm') + ' 至
 export const date5Filter = ({entryStart, entryEnd}) => dateFilter(entryStart, 'YYYY-MM-DD HH:mm') + ' 至 ' + dateFilter(entryEnd, 'YYYY-MM-DD HH:mm')
 export const diffFilter = (date, type) => moment().diff(date, type)
 export const date6Filter = (time) => dateFilter(time, 'MM-DD HH:mm');
+export const MMddFilter = (time) => dateFilter(time, 'MM-DD');
 export const date7Filter = (time) => dateFilter(time, 'YYYY年MM月');
 export const HHmmFilter = (date) => dateFilter(date, 'HH:mm')
 export const date8Filter = ({recording}) => dateFilter(recording, 'YYYY-MM-DD HH:mm')
@@ -124,6 +125,7 @@ export default {
   userFilter,
   signFilter,
   HHmmFilter,
+  MMddFilter,
   groupList,
   numFilter,
   syncFilter,

@@ -46,7 +46,7 @@
                             border-bottom: 5px solid transparent;
                         }
                     }
-                    a{ color: #333;
+                    a{ color: #333;font-weight: bold;
                         &:hover{ color: #BC0000;}
                     }
                 }

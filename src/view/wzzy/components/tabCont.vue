@@ -10,7 +10,7 @@
         <!--</div>-->
         <el-row :gutter="20" class="wzzy-tab-cont-list">
             <el-col :span="12" v-for="(item,index) in newsList" :key="index">
-                <router-link :to="'messageDetail/'+item.id"><span>{{item.title}}</span> <i>{{dateFilter(item.created)}}</i></router-link>
+                <router-link :to="'messageDetail/'+item.id"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></router-link>
             </el-col>
         </el-row>
     </div>

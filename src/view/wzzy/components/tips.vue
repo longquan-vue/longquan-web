@@ -11,7 +11,7 @@
             <div class="border-content" style="border-top: none;height: 220px;">
                 <div class="wzzy-tab-cont-list">
                     <transition-group name="flip-tip" tag="p">
-                        <router-link :to="'/view/wzzy/messageDetail/'+item.id" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{date3Filter(item.created)}}</i></router-link>
+                        <router-link :to="'/view/wzzy/messageDetail/'+item.id" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></router-link>
                     </transition-group>
                 </div>
             </div>

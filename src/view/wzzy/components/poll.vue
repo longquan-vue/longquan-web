@@ -42,7 +42,7 @@
         a{ color: #333;}
         &:hover a{ color: #bc0000;}
     }
-    .wzzy-poll-content{ font-size: 14px;color: #999;line-height: 20px;}
+    .wzzy-poll-content{ font-size: 14px;color: #8a8a8a;line-height: 20px;}
     .wzzy-poll-a{ color: #BC0000;display: block;text-align: right;font-size: 14px;padding-top: 10px;}
 
 </style>
