@@ -40,7 +40,7 @@ const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) =
   })))
 const toUrl = ({commit}, {path, params, query}) => {
   router.push({path, params, query});
-
+  document.querySelector('.wzzy').scrollTop = 0;
 }
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
@@ -255,7 +255,7 @@ const getPoll = ({commit, state}) => {
   if (id == CREATE) {
     commit(SET_DATA, {edit: true, ...defData.poll});
   } else {
-    return getPollApi(id).then((data) => commit(SET_DATA, {...data, edit: false}))
+    getPollApi(id).then((data) => commit(SET_DATA, {...data, edit: false}))
   }
 };
 // 获取投票调查列表

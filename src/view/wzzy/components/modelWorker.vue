@@ -8,7 +8,7 @@
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.advanced" :class="{'active':activeName==key}" @click="activeName = key">{{val.name}}</a>
             </div>
-            <a class="tab-head-more">更多 > </a>
+            <a class="tab-head-more" @click="toUrl({path:'/view/wzzy/advanced/1/'+activeName})">更多 > </a>
         </div>
         <div class="wzzy-tab-cont" >
             <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
@@ -76,8 +76,7 @@
 
 
 <script type="es6">
-    import { mapGetters } from 'vuex'
-    import { mapActions } from 'vuex'
+    import { mapGetters,mapActions } from 'vuex'
     import filters from '../../../filters'
     import {findArticleApi} from '../../../api/articleApi'
     export default{
@@ -95,10 +94,10 @@
                 this.getNews()
             }
         },
-        computed: {...mapGetters([ 'page','list','articleType']),
+        computed: {...mapGetters([ 'articleType']),
         },
         methods:{
-            ...mapActions(['go','clear']),
+            ...mapActions(['toUrl']),
             ...filters,
             getNews(){
                 if(!this.articleType.advanced){

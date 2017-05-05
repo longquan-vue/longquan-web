@@ -9,10 +9,10 @@
         <div class="fastEnter">
             <el-row :gutter="10">
                 <el-col :span="6" v-for="(type,idx) in articleType.guide" :key="idx">
-                    <a><img :src="type.url"></a>
+                    <a @click="toUrl({path:'/view/wzzy/guide/8/'+idx})"><img :src="type.url"></a>
                 </el-col>
                 <el-col :span="6">
-                    <a><img src="../../../../static/wzzy/ghzj.png"></a>
+                    <a @click="toUrl({path:'/view/wzzy/guide/0/0'})"><img src="/static/wzzy/ghzj.png"></a>
                 </el-col>
             </el-row>
         </div>
@@ -31,10 +31,12 @@
 </style>
 
 <script type="es6">
-    import { mapGetters } from 'vuex'
+    import { mapGetters,mapActions } from 'vuex'
     export default{
-        computed: {...mapGetters([ 'articleType']),
-        },
+        computed: {...mapGetters([ 'articleType'])},
+      methods: {
+        ...mapActions(['toUrl']),
+      }
     }
 </script>
 

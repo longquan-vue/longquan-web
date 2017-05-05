@@ -45,7 +45,7 @@
         if (this.params.idx == '1') {
           return '招聘信息'
         }
-        return this.articleType.service && this.articleType.service[this.params.type]
+        return this.articleType.service && this.articleType.service[this.params.type].name
       }
     },
     methods: {

@@ -6,7 +6,7 @@
     <div class="contentBoxtitle"><span>工会服务列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="服务类型" field="subType" :options="articleType.service || {}" :change="change"/>
+        <MySelect title="服务类型" field="subType" label="name" :options="articleType.service || {}" :change="change"/>
         <MySelectInput :options="{'title':'标题'}" def-key="title" :change="change"/>
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
@@ -17,7 +17,7 @@
           <MyColumn type="index" fixed="left"/>
           <MyColumn prop="title" label="标题" min-width="120"/>
           <MyColumn prop="files" label="附件" :formatter="({files})=>filesFilter(files)" min-width="110"/>
-          <MyColumn prop="files" label="服务类型" :formatter="({subType})=>typeFilter(articleType.service,subType)" min-width="110"/>
+          <MyColumn prop="files" label="服务类型" :formatter="({subType})=>type2Filter(articleType.service,subType)" min-width="110"/>
           <MyColumn prop="files" label="附件下载次数" :formatter="({files})=>filesNumFilter(files)" min-width="110"/>
           <MyColumn prop="num" label="浏览次数" min-width="110"/>
           <MyColumn prop="adminName" label="发布者" min-width="140"/>
