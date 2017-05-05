@@ -38,7 +38,10 @@ const go = ({commit}, [name, id, query] = []) => new Promise((resolve, reject) =
     params: id ? {id} : {},
     query
   })))
-const toUrl = ({commit}, {path, params, query}) => router.push({path, params, query})
+const toUrl = ({commit}, {path, params, query}) => {
+  router.push({path, params, query});
+  document.querySelector('.wzzy').scrollTop = 0;
+}
 // goto
 const goto = ({commit}, [name, query]) => new Promise((resolve, reject) => resolve(router.push({name, query})))
 //清除page
@@ -83,8 +86,8 @@ const login = async({commit, state}, admin) => {
   }
 }
 // 退出
-const loginOut = ({commit, state},flag=false) => loginOutApi().then(() => {
-  flag||go({  commit,  state}, ['login']);
+const loginOut = ({commit, state}, flag = false) => loginOutApi().then(() => {
+  flag || go({commit, state}, ['login']);
   commit(GET_MINE);
 });
 //签到

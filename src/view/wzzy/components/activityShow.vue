@@ -8,7 +8,7 @@
             <div class="tab-head-btn">
                 <a v-for="(val,key) in articleType.activity" :class="{'active':activeName==key}" @click="activeName = key">{{val}}</a>
             </div>
-            <a class="tab-head-more">更多 > </a>
+            <a class="tab-head-more" @click="toUrl({path:'/view/wzzy/news/7/'+activeName})">更多 > </a>
         </div>
 
         <div class="wzzy-tab-cont">
@@ -66,7 +66,7 @@
         computed: {...mapGetters([ 'page','list','articleType']),
         },
         methods:{
-            ...mapActions(['go','clear','getMine']),
+            ...mapActions(['clear','getMine','toUrl']),
             ...filters,
             getNews(){
                 if(!this.articleType.activity){
