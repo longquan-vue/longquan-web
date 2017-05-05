@@ -135,7 +135,7 @@
       submitForm() {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            createDepApi(this.ruleForm).then(() => success('申请成功!')).catch((e) => console.log(e))
+            createDepApi(this.ruleForm).then(() => success('申请成功!')).catch((e) => console.error(e))
           } else {
             return false;
           }

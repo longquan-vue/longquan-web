@@ -133,7 +133,6 @@
       ...mapActions(['getPoll', 'createPoll', 'updatePoll', 'upload', 'clear', 'setData', 'setListVal', 'delList', 'go']),
       submitForm(){
         this.$refs.ruleForm.validate((valid) => {
-          console.log(valid)
           if (valid) {
             this.data.edit ? this.createPoll() : this.updatePoll();
           } else {

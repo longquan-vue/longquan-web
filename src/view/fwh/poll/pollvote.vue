@@ -156,7 +156,6 @@
             num(){
                 let num =0;
                 this.data.questions.map((item,index)=>{
-                    console.log("item.num",item.num);
                     if (item.num){
                         num+=item.num;
                     }

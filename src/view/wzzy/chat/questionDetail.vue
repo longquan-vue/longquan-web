@@ -220,7 +220,6 @@
         computed: {
             ...mapGetters(['page','data']),
             active(){
-                console.log(this.$route.path.replace('/view/wzzy/',''));
                 return this.$route.path.replace('/view/wzzy/','');
             }
         },
@@ -235,7 +234,6 @@
             },
             submitQuestion(){
                 for(var i=0;i<this.questions.length;i++){
-                    console.log(this.questions[i]);
                     if (this.questions[i].result==null || this.questions[i].result.length==0 || this.questions[i].result==''){
                         alert('请填写第'+(i+1)+'题','error');
                         this.submit = false;

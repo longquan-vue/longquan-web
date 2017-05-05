@@ -223,7 +223,6 @@
             openPerson(index){
                 this.idx = index;
                 this.showEntryList = true;
-                console.log(this.idx);
             }
         },
         async created () {

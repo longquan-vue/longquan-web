@@ -82,7 +82,6 @@
                         keyWord: [key]
                     }, 0, 7).then((data) => {
                         this.$set(this.newsList,key,data.list);
-                        console.log("this.newsList",this.newsList)
                     });
                 });
             }

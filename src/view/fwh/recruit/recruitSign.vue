@@ -129,7 +129,6 @@
                 this.isshow=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
             subMit(){
-                console.log(this.$v);
                 let data = {
                     name:this.name,
                     age:this.age,

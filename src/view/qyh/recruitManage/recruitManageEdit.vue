@@ -127,7 +127,6 @@
           if (valid) {
             alert('submit!');
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -136,7 +135,6 @@
         this.$refs[formName].resetFields();
       },
       changeStart (value) {
-        console.log('change', value);
         this.setData({start: new Date(value).getTime()})
       },
       changeEnd (value) {

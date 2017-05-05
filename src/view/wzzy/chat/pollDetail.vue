@@ -207,7 +207,6 @@
             num(){
                 let num =0;
                 this.data.questions.map((item,index)=>{
-                    console.log("item.num",item.num);
                     if (item.num){
                         num+=item.num;
                     }
@@ -223,7 +222,6 @@
                 this.dialogImg = true;
             },
             changeSlide(index){
-                console.log(index);
                 this.imgIndex = index+1;
             },
             doVote({id,pollId}){  //投票
@@ -237,7 +235,6 @@
         },
         async created () {
             await this.getPoll();
-            console.log(this.$store.state.data);
             this.personList = this.$store.state.data.questions;
         },
         destroyed(){

@@ -31,7 +31,6 @@
         computed: {
             ...mapGetters([ 'page','list']),
             active(){
-                console.log(this.$route.path.replace('/view/wzzy/',''));
                 return this.$route.path.replace('/view/wzzy/','');
             }
         },

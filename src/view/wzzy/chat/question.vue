@@ -49,7 +49,6 @@
                 param.filed = ['type'];
                 param.keyWord = [0];
                 pollListApi(param).then((data) => {
-                    console.log('data.list',data.list);
                     this.newsList = data.list;
                     delete data.list;
                     this.changePage(data);

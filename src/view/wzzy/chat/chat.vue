@@ -33,7 +33,6 @@
         },
         computed: {
             active(){
-                console.log(this.$route.path.replace('/view/wzzy/chat/',''));
                 return this.$route.path.replace('/view/wzzy/chat/','');
             },
             pathName(){

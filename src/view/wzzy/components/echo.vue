@@ -62,7 +62,6 @@
                 page: 1,
                 pageSize: 5,
             }).then((data)=>{
-                console.log("echo",data.list);
                 this.list = data.list;
             })
         },
