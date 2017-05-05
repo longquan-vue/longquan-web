@@ -11,6 +11,7 @@
       <el-tab-pane label="关注设置" name="1"/>
       <el-tab-pane label="关注回复设置" name="2"/>
       <el-tab-pane label="服务号菜单设置" name="3"/>
+      <el-tab-pane label="服务号二维码" name="4"/>
     </el-tabs>
     <div class="contentBoxCont" v-if="tab == '1'">
       <el-form :model="setting" ref="setting" label-width="120px">
@@ -70,6 +71,14 @@
         </el-row>
       </div>
     </div>
+    <div v-if="tab=='4'">
+      <el-form :model="setting" ref="ticket" label-width="0" class="ticket">
+        <el-form-item prop="wechatTicket" :rules="[{required:true,message:'微信公众号二维码不能为空'}]">
+          <Avatar :success="(wechatTicket)=>changeSys({wechatTicket})" :url="setting.wechatTicket"/>
+          <div class="av_tip">微信公众号二维码，格式为JPG/PNG</div>
+        </el-form-item>
+      </el-form>
+    </div>
     <div style="text-align: center">
       <el-button type="primary" @click="submitForm">提交</el-button>
     </div>
@@ -101,7 +110,7 @@
         if (this.tab == 3) {
           confirm('是否需要设置服务号菜单?', 'warning').then(() => delFwhMenuApi().then(() => createFwhMenuApi(this.menu).then(() => alert('设置成功！')).catch(() => alert('设置失败！', 'error'))))
         } else {
-          this.$refs[['setting', 'sub'][this.tab - 1]].validate((valid) => valid ? this.saveSys() : false)
+          this.$refs[['setting', 'sub', '', 'ticket'][this.tab - 1]].validate((valid) => valid ? this.saveSys() : false)
         }
       },
       changeType(){
