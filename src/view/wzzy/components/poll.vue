@@ -23,8 +23,8 @@
   .wzzy-poll-li:not(:last-child){ padding-bottom: 20px;border-bottom: 1px solid #E7E7E7;margin-bottom: 20px;}
   }
   .poll-head-tab{
-    line-height: 38px;border-bottom: 1px solid #BC0000;overflow: hidden;
-  span{ font-size: 16px;width: 90px;float: left;height: 38px;text-align: center;cursor: pointer;
+    line-height: 32px;border-bottom: 1px solid #BC0000;overflow: hidden;
+  span{ font-size: 16px;width: 90px;float: left;height: 32px;text-align: center;cursor: pointer;
   &.active{ background-color: #BC0000;color: #ffffff;border-top-left-radius: 4px;
      border-top-right-radius: 4px;
    }
