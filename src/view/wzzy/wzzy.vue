@@ -1,5 +1,6 @@
 <style lang="less">
   @import "../../main.less";
+  @import "wzzy.less";
   .weather{ line-height: 50px;}
 </style>
 <template>

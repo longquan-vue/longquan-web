@@ -16,16 +16,6 @@
         </div>
     </div>
 </template>
-<style lang="less">
-    .border-content{ border: 1px solid #E7E7E7;padding: 20px;margin-bottom: 20px;
-        .wzzy-tab-cont-list{
-            padding:0 !important;width:100%;height:100%;overflow: hidden;position: relative;
-        }
-    }
-    .flip-tip-move {
-        transition: transform 0.8s;
-    }
-</style>
 <script type="es6">
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
