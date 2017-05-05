@@ -8,7 +8,16 @@
                 欢迎访问成都市龙泉驿区总工会网站！今天是:{{today}}
             </span>
             <a @click="changeSys({qrcode:true})" v-if="!login.id">登录</a>
-            <a v-if="login.id">{{login.name}}</a>
+            <div class="my-login" @mouseenter="showLogin" @mouseleave="closeLogin">
+                <a v-if="login.id">欢迎您，{{login.name}}</a>
+                <div class="my-login-box" v-show="showLoginBox" @mouseenter="showLogin">
+                    <img :src="login.headimgurl">
+                    <h2>{{login.name}}</h2>
+                    <p>我的积分</p>
+                    <div>{{login.score}}</div>
+                    <a>退出登录</a>
+                </div>
+            </div>
         </div>
         <div class="header-nav">
             <div class="pagewrap">
@@ -63,7 +72,9 @@
                 idx:1,
                 show:false,
                 menu:menu.wzzy,
-                child:{}
+                child:{},
+                showLoginBox:false,
+                timer:null
             }
         },
         components:{
@@ -100,11 +111,20 @@
                   }
                 }
                 this.toUrl({path:url})
+            },
+            showLogin(){
+                clearTimeout(this.timer);
+                this.showLoginBox = true;
+            },
+            closeLogin(){
+                this.timer = setTimeout(()=>{
+                    this.showLoginBox = false;
+                },300)
             }
         },
         created () {
            this.getSetting();
-          this.getMine();
+           this.getMine();
         },
         destroyed(){
 

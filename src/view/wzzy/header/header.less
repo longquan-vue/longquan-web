@@ -1,9 +1,31 @@
 .wzzy-header{
     background-color: #F0F0F0;
     .header-date{
-        overflow: hidden;height: 40px;line-height: 40px;font-size: 14px;color: #666666;
+        height: 40px;line-height: 40px;font-size: 14px;color: #666666;
         >span{ float: left}
         >a{ color: #666666;float: right;margin-right: 15px;display: inline-block;cursor: pointer;}
+        .my-login{ height: 100%;width: 100px;position: relative;float: right;cursor: pointer;z-index: 3;
+            > a{ display: block;width: 100%;height: 100%;text-align: center;line-height: 40px;}
+            .my-login-box{ position: absolute;width: 110px;background-color: #ffffff;border-radius: 4px;
+                height: 190px;right: 0;top: 50px;text-align: center;line-height: normal;
+                &:before{ content: '';position: absolute;bottom: 100%;right: 20px;
+                    width: 0;  height: 0;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid #ffffff;
+                }
+                h2{ font-size: 16px;margin-bottom: 5px;}
+                img{ width: 50px;height: 50px;margin-top: 10px;}
+                p{ color: #999999;margin-bottom: 5px;}
+                div{ border-bottom: 2px solid #E7E7E7;border-top: 2px solid #E7E7E7;
+                    padding: 5px 0;margin-bottom: 5px;display: inline-block;
+                }
+                a{ padding: 5px 8px;background-color: #F0F0F0;color: #666;font-size: 14px;
+                    display: inline-block;
+                    &:hover{ color: #BC0000}
+                }
+            }
+        }
     }
     .header-nav{
         height: 236px;background: url("../../../../static/wzzy/wzzy-head.jpg") no-repeat center;
