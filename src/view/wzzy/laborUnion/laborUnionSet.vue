@@ -30,7 +30,7 @@
       }
     },
     created () {
-      findDepListApi({page: 1}).then((data) => this.list = group(data.list, 'parent', (v) => v, (it) => it))
+      findDepListApi({page: 1},0).then((data) => this.list = group(data.list, 'parent', (v) => v, (it) => it))
     },
     destroyed(){
 

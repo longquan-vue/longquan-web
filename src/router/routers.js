@@ -86,11 +86,13 @@ export default [
       // {path: `${ROOT}/zhxt/myDep`, component: require('../view/zhxt/notice/notice.vue'), name: 'myDep'}, /
       /*工会组建*/
       {path: `${ROOT}/zhxt/unions`, component: require('../view/zhxt/department/unions.vue'), name: 'unions', meta: {title: '工会管理列表'}},
-      {path: `${ROOT}/zhxt/unions/:id`, component: require('../view/zhxt/department/unionsEdit.vue'), name: 'unionsEdit', meta: {title: '编辑公会'}},
+      {path: `${ROOT}/zhxt/unions/:id`, component: require('../view/zhxt/department/unionsEdit.vue'), name: 'unionsEdit', meta: {title: '修改公会'}},
       {path: `${ROOT}/zhxt/department`, component: require('../view/zhxt/department/dep.vue'), name: 'dep', meta: {title: '组织架构列表'}},
-      {path: `${ROOT}/zhxt/department/:id`, component: require('../view/zhxt/department/depEdit.vue'), name: 'depEdit', meta: {title: '编辑部门'}},
+      {path: `${ROOT}/zhxt/department/:id`, component: require('../view/zhxt/department/depEdit.vue'), name: 'depEdit', meta: {title: '修改部门'}},
       {path: `${ROOT}/zhxt/admin`, component: require('../view/zhxt/department/admin.vue'), name: 'adminList', meta: {title: '管理员列表'}},
       {path: `${ROOT}/zhxt/desc`, component: require('../view/zhxt/department/desc.vue'), name: 'desc', meta: {title: '区总介绍'}},
+      {path: `${ROOT}/zhxt/leader`, component: require('../view/zhxt/department/leader.vue'), name: 'leader', meta: {title: '区总领导'}},
+      {path: `${ROOT}/zhxt/leader/:id`, component: require('../view/zhxt/department/leaderEdit.vue'), name: 'leaderEdit', meta: {title: '修改区总领导'}},
       /*招聘信息*/
       {path: `${ROOT}/zhxt/recruit`, component: require('../view/zhxt/recruit/recruit.vue'), name: 'recruitList', meta: {title: '招聘信息列表'}},
       {path: `${ROOT}/zhxt/recruit/:id`, component: require('../view/zhxt/recruit/recruitEdit.vue'), name: 'recruitEdit', meta: {title: '修改招聘信息'}},
@@ -105,7 +107,7 @@ export default [
       {path: `${ROOT}/zhxt/questCount`, component: require('../view/zhxt/poll/questCount.vue'), name: 'questCount', meta: {title: '问卷调查统计'}},
       /*回音壁*/
       {path: `${ROOT}/zhxt/echo`, component: require('../view/zhxt/echo/echo.vue'), name: 'echo', meta: {title: '回音壁列表'}},
-      {path: `${ROOT}/zhxt/echo/:id`, component: require('../view/zhxt/echo/echoEdit.vue'), name: 'echoEdit', meta: {title: '编辑回音壁'}},
+      {path: `${ROOT}/zhxt/echo/:id`, component: require('../view/zhxt/echo/echoEdit.vue'), name: 'echoEdit', meta: {title: '修改回音壁'}},
       /*系统设置*/
       {path: `${ROOT}/zhxt/setting/fwh`, component: require('../view/zhxt/setting/fwh.vue'), name: 'fwhSetting', meta: {title: '服务号设置'}},
       {path: `${ROOT}/zhxt/setting/ticket`, component: require('../view/zhxt/setting/ticket.vue'), name: 'ticketSetting', meta: {title: '二维码管理'}},
@@ -167,7 +169,7 @@ export default [
       {path: `${ROOT}/fwh/signin`, component: require('../view/fwh/signin/signin.vue'), name: 'signin'},  //积分签到
       {path: `${ROOT}/fwh/center`, component: require('../view/fwh/center/center.vue'), name: 'center'},  // 个人中心
       {path: `${ROOT}/fwh/centermess`, component: require('../view/fwh/center/centermess.vue'), name: 'centermess'},  //我的消息
-      {path: `${ROOT}/fwh/centeredit`, component: require('../view/fwh/center/centeredit.vue'), name: 'centeredit'},  //编辑我的信息
+      {path: `${ROOT}/fwh/centeredit`, component: require('../view/fwh/center/centeredit.vue'), name: 'centeredit'},  //修改我的信息
       {path: `${ROOT}/fwh/centerwelfare`, component: require('../view/fwh/center/centerwelfare.vue'), name: 'centerwelfare'}, //我的福利
       {path: `${ROOT}/fwh/centerhealth`, component: require('../view/fwh/center/centerhealth.vue'), name: 'centerhealth'}, //我的健身项目
       {path: `${ROOT}/fwh/centerrecruit`, component: require('../view/fwh/center/centerrecruit.vue'), name: 'centerrecruit'}, //我收藏的招聘信息

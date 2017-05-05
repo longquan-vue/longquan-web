@@ -115,6 +115,7 @@ export default {
         {title: '组织架构列表', path: `${ROOT}/zhxt/department`},
         {title: '我的公会', path: `${ROOT}/zhxt/unions/mine`},
         {title: '区总介绍', path: `${ROOT}/zhxt/desc`},
+        {title: '区总领导', path: `${ROOT}/zhxt/leader`},
       ]
     },
     {
