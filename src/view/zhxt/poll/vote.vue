@@ -63,7 +63,7 @@
     },
     created () {
       this.changeSelect({key: 'type', value: 1});
-      this.getPollList()
+      // this.getPollList()
     },
     destroyed () {
       this.clear('poll')

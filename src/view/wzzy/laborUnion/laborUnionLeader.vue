@@ -61,7 +61,7 @@
             ...mapActions(['clear','findLeader']),
         },
         created () {
-          this.findLeader()
+          // this.findLeader()
         },
         destroyed(){
           this.clear()

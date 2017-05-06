@@ -18,7 +18,7 @@
         <newsItem v-for="(item,i) in list" :item="item" :key="i"/>
       </div>
       <div class="nomess" v-if="list.length == 0">暂无数据</div>
-      <MyPagination :method="search" style="margin:30px 0;" v-if="list.length !=0"/>
+      <MyPagination :method="()=>search(query.keyWord)" style="margin:30px 0;"/>
   </div>
 </template>
 
@@ -37,9 +37,9 @@
       ...mapActions(['search','clearPage']),
     },
     created () {
-      if(!this.list || this.list.length < 1){
-        this.search(this.query.keyWord)
-      }
+      // if(!this.list || this.list.length < 1){
+      //   this.search(this.query.keyWord)
+      // }
     },
     destroyed(){
       this.clearPage();

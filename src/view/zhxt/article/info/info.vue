@@ -74,7 +74,7 @@
       },
     },
     created () {
-      this.findArticle([5, 0])
+      // this.findArticle([5, 0])
     },
     destroyed () {
       this.clear('article')

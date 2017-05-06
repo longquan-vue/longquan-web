@@ -65,7 +65,7 @@
       }
     },
     created () {
-      this.getEnter();
+      // this.getEnter();
     },
     destroyed () {
       this.clear('activity');

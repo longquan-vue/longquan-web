@@ -64,7 +64,7 @@
       }
     },
     created () {
-      this.getRecruit();
+      // this.getRecruit();
     },
     destroyed () {
       this.clear('recruit')

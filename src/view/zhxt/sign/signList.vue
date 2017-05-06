@@ -69,7 +69,7 @@
       },
     },
     created () {
-      this.getSign();
+      // this.getSign();
     },
     destroyed () {
       this.clear()

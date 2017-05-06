@@ -89,7 +89,7 @@
     },
     created () {
       this.changeSelect({key: 'type', value: 2});
-      this.getWelfare()
+      // this.getWelfare()
     },
     destroyed () {
       this.clear('welfare')

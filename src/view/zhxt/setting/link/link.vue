@@ -87,7 +87,7 @@
       }
     },
     created () {
-      this.findLink()
+      // this.findLink()
     },
     destroyed () {
       this.clear()

@@ -56,7 +56,7 @@
       }
     },
     created () {
-      this.getNews()
+      // this.getNews()
     },
     destroyed(){
       this.clear();

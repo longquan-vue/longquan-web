@@ -63,7 +63,7 @@
       }
     },
     created () {
-      this.getHealthEnter();
+      // this.getHealthEnter();
     },
     destroyed () {
       this.clear('health');

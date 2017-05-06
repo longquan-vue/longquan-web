@@ -77,7 +77,7 @@
       },
     },
     created () {
-      this.findArticle([6, 0]);
+      // this.findArticle([6, 0]);
     },
     destroyed () {
       this.clear('welfare')

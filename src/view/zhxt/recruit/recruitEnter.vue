@@ -66,7 +66,7 @@
     },
     computed: {...mapGetters(['list', 'query'])},
     created () {
-      this.getRecruitSigin();
+      // this.getRecruitSigin();
     },
     destroyed () {
       this.clear('recruit');

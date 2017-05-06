@@ -60,7 +60,7 @@
     },
     created () {
       this.changeSelect({key: 'type', value: 1})
-      this.findDep();
+      // this.findDep();
     },
     destroyed () {
       this.clear('dep')

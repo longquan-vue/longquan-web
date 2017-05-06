@@ -82,7 +82,7 @@
       }
     },
     created () {
-      this.getActivity()
+      // this.getActivity()
     },
     destroyed () {
       this.clear('activity')
