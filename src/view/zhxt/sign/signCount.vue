@@ -13,31 +13,31 @@
       <div class="contentBoxCont">
         <ul flex>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.all}}</h3>
             <p>签到总次数(次)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.today}}</h3>
             <p>今日签到用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.yesterday}}</h3>
             <p>昨日签到用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.week}}</h3>
             <p>本周签到用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.lastWeek}}</h3>
             <p>上周签到用户</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.month}}</h3>
             <p>本月签到用户</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.lastMonth}}</h3>
             <p>上月签到用户</p>
           </li>
         </ul>
@@ -47,13 +47,19 @@
 </template>
 <script type="es6">
   import {mapActions} from 'vuex'
+  import {signCountApi} from '../../../api/userApi'
   export default {
     data() {
-      return {}
+      return {
+        count: {}
+      }
     },
     computed: {},
     methods: {
       ...mapActions(['go']),
-    }
+    },
+    created () {
+      signCountApi().then((data) => this.count = data)
+    },
   }
 </script>

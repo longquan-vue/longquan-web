@@ -13,11 +13,11 @@
       <div class="contentBoxCont">
         <ul flex>
           <li box="1">
-            <h3>34</h3>
+            <h3>{{count.zcs}}</h3>
             <p>兑换券福利发放次数(次)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.zzs}}</h3>
             <p>兑换券发放张数(张)</p>
           </li>
         </ul>
@@ -27,13 +27,19 @@
 </template>
 <script type="es6">
   import {mapActions} from 'vuex'
+  import {welfareCountApi} from '../../../api/welfareApi'
   export default {
     data() {
-      return {}
+      return {
+        count:{}
+      }
     },
     computed: {},
     methods: {
       ...mapActions(['go']),
-    }
+    },
+    created () {
+      welfareCountApi(3).then((data) => this.count = data)
+    },
   }
 </script>
