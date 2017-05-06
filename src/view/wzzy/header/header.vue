@@ -26,13 +26,12 @@
         <div class="header-title">
           <img class="header-logo" src="../../../../static/wzzy/www.png">
           <div class="header-search">
-            <el-input placeholder="请输入内容" v-model="input5">
+            <el-input placeholder="请输入内容" v-model="searchInput">
               <el-select v-model="select" slot="prepend" placeholder="请选择">
-                <el-option label="餐厅名" value="1"></el-option>
-                <el-option label="订单号" value="2"></el-option>
-                <el-option label="用户电话" value="3"></el-option>
+                <el-option label="站内搜索" :value="1"></el-option>
+                <el-option label="站外搜索" :value="2"></el-option>
               </el-select>
-              <el-button slot="append" icon="search"></el-button>
+              <el-button slot="append" icon="search" @click="search"></el-button>
             </el-input>
           </div>
         </div>
@@ -40,7 +39,7 @@
           <el-row :gutter="20">
             <el-col :span="3" v-for="(item,index) in menu" :key="index">
               <a @click="go(item)" class="menu-a" :class="{'active':item.name==active}" @mouseover="()=>{child=item;$set(child,'show',true)}" @mouseout="child.show=false">{{item.title}}</a>
-            </el-col>
+            </el-col   >
           </el-row>
         </div>
         <div class="header-menu-sub" v-show="child.show && child.children" @mouseover="child.show=true" @mouseout="child.show=false">
@@ -69,14 +68,15 @@
     name: 'wzzyHeader',
     data(){
       return {
-        input5: '',
-        select: '',
+        searchInput: '',
+        select: 1,
         idx: 1,
         show: false,
         menu: menu.wzzy,
         child: {},
         showLoginBox: false,
-        timer: null
+        timer: null,
+        searchSrc:'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd='
       }
     },
     components: {
@@ -103,7 +103,7 @@
         if (item.url) {
           url = item.url;
         } else {
-          const it = item.children[0]
+          const it = item.children[0];
           if (it.type) {
             url = it.path + Object.keys(this.articleType[it.type])[0]
           } else if (it.href) {
@@ -126,6 +126,18 @@
           this.showLoginBox = false;
         }, 300)
       },
+      search(){
+        console.log('this.select',this.select);
+        if (this.select == 1){
+          this.toUrl({path:'/view/wzzy/search'})
+        }else {
+          if (this.searchInput){
+            window.open(this.searchSrc+this.searchInput);
+          }else {
+            return false;
+          }
+        }
+      }
     },
     created () {
       this.getSetting();
