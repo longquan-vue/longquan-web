@@ -127,7 +127,7 @@
       ...mapGetters(['data']),
     },
     methods: {
-      ...mapActions(['go', 'clear', 'getArticle']),
+      ...mapActions(['go', 'getArticle']),
       ...filters,
     },
     beforeRouteUpdate (to, from, next) {
@@ -138,7 +138,6 @@
       this.getArticle();
     },
     destroyed(){
-      this.clear()
     }
   }
 </script>

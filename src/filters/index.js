@@ -41,6 +41,8 @@ export const searchFilter = (value, data) => value.indexOf(data) > -1 ? value : 
 export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l) + '...' : str;
 //过滤文字
 export const strFilter = (str = '') => str.replace(/<[^>]+>/g, '');
+//过滤文字
+export const str2Filter = (str = '',str2='') => str.replace(new RegExp(str2,'g'),`<span style="color: #bc0000">${str2}</span>`)
 //url补充矫正
 export const urlFilter = (url = '') => url.startsWith('http://')?url:'http://'+url;
 
@@ -92,6 +94,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 
 
 export default {
+  str2Filter,
   urlFilter,
   filesNumFilter,
   strFilter,

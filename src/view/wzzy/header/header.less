@@ -38,17 +38,20 @@
             float: left;
         }
         .header-search{
-            float: right;width: 400px;margin-top: 20px;
+            float: right;width: 400px;margin-top: 20px;font-size: 0;
             .el-select .el-input {
               width: 110px;
             }
-            .el-input-group__prepend{ border: none;background: none;
-              color: #666666;
+            .search_ipt{ padding: 0 15px;margin-left: 1px}
+            .search_ipt,.el-button{ height: 36px;border: none;background-color: rgba(255,255,255,0.9);
+              vertical-align: top;border-radius: 0;
             }
-            .el-input-group__append{ border: none;background-color: #BC0000;color: #ffffff;padding: 0 6px;}
-            .el-select .el-input .el-input__icon{ color: #757271}
-            .el-input__inner{ border: none;background-color:rgba(255,255,255,0.9) }
-            .el-input-group>.el-input__inner{ margin-left: 1px;}
+            .el-button{ background-color: #BC0000;color: #ffffff;
+              i{ font-size: 20px;}
+            }
+
+            .el-input__icon{ color: #757271}
+            .el-input__inner{ border: none;background-color:rgba(255,255,255,0.9);border-radius: 0;}
         }
         .header-menu{ height: 56px;background-color: #BC0000;position: absolute;width: 100%;padding: 0 20px;
             bottom: 0;left: 0;border-top-left-radius: 6px;border-top-right-radius: 6px;padding-top: 10px;

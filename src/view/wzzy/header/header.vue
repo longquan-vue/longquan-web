@@ -26,13 +26,12 @@
         <div class="header-title">
           <img class="header-logo" src="../../../../static/wzzy/www.png">
           <div class="header-search">
-            <el-input placeholder="请输入内容" v-model="searchInput">
-              <el-select v-model="select" slot="prepend" placeholder="请选择">
+              <el-select v-model="select" placeholder="请选择...">
                 <el-option label="站内搜索" :value="1"></el-option>
                 <el-option label="站外搜索" :value="2"></el-option>
               </el-select>
-              <el-button slot="append" icon="search" @click="search"></el-button>
-            </el-input>
+              <input placeholder="输入搜索关键字" class="search_ipt" v-model="searchInput" @keyup.enter="searchFun">
+              <el-button icon="search" @click="searchFun"></el-button>
           </div>
         </div>
         <div class="header-menu">
@@ -82,8 +81,17 @@
     components: {
       moment
     },
+    watch:{
+      path(newval,val){
+        console.log(val);
+        console.log(newval);
+        if (newval !='/view/wzzy/search'){
+          this.searchInput= '';
+        }
+      }
+    },
     computed: {
-      ...mapGetters(['path', 'articleType', 'login']),
+      ...mapGetters(['path', 'articleType', 'login','query']),
       today(){
         return moment(new Date()).format('YYYY年MM月DD日')
       },
@@ -92,7 +100,7 @@
       },
     },
     methods: {
-      ...mapActions(['toUrl', 'clear', 'getMine', 'changePage', 'changeSys', 'getSetting', 'loginOut']),
+      ...mapActions(['toUrl', 'clear', 'getMine', 'changePage', 'changeSys', 'getSetting', 'loginOut','search']),
       ...filters,
       showSub(index){
         this.idx = index;
@@ -126,22 +134,24 @@
           this.showLoginBox = false;
         }, 300)
       },
-      search(){
-        console.log('this.select',this.select);
+      searchFun(){
         if (this.select == 1){
-          this.toUrl({path:'/view/wzzy/search'})
-        }else {
-          if (this.searchInput){
-            window.open(this.searchSrc+this.searchInput);
-          }else {
-            return false;
+          this.search(this.searchInput);
+          if(this.path != '/view/wzzy/search'){
+            this.toUrl({path:'/view/wzzy/search'});
           }
+          this.toUrl({query:{keyWord:this.searchInput}});
+        }else if (this.select == 2 && this.searchInput){
+            window.open(this.searchSrc+this.searchInput);
         }
       }
     },
     created () {
       this.getSetting();
       this.getMine();
+      if (this.path == '/view/wzzy/search'){
+        this.searchInput = this.query.keyWord || '';
+      }
     },
     destroyed(){
 
