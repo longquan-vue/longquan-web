@@ -32,7 +32,7 @@
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="findArticle"/>
+        <MyPagination :method="()=>findArticle([5, 0])"/>
       </div>
     </div>
   </div>
