@@ -147,6 +147,8 @@ export default [
       //文件资料
       {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
       {path: `${ROOT}/wzzy/filesList/:type`, component: require('../view/wzzy/files/filesList.vue'), name: 'filesList'},
+      //搜索结果
+      {path: `${ROOT}/wzzy/search`, component: require('../view/wzzy/search/search.vue'), name: 'search-wzzy'},
     ]
   },
   // 企业号
@@ -189,6 +191,7 @@ export default [
       {path: `${ROOT}/fwh/poll`, component: require('../view/fwh/poll/poll.vue'), name: 'poll'}, //投票调查
       {path: `${ROOT}/fwh/pollvote/:id`, component: require('../view/fwh/poll/pollvote.vue'), name: 'pollvote'}, //投票调查--选举
       {path: `${ROOT}/fwh/pollquestion/:id`, component: require('../view/fwh/poll/pollquestion.vue'), name: 'pollquestion'}, //投票调查--问卷
+      {path: `${ROOT}/fwh/build`, component: require('../view/fwh/build/build.vue'), name: 'build-fwh'}, //招聘信息
     ]
   },
 ]
