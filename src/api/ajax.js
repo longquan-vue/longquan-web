@@ -24,9 +24,9 @@ export const request = ({method = 'post', url, data, options = {}} = {}) => {
   // const accessToken = options.accessToken === null ? createNonceStr() : options.accessToken || getAccessToken()
   // delete options.accessToken
   url = `/rest${url}`
-  if (process.env.NODE_ENV == 'development') {
-    url += url.indexOf('?') > 0 ? `&debug=weizidong` : `?debug=weizidong`;
-  }
+  // if (process.env.NODE_ENV == 'development') {
+  //   url += url.indexOf('?') > 0 ? `&debug=weizidong` : `?debug=weizidong`;
+  // }
   const appType = 'appType=' + window.location.pathname.split('/')[2];
   url += url.indexOf('?') > 0 ? `&${appType}` : `?${appType}`;
   let param1

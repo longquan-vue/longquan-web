@@ -13,7 +13,7 @@
           <MyColumn type="index" fixed="left"/>
           <MyColumn prop="name" label="单位名称" min-width="100"/>
           <MyColumn prop="address" label="单位地址" min-width="100"/>
-          <MyColumn prop="type" label="单位类型" min-width="150"/>
+          <MyColumn prop="mold" label="单位类型" min-width="150"/>
           <MyColumn prop="industry" label="所属行业" min-width="150"/>
           <MyColumn prop="workers" label="职工总数" min-width="150"/>
           <MyColumn prop="feWorkers" label="女职工总数" min-width="150"/>
