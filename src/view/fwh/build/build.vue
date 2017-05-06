@@ -87,7 +87,6 @@
   import filters from '../../../filters'
   import { TransferDomDirective as TransferDom, Popup , XHeader,Scroller} from 'vux'
   import {createDepApi} from '../../../api/departmentApi'
-  import {success} from '../../../actions'
   export default{
     data(){
       return{
@@ -107,41 +106,39 @@
         },
         rules: {
           name: [
-            {required: true, message: '请输入单位名称', trigger: 'change'},
-            {min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'}
+            {required: true, message: '请输入单位名称'},
+            {min: 2, max: 5, message: '长度在 2 到 5 个字符'}
           ],
           address: [
-            {required: true, message: '请输入单位地址', trigger: 'change'},
-            {min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'change'}
+            {required: true, message: '请输入单位地址'},
+            {min: 2, max: 40, message: '长度在 2 到 40 个字符'}
           ],
           mold: [
-            {required: true, message: '请选择单位类型', trigger: 'change'}
+            {required: true, message: '请选择单位类型'}
           ],
           industry: [
-            {required: true, message: '请选择所属行业', trigger: 'change'}
+            {required: true, message: '请选择所属行业'}
           ],
           workers: [
-            {required: true, message: '请输入职工总数', trigger: 'change'},
-            {min: 1, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'},
+            {required: true, message: '请输入职工总数'},
             {type: 'number', message: '职工总数必须为数字值'}
           ],
           feWorkers: [
-            {required: true, message: '请输入女职工总数', trigger: 'change'},
-            {min: 1, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'},
+            {required: true, message: '请输入女职工总数'},
             {type: 'number', message: '女职工总数必须为数字值'}
           ],
           applyName: [
-            {required: true, message: '请输入申请人姓名', trigger: 'change'},
-            {min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'}
+            {required: true, message: '请输入申请人姓名'},
+            {min: 2, max: 5, message: '长度在 2 到 5 个字符'}
           ],
           applyPhone: [
-            {required: true, message: '请输入联系方式', trigger: 'change'},
+            {required: true, message: '请输入联系方式'},
           ],
           applyEmail: [
-            {required: true, message: '请输入联系邮箱', trigger: 'change'},
+            {required: true, message: '请输入联系邮箱'},
           ],
           applyMark: [
-            {required: true, message: '请填写申请备注', trigger: 'blur'}
+            {required: true, message: '请填写申请备注'}
           ]
         }
       }
@@ -160,7 +157,17 @@
       submitForm() {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            createDepApi(this.ruleForm).then(() => success('申请成功!')).catch((e) => console.error(e))
+            createDepApi(this.ruleForm).then(() => {
+              this.$vux.alert.show({
+                title: '提示',
+                content: '消息提交成功'
+              })
+            }).catch((e) => {
+              this.$vux.alert.show({
+                title: '提示',
+                content: e.msg
+              })
+            })
           } else {
             return false;
           }
