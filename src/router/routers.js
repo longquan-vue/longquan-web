@@ -6,9 +6,10 @@ export default [
     redirect: `${ROOT}/wzzy/home`,
   },
   {
-    path: `${ROOT}/zhxt/login`,
+    path: `/login`,
     component: require('../view/zhxt/login/Login.vue'),
-    name: 'login'
+    name: 'login',
+    meta: {title: '智慧系统后台登录'}
   },
   {
     path: `${ROOT}/zhxt`,
