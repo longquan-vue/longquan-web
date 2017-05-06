@@ -34,3 +34,7 @@ export const delWelfareApi = (id, del = 1) => request({
 export const pauseWelfareApi = (id) => request({
   url: `${BASE_PATH}/pause/${id}`,
 });
+//福利统计
+export const welfareCountApi = (type = 2) => request({
+  url: `${BASE_PATH}/account/${type}`,
+});

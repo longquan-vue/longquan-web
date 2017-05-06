@@ -82,3 +82,11 @@ export const deleteApi = (id, del) => request({
   method: "delete",
   url: `/history/delete/${id}/${del}`,
 });
+//用户统计
+export const userCountApi = () => request({
+  url: `${BASE_PATH}/account`,
+});
+//签到统计
+export const signCountApi = () => request({
+  url: `${BASE_PATH}/signAccount`,
+});

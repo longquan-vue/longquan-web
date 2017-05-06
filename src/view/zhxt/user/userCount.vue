@@ -13,31 +13,31 @@
       <div class="contentBoxCont">
         <ul flex>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.all}}</h3>
             <p>平台用户总数(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.addAll}}</h3>
             <p>今日新增用户数(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.addUser}}</h3>
             <p>今日新增普通用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.addAudit}}</h3>
             <p>今日新增认证用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.addMonth}}</h3>
             <p>本月新增用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.monthUser}}</h3>
             <p>本月新增普通用户(人)</p>
           </li>
           <li box="1">
-            <h3>25654</h3>
+            <h3>{{count.monthAudit}}</h3>
             <p>本月新增认证用户(人)</p>
           </li>
         </ul>
@@ -46,14 +46,20 @@
   </div>
 </template>
 <script type="es6">
+  import {userCountApi} from '../../../api/userApi'
   import {mapActions} from 'vuex'
   export default {
     data() {
-      return {}
+      return {
+        count:{}
+      }
     },
     computed: {},
     methods: {
       ...mapActions(['go']),
-    }
+    },
+    created () {
+      userCountApi().then((data) => this.count = data)
+    },
   }
 </script>

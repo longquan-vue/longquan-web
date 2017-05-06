@@ -18,7 +18,7 @@
             <el-input placeholder="请输入..." :value="data.name" @input="(v)=>setData({name:v})"/>
           </el-form-item>
           <el-form-item label="上级工会：" prop="parentid">
-            <el-select :value="data.parentid || '无'" placeholder="请选择上级工会..." @input="(v)=>setData({parentid:v})" style="width: 100%">
+            <el-select :value="data.parentid || '无'" placeholder="请选择上级工会..." :disabled="data.parentid<1" @input="(v)=>setData({parentid:v})" style="width: 100%">
               <el-option v-for="item in opts" :label="item.name" :key="item.id" :value="item.id"/>
             </el-select>
           </el-form-item>

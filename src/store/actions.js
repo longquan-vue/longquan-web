@@ -74,7 +74,7 @@ const getMine = ({commit, state}, mine) => {
   }
 };
 // 登录
-const login = async({commit, state}, admin) => {
+const login = ({commit, state}, admin) => {
   if (admin.id) {
     commit(GET_MINE, admin);
     go({commit, state}, ['userList']);

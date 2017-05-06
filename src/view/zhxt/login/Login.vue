@@ -71,8 +71,8 @@
       getCode(){
         this.show = true;
         codeApi().then(({accessToken, qrcode, sessionId, ts}) => {
-          this.$cookie.set('access_token', accessToken, 7);
-          this.$cookie.set('session_zhxy', sessionId, 7);
+          this.$cookie.set('token_zhxt', accessToken, 'Session');
+          this.$cookie.set('session_zhxt', sessionId, 'Session');
           this.$socket.open(sessionId).on('login', ({user}) => this.login(user));
           this.qrcode = qrcode;
           setTimeout(() => {
