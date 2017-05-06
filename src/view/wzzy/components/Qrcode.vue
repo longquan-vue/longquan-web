@@ -10,9 +10,13 @@
   </el-dialog>
 </template>
 <style lang="less" scoped>
-  .codeBox{
-      text-align: center;
-      img{ width: 200px;}
+  .codeBox {
+    text-align: center;
+
+  img {
+    width: 200px;
+  }
+
   }
 </style>
 <script type="es6">
@@ -25,7 +29,7 @@
         qrcode: '',
         timeout: false,
         show: false,
-        timer:null
+        timer: null
       }
     },
     watch: {
@@ -41,7 +45,7 @@
       getCode(){
         this.show = true;
         userLoginApi().then(({accessToken, qrcode, sessionId, ts}) => {
-          this.$cookie.set('access_token', accessToken, 7);
+          this.$cookie.set('token_wzzy', accessToken, 7);
           this.$cookie.set('session_wzzy', sessionId, 7);
           this.$socket.open(sessionId).on('login', ({user}) => {
             alert('登陆成功!');
