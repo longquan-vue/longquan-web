@@ -28,11 +28,14 @@
     line-height: 25px;
     font-size: 14px;
     color: #666;
-  .messageDetailContImg{
-    padding:15px;
-    img{
-      width: 480px;
-    }
+
+  .messageDetailContImg {
+    padding: 15px;
+
+  img {
+    width: 480px;
+  }
+
   }
   .messageDetailCont-mess {
 
@@ -89,7 +92,8 @@
     <div class="the-place" style="">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>新闻动态{{data.type}}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{typeName}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="subTypeName">{{subTypeName}}</el-breadcrumb-item>
         <el-breadcrumb-item>详情</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -111,8 +115,8 @@
           </div>
         </div>
         <div class="messageDetailContPage">
-          <a>上一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
-          <a>下一篇：职工劳动竞赛收官之战工会知识竞功举行...</a>
+          <a @click="toUrl({path:data.last})" v-if="data.last">上一篇：{{data.lastTitle}}</a>
+          <a @click="toUrl({path:data.next})" v-if="data.next">下一篇：{{data.nextTitle}}</a>
         </div>
       </div>
     </div>
@@ -124,21 +128,30 @@
   import filters from '../../../filters'
   export default{
     computed: {
-      ...mapGetters(['data']),
+      ...mapGetters(['data', 'articleType']),
+      typeName(){
+        return ['公示公告', '先进人物', '工会服务', '政策法规', '文件资料', '新闻动态', '福利预告', '工会活动', '办事指南', '内部通知'][this.data.type]
+      },
+      subTypeName(){
+        const type = this.articleType[['', 'advanced', 'service', '', 'file', 'info', '', 'activity', 'guide', ''][this.data.type]]
+        return type ? (type[this.data.subType].name || type[this.data.subType]) : null
+      }
     },
     methods: {
-      ...mapActions(['go', 'clear', 'getArticle']),
+      ...mapActions(['go', 'setData', 'getArticle', 'toUrl']),
       ...filters,
     },
     beforeRouteUpdate (to, from, next) {
       next();
+      this.setData()
       this.getArticle()
     },
     created () {
+      this.setData()
       this.getArticle();
     },
     destroyed(){
-      this.clear()
+      this.setData()
     }
   }
 </script>
