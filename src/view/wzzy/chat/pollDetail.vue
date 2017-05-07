@@ -120,8 +120,6 @@
                 </div>
             </div>
         </div>
-        <!--<MyPagination style="margin:30px 0;" :method="getPoll"/>-->
-
         <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 规则详情
@@ -186,7 +184,6 @@
     import { mapGetters } from 'vuex'
     import { mapActions } from 'vuex'
     import filters from '../../../filters'
-    import MyPagination from '../../../components/public/page/MyPagination.vue'
     import {alert,confirm} from '../../../actions'
     import {doVoteApi,surplusVoteApi} from '../../../api/pollApi'
     export default{
@@ -199,7 +196,6 @@
             }
         },
         components:{
-            MyPagination
         },
         computed: {
             ...mapGetters(['login', 'page','data']),

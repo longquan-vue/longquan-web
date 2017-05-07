@@ -12,6 +12,7 @@ import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delAr
 import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from "../api/echoApi";
 import {findDepApi, findDepListApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from "../api/departmentApi";
 import {createLeaderApi, updateLeaderApi, delLeaderApi, findLeaderApi, getLeaderApi} from "../api/leaderApi";
+import {searchApi} from '../api/searchApi'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from "./mutation-types";
 // defData
@@ -363,7 +364,9 @@ const getLeader = ({commit, state}) => {
 const createLeader = ({commit, state}) => createLeaderApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改领导
 const updateLeader = ({commit, state}) => updateLeaderApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
+const search = ({commit, state},word='') => searchApi(state.page,word).then((data)=>commit(GET_DATA_LIST,data)).catch(()=>commit(GET_DATA_LIST,{...state.page,list:[]}))
 export default {
+  search,
   findLeader,// 获取领导列表
   delLeader,// 删除领导
   getLeader,// 获取领导详情

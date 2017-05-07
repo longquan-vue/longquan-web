@@ -54,7 +54,7 @@
       },
     },
     created () {
-      this.findDepList();
+      // this.findDepList();
     },
     destroyed () {
       this.clear('dep')

@@ -86,12 +86,12 @@
                 });
             }
         },
-        beforeRouteUpdate (to, from, next) {
-            next();
-            this.getNews()
-        },
+        // beforeRouteUpdate (to, from, next) {
+        //     next();
+        //     this.getNews()
+        // },
         created () {
-            this.getNews();
+            // this.getNews();
         },
         destroyed(){
             this.clear();

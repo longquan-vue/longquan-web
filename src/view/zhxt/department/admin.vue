@@ -59,7 +59,7 @@
       },
     },
     created () {
-      this.getHealth();
+      // this.getHealth();
     },
     destroyed () {
       this.clear('health')

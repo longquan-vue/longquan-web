@@ -73,7 +73,7 @@
       },
     },
     created () {
-      this.findArticle([4, 0])
+      // this.findArticle([4, 0])
     },
     destroyed () {
       this.clear('article')

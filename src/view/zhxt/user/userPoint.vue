@@ -108,7 +108,7 @@
       }
     },
     created () {
-      this.getMineScore();
+      // this.getMineScore();
     },
     destroyed () {
       this.clear()

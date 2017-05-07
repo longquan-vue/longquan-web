@@ -52,7 +52,7 @@
       },
     },
     created () {
-      this.findLeader();
+      // this.findLeader();
     },
     destroyed () {
       this.clear('leader')

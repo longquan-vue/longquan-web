@@ -65,7 +65,7 @@
       },
     },
     created () {
-      this.getAdminList();
+      // this.getAdminList();
     },
     destroyed () {
       this.clear()

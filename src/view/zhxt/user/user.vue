@@ -75,7 +75,7 @@
       },
     },
     created () {
-      this.findUserList();
+      // this.findUserList();
     },
     destroyed () {
       this.clear()

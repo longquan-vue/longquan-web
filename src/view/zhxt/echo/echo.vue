@@ -62,7 +62,7 @@
       },
     },
     created () {
-      this.findEcho()
+      // this.findEcho()
     },
     destroyed () {
       this.clear('echo')

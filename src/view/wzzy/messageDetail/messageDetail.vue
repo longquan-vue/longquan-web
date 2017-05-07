@@ -28,14 +28,11 @@
     line-height: 25px;
     font-size: 14px;
     color: #666;
-
-  .messageDetailContImg {
-    padding: 15px;
-
-  img {
-    width: 480px;
-  }
-
+  .messageDetailContImg{
+    padding:15px;
+    img{
+      width: 480px;
+    }
   }
   .messageDetailCont-mess {
 
