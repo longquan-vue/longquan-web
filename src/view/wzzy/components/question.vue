@@ -33,7 +33,8 @@
     &>p {font-size: 14px;color: #818181;padding-bottom: 15px;border-bottom: 1px solid #E7E7E7;}
     .my-ask-box {padding-top: 20px;}
   }
-  .formSubmit {width: 250px;height: 40px;display: block;margin: 20px auto;background-color: #E00404;text-align: center;line-height: 40px;color: #ffffff;font-size: 16px;border-radius: 4px;cursor: pointer;}
+  .formSubmit {width: 250px;height: 40px;display: block;margin: 20px auto;background-color: #E00404;
+    text-align: center;line-height: 40px;color: #ffffff;font-size: 16px;border-radius: 4px;cursor: pointer;}
   .echo_question {
     .ql-container {height: 3rem;}
   }
