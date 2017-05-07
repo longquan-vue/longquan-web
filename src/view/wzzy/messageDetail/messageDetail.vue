@@ -105,7 +105,7 @@
         <div class="messageDetailTitle">
           <h2>{{data.title}}</h2>
           <p>
-            <span>文章来源：发布者所属机关部门  &nbsp;&nbsp;&nbsp; {{date3Filter(data.created)}}  </span>
+            <span>文章来源：{{data.depName}}  &nbsp;&nbsp;&nbsp; {{date3Filter(data.created)}}  </span>
             <i>点击次数：<em style="color:#333;">{{data.num}}</em></i>
           </p>
         </div>
@@ -118,8 +118,8 @@
           </div>
         </div>
         <div class="messageDetailContPage">
-          <a class="messageDetailContPageLeft" @click="toUrl({path:data.last})" v-if="data.last">上一篇：{{data.lastTitle}}</a>
-          <a class="messageDetailContPageRight" @click="toUrl({path:data.next})" v-if="data.next">下一篇：{{data.nextTitle}}</a>
+          <div class="messageDetailContPageLeft">上一篇：<a  @click="toUrl({path:data.last})" v-if="data.last">{{data.lastTitle}}</a><span v-else>没有了</span></div>
+          <div class="messageDetailContPageRight">下一篇：<a  @click="toUrl({path:data.next})" v-if="data.next">{{data.nextTitle}}</a><span v-else>没有了</span></div>
         </div>
       </div>
     </div>
