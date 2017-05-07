@@ -183,7 +183,7 @@
                 </li>
                 <li>
                     <span>答题规则:</span>
-                    <div v-html="decode(data.rule)"></div>
+                    <div class="ql-editor" v-html="decode(data.rule)"></div>
                 </li>
             </ul>
         </el-dialog>

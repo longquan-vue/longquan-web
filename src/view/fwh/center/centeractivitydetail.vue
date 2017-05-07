@@ -1,5 +1,4 @@
 <style lang="less" scoped>
-    @import "../../../../static/normal.less";
     @import "./centeractivitydetail.less";
 </style>
 <template>
@@ -62,11 +61,11 @@
                 </li>
                 <li flex>
                     <div box="2">活动内容 : </div>
-                    <div box="8" v-html="data.detail"></div>
+                    <div class="ql-editor" style="padding:0" box="8" v-html="decode(data.detail)"></div>
                 </li>
                 <li flex>
                     <div box="2">规则介绍 : </div>
-                    <div box="8" v-html="data.rule"></div>
+                    <div class="ql-editor" style="padding:0" box="8" v-html="decode(data.rule)"></div>
                 </li>
             </ul>
         </div>

@@ -29,7 +29,7 @@
                 <h2>{{data.title}}</h2>
                 <!--<p>RE0 女主</p>-->
               </div>
-              <div class="modelWorkerDetailRight" v-html="decode(data.content)"></div>
+              <div class="modelWorkerDetailRight ql-editor" v-html="decode(data.content)"></div>
             </div>
           </div>
         </div>

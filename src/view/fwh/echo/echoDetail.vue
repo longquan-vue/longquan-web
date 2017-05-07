@@ -14,7 +14,7 @@
           <span>咨询时间:{{date3Filter(data.quesTime)}}</span>
           <span>咨询人:{{data.questioner}}</span>
         </p>
-        <div class="ql-editor" v-html="decode(data.question)"></div>
+        <div class="ql-editor" style="padding:0" v-html="decode(data.question)"></div>
       </div>
     </div>
     <div class="questionPerson">
@@ -24,7 +24,7 @@
           <span>回应时间:{{date3Filter(data.repTime)}}</span>
           <span>回应人:{{data.replier}}</span>
         </p>
-        <div class="ql-editor" v-html="decode(data.answer)"></div>
+        <div class="ql-editor" style="padding:0" v-html="decode(data.answer)"></div>
       </div>
     </div>
   </div>

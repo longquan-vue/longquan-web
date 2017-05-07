@@ -93,7 +93,7 @@
                             </li>
                             <li flex>
                                 <span box="1">规则:</span>
-                                <div box="5" v-html="decode(data.rule)"></div>
+                                <div box="5" style="padding:0" class="ql-editor" v-html="decode(data.rule)"></div>
                             </li>
                         </ul>
                         <!--<div class="rules" flex>-->

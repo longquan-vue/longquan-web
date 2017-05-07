@@ -111,7 +111,7 @@
         </div>
         <div class="messageDetailCont">
           <div v-if="data.picUrl" class="messageDetailContImg"><img :src="data.picUrl"></div>
-          <div class="messageDetailCont-mess" v-html="decode(data.content)"></div>
+          <div class="messageDetailCont-mess ql-editor"  v-html="decode(data.content)"></div>
           <div class="messageDetailCont-down" v-for="(file,index) in data.files" :key="index">
             <span>附件：{{file.name}}.{{file.suffix}}</span>
             <a :href="file.url" target="_blank">下载 ↓</a>

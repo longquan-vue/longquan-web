@@ -50,7 +50,7 @@
               <template slot="append">人</template>
             </el-input>
           </el-form-item>
-          <el-form-item label="报名权限：" prop="entry">
+          <el-form-item label="报名权限：" prop="entry" required>
             <el-radio-group :value="data.entry" @input="(v)=>setData({entry:v})">
               <el-radio :label="0">所有用户可报名</el-radio>
               <el-radio :label="1">认证用户可报名</el-radio>
@@ -115,7 +115,7 @@
           entryStart: number('请选择开始时间...'),
           entryEnd: number('请选择结束时间...'),
           total: number('请填写报名人数...'),
-          entry: required('请选择报名权限...'),
+          // entry: required('请选择报名权限...',{min:0}),
           score: number('请填写所需积分...', {required: false, min: 0}),
           place: required('请填写活动地点...'),
           sponsor: required('请填写活动主办方...', {min: 1, max: 30}),

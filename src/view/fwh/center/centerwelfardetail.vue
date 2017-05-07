@@ -36,7 +36,7 @@
                 </li>
                 <li flex>
                     <div box="1">规则 : </div>
-                    <div box="8" v-html="data.rule"></div>
+                    <div class="ql-editor" style="padding:0" box="8" v-html="decode(data.rule)"></div>
                 </li>
             </ul>
         </div>
