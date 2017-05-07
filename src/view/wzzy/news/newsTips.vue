@@ -1,6 +1,6 @@
 <style lang="less">
    .newTips{
-       li{ height: 60px;line-height: 60px;border-bottom: 1px solid #E7E7E7;
+       li{ height: 60px;line-height: 60px;border-bottom: 1px solid #E7E7E7;font-size: 16px;;
             a{ display: block;height: 100%;position: relative;cursor: pointer;
                 span{ display: block;padding-right: 120px;color: #333;margin-left: 20px;}
                 &:before{  content: '';  width: 0;  height: 0;  position: absolute;  left: 0;  top: 24px;

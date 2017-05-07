@@ -12,7 +12,7 @@
         </div>
         <div class="wzzy-tab-cont" >
             <transition-group enter-active-class="animated fadeIn" leave-active-class="pos">
-                <div class="modelWorker" v-for="(list,key) in newsList" v-show="activeName==key" :key="key">
+                <div class="modelWorker" v-for="(list,key) in newsList" v-show="activeName==key" :key="key" v-if="articleType.advanced[key].name=='优秀职工'">
                     <el-row :gutter="10">
                         <el-col :span="6" v-for="(item,index) in list" :key="index">
                             <div class="img-card">
@@ -20,11 +20,24 @@
                                 <div class="card-bg">
                                     <h2>{{item.title}}</h2>
                                     <p v-html="limitFilter(strFilter(decode(item.content)),45)"></p>
-                                    <router-link :to="'/view/wzzy/workerDetail/'+item.id">查看详情</router-link>
+                                    <router-link :to="'/view/wzzy/messageDetail/'+item.id">查看详情</router-link>
                                 </div>
                             </div>
                         </el-col>
                     </el-row>
+                </div>
+                <div class="newsAct" style="margin:20px 0" v-for="(list,key) in newsList" v-show="activeName==key" :key="key" v-if="articleType.advanced[key].name=='劳模风采'">
+                  <el-row :gutter="15">
+                    <el-col :span="6" v-for="(item,index) in list" :key="index">
+                      <div class="newsAct-card">
+                        <img :src="item.picUrl" style="height:100px;">
+                        <div class="newsAct-card-box">
+                          <h2 style="overflow: auto;white-space: wrap;text-overflow: clip;">{{strFilter(item.title),20}}</h2>
+                        </div>
+                        <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="block-link"></router-link>
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
             </transition-group>
         </div>
@@ -32,7 +45,7 @@
 </template>
 <style lang="less">
     .modelWorker{
-        padding-bottom: 40px;padding-top: 20px;
+        padding-bottom: 20px;padding-top: 20px;
         .img-card{ height: 252px;position: relative;overflow: hidden;margin-bottom:20px;cursor: pointer;
             &:hover{
                 .card-bg{   top: 0;

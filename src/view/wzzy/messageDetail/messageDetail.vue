@@ -91,7 +91,7 @@
   }
 </style>
 <template>
-  <div class="newsDetail" style="padding-top:20px;">
+  <div class="newsDetail">
     <div class="the-place" style="">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>

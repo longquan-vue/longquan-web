@@ -157,7 +157,7 @@
               this.$vux.alert.show({
                 title: '提示',
                 content: e.msg
-              })
+              });
               this.showNoScroll = false;
             })
           } else {

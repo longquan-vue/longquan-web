@@ -44,11 +44,11 @@
         <div class="header-menu-sub" v-show="child.show && child.children" @mouseover="child.show=true" @mouseout="child.show=false">
           <el-row :gutter="20">
             <span v-for="(item,index) in child.children" :key="index">
-              <el-col :span="3" v-if="!item.type">
+              <el-col :span="3" v-if="!item.type" style="width:10%">
                 <router-link :to="item.url" :class="['menu-a',{'active':path==item.url}]" v-if="item.url">{{item.name}}</router-link>
                 <a :href="item.href" target="_blank" v-if="item.href">{{item.name}}</a>
               </el-col>
-              <el-col :span="3" v-for="(val,key) in articleType[item.type]" :key="index+key" v-if="item.type">
+              <el-col :span="3" v-for="(val,key) in articleType[item.type]" :key="index+key" v-if="item.type" style="width:10%">
                 <router-link :to="item.path+key" :class="['menu-a',{'active':path==item.path+key}]">{{val.name?val.name:val}}</router-link>
               </el-col>
               </span>
