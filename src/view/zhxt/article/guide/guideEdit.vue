@@ -14,7 +14,7 @@
       <div style="width:80%;margin:auto;">
         <el-form :model="data" :rules="rules" ref="form" label-width="120px" class="demo-ruleForm">
           <el-form-item label="标题：" prop="title">
-            <el-input placeholder="请输入..."  :value="data.title" @input="(v)=>setData({title:v})"/>
+            <el-input placeholder="请输入..." :value="data.title" @input="(v)=>setData({title:v})"/>
           </el-form-item>
           <el-form-item label="类型：" prop="subType">
             <el-select :value="data.subType" placeholder="请选择类型..." @input="(v)=>setData({subType:v})">
@@ -24,13 +24,13 @@
           <!--<el-form-item label="配图：" prop="pics">-->
           <!--<MyUpload :files="data.pics" filed="pics" :edit="data.edit"/>-->
           <!--</el-form-item>-->
-          <!--<el-form-item label="同步显示：" prop="sync">-->
-          <!--<el-checkbox-group :value="JSON.parse(data.sync|| '[0,1,2]')" @input="(v)=>setData({sync:JSON.stringify(v)})">-->
-          <!--<el-checkbox :label="0">网站</el-checkbox>-->
-          <!--<el-checkbox :label="1">服务号</el-checkbox>-->
-          <!--<el-checkbox :label="2">企业号</el-checkbox>-->
-          <!--</el-checkbox-group>-->
-          <!--</el-form-item>-->
+          <el-form-item label="同步显示：" prop="sync">
+            <el-checkbox-group :value="JSON.parse(data.sync)" @input="(v)=>setData({sync:JSON.stringify(v)})">
+              <el-checkbox :label="0">网站</el-checkbox>
+              <el-checkbox :label="1">服务号</el-checkbox>
+              <!--<el-checkbox :label="2">企业号</el-checkbox>-->
+            </el-checkbox-group>
+          </el-form-item>
           <el-form-item label="内容：" prop="content">
             <quill-editor :content="decode(data.content)" @input="setData({content:encode($event)})" :options="editorOption"/>
           </el-form-item>
@@ -39,10 +39,10 @@
           </el-form-item>
           <div v-if="!data.edit">
             <el-form-item label="发布者：" prop="admin">
-              <el-input placeholder="无"  v-model="data.admin.name" readonly/>
+              <el-input placeholder="无" v-model="data.admin.name" readonly/>
             </el-form-item>
             <el-form-item label="发布时间：" prop="created">
-              <el-input placeholder="无"  :value="date3Filter(data.created)" readonly/>
+              <el-input placeholder="无" :value="date3Filter(data.created)" readonly/>
             </el-form-item>
           </div>
           <el-form-item style="text-align: center">
@@ -63,9 +63,10 @@
     data() {
       return {
         rules: {
-          files: array(),
+//          files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
-//          sync: required('请选择同步服务...'),
+          sync: required('请选择同步显示...',{min: 3}),
+          subType: required('请选择类型...'),
         },
       }
     },
@@ -86,7 +87,7 @@
       },
     },
     created () {
-      this.setData({type: 8, sync: '[0,1,2]'});
+      this.setData({type: 8, sync: '[0,1]'});
       this.getArticle()
     },
     destroyed () {

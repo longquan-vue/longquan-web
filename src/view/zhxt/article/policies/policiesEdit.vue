@@ -1,11 +1,11 @@
 <style lang="less" scoped>
-  @import "./tips.less";
+  @import "policies.less";
 </style>
 <template>
   <div class="contentBox">
     <div class="contentBoxtitle">
-      <span v-if="data.edit">发布公示公告</span>
-      <span v-if="!data.edit">修改公示公告</span>
+      <span v-if="data.edit">发布政策法规</span>
+      <span v-if="!data.edit">修改政策法规</span>
       <a @click="go()" style="float:right;">
         <el-button type="primary" icon="arrow-left"/>
       </a>
@@ -81,7 +81,7 @@
       },
     },
     created () {
-      this.setData({type: 0, sync: '[0,1,2]'});
+      this.setData({type: 3, sync: '[0,1,2]'});
       this.getArticle()
     },
     destroyed () {

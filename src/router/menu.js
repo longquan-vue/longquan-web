@@ -10,6 +10,10 @@ export default {
           children: [{title: '公示公告列表', path: `${ROOT}/zhxt/article/tips`}]
         },
         {
+          title: '政策法规管理',
+          children: [{title: '政策法规列表', path: `${ROOT}/zhxt/article/policies`}]
+        },
+        {
           title: '文件资料管理',
           children: [
             {title: '文件资料列表', path: `${ROOT}/zhxt/article/docs`},

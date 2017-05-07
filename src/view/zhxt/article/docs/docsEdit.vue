@@ -28,7 +28,7 @@
             <el-checkbox-group :value="JSON.parse(data.sync)" @input="(v)=>setData({sync:JSON.stringify(v)})">
               <el-checkbox :label="0">网站</el-checkbox>
               <el-checkbox :label="1">服务号</el-checkbox>
-              <el-checkbox :label="2">企业号</el-checkbox>
+              <el-checkbox :label="2">企业号(内部)</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="内容：" prop="content">
@@ -65,7 +65,8 @@
         rules: {
           files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
-          sync: required('请选择同步服务...'),
+          sync: required('请选择同步显示...',{min: 3}),
+          subType: required('请选择资料类型...'),
         },
       }
     },
