@@ -14,7 +14,7 @@ export default {
           children: [
             {title: '文件资料列表', path: `${ROOT}/zhxt/article/docs`},
             {title: '资料类型设置', path: `${ROOT}/zhxt/article/docsSetting`},
-            {title: '文件资料统计', path: `${ROOT}/zhxt/article/docsCount`}
+            // {title: '文件资料统计', path: `${ROOT}/zhxt/article/docsCount`}
           ]
         },
         {
@@ -22,7 +22,7 @@ export default {
           children: [
             {title: '活动展示列表', path: `${ROOT}/zhxt/article/activity`},
             {title: '活动类型设置', path: `${ROOT}/zhxt/article/activitySetting`},
-            {title: '活动展示统计', path: `${ROOT}/zhxt/article/activityCount`}
+            // {title: '活动展示统计', path: `${ROOT}/zhxt/article/activityCount`}
           ]
         },
         {
@@ -30,7 +30,7 @@ export default {
           children: [
             {title: '新闻资讯列表', path: `${ROOT}/zhxt/article/info`},
             {title: '新闻类型设置', path: `${ROOT}/zhxt/article/infoSetting`},
-            {title: '新闻资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
+            // {title: '新闻资讯统计', path: `${ROOT}/zhxt/article/infoCount`}
           ]
         },
         {
@@ -38,7 +38,7 @@ export default {
           children: [
             {title: '办事指南列表', path: `${ROOT}/zhxt/article/guide`},
             {title: '办事类型设置', path: `${ROOT}/zhxt/article/guideSetting`},
-            {title: '办事指南统计', path: `${ROOT}/zhxt/article/guideCount`}
+            // {title: '办事指南统计', path: `${ROOT}/zhxt/article/guideCount`}
           ]
         },
         {
@@ -46,7 +46,7 @@ export default {
           children: [
             {title: '先进人物列表', path: `${ROOT}/zhxt/article/advanced`},
             {title: '先进类型设置', path: `${ROOT}/zhxt/article/advancedSetting`},
-            {title: '先进人物统计', path: `${ROOT}/zhxt/article/advancedCount`}
+            // {title: '先进人物统计', path: `${ROOT}/zhxt/article/advancedCount`}
           ]
         },
         {
@@ -54,7 +54,7 @@ export default {
           children: [
             {title: '工会服务列表', path: `${ROOT}/zhxt/article/service`},
             {title: '服务类型设置', path: `${ROOT}/zhxt/article/serviceSetting`},
-            {title: '工会服务统计', path: `${ROOT}/zhxt/article/serviceCount`}
+            // {title: '工会服务统计', path: `${ROOT}/zhxt/article/serviceCount`}
           ]
         },
       ]
@@ -63,16 +63,16 @@ export default {
       title: '投票调查管理',
       children: [
         {title: '问卷调查列表', path: `${ROOT}/zhxt/quest`},
-        {title: '问卷调查统计', path: `${ROOT}/zhxt/questCount`},
+        // {title: '问卷调查统计', path: `${ROOT}/zhxt/questCount`},
         {title: '投票选举列表', path: `${ROOT}/zhxt/vote`},
-        {title: '投票选举统计', path: `${ROOT}/zhxt/voteCount`},
+        // {title: '投票选举统计', path: `${ROOT}/zhxt/voteCount`},
       ]
     },
     {
       title: '招聘信息管理',
       children: [
         {title: '招聘信息列表', path: `${ROOT}/zhxt/recruit`},
-        {title: '招聘信息统计', path: `${ROOT}/zhxt/recruitCount`},
+        // {title: '招聘信息统计', path: `${ROOT}/zhxt/recruitCount`},
       ]
     },
     {
@@ -97,14 +97,14 @@ export default {
       title: '活动管理',
       children: [
         {title: '工会活动列表', path: `${ROOT}/zhxt/activity`},
-        {title: '工会活动统计', path: `${ROOT}/zhxt/activityCount`},
+        // {title: '工会活动统计', path: `${ROOT}/zhxt/activityCount`},
       ]
     },
     {
       title: '健身中心管理',
       children: [
         {title: '健身项目列表', path: `${ROOT}/zhxt/health`},
-        {title: '健身项目统计', path: `${ROOT}/zhxt/healthCount`},
+        // {title: '健身项目统计', path: `${ROOT}/zhxt/healthCount`},
         {title: '到场签到二维码', path: `${ROOT}/zhxt/healthCode`},
       ]
     },
