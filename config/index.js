@@ -2,6 +2,7 @@
 var path = require('path')
 
 module.exports = {
+  title: '龙泉驿总工会',
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),

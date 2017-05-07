@@ -9,7 +9,7 @@ export default [
     path: `/login`,
     component: require('../view/zhxt/login/Login.vue'),
     name: 'login',
-    meta: {title: '智慧系统后台登录'}
+    meta: {title: '智慧系统登录'}
   },
   {
     path: `${ROOT}/zhxt`,
@@ -123,32 +123,31 @@ export default [
     path: `${ROOT}/wzzy`,
     component: require('../view/wzzy/wzzy.vue'),
     children: [
-      {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome'},
+      {path: `${ROOT}/wzzy/home`, component: require('../view/wzzy/home/home.vue'), name: 'wzzyHome', meta: {title: '网站首页'}},
       //详情
-      {path: `${ROOT}/wzzy/messageDetail/:id`, component: require('../view/wzzy/messageDetail/messageDetail.vue'), name: 'messageDetail'},
-      {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail'},
-      {path: `${ROOT}/wzzy/chatPoll/:id`, component: require('../view/wzzy/chat/pollDetail.vue'), name: 'chatPollDetail'},
-      {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail'},
-      {path: `${ROOT}/wzzy/chatEcho/:id`, component: require('../view/wzzy/chat/echoDetail.vue'), name: 'chatEchoDetail'},
-      {path: `${ROOT}/wzzy/workerDetail/:id`, component: require('../view/wzzy/advanced/workerDetail.vue'), name: 'workerDetail'},
+      {path: `${ROOT}/wzzy/messageDetail/:id`, component: require('../view/wzzy/messageDetail/messageDetail.vue'), name: 'messageDetail', meta: {title: '新闻动态详情'}},
+      {path: `${ROOT}/wzzy/recruitDetail/:id`, component: require('../view/wzzy/messageDetail/recruitDetail.vue'), name: 'recruitDetail', meta: {title: '招聘信息详情'}},
+      {path: `${ROOT}/wzzy/chatPoll/:id`, component: require('../view/wzzy/chat/pollDetail.vue'), name: 'chatPollDetail', meta: {title: '投票选举详情'}},
+      {path: `${ROOT}/wzzy/chatQuestion/:id`, component: require('../view/wzzy/chat/questionDetail.vue'), name: 'chatQuestionDetail', meta: {title: '问卷调查详情'}},
+      {path: `${ROOT}/wzzy/chatEcho/:id`, component: require('../view/wzzy/chat/echoDetail.vue'), name: 'chatEchoDetail', meta: {title: '回音壁详情'}},
+      {path: `${ROOT}/wzzy/workerDetail/:id`, component: require('../view/wzzy/advanced/workerDetail.vue'), name: 'workerDetail', meta: {title: '先进人物详情'}},
       /*机构介绍*/
-      {path: `${ROOT}/wzzy/laborUnion/:type`, component: require('../view/wzzy/laborUnion/laborUnion.vue'), name: 'laborUnion-wzzy'},
+      {path: `${ROOT}/wzzy/laborUnion/:type`, component: require('../view/wzzy/laborUnion/laborUnion.vue'), name: 'laborUnion-wzzy', meta: {title: '机构介绍'}},
       //新闻动态
-      {path: `${ROOT}/wzzy/news/:idx/:type`, component: require('../view/wzzy/news/news.vue'), name: 'news-wzzy'},
+      {path: `${ROOT}/wzzy/news/:idx/:type`, component: require('../view/wzzy/news/news.vue'), name: 'news-wzzy', meta: {title: '新闻动态'}},
       //办事指南
-      {path: `${ROOT}/wzzy/guide/:idx/:type`, component: require('../view/wzzy/guide/guide.vue'), name: 'guide-wzzy'},
-      // {path: `${ROOT}/wzzy/guide/8/:type`, component: require('../view/wzzy/guide/guideWq.vue'), name: 'guideWq'},
+      {path: `${ROOT}/wzzy/guide/:idx/:type`, component: require('../view/wzzy/guide/guide.vue'), name: 'guide-wzzy', meta: {title: '办事指南'}},
       //工会服务
-      {path: `${ROOT}/wzzy/service/:idx/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach'},
+      {path: `${ROOT}/wzzy/service/:idx/:type`, component: require('../view/wzzy/service/serviceTeach.vue'), name: 'serviceTeach', meta: {title: '工会服务'}},
       //互动交流
-      {path: `${ROOT}/wzzy/chat/:type`, component: require('../view/wzzy/chat/chat.vue'), name: 'chat-wzzy'},
+      {path: `${ROOT}/wzzy/chat/:type`, component: require('../view/wzzy/chat/chat.vue'), name: 'chat-wzzy', meta: {title: '互动交流'}},
       //先进人物
-      {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy'},
-      //文件资料
-      {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files'},
-      {path: `${ROOT}/wzzy/filesList/:type`, component: require('../view/wzzy/files/filesList.vue'), name: 'filesList'},
+      {path: `${ROOT}/wzzy/advanced/1/:type`, component: require('../view/wzzy/advanced/advanced.vue'), name: 'advanced-wzzy', meta: {title: '先进人物'}},
+      //文件·资料
+      {path: `${ROOT}/wzzy/files`, component: require('../view/wzzy/files/files.vue'), name: 'files', meta: {title: '文件·资料'}},
+      {path: `${ROOT}/wzzy/filesList/:type`, component: require('../view/wzzy/files/filesList.vue'), name: 'filesList', meta: {title: '文件·资料'}},
       //搜索结果
-      {path: `${ROOT}/wzzy/search`, component: require('../view/wzzy/search/search.vue'), name: 'search-wzzy'},
+      {path: `${ROOT}/wzzy/search`, component: require('../view/wzzy/search/search.vue'), name: 'search-wzzy', meta: {title: '搜索结果'}},
     ]
   },
   // 企业号
