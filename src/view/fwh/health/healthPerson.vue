@@ -62,9 +62,6 @@
             isEnd(endTime){
                 return new Date().getTime()>endTime
             },
-            calenderClick(){
-                console.log(this.value);
-            }
         },
         created () {
 

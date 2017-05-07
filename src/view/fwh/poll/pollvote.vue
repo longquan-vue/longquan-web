@@ -159,10 +159,10 @@
             ...mapActions(['go','clear','getPoll','clearPage']),
             ...filters,
             success (src, ele) {
-                console.log('success load', src);
+//                console.log('success load', src);
             },
             error (src, ele, msg) {
-                console.log('error load', msg, src);
+//                console.log('error load', msg, src);
             },
             showImg(idx){
                 this.idx = idx;
