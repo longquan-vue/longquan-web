@@ -62,15 +62,21 @@
   .messageDetailContPage {
     margin: 20px 0;
 
-  a:nth-child(1) {
-    float: left;
+  .messageDetailContPageLeft {
+    float: left;width: 50%;padding-right: 40px;;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: #818181;
     font-size: 14px;
     cursor: pointer;
   }
 
-  a:nth-child(2) {
-    float: right;
+    .messageDetailContPageRight {
+    float: right;width: 50%;padding-right: 40px;;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: #818181;
     font-size: 14px;
     cursor: pointer;
@@ -112,8 +118,8 @@
           </div>
         </div>
         <div class="messageDetailContPage">
-          <a @click="toUrl({path:data.last})" v-if="data.last">上一篇：{{data.lastTitle}}</a>
-          <a @click="toUrl({path:data.next})" v-if="data.next">下一篇：{{data.nextTitle}}</a>
+          <a class="messageDetailContPageLeft" @click="toUrl({path:data.last})" v-if="data.last">上一篇：{{data.lastTitle}}</a>
+          <a class="messageDetailContPageRight" @click="toUrl({path:data.next})" v-if="data.next">下一篇：{{data.nextTitle}}</a>
         </div>
       </div>
     </div>
