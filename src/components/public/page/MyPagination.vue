@@ -19,15 +19,15 @@
     },
     computed: {...mapGetters(['page','query'])},
     methods: {
-      ...mapActions(['changePage','toUrl']),
+      ...mapActions(['changePage']),
       handleSizeChange(pageSize){
         this.changePage({pageSize});
-        this.toUrl({query:{...this.query,pageSize}});
+        this.$router.push({query:{...this.query,pageSize}});
         this.method && this.method();
       },
       handleCurrentChange(page){
         this.changePage({page});
-        this.toUrl({query:{...this.query,page}});
+        this.$router.push({query:{...this.query,page}});
         this.method && this.method();
       }
     },
