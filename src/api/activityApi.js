@@ -37,6 +37,10 @@ export const deleteActivityApi = (id, del) => request({
 export const entryActivityApi = (id) => request({
   url: `${BASE_PATH}/entry/${id}`,
 });
+//取消报名活动
+export const cancelEntryActivityApi = (id) => request({
+  url: `${BASE_PATH}/cancelEntry/${id}`,
+});
 // 导出活动报名表单
 export const exportEntryApi = (id, data) => request({
   url: `${BASE_PATH}/exportEntry/${id}`,
