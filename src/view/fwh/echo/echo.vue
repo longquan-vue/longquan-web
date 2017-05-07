@@ -37,7 +37,7 @@
   <div class="fwh-echo" style="background-color: #F0F0F0;height: 100%;overflow: scroll">
     <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" v-if="list.length>0" height="-46">
       <div class="fwh-echo-box">
-          <div class="fwh-echo-item" v-for="(item,index) in list">
+          <div class="fwh-echo-item" v-for="(item,index) in list" @click="go(['echoDetail-fwh',item.id])">
               <div class="fwh-echo-item-head" flex>
                 <span>问：</span>
                 <p box="1">{{item.title}}</p>
