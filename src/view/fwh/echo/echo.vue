@@ -123,7 +123,7 @@
     computed: {...mapGetters([ 'page','list']),
     },
     methods:{
-      ...mapActions(['go','clear','findEcho','changePage','getMine']),
+      ...mapActions(['go','clear','findEcho','changePage','getMine','createEcho']),
       ...filters,
       loadMore () {
         setTimeout(async() => {
@@ -147,7 +147,19 @@
       submitForm() {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            this.createEcho(this.ruleForm)
+            this.createEcho(this.ruleForm).then(()=>{
+              this.$vux.alert.show({
+                title: '提示',
+                content: '消息提交成功'
+              });
+              this.showNoScroll = false;
+            }).catch(()=>{
+              this.$vux.alert.show({
+                title: '提示',
+                content: e.msg
+              })
+              this.showNoScroll = false;
+            })
           } else {
             return false;
           }
