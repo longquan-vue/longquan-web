@@ -5,8 +5,7 @@
 <template>
     <div class="healthDetail" style="background-color: #ffffff;height: 100%;overflow: scroll;padding-top:50px;">
         <appHead :title="data.name"></appHead>
-        <inline-calendar @click="calenderClick()"
-                         class="inline-calendar-demo"
+        <inline-calendar class="inline-calendar-demo"
                          :show.sync="show"
                          v-model="value"
                          start-date="2016-04-01"
@@ -153,9 +152,6 @@
         methods: {
             ...mapActions(['go', 'gethealthDetail', 'clear', 'getHealthEnter', 'changeSelect']),
             ...filters,
-            calenderClick(){
-                console.log(this.value);
-            },
             isShow(val, data, date){
                 if (val == 1) {   //报名成功
                     this.content = '恭喜您！报名成功';

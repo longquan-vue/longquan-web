@@ -83,8 +83,6 @@
     },
     watch:{
       path(newval,val){
-        console.log(val);
-        console.log(newval);
         if (newval !='/view/wzzy/search'){
           this.searchInput= '';
         }

@@ -140,7 +140,7 @@
             ...mapActions(['go', 'gethealthDetail', 'clear', 'getHealthEnter', 'changeSelect']),
             ...filters,
             calenderClick(){
-                console.log(this.value);
+//                console.log(this.value);
             },
             onResultChange(val){
                 this.isshow = val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
@@ -165,7 +165,6 @@
             openPerson(index){
                 this.idx = index;
                 this.showEntryList = true;
-                console.log(this.idx);
             }
         },
         async created () {

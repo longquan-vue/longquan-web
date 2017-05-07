@@ -99,7 +99,7 @@
             },
             onScrollBottom () {
                 if (this.onFetching) {
-                    console.log('正在加载中别啦了')
+//                    console.log('正在加载中别啦了')
                 } else {
                     this.onFetching = true;
                     setTimeout(async () => {
