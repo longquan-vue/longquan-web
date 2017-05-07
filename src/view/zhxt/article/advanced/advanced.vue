@@ -6,7 +6,7 @@
     <div class="contentBoxtitle"><span>先进人物列表</span></div>
     <div class="contentBoxCont">
       <div class="mgb20">
-        <MySelect title="先进类型" field="subType" :options="articleType.advanced || {}" :change="change"/>
+        <MySelect title="先进类型" field="subType" label="name" :options="articleType.advanced || {}" :change="change"/>
         <MySelectInput :options="{'title':'标题'}" def-key="title" :change="change"/>
         <el-date-picker v-model="dateValue" type="daterange" placeholder="选择日期范围"/>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>

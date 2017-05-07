@@ -58,7 +58,7 @@
     data() {
       return {
         rules: {
-          files: array(),
+//          files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
           sync: required('请选择同步服务...'),
         },

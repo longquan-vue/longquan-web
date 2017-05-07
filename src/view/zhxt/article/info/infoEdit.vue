@@ -64,10 +64,10 @@
     data() {
       return {
         rules: {
-          files: array(),
+//          files: array(),
           title: required('请填写标题...', {min: 1, max: 30}),
-          picUrl: required('请选择上传配图...'),
-
+          subType: required('请选择新闻类型...'),
+          sync: required('请选择同步显示...',{min: 3}),
         },
       }
     },
