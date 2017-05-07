@@ -192,6 +192,7 @@ export default [
       {path: `${ROOT}/fwh/pollquestion/:id`, component: require('../view/fwh/poll/pollquestion.vue'), name: 'pollquestion'}, //投票调查--问卷
       {path: `${ROOT}/fwh/build`, component: require('../view/fwh/build/build.vue'), name: 'build-fwh'}, //工会组建
       {path: `${ROOT}/fwh/echo`, component: require('../view/fwh/echo/echo.vue'), name: 'echo-fwh'}, //回音壁
+      {path: `${ROOT}/fwh/echo/:id`, component: require('../view/fwh/echo/echoDetail.vue'), name: 'echoDetail-fwh'}, //回音壁详情
     ]
   },
 ]
