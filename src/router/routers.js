@@ -49,6 +49,9 @@ export default [
       {path: `${ROOT}/zhxt/article/service/:id`, component: require('../view/zhxt/article/service/serviceEdit.vue'), name: 'serviceEdit', meta: {title: '修改工会服务'}},
       {path: `${ROOT}/zhxt/article/serviceSetting`, component: require('../view/zhxt/article/service/serviceSetting.vue'), name: 'serviceSetting', meta: {title: '服务类型设置'}},
       {path: `${ROOT}/zhxt/article/serviceCount`, component: require('../view/zhxt/article/service/serviceCount.vue'), name: 'serviceCount', meta: {title: '工会服务统计'}},
+      /*文章 -- 政策法规管理*/
+      {path: `${ROOT}/zhxt/article/policies`, component: require('../view/zhxt/article/policies/policies.vue'), name: 'policies', meta: {title: '政策法规列表'}},
+      {path: `${ROOT}/zhxt/article/policies/:id`, component: require('../view/zhxt/article/policies/policiesEdit.vue'), name: 'policiesEdit', meta: {title: '修改政策法规'}},
       /*活动*/
       {path: `${ROOT}/zhxt/activity`, component: require('../view/zhxt/activity/activity.vue'), name: 'activityList', meta: {title: '工会活动列表'}},
       {path: `${ROOT}/zhxt/activity/:id`, component: require('../view/zhxt/activity/activityEdit.vue'), name: "activityEdit", meta: {title: '修改工会活动'}},
