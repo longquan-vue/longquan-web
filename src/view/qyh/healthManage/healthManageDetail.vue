@@ -47,7 +47,7 @@
         </div>
         <div class="healthCont" v-if="!showList">
             <div class="noHealth">
-                <img src="../../../../static/wx/default.png">
+                <img src="/static/wx/default.png">
                 <p>该日期未开启项目！</p>
             </div>
         </div>

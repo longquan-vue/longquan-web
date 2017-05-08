@@ -19,7 +19,7 @@
                     <div box="1">{{item.name}}</div>
                     <div class="">
                         <span>所需 {{item.score}} 积分</span>
-                        <img src="../../../../static/wx/center/jiantou.png">
+                        <img src="/static/wx/center/jiantou.png">
                     </div>
                 </li>
             </ul>

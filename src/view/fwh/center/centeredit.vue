@@ -83,7 +83,7 @@
            <x-dialog v-model="departmentPop" class="dialog-demo" :scroll="false" :hideOnBlur="true">
                <div class="popup">
                    <div class="popTitle">
-                       所属单位 <img src="../../../../static/wx/del.png" @click="departmentPop=false">
+                       所属单位 <img src="/static/wx/del.png" @click="departmentPop=false">
                    </div>
                    <div class="popContent">
                        <div class="search">
@@ -95,7 +95,7 @@
                        </el-radio-group>
                    </div>
                    <div class="popBtn">
-                       <img src="../../../../static/wx/popbtn.png" @click="selectVal">
+                       <img src="/static/wx/popbtn.png" @click="selectVal">
                    </div>
                </div>
            </x-dialog>
@@ -205,13 +205,13 @@
             isShow(val){
                 if (val==1){
                     this.def=false;
-                    this.img = '../../../../static/wx/succ.png';
+                    this.img = '/static/wx/succ.png';
                     this.content='提交成功';
                     this.btns={btn:'确定'};
                     this.isshow=true;
                 }else {
                     this.def=true;
-                    this.img = '../../../../static/wx/default.png';
+                    this.img = '/static/wx/default.png';
                     this.content='服务器异常，请稍微再试';
                     this.btns={btn:'确定'};
                     this.isshow=true;

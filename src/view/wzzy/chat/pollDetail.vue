@@ -90,13 +90,13 @@
                         <span><i>投票时间：</i>{{date3Filter(data.start)}} 至 {{date3Filter(data.end)}}</span>
                         <span><i>积分奖励：</i> <em>50</em></span>
                     </p>
-                    <img src="../../../../static/wzzy/ising.png">
+                    <img src="/static/wzzy/ising.png">
                 </div>
                 <div class="wzzy-poll-detail-intro" v-html="data.description"></div>
                 <div class="wzzy-poll-detail-cont">
                     <p>
                         你当前已投 <span>{{data.time - num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
-                        <a>按号数 <img src="../../../../static/wzzy/updown.png"></a>
+                        <a>按号数 <img src="/static/wzzy/updown.png"></a>
                     </p>
                     <el-row :gutter="13">
                         <el-col :span="6" v-for="(item,index) in data.questions" :key="index">
@@ -123,7 +123,7 @@
         <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 规则详情
-                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
+                <img src="/static/wzzy/wzzy-close.png" @click="dialogVisible=false">
             </span>
             <ul class="wzzy-list-li">
                 <li>
@@ -161,7 +161,7 @@
         <el-dialog v-model="dialogImg.show" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 人物详情
-                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogImg.show=false">
+                <img src="/static/wzzy/wzzy-close.png" @click="dialogImg.show=false">
             </span>
             <div class="person-slide">
                 <el-carousel :interval="4000" height="600px" trigger="click" arrow="always" indicator-position="none" @change="changeSlide">

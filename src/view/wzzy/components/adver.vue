@@ -1,6 +1,6 @@
 <template>
     <div class="wzzy-adver">
-        <img src="../../../../static/wzzy/weiquan.png" >
+        <img src="/static/wzzy/weiquan.png" >
     </div>
 </template>
 <style lang="less">

@@ -7,7 +7,7 @@
   <div class="recruitSign" style="background-color: #F0F0F0;height: 100%;overflow: scroll;padding-top:1.6533333rem;">
     <appHead title="回音壁详情" style="background-color:#FF8004"></appHead>
     <div class="questionPerson" style="margin-top:0;">
-      <div class="questionPerson-head"><img style="vertical-align: middle;position:relative;top:-2px;" src="../../../../static/wzzy/icon-hynr.png"> 咨询内容</div>
+      <div class="questionPerson-head"><img style="vertical-align: middle;position:relative;top:-2px;" src="/static/wzzy/icon-hynr.png"> 咨询内容</div>
       <div class="questionPerson-cont">
         <h2>{{data.title}}</h2>
         <p>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="questionPerson">
-      <div class="questionPerson-head"><img style="vertical-align: middle;position:relative;top:-2px;" src="../../../../static/wzzy/icon-hynr.png"> 回应内容</div>
+      <div class="questionPerson-head"><img style="vertical-align: middle;position:relative;top:-2px;" src="/static/wzzy/icon-hynr.png"> 回应内容</div>
       <div class="questionPerson-cont">
         <p>
           <span>回应时间:{{date3Filter(data.repTime)}}</span>

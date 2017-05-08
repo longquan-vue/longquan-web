@@ -1,12 +1,12 @@
 <style lang="less" scoped>
     @import "../../../../static/normal.less";
-    @import "./welfare";
+    @import "./welfare.less";
 </style>
 <template>
    <div class="welfareDetail">
        <div class="welfareDetailHead">
-            <a href="javascript:history.go(-1);"><img class="return" src="../../../../static/wx/return.png"></a>
-            <img class="bg" src="../../../../static/wx/centerbg.png">
+            <a href="javascript:history.go(-1);"><img class="return" src="/static/wx/return.png"></a>
+            <img class="bg" src="/static/wx/centerbg.png">
             <div class="last">
                 <h3>{{login.score}}</h3>
                 <p>剩余积分</p>

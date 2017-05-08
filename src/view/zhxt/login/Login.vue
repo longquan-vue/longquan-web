@@ -3,8 +3,8 @@
     <div class="ms-title">后台管理系统</div>
     <div class="ms-login">
       <div class="swichBox">
-        <img v-if="!show" src="../../../../static/wx/code.png" @click="getCode">
-        <img v-if="show" src="../../../../static/wx/pc.png" @click="clearCode">
+        <img v-if="!show" src="/static/wx/code.png" @click="getCode">
+        <img v-if="show" src="/static/wx/pc.png" @click="clearCode">
       </div>
       <div class="codeBox" v-if="show">
         <img :src="qrcode">

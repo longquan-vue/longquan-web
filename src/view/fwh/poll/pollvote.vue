@@ -6,7 +6,7 @@
         <div class="centerMessHead">
             <div flex>
                 <div  flex items="center" style="padding-left:10px;">
-                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
+                    <a href="javascript:history.go(-1);"> <img class="return" src="/static/wx/return.png"> </a>
                 </div>
                 <div box="4" flex items="center" justify="center" class="headTitle">
                     <h2>{{data.title}}</h2>
@@ -24,7 +24,7 @@
             <ul flex justify="between" wrap="wrap">
                 <li v-for="(item,index) in data.questions">
                     <div class="imgBox" @click="showImg(index)">
-                        <x-img :src="item.files[0] && item.files[0].url" :webp-src="`${item.files[0] && item.files[0].url}?type=webp`" default-src="../../../../static/wx/test/def.png"
+                        <x-img :src="item.files[0] && item.files[0].url" :webp-src="`${item.files[0] && item.files[0].url}?type=webp`" default-src="/static/wx/test/def.png"
                                @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error"
                                :offset="-100" container=".pollvote" :delay="1000"
                         ></x-img>
@@ -63,7 +63,7 @@
                 <div class="popupBox">
                     <div class="popupHead">
                         规则详情
-                        <img src="../../../../static/wx/del.png" @click="popupVisible=false">
+                        <img src="/static/wx/del.png" @click="popupVisible=false">
                     </div>
                     <div class="popupCont">
                         <ul>
@@ -122,23 +122,13 @@
     export default{
         data(){
             return{
-                list: [
-                    '../../../../static/wx/test/test1.jpg',
-                    '../../../../static/wx/test/test2.jpg',
-                    '../../../../static/wx/test/test3.jpg',
-                    '../../../../static/wx/test/test4.jpg',
-                    '../../../../static/wx/test/test5.jpg',
-                    '../../../../static/wx/test/test6.jpg',
-                    '../../../../static/wx/test/test7.jpg',
-                    '../../../../static/wx/test/test8.jpg',
-                ],
                 num:0,
                 showImgDetail:false,
                 index:0,
                 idx:0,
                 popupVisible:false,
                 isshow:false,//控制弹窗
-                img:'../../../../static/wx/succ.png',//控制弹窗图片
+                img:'/static/wx/succ.png',//控制弹窗图片
                 title:'提示',   //控制弹窗标题
                 content:'恭喜您！报名成功',  //控制弹窗内容
                 btns: {btn:'确定'},
@@ -179,11 +169,11 @@
             },
             isShow(val){
                 if (val==1){
-                    this.img='../../../../static/wx/succ.png';
+                    this.img='/static/wx/succ.png';
                     this.content='恭喜您！投票成功';
                     this.btns={btn:'确定'};
                 }else if (val==2){
-                    this.img='../../../../static/wx/default.png';
+                    this.img='/static/wx/default.png';
                     this.content='对不起，您已经投过票啦';
                     this.btns={btn:'确定'};
                 }
@@ -195,7 +185,7 @@
                     this.getPoll();
                     this.num ++;
                 }).catch((data)=>{
-                    this.img='../../../../static/wx/default.png';
+                    this.img='/static/wx/default.png';
                     this.content=data.msg;
                     this.btns={btn:'确定'};
                     this.isshow=true;

@@ -10,15 +10,15 @@
                     <div flex items="center" @click="go(['healthManageDetail',item.id])"><img :src="item.picUrl"></div>
                     <div box="1">{{item.name}}</div>
                     <div class="">
-                        <img src="../../../../static/wx/reEdit.png" @click="go(['healthManageEdit',item.id])">
-                        <img src="../../../../static/wx/repause.png" @click="pause(index,item)" v-if="item.status==1">
-                        <img src="../../../../static/wx/restart.png" @click="pause(index,item)" v-if="item.status==2">
-                        <img src="../../../../static/wx/recover.png" @click="del(index,item)">
+                        <img src="/static/wx/reEdit.png" @click="go(['healthManageEdit',item.id])">
+                        <img src="/static/wx/repause.png" @click="pause(index,item)" v-if="item.status==1">
+                        <img src="/static/wx/restart.png" @click="pause(index,item)" v-if="item.status==2">
+                        <img src="/static/wx/recover.png" @click="del(index,item)">
                     </div>
                 </li>
                 <li flex>
                     <div flex items="center">
-                        <a @click="go(['healthManageEdit','create'])"><img src="../../../../static/wx/add.png"></a>
+                        <a @click="go(['healthManageEdit','create'])"><img src="/static/wx/add.png"></a>
                     </div>
                     <div box="1">添加健身项目</div>
                 </li>
@@ -59,7 +59,7 @@
                     }};
                     this.isshow=true;
                 }else {
-                    // this.img = '../../../../static/wx/succ.png';
+                    // this.img = '/static/wx/succ.png';
                     this.content='是否确定删除该项目';
                     this.btns={btn1:'是',btn2:'否',action:()=>{
                         this.delHealth([id,index]);

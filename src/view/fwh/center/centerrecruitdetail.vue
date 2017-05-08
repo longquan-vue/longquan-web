@@ -6,7 +6,7 @@
         <div class="centerMessHead">
             <div flex>
                 <div box="1" flex items="center" style="padding-left:10px;">
-                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
+                    <a href="javascript:history.go(-1);"> <img class="return" src="/static/wx/return.png"> </a>
                 </div>
                 <div box="4" flex items="center" justify="center">
                     <h2>招聘详情</h2>
@@ -75,7 +75,7 @@
                         <div box="8">
                             <a class="tel" :href="'tel:'+data.phones[index]">
                                 {{data.phones[index]}}（09:00-18:00）
-                                <img src="../../../../static/wx/tel.png" style="float:right">
+                                <img src="/static/wx/tel.png" style="float:right">
                             </a>
                         </div>
                     </li>

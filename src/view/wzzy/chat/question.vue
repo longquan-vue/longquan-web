@@ -11,7 +11,7 @@
                 </h2>
                 <p>
                 <span>
-                    <img src="../../../../static/wzzy/wzzy-point.png">
+                    <img src="/static/wzzy/wzzy-point.png">
                     积分奖励 : <i>{{item.score}}</i>
                 </span>
                     <em>{{ date3Filter(item.created) }}</em>

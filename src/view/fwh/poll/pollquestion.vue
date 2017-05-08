@@ -7,7 +7,7 @@
         <div class="centerMessHead">
             <div flex>
                 <div  flex items="center" style="padding-left:10px;">
-                    <a href="javascript:history.go(-1);"> <img class="return" src="../../../../static/wx/return.png"> </a>
+                    <a href="javascript:history.go(-1);"> <img class="return" src="/static/wx/return.png"> </a>
                 </div>
                 <div box="4" flex items="center" justify="center" class="headTitle">
                     <h2>{{data.title}}</h2>
@@ -62,9 +62,9 @@
                 </div>
             </div>
             <div class="answerBtn">
-                <a class="prev" @click="switchSwiper(1)"><img src="../../../../static/wx/prev.png"></a>
-                <a class="next" @click="switchSwiper(2)" v-if="this.swip.activeIndex!=(questions.length-1)"><img src="../../../../static/wx/next.png"></a>
-                <a class="next" @click="switchSwiper(3)" v-if="this.swip.activeIndex==(questions.length-1)"><img src="../../../../static/wx/submit.png"></a>
+                <a class="prev" @click="switchSwiper(1)"><img src="/static/wx/prev.png"></a>
+                <a class="next" @click="switchSwiper(2)" v-if="this.swip.activeIndex!=(questions.length-1)"><img src="/static/wx/next.png"></a>
+                <a class="next" @click="switchSwiper(3)" v-if="this.swip.activeIndex==(questions.length-1)"><img src="/static/wx/submit.png"></a>
             </div>
         </div>
 
@@ -74,7 +74,7 @@
                 <div class="popupBox">
                     <div class="popupHead">
                         规则详情
-                        <img src="../../../../static/wx/del.png" @click="popupVisible=false">
+                        <img src="/static/wx/del.png" @click="popupVisible=false">
                     </div>
                     <div class="popupCont">
                         <ul>

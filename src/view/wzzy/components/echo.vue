@@ -2,7 +2,7 @@
   <div class="wzzy-tab">
     <div class="wzzy-tab-head">
       <div class="tab-head-title">
-        <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
+        <img class="tab-head-title-img" src="/static/wzzy/wzzy-tab.png">
         <span><i class="iconfont icon-huiyinbi"></i> 回音壁</span>
       </div>
       <a class="tab-head-more" @click="toUrl({path:'/view/wzzy/chat/3'})">更多 > </a>

@@ -52,7 +52,7 @@
         </div>
         <div class="healthCont" v-if="!showList">
             <div class="noHealth">
-                <img src="../../../../static/wx/default.png">
+                <img src="/static/wx/default.png">
                 <p>该日期未开启项目！</p>
             </div>
         </div>
@@ -157,7 +157,7 @@
                     this.content = '恭喜您！报名成功';
                     this.btns = {btn: '确定'};
                 } else if (val == 2) { // 取消
-                    // this.img = '../../../../static/wx/succ.png';
+                    // this.img = '/static/wx/succ.png';
                     this.content = '是否确定取消预约报名';
                     this.btns = {
                         btn1: '是', btn2: '否', action: () => {
@@ -167,7 +167,7 @@
                         }
                     };
                 } else if (val == 3) { // 没有认证
-                    // this.img = '../../../../static/wx/succ.png';
+                    // this.img = '/static/wx/succ.png';
                     this.content = '请先完善个人信息并通过职工认证';
                     this.btns = {
                         btn1: '去认证', btn2: '取消', action: () => {
