@@ -131,7 +131,7 @@
           start: number('请选择投票选举开始时间...'),
           end: number('请选择投票选举结束时间...'),
           time: number('请输入投票选举人均投票次数...'),
-          repetition: required('请选择是否重复投票...'),
+          // repetition: required('请选择是否重复投票...'),
           days: number('请输入连续投票天数...'),
           score: number('请输入投票选举奖励积分...'),
           sync: required('请选择同步...'),
