@@ -93,7 +93,6 @@
     import swipe from '../../../components/public/swip/swipe.vue'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
     import {entryActivityApi,cancelEntryActivityApi} from '../../../api/activityApi'
-    import {jssdkApi} from '../../../api/systemApi'
     export default{
         data(){
             return{
@@ -111,7 +110,7 @@
         },
         computed: {...mapGetters(['data'])},
         methods:{
-            ...mapActions(['goto','clear','getActivityDetail','getMine','jssdkApi']),
+            ...mapActions(['goto','clear','getActivityDetail','getMine','settingWx']),
             ...filters,
             isShow(val,id,ticket,used,welfareId){
                 if (val==1){   //已经报过名
@@ -176,51 +175,11 @@
                 this.isshow=true;
               });
             },
-            randomString(len) {
-              len = len || 32;
-              let $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-              let maxPos = $chars.length;
-              let pwd = '';
-              for (let i = 0; i < len; i++) {
-                //0~32的整数
-                pwd += $chars.charAt(Math.floor(Math.random() * (maxPos+1)));
-              }
-              return pwd;
+            delCode(){
+              alert('1');
             },
             testWx(){
-               // console.log(this.randomString(16));
-                  jssdkApi().then((data)=>{
-                      let appId = data.appId;
-                      let noncestr = this.randomString(16);
-                      let timestamp = data.timestamp;
-                      let signature = hex_sha1(data.ticket);
-                      this.$wechat.config({
-                        debug: true, //调试阶段建议开启
-                        appId: appId,//APPID
-                        timestamp: timestamp,//时间戳timestamp
-                        nonceStr: noncestr,//随机数nonceStr
-                        signature: signature,//签名signature
-                        jsApiList: [
-                          //所有要调用的 API 都要加到这个列表中
-                          "scanQRCode",//二维码,
-                          "closeWindow",// 关闭窗口
-                        ]
-                      });
-                      this.$wechat.ready(()=>{
-                          console.log('微信配置成功!');
-                          this.$wechat.scanQRCode({
-                            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-                            success: function (res) {
-                              var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                            }
-                          });
-                      });
-                      // console.log('appId',appId);
-                      // console.log('noncestr',noncestr);
-                      // console.log('timestamp',timestamp);
-                      // console.log('ticket',ticket);
-                  });
+                this.settingWx([this,this.delCode]);
             }
         },
         created () {

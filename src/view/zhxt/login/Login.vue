@@ -34,7 +34,6 @@
 <script type="es6">
   import {codeApi} from '../../../api/adminApi'
   import {mapActions} from 'vuex'
-  import moment from 'moment'
   import md5 from 'md5'
   export default {
     data: function () {
