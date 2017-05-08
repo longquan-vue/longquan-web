@@ -69,8 +69,16 @@
                 </li>
             </ul>
         </div>
-        <a href="javascript:;" v-if="!isEnd(data.end)" class="baoming" @click="sign()" style="background-image:url('../../../../static/wx/redBtn.png')">立即报名</a>
-        <a href="javascript:;" v-if="isEnd(data.end)" class="baoming" style="background-image:url('../../../../static/wx/redBtn.png')">已结束</a>
+        <div class="isSing" v-if="data.isSign && !isEnd(data.end)" style="text-align:center;font-size:0;padding:0.3rem 0">
+            <img src="../../../../static/wx/cancleSign.png" style="width:3.68rem;margin-right:1px;" @click="cancelEntry">
+          <img src="../../../../static/wx/saoma.png" style="width:3.68rem">
+        </div>
+        <div v-if="!data.isSign && !isEnd(data.end)">
+          <a href="javascript:;" v-if="!isEnd(data.end)" class="baoming" @click="sign()" style="background-image:url('../../../../static/wx/redBtn.png')">立即报名</a>
+        </div>
+        <div v-if="isEnd(data.end)">
+          <a href="javascript:;" v-if="isEnd(data.end)" class="baoming" style="background-image:url('../../../../static/wx/redBtn.png')">已结束</a>
+        </div>
 
         <myImgDialog @on-result-change="onResultChange" :img="img" :bgImg="bgImg" :def="def" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
 
@@ -84,7 +92,7 @@
     import appHead from '../../../components/public/apphead/Apphead.vue'
     import swipe from '../../../components/public/swip/swipe.vue'
     import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
-    import {entryActivityApi,} from '../../../api/activityApi'
+    import {entryActivityApi,cancelEntryActivityApi} from '../../../api/activityApi'
     export default{
         data(){
             return{
@@ -141,6 +149,7 @@
                         const id=this.$store.state.route.params.id;
                         await entryActivityApi(id).then((data) => {
                             this.isShow(2);
+                            this.getActivityDetail();
                         }).catch((data) => {
                             this.isShow(1);
                         });
@@ -148,7 +157,23 @@
                 }else {
                     this.isShow(3);
                 }
-
+            },
+            cancelEntry(){
+              const id=this.$store.state.route.params.id;
+              cancelEntryActivityApi(id).then((data) => {
+                this.def=true;
+                this.bgImg='../../../../static/wx/pop-suc.png';
+                this.content='取消成功！';
+                this.btns={btn:'确定'};
+                this.isshow=true;
+                this.getActivityDetail();
+              }).catch((data) => {
+                this.def=true;
+                this.bgImg='../../../../static/wx/pop-error.png';
+                this.content=data.msg;
+                this.btns={btn:'确定'};
+                this.isshow=true;
+              });
             }
         },
         created () {
