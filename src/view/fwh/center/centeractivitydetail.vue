@@ -139,23 +139,29 @@
             onResultChange(val){
                 this.isshow=val;//外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
             },
+            toSign(id){
+              entryActivityApi(id).then((data) => {
+                this.isShow(2);
+                this.getActivityDetail();
+              }).catch((data) => {
+                this.isShow(1);
+              });
+            },
             async sign(){
-                // alert(1);
                 const audit = this.$store.state.login.audit;
-                if (audit==2){   //判断是否为认证用户
-                    if (this.$store.state.data.current==this.$store.state.data.total){  //如果已经满员
-                        this.isShow(4);
-                    }else {
-                        const id=this.$store.state.route.params.id;
-                        await entryActivityApi(id).then((data) => {
-                            this.isShow(2);
-                            this.getActivityDetail();
-                        }).catch((data) => {
-                            this.isShow(1);
-                        });
-                    }
+                const id=this.$store.state.route.params.id;
+                if (this.data.current==this.data.total){  //如果已经满员
+                    this.isShow(4);
                 }else {
-                    this.isShow(3);
+                    if (this.data.entry){
+                      if (audit == 2){
+                        await this.toSign(id)
+                      }else {
+                        this.isShow(3);
+                      }
+                    }else {
+                      await this.toSign(id)
+                    }
                 }
             },
             cancelEntry(){
