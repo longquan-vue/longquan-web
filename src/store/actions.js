@@ -7,14 +7,12 @@ import {findRecruitApi, findRecruitDetailApi, entryRecruitApi, delRecruitApi, fi
 import {fileApi, delFileApi, delPicApi} from "../api/fileApi";
 import {createPollApi, pollListApi, updatePollApi, getPollApi, delPollApi} from "../api/pollApi";
 import {findHealthApi, findHealthDetailApi, findHealthEnterApi, exportHealthEntryApi, createHealthApi, updateHealthApi, pauseHealthApi, delHealthApi} from "../api/healthApi";
-import {getSysApi, setSysApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi, jssdkApi} from "../api/systemApi";
+import {getSysApi, setSysApi, findLinkApi, createLinkApi, updateLinkApi, delLinkApi} from "../api/systemApi";
 import {findArticleApi, createArticleApi, updateArticleApi, getArticleApi, delArticleApi, pauseArticleApi} from "../api/articleApi";
 import {findEchoApi, createEchoApi, updateEchoApi, delEchoApi, getEchoApi, pauseEchoApi} from "../api/echoApi";
 import {findDepApi, findDepListApi, createDepApi, updateDepApi, delDepApi, getDepApi, auditDepApi} from "../api/departmentApi";
 import {createLeaderApi, updateLeaderApi, delLeaderApi, findLeaderApi, getLeaderApi} from "../api/leaderApi";
 import {searchApi} from '../api/searchApi'
-import md5 from 'md5'
-import sha1 from 'sha1'
 // type
 import {SET_LIST_VAL, DEL_DATA, SET_LOGIN, SET_DATA, GET_DATA_LIST, GET_MINE, PAGE, CHANE_SELECT, DEL_LIST, SETTING, CHANGE_LIST} from "./mutation-types";
 // defData
@@ -26,46 +24,6 @@ const clear = ({commit}, key = 'user') => {
   commit(SET_DATA, defData[key]);
   commit(GET_DATA_LIST, null);
   commit(PAGE)
-};
-//配置微信
-const settingWx = ({commit, state},[obj,method])=>{
-  jssdkApi(method,obj).then((data)=>{
-    let appId = data.appId;
-    let noncestr = md5(new Date().getTime()).substr(16);
-    let timestamp = data.timestamp;
-    let signature = sha1(data.ticket);
-    obj.$wechat.config({
-      debug: true, //调试阶段建议开启
-      appId: appId,//APPID
-      timestamp: timestamp,//时间戳timestamp
-      nonceStr: noncestr,//随机数nonceStr
-      signature: signature,//签名signature
-      jsApiList: [
-        //所有要调用的 API 都要加到这个列表中
-        "scanQRCode",//二维码,
-        "closeWindow",// 关闭窗口
-      ]
-    });
-    obj.$wechat.ready(()=>{
-      alert('微信配置成功!');
-      obj.$wechat.scanQRCode({
-        needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-        scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-        success: function (res) {
-          alert(JSON.stringify(res));
-          var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-          method && method();
-        },fail:(res)=>{
-          alert(JSON.stringify(res));
-        }
-      });
-    });
-    obj.$wechat.error(function(res){
-      alert(JSON.stringify(res));
-      // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-    });
-
-  });
 };
 //上传文件
 const upload = ({commit, state}, {file}) => fileApi(file);
@@ -515,5 +473,4 @@ export default {
   updateDep,//修改工会
   auditDep,//审核工会
   topArticle,//设置头条
-  settingWx
 }
