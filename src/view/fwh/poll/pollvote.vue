@@ -18,7 +18,7 @@
         </div>
         <div class="imgList">
             <p class="imgListHead" flex justify="between">
-                <span>你当前已投{{data.time - num}}/{{data.time}}票,投完{{data.time}}票即可获得积分奖励</span>
+                <span>你当前已投{{data.time-num}}/{{data.time}}票,投完{{data.time}}票即可获得积分奖励</span>
                 <a><em>按号数</em> ↑↓</a>
             </p>
             <ul flex justify="between" wrap="wrap">

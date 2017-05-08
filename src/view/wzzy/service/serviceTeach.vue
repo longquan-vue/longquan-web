@@ -2,7 +2,7 @@
 
 </style>
 <template>
-  <div class="wzzyLaborUnion" style="padding-top:20px;">
+  <div class="wzzyLaborUnion">
     <div class="pagewrap">
       <div class="wzzy-content">
         <div class="grid-left">

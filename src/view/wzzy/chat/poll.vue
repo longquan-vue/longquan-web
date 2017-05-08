@@ -36,7 +36,8 @@
         <ul class="wzzy-toupiao">
             <li v-for="(item,index) in newsList" :key="index">
                 <h2>
-                    <a @click="go(['chatPollDetail',item.id])"> {{item.title}} <i>已投票</i></a>
+                    <a @click="go(['chatPollDetail',item.id])"> {{item.title}} </a>
+                  <!--<a @click="go(['chatPollDetail',item.id])"> {{item.title}} <i>已投票</i></a>-->
                     <span class="ising" v-if="!isEnd(item.end)">进行中</span>
                     <span class="isover" v-if="isEnd(item.end)">已结束</span>
                 </h2>
@@ -81,6 +82,7 @@
                 param.keyWord = [1];
                 pollListApi(param).then((data) => {
                     this.newsList = data.list;
+                    console.log(this.newsList);
                     delete data.list;
                     this.changePage(data);
                 });

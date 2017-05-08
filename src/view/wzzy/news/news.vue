@@ -2,7 +2,7 @@
 
 </style>
 <template>
-    <div class="wzzyLaborUnion page" style="padding-top:20px;">
+    <div class="wzzyLaborUnion page">
         <div class="the-place">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>

@@ -73,7 +73,7 @@
     }
 </style>
 <template>
-    <div class="wzzyLaborUnion" style="padding-top:20px;">
+    <div class="wzzyLaborUnion">
         <div class="the-place" style="">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -88,9 +88,10 @@
                     <h2>{{data.title}}</h2>
                     <p>
                         <span><i>投票时间：</i>{{date3Filter(data.start)}} 至 {{date3Filter(data.end)}}</span>
-                        <span><i>积分奖励：</i> <em>50</em></span>
+                        <span><i>积分奖励：</i> <em>{{data.score}}</em></span>
                     </p>
-                    <img src="/static/wzzy/ising.png">
+                    <img src="/static/wzzy/ising.png" v-if="!isEnd(data.end)">
+                    <img src="/static/wzzy/isover.png" v-if="isEnd(data.end)">
                 </div>
                 <div class="wzzy-poll-detail-intro" v-html="data.description"></div>
                 <div class="wzzy-poll-detail-cont">
@@ -229,6 +230,7 @@
         created () {
           this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>{
               this.num = data;
+              console.log('this.num',this.num);
           }));
         },
         destroyed(){

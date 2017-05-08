@@ -92,7 +92,7 @@
         rules: {
           name: [
             {required: true, message: '请输入单位名称', trigger: 'change'},
-            {min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'}
+            {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'change'}
           ],
           address: [
             {required: true, message: '请输入单位地址', trigger: 'change'},
@@ -105,13 +105,13 @@
             {required: true, message: '请选择所属行业', trigger: 'change'}
           ],
           workers: [
-            {required: true, message: '请输入职工总数', trigger: 'change'},
-            {min: 1, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'},
+            {required: true, message: '请输入职工总数'},
+            // {min: 1, max: 5, message: '长度在 1 到 5 个字符'},
             {type: 'number', message: '职工总数必须为数字值'}
           ],
           feWorkers: [
-            {required: true, message: '请输入女职工总数', trigger: 'change'},
-            {min: 1, max: 5, message: '长度在 2 到 5 个字符', trigger: 'change'},
+            {required: true, message: '请输入女职工总数'},
+            // {min: 1, max: 5, message: '长度在 1 到 5 个字符'},
             {type: 'number', message: '女职工总数必须为数字值'}
           ],
           applyName: [
