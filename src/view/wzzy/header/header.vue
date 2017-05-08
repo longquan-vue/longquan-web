@@ -24,7 +24,7 @@
     <div class="header-nav">
       <div class="pagewrap">
         <div class="header-title">
-          <img class="header-logo" src="../../../../static/wzzy/www.png">
+          <img class="header-logo" src="/static/wzzy/www.png">
           <div class="header-search">
               <el-select v-model="select" placeholder="请选择...">
                 <el-option label="站内搜索" :value="1"></el-option>

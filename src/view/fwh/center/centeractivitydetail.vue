@@ -74,10 +74,10 @@
           <img src="../../../../static/wx/saoma.png" style="width:3.68rem" @click="testWx">
         </div>
         <div v-if="!data.isSign && !isEnd(data.end)">
-          <a href="javascript:;" v-if="!isEnd(data.end)" class="baoming" @click="sign()" style="background-image:url('../../../../static/wx/redBtn.png')">立即报名</a>
+          <a href="javascript:;" v-if="!isEnd(data.end)" class="baoming" @click="sign()" style="background-image:url('/static/wx/redBtn.png')">立即报名</a>
         </div>
         <div v-if="isEnd(data.end)">
-          <a href="javascript:;" v-if="isEnd(data.end)" class="baoming" style="background-image:url('../../../../static/wx/redBtn.png')">已结束</a>
+          <a href="javascript:;" v-if="isEnd(data.end)" class="baoming" style="background-image:url('/static/wx/redBtn.png')">已结束</a>
         </div>
 
         <myImgDialog @on-result-change="onResultChange" :img="img" :bgImg="bgImg" :def="def" :title="title" :content="content" :btns="btns" :isShow="isshow"></myImgDialog>
@@ -102,7 +102,7 @@
                 title:'提示',   //控制弹窗标题
                 content:'兑换成功',  //控制弹窗内容
                 btns: {btn:'确定'},
-                bgImg:'../../../../static/wx/pop-suc.png',
+                bgImg:'/static/wx/pop-suc.png',
                 def:false
             }
         },
@@ -116,22 +116,22 @@
             isShow(val,id,ticket,used,welfareId){
                 if (val==1){   //已经报过名
                     this.def=true;
-                    this.bgImg='../../../../static/wx/pop-error.png';
+                    this.bgImg='/static/wx/pop-error.png';
                     this.content='您已经报过名啦！';
                     this.btns={btn:'确定'};
                 }else if (val==2){   //报名成功
                     this.def=false;
-                    this.bgImg='../../../../static/wx/pop-suc.png';
+                    this.bgImg='/static/wx/pop-suc.png';
                     this.content='报名成功';
                     this.btns={btn:'',btn1:'立即查看',btn2:'确定',action:()=>{this.goto(['centeractivity'])}};
                 }else if (val==3){   //
                     this.def=true;
-                    this.bgImg='../../../../static/wx/pop-error.png';
+                    this.bgImg='/static/wx/pop-error.png';
                     this.content='您不是职工认证用户,不能参加此活动！';
                     this.btns={btn:'',btn1:'去认证',btn2:'确定',action:()=>{alert('去认证')}};
                 }else if (val==4){
                     this.def=true;
-                    this.bgImg='../../../../static/wx/pop-error.png';
+                    this.bgImg='/static/wx/pop-error.png';
                     this.content='该活动已经满员啦！';
                     this.btns={btn:'确定'};
                 }
@@ -163,14 +163,14 @@
               const id=this.$store.state.route.params.id;
               cancelEntryActivityApi(id).then((data) => {
                 this.def=true;
-                this.bgImg='../../../../static/wx/pop-suc.png';
+                this.bgImg='/static/wx/pop-suc.png';
                 this.content='取消成功！';
                 this.btns={btn:'确定'};
                 this.isshow=true;
                 this.getActivityDetail();
               }).catch((data) => {
                 this.def=true;
-                this.bgImg='../../../../static/wx/pop-error.png';
+                this.bgImg='/static/wx/pop-error.png';
                 this.content=data.msg;
                 this.btns={btn:'确定'};
                 this.isshow=true;

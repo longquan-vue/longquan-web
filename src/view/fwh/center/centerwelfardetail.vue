@@ -6,7 +6,7 @@
     <div class="centerwelfaardetail">
         <appHead title="福利详情"></appHead>
         <div class="detailHead">
-            <img src="../../../../static/wx/center/reapack.png" v-if="data.type==2">
+            <img src="/static/wx/center/reapack.png" v-if="data.type==2">
             <div v-if="data.type==3">
                 <h2>{{data.ticket}}</h2>
                 <p>兑换码</p>
@@ -42,7 +42,7 @@
         </div>
         <div class="sao">
             <p>提示: 请到现场点击“扫码兑换”按钮进行扫码兑换</p>
-            <a @click="code()"><img src="../../../../static/wx/center/saocode.png"></a>
+            <a @click="code()"><img src="/static/wx/center/saocode.png"></a>
         </div>
     </div>
 </template>

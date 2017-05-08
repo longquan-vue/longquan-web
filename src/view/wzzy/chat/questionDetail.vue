@@ -152,7 +152,7 @@
         <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
             <span slot="title" class="wzzy-dialog-header" >
                 规则详情
-                <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
+                <img src="/static/wzzy/wzzy-close.png" @click="dialogVisible=false">
             </span>
             <ul class="wzzy-list-li">
                 <li>

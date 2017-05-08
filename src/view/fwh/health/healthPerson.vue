@@ -15,7 +15,7 @@
                     <div class="siginList">
                         <grid :rows="7">
                             <grid-item v-for="i in 9" :key="i">
-                                <span class="grid-center"><a><img src="../../../../static/wx/img/1.jpg"></a></span>
+                                <span class="grid-center"><a><img src="/static/wx/img/1.jpg"></a></span>
                             </grid-item>
                         </grid>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="siginList" flex items="center" >
                         <grid :rows="7">
                             <grid-item v-for="i in 20" :key="i">
-                                <span class="grid-center"><a><img src="../../../../static/wx/img/1.jpg"></a></span>
+                                <span class="grid-center"><a><img src="/static/wx/img/1.jpg"></a></span>
                             </grid-item>
                         </grid>
                     </div>

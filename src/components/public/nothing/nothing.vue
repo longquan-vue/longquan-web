@@ -12,7 +12,7 @@
 </style>
 <template>
     <div class="nothing">
-        <img src="../../../../static/wx/default.png">
+        <img src="/static/wx/default.png">
         <h2>{{title}}</h2>
         <p>{{content}}</p>
     </div>

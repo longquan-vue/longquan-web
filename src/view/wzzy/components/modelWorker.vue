@@ -2,7 +2,7 @@
     <div class="wzzy-tab">
         <div class="wzzy-tab-head">
             <div class="tab-head-title">
-                <img class="tab-head-title-img" src="../../../../static/wzzy/wzzy-tab.png">
+                <img class="tab-head-title-img" src="/static/wzzy/wzzy-tab.png">
                 <span><i class="iconfont icon-xianjinrenwu"></i> 先进人物</span>
             </div>
             <div class="tab-head-btn">

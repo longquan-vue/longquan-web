@@ -10,7 +10,7 @@
 <template>
   <div class="fwh-build" style="background-color: #F0F0F0;height: 100%;overflow: scroll;">
     <div class="guideBulidForm">
-      <img src="../../../../static/wx/apply.png" style="width:100%;margin-bottom:0.5rem;" @click="showApply = true">
+      <img src="/static/wx/apply.png" style="width:100%;margin-bottom:0.5rem;" @click="showApply = true">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" label-position="top">
         <el-form-item label="单位名称：" prop="name">
           <el-input v-model="ruleForm.name" placeholder="请输入单位名称..."></el-input>

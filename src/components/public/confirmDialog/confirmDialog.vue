@@ -9,7 +9,7 @@
                 border-radius: 10px;overflow: hidden;}
         }
         .dialog-title{ height: 1.6rem;line-height: 1.6rem;
-            position: relative;background: url('../../../../static/wx/pophead.png') no-repeat center;
+            position: relative;background: url('/static/wx/pophead.png') no-repeat center;
             background-size: cover;font-size: 0.48rem;color: #ffffff;
             span{ position: absolute;right: 10px;}
         }

@@ -112,13 +112,13 @@
             isShow(val){
                 if (val==1){
                     this.def=false;
-                    this.img = '../../../../static/wx/succ.png';
+                    this.img = '/static/wx/succ.png';
                     this.content='提交成功';
                     this.btns={btn:'确定'};
                     this.isshow=true;
                 }else {
                     this.def=true;
-                    this.img = '../../../../static/wx/default.png';
+                    this.img = '/static/wx/default.png';
                     this.content='您已经报过名啦';
                     this.btns={btn:'确定'};
                     this.isshow=true;

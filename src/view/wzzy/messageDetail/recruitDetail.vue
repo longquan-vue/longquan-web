@@ -160,7 +160,7 @@
     <el-dialog v-model="dialogVisible" size="tiny" class="wzzy-dialog" :show-close="false">
         <span slot="title" class="wzzy-dialog-header">
             招聘报名表
-            <img src="../../../../static/wzzy/wzzy-close.png" @click="dialogVisible=false">
+            <img src="/static/wzzy/wzzy-close.png" @click="dialogVisible=false">
         </span>
       <el-form :model="login" :rules="rules" ref="ruleForm" label-width="100px">
         <el-form-item label="姓名：" prop="name">

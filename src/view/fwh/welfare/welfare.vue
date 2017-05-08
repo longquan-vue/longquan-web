@@ -17,14 +17,14 @@
         <div class="welfareHead">
             <p>不定期推出各种积分兑换福利，你备好积分了么？</p>
             <a class="" href="javascript:;" @click="goto(['signin'])">
-                <img src="../../../../static/wx/button.png">
+                <img src="/static/wx/button.png">
             </a>
         </div>
         <div class="welfareCont">
            <a class="javascript:;" flex>
                <span>我的积分 : </span>
                <i box="1">{{login.score}}</i>
-               <em flex items="center" justify="center" @click="goto(['welfareDetail',{id:login.id}])">积分明细<img src="../../../../static/wx/go.png"></em>
+               <em flex items="center" justify="center" @click="goto(['welfareDetail',{id:login.id}])">积分明细<img src="/static/wx/go.png"></em>
            </a>
            <ul class="list">
                <li v-for="(item, index) in list">
@@ -63,7 +63,7 @@
                 <div class="popupBox">
                     <div class="popupHead">
                         规则详情
-                        <img src="../../../../static/wx/del.png" @click="popupVisible=false">
+                        <img src="/static/wx/del.png" @click="popupVisible=false">
                     </div>
                     <div class="popupCont">
                         <ul>
@@ -112,10 +112,10 @@
         <!--<div v-transfer-dom>-->
             <!--<x-dialog v-model="popupOpen" class="dialog-demo" :hideOnBlur="true">-->
                 <!--<div class="popupOpenBox">-->
-                    <!--<img class="img" src="../../../../static/wx/getSuccess.png">-->
+                    <!--<img class="img" src="/static/wx/getSuccess.png">-->
                     <!--<div class="mess">兑换成功</div>-->
-                    <!--<img class="del" src="../../../../static/wx/del.png" @click="popupOpen=false">-->
-                    <!--&lt;!&ndash;<img class="img" src="../../../static/wx/delete.png" @click="popupOpen=false">&ndash;&gt;-->
+                    <!--<img class="del" src="/static/wx/del.png" @click="popupOpen=false">-->
+                    <!--&lt;!&ndash;<img class="img" src="/static/wx/delete.png" @click="popupOpen=false">&ndash;&gt;-->
                 <!--</div>-->
             <!--</x-dialog>-->
         <!--</div>-->
@@ -144,7 +144,7 @@
                 title:'提示',   //控制弹窗标题
                 content:'兑换成功',  //控制弹窗内容
                 btns: {btn:'确定'},
-                bgImg:'../../../../static/wx/pop-suc.png',
+                bgImg:'/static/wx/pop-suc.png',
                 def:false
             }
         },
@@ -161,12 +161,12 @@
             isShow(val,id,ticket,used,welfareId){
                 if (val==1){
                     this.def=true;
-                    this.bgImg='../../../../static/wx/pop-error.png';
+                    this.bgImg='/static/wx/pop-error.png';
                     this.content='兑换失败!积分不足';
                     this.btns={btn:'签到赚积分',action:()=>{this.goto(['signin'])}};
                 }else if (val==2){
                     this.def=false;
-                    this.bgImg='../../../../static/wx/pop-suc.png';
+                    this.bgImg='/static/wx/pop-suc.png';
                     this.content='兑换成功';
                     this.btns={btn:'查看积分福利',action:()=>{this.goto(['centerwelfare'])}};
                 }
@@ -205,7 +205,7 @@
                         //     duration:1000
                         // });
                         this.def=true;
-                        this.bgImg='../../../../static/wx/pop-error.png';
+                        this.bgImg='/static/wx/pop-error.png';
                         this.content=data.msg;
                         this.btns={btn:'确定'};
                         this.isshow=true;
