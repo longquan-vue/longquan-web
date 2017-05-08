@@ -7,7 +7,7 @@
         <scroller ref="scroller" lock-x scrollbar-y use-pullup v-model="scroller" @on-pullup-loading="loadMore" height="-50" v-if="list.length>0">
             <div class="scrollerBox">
                 <ul class="centerMessList">
-                    <li v-for="(item,index) in list" flex @click="go(['healthDetail',item.id])">
+                    <li v-for="(item,index) in list" flex @click.stop="go(['healthDetail',item.id])">
                         <div>
                             <img :src="item.picUrl">
                         </div>
@@ -17,13 +17,13 @@
                                     {{item.name}}
                                     <i v-if="isEnd(item.end)">已过期</i>
                                     <i v-if="item.status == 1 && !isEnd(item.end)">已签到</i>
-                                    <a v-if="item.status == 0 && !isEnd(item.end)" @click="openCode()"><img src="../../../../static/wx/center/sao.png">扫码签到</a>
+                                    <a v-if="item.status == 0 && !isEnd(item.end)" @click.stop="openCode()"><img src="../../../../static/wx/center/sao.png">扫码签到</a>
                                 </h2>
                                 <p>预约时间 : {{date3Filter(item.start)}} - {{HHmmFilter(item.end)}}</p>
                             </div>
                         </div>
                         <div box="1">
-                            <a @click="del(index)"><img src="../../../../static/wx/recover.png"></a>
+                            <a @click.stop="del(index)"><img src="../../../../static/wx/recover.png"></a>
                         </div>
                     </li>
                 </ul>

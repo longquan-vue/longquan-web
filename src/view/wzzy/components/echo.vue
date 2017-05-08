@@ -14,7 +14,7 @@
           <div class="echo-title" @click="toUrl({path:'/view/wzzy/chatEcho/'+item.id})">
             问：{{item.title}}
           </div>
-          <div class="echo-cont" v-html="limitFilter(strFilter(decode(item.answer)),100)"></div>
+          <div class="echo-cont" v-html="'答:'+limitFilter(strFilter(decode(item.answer)),100)"></div>
         </li>
       </ul>
       <question></question>

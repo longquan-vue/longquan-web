@@ -26,4 +26,5 @@ export const delFwhMenuApi = () => request({method: 'delete', url: `/wechat/fwMe
 export const syncfwhApi = () => request({url: `/wechat/syncfwh`})
 // 同步企业号
 export const syncqyhApi = () => request({url: `/wechat/syncqyh`})
-
+// 获取js 签名
+export const jssdkApi = () => request({url: `${BASE_PATH}/jsapi`})

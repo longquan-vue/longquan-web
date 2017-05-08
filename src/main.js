@@ -14,6 +14,8 @@ import {AlertPlugin} from 'vux'
 import VueQuillEditor from 'vue-quill-editor'
 import Quill from 'quill'
 import {ImageResize} from './components/public/QuillModules/ImageResize'
+import { WechatPlugin } from 'vux'
+
 Quill.register('modules/imageResize', ImageResize)
 
 sync(store, router)
@@ -25,6 +27,7 @@ Vue.use(VueQuillEditor)
 Vue.use(Vuelidate)
 Vue.use(Socket)
 Vue.use(VueCookie);
+Vue.use(WechatPlugin)
 
 
 new Vue({
