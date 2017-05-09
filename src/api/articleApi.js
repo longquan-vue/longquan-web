@@ -25,6 +25,7 @@ export const findArticleApi = (data = {}, del = 0, type = -1) => {
 }
 //获取文章详情
 export const getArticleApi = (id) => request({
+  method: 'get',
   url: `${BASE_PATH}/get/${id}`
 });
 //删除文章
