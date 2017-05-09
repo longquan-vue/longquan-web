@@ -142,7 +142,7 @@ export default {
           ]
         },
         {title: '服务号设置', path: `${ROOT}/zhxt/setting/fwh`},
-        {title: '联系我们', path: `${ROOT}/zhxt/setting/relation`},
+        {title: '网站设置', path: `${ROOT}/zhxt/setting/relation`},
       ]
     },
   ],

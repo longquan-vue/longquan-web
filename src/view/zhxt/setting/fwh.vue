@@ -27,7 +27,7 @@
         </el-form-item>
         <el-form-item label="图片：" prop="picurl" :rules="[{required:true,message:'图片不能为空'}]">
           <Avatar :success="()=>setSub({picurl: url})" width="360" height="200" :url="sub.picurl"/>
-          <div class="av_tip">提示：支持JPG、PNG格式，360*200px</div>
+          <span class="av_tip">提示：支持JPG、PNG格式，360*200px</span>
         </el-form-item>
         <el-form-item label="描述：" prop="description" :rules="[{required:true,message:'描述不能为空'}]">
           <el-input placeholder="请输入..." type="textarea" :rows="5" :value="sub.description" auto-complete="off" @input="(v)=>setSub({description:v})" style="width:90%;"/>

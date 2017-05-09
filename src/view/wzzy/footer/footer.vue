@@ -1,9 +1,9 @@
 <template>
   <div class="wzzy-foot">
     <div class="pagewrap">
-      <p style="margin-bottom:20px;"><a :href="'mailto:'+relation[0]+'?subject=联系我们'">联系我们</a><a @click="addFavorite">加入收藏</a></p>
+      <p style="margin-bottom:20px;"><a :href="'mailto:'+relation.email+'?subject='+setting.name">联系我们</a><a @click="addFavorite">加入收藏</a></p>
       <p><span>Copyright @ 2003-2016</span><span>成都市龙泉驿区总工会 版权所有.</span></p>
-      <p><span v-for="(val,i) in relation" v-if="i>0" :key="i">{{val}}</span></p>
+      <p><span v-for="(val,i) in relation.other" :key="i">{{val}}</span></p>
       <p><span>备案序号：<img src="/static/wzzy/beian.png"> 蜀ICP备07006651号</span><span>技术支持：成都爱创业科技有限公司</span></p>
       <p><a><img src="/static/wzzy/work.png"></a></p>
     </div>
