@@ -49,6 +49,7 @@
                         -o-transition: all 0.3s;
                         transition: all 0.3s;
                         &:hover{ color: #ffffff;background-color: #BC0000;}
+                        &.disable{ background-color: #eee;color: #ffffff;border: none;}
                     }
                 }
             }
@@ -97,7 +98,7 @@
                 <div class="wzzy-poll-detail-cont">
                     <p>
                         你当前已投 <span>{{data.time - num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
-                        <a @click="sort">按号数 <img src="/static/wzzy/updown.png"></a>
+                        <!--<a @click="sort">按号数 <img src="/static/wzzy/updown.png"></a>-->
                     </p>
                     <el-row :gutter="13">
                         <el-col :span="6" v-for="(item,index) in data.questions" :key="index">
@@ -113,7 +114,7 @@
                                 <div class="poll-card-cont">
                                     <h2>{{item.title}}</h2>
                                     <p>{{item.files[0] && item.files[0].description}}</p>
-                                    <a @click="doVote(item)">投票</a>
+                                    <a @click="doVote(item)" :class="{disable:vote[item.id]}">投票</a>
                                 </div>
                             </div>
                         </el-col>
@@ -193,7 +194,8 @@
                 dialogVisible: false,
                 dialogImg:{item:{files:[]},show:false},
                 imgIndex:1,
-                num:0
+                num:0,
+                vote:{}
             }
         },
         components:{
@@ -213,12 +215,18 @@
                 this.imgIndex = index+1;
             },
             doVote({id,pollId}){  //投票
+                if(this.vote[id]){
+                  return;
+                }
                 if (this.login.id){
+                  this.$set(this.vote,id,true);
                   doVoteApi({pollId,questionId:id}).then(()=>{
+                    this.vote[id] = false;
                     alert('恭喜您！投票成功');
                     this.getPoll();
                     this.num ++;
                   }).catch((data)=>{
+                    this.vote[id] = false;
                     alert(data.msg,'error');
                   });
                 }else {
@@ -231,10 +239,7 @@
             }
         },
         created () {
-          this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>{
-              this.num = data;
-              console.log('this.num',this.num);
-          }));
+          this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>this.num = data != -1 ?data:this.data.time));
         },
         destroyed(){
 
