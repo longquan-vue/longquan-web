@@ -97,7 +97,7 @@
                 <div class="wzzy-poll-detail-cont">
                     <p>
                         你当前已投 <span>{{data.time - num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
-                        <a>按号数 <img src="/static/wzzy/updown.png"></a>
+                        <a @click="sort">按号数 <img src="/static/wzzy/updown.png"></a>
                     </p>
                     <el-row :gutter="13">
                         <el-col :span="6" v-for="(item,index) in data.questions" :key="index">
@@ -226,6 +226,9 @@
                 }
 
             },
+            sort(){
+
+            }
         },
         created () {
           this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>{
