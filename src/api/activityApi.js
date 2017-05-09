@@ -46,3 +46,8 @@ export const exportEntryApi = (id, data) => request({
   url: `${BASE_PATH}/exportEntry/${id}`,
   data
 });
+
+//签到活动
+export const signActivityApi = (id) => request({
+  url: `${BASE_PATH}/sign/${id}`,
+});
