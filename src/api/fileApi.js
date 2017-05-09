@@ -22,4 +22,8 @@ export const delPicApi = (url) => request({
   method: 'delete',
   url: `${BASE_PATH}/deleteUrl/${encodeURIComponent(url)}`,
 });
+export const downloadApi = (id) => request({
+  method: 'get',
+  url: `${BASE_PATH}/download/${id}`,
+});
 

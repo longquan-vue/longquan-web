@@ -114,7 +114,7 @@
           <div class="messageDetailCont-mess ql-editor"  v-html="decode(data.content)"></div>
           <div class="messageDetailCont-down" v-for="(file,index) in data.files" :key="index">
             <span>附件：{{file.name}}.{{file.suffix}}</span>
-            <a :href="file.url" target="_blank">下载 ↓</a>
+            <a @click="download(file.id)" target="_blank">下载 ↓</a>
           </div>
         </div>
         <div class="messageDetailContPage">
@@ -129,6 +129,7 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filters from '../../../filters'
+  import {downloadApi} from '../../../api/fileApi'
   export default{
     computed: {
       ...mapGetters(['data', 'articleType']),
@@ -143,6 +144,9 @@
     methods: {
       ...mapActions(['go', 'setData', 'getArticle', 'toUrl']),
       ...filters,
+      download(id){
+        downloadApi(id)
+      }
     },
     beforeRouteUpdate (to, from, next) {
       next();
