@@ -22,8 +22,12 @@ export const delPicApi = (url) => request({
   method: 'delete',
   url: `${BASE_PATH}/deleteUrl/${encodeURIComponent(url)}`,
 });
-export const downloadApi = (id) => request({
-  method: 'get',
-  url: `${BASE_PATH}/download/${id}`,
-});
+export const downloadApi = (id) => {
+  const appType = `appType=${window.location.pathname.split('/')[2]}`;
+  let url = `/rest${BASE_PATH}/download/${id}?${appType}`;
+  if (process.env.NODE_ENV == 'development') {
+    url = `http://java.ichuangye.cn${url}&debug=weizidong`
+  }
+  return url
+}
 
