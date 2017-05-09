@@ -7,23 +7,21 @@
 </template>
 
 <script type="es6">
-  import { mapGetters } from 'vuex'
-  import { mapActions } from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import filters from '../../../filters'
-  import articleDetail from '../../components/messDetail.vue'
+  import articleDetail from './messDetail.vue'
   export default{
     data(){
-      return{
-
-      }
+      return {}
     },
-    components:{
+    components: {
       articleDetail
     },
-    computed: {...mapGetters([ 'data','articleType']),
+    computed: {
+      ...mapGetters(['data', 'articleType']),
     },
-    methods:{
-      ...mapActions(['go','clear','getArticle']),
+    methods: {
+      ...mapActions(['go', 'clear', 'getArticle']),
       ...filters,
     },
     created () {

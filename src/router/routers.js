@@ -164,7 +164,7 @@ export default [
       {path: `${ROOT}/qyh/healthManage`, component: require('../view/qyh/healthManage/healthManage.vue'), name: 'healthManage'},
       {path: `${ROOT}/qyh/healthManageDetail/:id`, component: require('../view/qyh/healthManage/healthManageDetail.vue'), name: 'healthManageDetail'}, //健身中心项目详情
       {path: `${ROOT}/qyh/healthManageEdit/:id`, component: require('../view/qyh/healthManage/healthManageEdit.vue'), name: 'healthManageEdit'},
-      {path: `${ROOT}/qyh/article/:id`, component: require('../view/fwh/article/article.vue'), name: 'article-qyh'}, //文章详情
+      {path: `${ROOT}/qyh/article/:id`, component: require('../view/common/article/article.vue'), name: 'article-qyh'}, //文章详情
     ]
   },
   // 服务号
@@ -198,7 +198,7 @@ export default [
       {path: `${ROOT}/fwh/build`, component: require('../view/fwh/build/build.vue'), name: 'build-fwh'}, //工会组建
       {path: `${ROOT}/fwh/echo`, component: require('../view/fwh/echo/echo.vue'), name: 'echo-fwh'}, //回音壁
       {path: `${ROOT}/fwh/echo/:id`, component: require('../view/fwh/echo/echoDetail.vue'), name: 'echoDetail-fwh'}, //回音壁详情
-      {path: `${ROOT}/fwh/article/:id`, component: require('../view/fwh/article/article.vue'), name: 'article-fwh'}, //文章详情
+      {path: `${ROOT}/fwh/article/:id`, component: require('../view/common/article/article.vue'), name: 'article-fwh'}, //文章详情
     ]
   },
 ]
