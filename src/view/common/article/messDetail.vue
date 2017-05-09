@@ -28,13 +28,13 @@
           <div class="messDetail-cont-mess" v-html="decode(data.content)"></div>
       </div>
       <div class="messDetail-cont-down">
-        <a :href="downloadApi(file.id)" v-for="(file,index) in data.files">文件下载 <img src="../../../static/wx/down.png"></a>
+        <a :href="downloadApi(file.id)" v-for="(file,index) in data.files">文件下载 <img src="../../../../static/wx/down.png"></a>
       </div>
   </div>
 </template>
 <script type="es6">
-  import filters from '../../filters'
-  import {downloadApi} from '../../api/fileApi'
+  import filters from '../../../filters'
+  import {downloadApi} from '../../../api/fileApi'
   export default{
     data(){
       return {
