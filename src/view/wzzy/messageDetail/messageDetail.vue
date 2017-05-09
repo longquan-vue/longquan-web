@@ -38,7 +38,7 @@
 
   }
   .messageDetailCont-mess {
-
+    font-size: 16px;
   p {
     margin-bottom: 20px;
   }

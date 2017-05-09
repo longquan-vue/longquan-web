@@ -53,7 +53,7 @@
         <el-form-item label="联系电话：" prop="applyPhone">
           <el-input v-model="ruleForm.applyPhone" placeholder="请输入申请人联系电话..."></el-input>
         </el-form-item>
-        <el-form-item label="申邮箱地址：" prop="applyEmail">
+        <el-form-item label="邮箱地址：" prop="applyEmail">
           <el-input v-model="ruleForm.applyEmail" placeholder="请输入申请人邮箱地址..."></el-input>
         </el-form-item>
         <el-form-item label="申请备注：" prop="applyMark">

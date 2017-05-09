@@ -226,7 +226,7 @@ const getRecruitDetail = ({commit, state}) => {
   }
 };
 //获取招聘信息相关数据  报名
-const entryRecruit = ({commit, state}, [id, data]) => entryRecruitApi(id, data).then(() => success('报名成功！')).catch((data) => error(data.msg));
+const entryRecruit = ({commit, state}, [id, data]) => entryRecruitApi(id, data).then(() => alert('报名成功！')).catch((data) => alert(data.msg,'error'));
 // 设置值
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置LOGIN
