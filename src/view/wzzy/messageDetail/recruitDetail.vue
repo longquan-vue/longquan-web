@@ -240,7 +240,7 @@
       submitForm() {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            this.entryRecruit([this.params.id, this.login])
+            this.entryRecruit([this.params.id, this.login]).then(()=>this.dialogVisible = false)
           } else {
             return false;
           }

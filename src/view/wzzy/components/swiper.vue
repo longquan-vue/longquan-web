@@ -5,6 +5,7 @@
                 <div class="wzzy-swiper-item-left">
                     <img :src="item.picUrl" >
                     <div class="overlay"></div>
+                    <router-link :to="'/view/wzzy/messageDetail/'+item.id" class="block-link"></router-link>
                 </div>
                 <div class="wzzy-swiper-item-right">
                     <h2>
@@ -27,7 +28,7 @@
             background-color: #FFF7F7;height: 100%;line-height: 100%;width: 100%;
             color: #ffffff;position: absolute;left: 0;top: 0;
             .wzzy-swiper-item-left{
-                width: 45%;height: 100%;float: left;position: relative;
+                width: 45%;height: 100%;float: left;position: relative;cursor: pointer;
                 img{ width: 100%;height: 100%;}
             }
             .wzzy-swiper-item-right{
