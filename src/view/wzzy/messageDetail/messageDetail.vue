@@ -28,11 +28,14 @@
     line-height: 25px;
     font-size: 14px;
     color: #666;
-  .messageDetailContImg{
-    padding:15px;
-    img{
-      width: 480px;
-    }
+
+  .messageDetailContImg {
+    padding: 15px;
+
+  img {
+    width: 480px;
+  }
+
   }
   .messageDetailCont-mess {
 
@@ -63,7 +66,9 @@
     margin: 20px 0;
 
   .messageDetailContPageLeft {
-    float: left;width: 50%;padding-right: 40px;;
+    float: left;
+    width: 50%;
+    padding-right: 40px;;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -72,8 +77,10 @@
     cursor: pointer;
   }
 
-    .messageDetailContPageRight {
-    float: right;width: 50%;padding-right: 40px;;
+  .messageDetailContPageRight {
+    float: right;
+    width: 50%;
+    padding-right: 40px;;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -111,15 +118,15 @@
         </div>
         <div class="messageDetailCont">
           <div v-if="data.picUrl" class="messageDetailContImg"><img :src="data.picUrl"></div>
-          <div class="messageDetailCont-mess ql-editor"  v-html="decode(data.content)"></div>
+          <div class="messageDetailCont-mess ql-editor" v-html="decode(data.content)"></div>
           <div class="messageDetailCont-down" v-for="(file,index) in data.files" :key="index">
             <span>附件：{{file.name}}.{{file.suffix}}</span>
-            <a :href="file.url" target="_blank">下载 ↓</a>
+            <a :href="downloadApi(file.id)" target="_blank">下载 ↓</a>
           </div>
         </div>
         <div class="messageDetailContPage">
-          <div class="messageDetailContPageLeft">上一篇：<a  @click="toUrl({path:data.last})" v-if="data.last">{{data.lastTitle}}</a><span v-else>没有了</span></div>
-          <div class="messageDetailContPageRight">下一篇：<a  @click="toUrl({path:data.next})" v-if="data.next">{{data.nextTitle}}</a><span v-else>没有了</span></div>
+          <div class="messageDetailContPageLeft">上一篇：<a @click="toUrl({path:data.last})" v-if="data.last">{{data.lastTitle}}</a><span v-else>没有了</span></div>
+          <div class="messageDetailContPageRight">下一篇：<a @click="toUrl({path:data.next})" v-if="data.next">{{data.nextTitle}}</a><span v-else>没有了</span></div>
         </div>
       </div>
     </div>
@@ -129,6 +136,7 @@
 <script type="es6">
   import {mapGetters, mapActions} from 'vuex'
   import filters from '../../../filters'
+  import {downloadApi} from '../../../api/fileApi'
   export default{
     computed: {
       ...mapGetters(['data', 'articleType']),
@@ -143,6 +151,7 @@
     methods: {
       ...mapActions(['go', 'setData', 'getArticle', 'toUrl']),
       ...filters,
+      downloadApi,
     },
     beforeRouteUpdate (to, from, next) {
       next();
