@@ -121,7 +121,7 @@
           <div class="messageDetailCont-mess ql-editor" v-html="decode(data.content)"></div>
           <div class="messageDetailCont-down" v-for="(file,index) in data.files" :key="index">
             <span>附件：{{file.name}}.{{file.suffix}}</span>
-            <a :href="downloadApi(file.id)" target="_blank" >下载 ↓</a>
+            <a :href="downloadApi(file.id)">下载 ↓</a>
           </div>
         </div>
         <div class="messageDetailContPage">
