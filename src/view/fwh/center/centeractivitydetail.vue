@@ -99,7 +99,6 @@
   import myImgDialog from '../../../components/public/img-dialog/imgDialog.vue'
   import {entryActivityApi, cancelEntryActivityApi,signActivityApi} from '../../../api/activityApi'
   import {settingWx, scanQRCode} from '../../../actions/wxApi'
-  import {alert} from '../../../actions'
   export default{
     data(){
       return {
@@ -140,7 +139,7 @@
           this.content = '您不是职工认证用户,不能参加此活动！';
           this.btns = {
             btn: '', btn1: '去认证', btn2: '确定', action: () => {
-              alert('去认证')
+              this.goto(['center'])
             }
           };
         } else if (val == 4) {
@@ -196,17 +195,25 @@
           this.isshow = true;
         });
       },
-      delCode(){
-        alert('1');
-      },
       testWx(){
         scanQRCode(({resultStr}) => {
           signActivityApi(resultStr.substr(resultStr.lastIndexOf('/')+1)).then(()=>{
-            alert('签到成功!');
+            this.$vux.alert.show({
+              title: '提示',
+              content: '签到成功',
+            });
             this.setData({isSign:true})
-          }).catch((data)=>alert(JSON.stringify(data)));
+          }).catch((data)=>{
+            this.$vux.alert.show({
+              title: '提示',
+              content: JSON.stringify(data),
+            });
+          });
         }, () => {
-          alert('请重试')
+          this.$vux.alert.show({
+            title: '提示',
+            content: '签到失败，请重试',
+          });
         })
       }
     },

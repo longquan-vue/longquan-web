@@ -17,7 +17,7 @@
                                     {{item.name}}
                                     <i v-if="isEnd(item.end)">已过期</i>
                                     <i v-if="item.status == 1 && !isEnd(item.end)">已签到</i>
-                                    <a v-if="item.status == 0 && !isEnd(item.end)" @click.stop="openCode()"><img src="../../../../static/wx/center/sao.png">扫码签到</a>
+                                    <a v-if="item.status == 0 && !isEnd(item.end)" @click.stop="openCode(index)"><img src="../../../../static/wx/center/sao.png">扫码签到</a>
                                 </h2>
                                 <p>预约时间 : {{date3Filter(item.start)}} - {{HHmmFilter(item.end)}}</p>
                             </div>
@@ -48,6 +48,7 @@
     import filters from '../../../filters'
     import appHead from '../../../components/public/apphead/Apphead.vue'
     import nothing from '../../../components/public/nothing/nothing.vue'
+    import {settingWx, scanQRCode} from '../../../actions/wxApi'
     import { TransferDomDirective as TransferDom, Scroller, Spinner,Actionsheet} from 'vux'
     export default{
         data(){
@@ -72,7 +73,7 @@
         computed: {...mapGetters(['login', 'list']),
         },
         methods:{
-            ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage','go']),
+            ...mapActions(['getMineHealth','clear', 'delMethod', 'changePage','go','changeList']),
             ...filters,
             del(index){
                 this.showDel = true;
@@ -103,15 +104,34 @@
 
                 }, 2000)
             },
-            openCode(){
-
+            openCode(index){
+              scanQRCode(({resultStr}) => {
+                signActivityApi(resultStr.substr(resultStr.lastIndexOf('/')+1)).then(()=>{
+                  this.$vux.alert.show({
+                    title: '提示',
+                    content: '签到成功',
+                  });
+                  this.changeList([index+'.status',1]);
+                }).catch((data)=>{
+                  this.$vux.alert.show({
+                    title: '提示',
+                    content: JSON.stringify(data),
+                  });
+                });
+              }, () => {
+                this.$vux.alert.show({
+                  title: '提示',
+                  content: '签到失败，请重试',
+                });
+              })
             },
         },
         async created () {
             await this.getMineHealth();
             this.$nextTick(() => {
                 this.$refs.scroller.reset()
-            })
+            });
+            settingWx();
         },
         destroyed(){
             this.clear()
