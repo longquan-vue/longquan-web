@@ -5,35 +5,37 @@
 </style>
 <template>
   <div class="wzzy" style="overflow-y:scroll;height:100%;">
-    <Qrcode/>
-    <wzzyHeader/>
-    <div class="wzzyHome">
-      <div class="pagewrap">
-        <div class="wzzy-content" style="padding-top:20px;">
-          <el-row :gutter="30">
-            <el-col :span="$route.path == '/view/wzzy/files'?24:17">
-              <div class="grid-left">
+    <div class="wzzy-cont" style="min-width:1200px;">
+      <Qrcode/>
+      <wzzyHeader/>
+      <div class="wzzyHome">
+        <div class="pagewrap">
+          <div class="wzzy-content" style="padding:20px 15px 0 15px;">
+            <el-row :gutter="30">
+              <el-col :span="$route.path == '/view/wzzy/files'?24:17" style="padding-left:0">
+                <div class="grid-left">
                   <transition name="move" mode="out-in">
                     <router-view/>
                   </transition>
-              </div>
-            </el-col>
-            <el-col :span="7" v-if="$route.path != '/view/wzzy/files'">
-              <div class="grid-right" :class="{'grid-right-sub':$route.path != '/view/wzzy/home'}">
-                <question v-if="$route.path == '/view/wzzy/chat/3'"></question>
-                <tip></tip>
-                <lastDynamic v-if="$route.path != '/view/wzzy/home'"></lastDynamic>
-                <someIcon></someIcon>
-                <poll v-if="$route.path == '/view/wzzy/home'"></poll>
-                <adver v-if="$route.path == '/view/wzzy/home'"></adver>
-                <echo v-if="$route.path == '/view/wzzy/home'"></echo>
-              </div>
-            </el-col>
-          </el-row>
+                </div>
+              </el-col>
+              <el-col :span="7" v-if="$route.path != '/view/wzzy/files'"style="padding-right:0">
+                <div class="grid-right" :class="{'grid-right-sub':$route.path != '/view/wzzy/home'}">
+                  <question v-if="$route.path == '/view/wzzy/chat/3'"></question>
+                  <tip></tip>
+                  <lastDynamic v-if="$route.path != '/view/wzzy/home'"></lastDynamic>
+                  <someIcon></someIcon>
+                  <poll v-if="$route.path == '/view/wzzy/home'"></poll>
+                  <adver v-if="$route.path == '/view/wzzy/home'"></adver>
+                  <echo v-if="$route.path == '/view/wzzy/home'"></echo>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </div>
+      <wzzyFooter/>
     </div>
-    <wzzyFooter/>
   </div>
 </template>
 
