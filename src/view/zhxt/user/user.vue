@@ -20,7 +20,11 @@
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称" min-width="100"/>
+          <MyColumn prop="nickname" label="昵称" min-width="100">
+            <template scope="scope">
+              <span v-html="emoji(scope.row.nickname)"></span>
+            </template>
+          </MyColumn>
           <MyColumn prop="name" label="姓名" min-width="100"/>
           <MyColumn prop="idCard" label="身份证" min-width="140"/>
           <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
