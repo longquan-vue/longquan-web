@@ -62,12 +62,8 @@ export const emoji = (val) => {
   if (supportEmoji || !val) {
     return val;
   }
-  val = val.replace(/[\uE000-\uF8FF]/gi, (code) => {
-    return `<span class="emoji emoji${conver.softbank[code.codePointAt().toString(16)]}" ></span>`;
-  });
-  return val.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/gi, (code) => {
-    return `<span class="emoji emoji${(code.codePointAt()).toString(16)}" ></span>`;
-  })
+  val = val.replace(/[\uE000-\uF8FF]/gi, (code) => `<span class="emoji emoji${conver.softbank[code.codePointAt().toString(16)]}" ></span>`);
+  return val.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/gi, (code) => `<span class="emoji emoji${(code.codePointAt()).toString(16)}" ></span>`)
 }
 // 报名列表过滤
 export const groupList = (list = [], {flagFn = () => false, field = 'start', keys = ['start', 'end']}) => {
