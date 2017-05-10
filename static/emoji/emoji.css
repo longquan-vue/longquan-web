@@ -1,4 +1,4 @@
-.emoji { background: url("./images/emoji.png") top left no-repeat; width: 20px; height: 20px; display: -moz-inline-stack; display: inline-block; vertical-align: top; zoom: 1; *display: inline; }
+.emoji { background-image: url("./images/emoji.png");background-size: cover; width: 20px; height: 20px; display: -moz-inline-stack; display: inline-block; vertical-align: top; zoom: 1; *display: inline; }
 .emoji2600 { background-position: -0px -15120px; }
 .emoji2601 { background-position: -0px -15140px; }
 .emoji2614 { background-position: -0px -15200px; }
@@ -719,6 +719,6 @@
 .emoji1f44c { background-position: -0px -6320px; }
 .emoji1f44e { background-position: -0px -6360px; }
 .emoji1f450 { background-position: -0px -6400px; }
-.emoji1f642 { background: url("./images/1f642.png") center no-repeat;background-size: cover;}
-.emoji1f611 { background: url("./images/1f611.png") center no-repeat;background-size: cover;}
-.emoji1f643 { background: url("./images/1f643.png") center no-repeat;background-size: cover;}
+.emoji1f642 { background-image: url("./images/1f642.png")}
+.emoji1f611 { background-image: url("./images/1f611.png")}
+.emoji1f643 { background-image: url("./images/1f643.png")}
