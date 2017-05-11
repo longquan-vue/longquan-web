@@ -5,7 +5,8 @@
         <ul class="wzzy-toupiao">
             <li v-for="(item,index) in newsList" :key="index">
                 <h2>
-                    <a @click="go(['chatQuestionDetail',item.id])"> {{item.title}} <i>已答题</i></a>
+                    <a @click="go(['chatQuestionDetail',item.id])"> {{item.title}} </a>
+                  <!--<a @click="go(['chatQuestionDetail',item.id])"> {{item.title}} <i>已答题</i></a>-->
                     <span class="ising" v-if="!isEnd(item.end)">进行中</span>
                     <span class="isover" v-if="isEnd(item.end)">已结束</span>
                 </h2>

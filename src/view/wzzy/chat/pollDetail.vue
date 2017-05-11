@@ -206,6 +206,13 @@
         computed: {
             ...mapGetters(['login', 'page','data']),
         },
+        watch:{
+          login(val){
+            if (val.id){
+              surplusVoteApi(this.data.id).then((data)=>this.num = data != -1 ?data:this.data.time)
+            }
+          }
+        },
         methods:{
             ...mapActions(['go','clear','getPoll','changePage','changeSys']),
             ...filters,
