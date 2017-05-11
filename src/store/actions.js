@@ -97,43 +97,22 @@ const singin = ({commit, state}, vux) => state.login.isSign ? appAlert(vux, '您
     commit(GET_MINE, {...state.login, isSign: true});
     commit(CHANGE_LIST, [state.list.length + '', res]);
   }).catch(() => appAlert(vux, '签到失败，请重试'));
-
 // 获取周签到记录
 const getWeekSign = ({commit, state}) => getWeekSignApi().then((data) => commit(GET_DATA_LIST, data))
-
 // 获取签到记录
 const getSign = ({commit, state}, id) => getSignApi(id, state.page).then((data) => commit(GET_DATA_LIST, data))
 //获取我的福利
-const getMineWelfare = ({commit, state}) => getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineWelfareApi(state.login.id, 0, state.page)));
+const getMineWelfare = ({commit, state}) => getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineWelfareApi(state.login.id, 0, state.page)));
 //获取我的积分记录
-const getMineScore = ({commit, state}) => getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineScoreApi(state.login.id, 0, state.page)));
+const getMineScore = ({commit, state}, id) => getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineScoreApi(id || state.login.id, 0, state.page)));
 //获取我的消息记录
-const getMineMsg = ({commit, state}) => state.page.page <= state.page.pages && getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineMsgApi(state.page)));
+const getMineMsg = ({commit, state}) => state.page.page <= state.page.pages && getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineMsgApi(state.page)));
 //获取我的工会活动
-const getMineActivity = ({commit, state}) => state.page.page <= state.page.pages && getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineActivityApi(1, state.page)));
+const getMineActivity = ({commit, state}) => state.page.page <= state.page.pages && getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineActivityApi(1, state.page)));
 //获取我的健身项目
-const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages && getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineHealthApi(0, state.page)));
+const getMineHealth = ({commit, state}) => state.page.page <= state.page.pages && getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineHealthApi(0, state.page)));
 //获取我的收藏的招聘信息
-const getMineRecruit = ({commit, state}) => state.page.page <= state.page.pages && getMine({
-  commit,
-  state
-}).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(0, state.page)));
-
+const getMineRecruit = ({commit, state}) => state.page.page <= state.page.pages && getMine({commit, state}).then(async() => commit(GET_DATA_LIST, await mineRecruitApi(0, state.page)));
 //公共删除方法
 const delMethod = async({commit, state}, idx) => deleteApi(state.list[idx].id, 1).then(() => success().then(() => commit(DEL_DATA, idx))).catch(() => error('删除失败！'));
 //获取福利  兑换列表
@@ -226,7 +205,7 @@ const getRecruitDetail = ({commit, state}) => {
   }
 };
 //获取招聘信息相关数据  报名
-const entryRecruit = ({commit, state}, [id, data]) => entryRecruitApi(id, data).then(() => alert('报名成功！')).catch((data) => alert(data.msg,'error'));
+const entryRecruit = ({commit, state}, [id, data]) => entryRecruitApi(id, data).then(() => alert('报名成功！')).catch((data) => alert(data.msg, 'error'));
 // 设置值
 const setData = ({commit}, data) => commit(SET_DATA, data)
 // 设置LOGIN
@@ -364,7 +343,7 @@ const getLeader = ({commit, state}) => {
 const createLeader = ({commit, state}) => createLeaderApi(state.data).then(() => success('创建成功！')).catch(() => error('创建失败！'))
 // 修改领导
 const updateLeader = ({commit, state}) => updateLeaderApi(state.data).then(() => success('修改成功！')).catch(() => error('修改失败！'))
-const search = ({commit, state},word='') => searchApi(state.page,word).then((data)=>commit(GET_DATA_LIST,data)).catch(()=>commit(GET_DATA_LIST,{...state.page,list:[]}))
+const search = ({commit, state}, word = '') => searchApi(state.page, word).then((data) => commit(GET_DATA_LIST, data)).catch(() => commit(GET_DATA_LIST, {...state.page, list: []}))
 export default {
   search,
   findLeader,// 获取领导列表

@@ -29,7 +29,7 @@
         </MyTable>
       </div>
       <div class="pageSlide">
-        <MyPagination :method="getMineScore"/>
+        <MyPagination :method="()=>getMineScore(params.id)"/>
       </div>
       <el-dialog title="积分管理" v-model="show" size="tiny">
         <el-form :model="point">
@@ -76,7 +76,7 @@
       }
     },
     components: {MyPagination, MyColumn, MyTable},
-    computed: {...mapGetters(['list'])},
+    computed: {...mapGetters(['list','params'])},
     methods: {
       ...mapActions(['getMineScore', 'updateUser', 'clear', 'changeSelect', 'go', 'changePage']),
       ...filter,

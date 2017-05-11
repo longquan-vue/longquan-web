@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from "moment";
 // 性别过滤器   0->未知,1->男,2->女
 export const sexFilter = (sex) => ['未知', '男', '女'][sex] || '未知'
 export const freezeFilter = ({deleted}) => ['否', '是'][deleted] || '否'
@@ -42,9 +42,9 @@ export const limitFilter = (str = '', l = 0) => str.length > l ? str.substr(0, l
 //过滤文字
 export const strFilter = (str = '') => str.replace(/<[^>]+>/g, '');
 //过滤文字
-export const str2Filter = (str = '',str2='') => str.replace(new RegExp(str2,'g'),`<span style="color: #bc0000">${str2}</span>`)
+export const str2Filter = (str = '', str2 = '') => str.replace(new RegExp(str2, 'g'), `<span style="color: #bc0000">${str2}</span>`)
 //url补充矫正
-export const urlFilter = (url = '') => url.startsWith('http://')?url:'http://'+url;
+export const urlFilter = (url = '') => url.startsWith('http://') ? url : 'http://' + url;
 
 // 认证状态过滤器   0->未认证,1->已认证
 export const auditFilter = ({audit}) => ['未认证', '认证中', '已认证', '认证失败'][audit] || '未知'
@@ -55,7 +55,16 @@ export const group = (list, field = 'recording', formate = date7Filter, filter =
   list.map((item) => filter(item) ? g[formate(item[field])] ? g[formate(item[field])].push(item) : g[formate(item[field])] = [item] : '');
   return g;
 };
-
+let supportEmoji = false;
+import conver from './conver'
+export const emoji = (val) => {
+  supportEmoji = navigator.userAgent.match(/Mac\s+OS/i) && !navigator.userAgent.match(/(Chrome|Firefox)/i);
+  if (supportEmoji || !val) {
+    return val;
+  }
+  val = val.replace(/[\uE000-\uF8FF]/gi, (code) => `<span class="emoji emoji${conver.softbank[code.codePointAt().toString(16)]}" ></span>`);
+  return val.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/gi, (code) => `<span class="emoji emoji${(code.codePointAt()).toString(16)}" ></span>`)
+}
 // 报名列表过滤
 export const groupList = (list = [], {flagFn = () => false, field = 'start', keys = ['start', 'end']}) => {
   const g = [];
@@ -94,6 +103,7 @@ export const filesNumFilter = (files = []) => files.reduce((p, {num = 0}) => p +
 
 
 export default {
+  emoji,
   str2Filter,
   urlFilter,
   filesNumFilter,

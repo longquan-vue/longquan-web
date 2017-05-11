@@ -18,9 +18,13 @@
         <el-button type="primary" @click="dialogFormVisible = true" icon="plus">群发站内信</el-button>
       </div>
       <div class="tableList mgb20">
-        <MyTable :data="list">
+        <MyTable :data="list" :fit="true">
           <MyColumn type="index" fixed="left"/>
-          <MyColumn prop="nickname" label="昵称" min-width="100"/>
+          <MyColumn label="昵称" min-width="150" :show-tooltip-when-overflow="false" >
+            <template scope="scope">
+              <span v-html="emoji(scope.row.nickname)"></span>
+            </template>
+          </MyColumn>
           <MyColumn prop="name" label="姓名" min-width="100"/>
           <MyColumn prop="idCard" label="身份证" min-width="140"/>
           <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>

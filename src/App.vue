@@ -1,18 +1,19 @@
 <style lang="less">
-    @import "/color-dark.less";
-    /*深色主题*/
-    @import './main.less';
+  @import "/color-dark.less";
+  /*深色主题*/
+  @import './main.less';
+  @import "/static/emoji/emoji.css";
 </style>
 <template>
-    <div id="app">
-        <router-view></router-view>
-    </div>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script type="es6">
-    export default {
-        name: 'vue_app',
-        replace: false,
-    }
+  export default {
+    name: 'vue_app',
+    replace: false,
+  }
 
 </script>

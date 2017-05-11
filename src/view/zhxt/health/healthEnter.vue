@@ -21,7 +21,7 @@
       <div class="tableList mgb20">
         <MyTable :data="list">
           <MyColumn type="index" fixed="left"/>
-          <MyColumn prop="start" :formatter="date4Filter2" label="时间段" min-width="150"/>
+          <MyColumn prop="start" :formatter="date4Filter" label="时间段" min-width="150"/>
           <MyColumn prop="name" label="姓名" min-width="100"/>
           <MyColumn prop="sex" :formatter="sex2Filter" label="性别" min-width="80"/>
           <MyColumn prop="idCard" label="身份证号" min-width="150"/>

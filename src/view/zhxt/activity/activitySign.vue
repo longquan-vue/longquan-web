@@ -50,7 +50,7 @@
     components: {MySelect, MySelectInput, MyPagination, MyColumn, MyTable},
     computed: {...mapGetters(['list'])},
     methods: {
-      ...mapActions(['getEnter', 'changeSelect', 'go', 'clear']),
+      ...mapActions(['getEnter', 'changeSelect', 'go', 'clear', 'exportEntry']),
       ...filter,
       change(key, value){
         this.changeSelect({key, value});
