@@ -11,13 +11,25 @@
       <div class="border-content" style="border-top: none;height: 220px;">
         <div class="wzzy-tab-cont-list">
           <transition-group name="flip-tip" tag="p">
-            <a @click="toUrl({path:'/view/wzzy/messageDetail/'+item.id})" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></a>
+            <a class="flip-tip-item" @click="toUrl({path:'/view/wzzy/messageDetail/'+item.id})" v-for="(item,index) in tipsList" style="margin-bottom: 12px;" :key="item"><span>{{item.title}}</span> <i>{{MMddFilter(item.created)}}</i></a>
           </transition-group>
         </div>
       </div>
     </div>
   </div>
 </template>
+<style lang="less">
+  .flip-tip-item {
+    transition: transform 0.8s;
+  }
+  .flip-tip-enter,.flip-tip-leave-active {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  /*.flip-tip-leave-active {*/
+    /*position: absolute;*/
+  /*}*/
+</style>
 <script type="es6">
   import {mapActions} from 'vuex'
   import filters from '../../../filters'

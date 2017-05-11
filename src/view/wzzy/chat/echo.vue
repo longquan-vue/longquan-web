@@ -17,7 +17,7 @@
       <ul class="wzzy-echo">
         <li v-for="(item,index) in list">
           <h2><a @click="go(['chatEchoDetail',item.id])">问： {{item.title}}</a><span>{{date3Filter(item.created)}}</span></h2>
-          <p v-html="limitFilter(strFilter(decode(item.answer)),100)"></p>
+          <p v-html="'答：'+limitFilter(strFilter(decode(item.answer)),100)"></p>
         </li>
       </ul>
       <MyPagination :method="getNews" style="margin:30px 0;"/>

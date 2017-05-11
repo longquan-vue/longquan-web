@@ -96,9 +96,12 @@
                 </div>
                 <div class="wzzy-poll-detail-intro" v-html="data.description"></div>
                 <div class="wzzy-poll-detail-cont">
-                    <p>
+                    <p v-if="login.id">
                         你当前已投 <span>{{data.time - num}}</span> 票，投完 <span>{{data.time}}</span> 票可获得积分奖励    <i @click="dialogVisible=true">查看规则></i>
                         <!--<a @click="sort">按号数 <img src="/static/wzzy/updown.png"></a>-->
+                    </p>
+                    <p v-if="!login.id">
+                      <i @click="dialogVisible=true" style="float:right;">查看规则></i>
                     </p>
                     <el-row :gutter="13">
                         <el-col :span="6" v-for="(item,index) in data.questions" :key="index">
@@ -239,7 +242,11 @@
             }
         },
         created () {
-          this.getPoll().then(()=>surplusVoteApi(this.data.id).then((data)=>this.num = data != -1 ?data:this.data.time));
+          this.getPoll().then(()=>{
+            if (this.login.id){
+              surplusVoteApi(this.data.id).then((data)=>this.num = data != -1 ?data:this.data.time)
+            }
+          });
         },
         destroyed(){
 

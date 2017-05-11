@@ -1,8 +1,9 @@
 <style lang="less">
+  .laborUnionIntro img{ max-width: 100%;}
 </style>
 <template>
-  <div class="laborUnionIntro ql-snow">
-    <div class="ql-editor" v-html="decode(setting.introduce)"></div>
+  <div class="laborUnionIntro">
+    <div class="ql-editor" style="font-size:16px;" v-html="decode(setting.introduce)"></div>
   </div>
 </template>
 

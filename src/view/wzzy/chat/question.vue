@@ -50,6 +50,7 @@
                 param.keyWord = [0];
                 pollListApi(param).then((data) => {
                     this.newsList = data.list;
+                    console.log(this.newsList);
                     delete data.list;
                     this.changePage(data);
                 });

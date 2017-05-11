@@ -76,11 +76,11 @@
         methods:{
             ...mapActions(['go','clear','getMine','changePage']),
             ...filters,
-            getNews(){
+            async getNews(){
                 const param = {...this.page};
                 param.filed = ['type'];
                 param.keyWord = [1];
-                pollListApi(param).then((data) => {
+                await pollListApi(param).then((data) => {
                     this.newsList = data.list;
                     console.log(this.newsList);
                     delete data.list;
